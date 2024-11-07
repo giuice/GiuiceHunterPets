@@ -1,0 +1,13 @@
+## Interface: 110005  -- (Update to match the current WoW version)
+## Title: GiuiceHunterPets
+## Author: YourName
+## Version: 1.0
+## Notes: Lists all hunter pets in a custom frame.
+## SavedVariables: GiuiceHunterPetsDB
+## OptionalDeps: AceGUI-3.0, LibSharedMedia-3.0
+
+libs\AceGUI-3.0\AceGUI-3.0.lua
+libs\LibSharedMedia-3.0\LibSharedMedia-3.0.lua
+
+GiuiceHunterPets.lua
+GiuiceBattlePets.lua
