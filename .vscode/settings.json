@@ -37,6 +37,11 @@
 		"MapCanvasDataProviderMixin",
 		"MapCanvasPinMixin",
 		"CreateUnsecuredRegionPoolInstance",
-		"CreateFramePool"
+		"CreateFramePool",
+		"UIDropDownMenu_Initialize",
+		"UIDropDownMenu_SetText",
+		"UIDropDownMenu_SetWidth",
+		"UIDropDownMenu_AddButton",
+		"UIDropDownMenu_CreateInfo"
 	]
 }
