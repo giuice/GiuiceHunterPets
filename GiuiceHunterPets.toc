@@ -5,7 +5,14 @@
 ## Notes: Lists all hunter pets in a custom frame.
 ## SavedVariables: GiuiceHunterPetsDB
 
+# Libraries
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+Libs\LibDBIcon-1.0\LibDBIcon-1.0.lua
 
-
+Localization.lua
+Data.lua
 GiuiceHunterPets.lua
 GiuiceBattlePets.lua
+GiuiceTooltipEnhancement.lua

@@ -42,6 +42,8 @@
 		"UIDropDownMenu_SetText",
 		"UIDropDownMenu_SetWidth",
 		"UIDropDownMenu_AddButton",
-		"UIDropDownMenu_CreateInfo"
+		"UIDropDownMenu_CreateInfo",
+		"AddonCompartmentFrame",
+		"TooltipDataProcessor"
 	]
 }

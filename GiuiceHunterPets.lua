@@ -4,8 +4,46 @@ local addonName, addon = ...
 addon.utils = {}
 addon.frames = {}
 
--- Saved variables
-GiuiceHunterPetsDB = GiuiceHunterPetsDB or {}
+-- Check for Hunter class first
+if (select(3, UnitClass("player")) ~= 3) then return end
+
+-- Check for required libraries
+assert(LibStub, "GiuiceHunterPets requires LibStub")
+local LDB = LibStub:GetLibrary("LibDataBroker-1.1", true)
+assert(LDB, "GiuiceHunterPets requires LibDataBroker-1.1")
+local LibDBIcon = LibStub:GetLibrary("LibDBIcon-1.0", true)
+assert(LibDBIcon, "GiuiceHunterPets requires LibDBIcon-1.0")
+
+-- Initialize saved variables with LibDBIcon settings
+GiuiceHunterPetsDB = GiuiceHunterPetsDB or {
+    position = nil,
+    minimap = { hide = false },
+}
+
+-- Create the LibDataBroker object
+local minimapLDB = LDB:NewDataObject("GiuiceHunterPets", {
+    type = "launcher",
+    icon = "Interface\\Icons\\Ability_Hunter_Pet_Devilsaur",
+    OnClick = function(self, button)
+        if button == "LeftButton" then
+            if GiuiceHunterPetsFrame:IsShown() then
+                GiuiceHunterPetsFrame:Hide()
+            else
+                GiuiceHunterPetsFrame:Show()
+                addon.utils.UpdatePetList(GiuiceHunterPetsFrame)
+            end
+        end
+    end,
+    OnTooltipShow = function(tooltip)
+        tooltip:AddLine("GiuiceHunterPets", 1, 0.82, 0)
+        tooltip:AddLine("Left Click: Toggle pet window", 1, 1, 1)
+    end,
+})
+
+-- Function to initialize minimap button
+local function InitializeMinimapButton()
+    LibDBIcon:Register("GiuiceHunterPets", minimapLDB, GiuiceHunterPetsDB.minimap)
+end
 
 function addon.utils.GetAllPets()
     local allPets = {}
@@ -26,6 +64,101 @@ function addon.utils.GetAllPets()
 
     return allPets
 end
+
+function addon.utils.CreatePetEntry(petContainer, petInfo)
+    -- Background improvements
+    petContainer:SetBackdrop({
+        bgFile = "Interface/Tooltips/UI-Tooltip-Background",
+        edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
+        tile = true,
+        tileSize = 16,
+        edgeSize = 16,
+        insets = { left = 4, right = 4, top = 4, bottom = 4 }
+    })
+    
+    -- Set different background colors for active vs stabled pets
+    local r, g, b = 0.1, 0.1, 0.1
+    if petInfo.isActive then
+        r, g, b = 0.15, 0.2, 0.15
+    end
+    petContainer:SetBackdropColor(r, g, b, 0.9)
+    petContainer:SetBackdropBorderColor(0.3, 0.3, 0.3, 1)
+
+    -- Pet icon with better framing
+    local iconFrame = CreateFrame("Frame", nil, petContainer, BackdropTemplateMixin and "BackdropTemplate")
+    iconFrame:SetSize(54, 54)
+    iconFrame:SetPoint("LEFT", 8, 0)
+    iconFrame:SetBackdrop({
+        edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
+        edgeSize = 8,
+    })
+    iconFrame:SetBackdropBorderColor(0.7, 0.7, 0.7, 1)
+
+    local icon = iconFrame:CreateTexture(nil, "ARTWORK")
+    icon:SetSize(50, 50)
+    icon:SetPoint("CENTER")
+    icon:SetTexture(petInfo.icon)
+
+    -- Create the main text container
+    local textContainer = CreateFrame("Frame", nil, petContainer)
+    textContainer:SetPoint("LEFT", iconFrame, "RIGHT", 12, 0)
+    textContainer:SetPoint("RIGHT", petContainer, "RIGHT", -8, 0)
+    textContainer:SetHeight(50)
+
+    -- Pet name and level
+    local nameText = textContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
+    nameText:SetPoint("TOPLEFT", 0, -2)
+    nameText:SetPoint("RIGHT", -5, 0)
+    nameText:SetJustifyH("LEFT")
+    
+    -- Create name string with proper coloring
+    local nameString = string.format(
+        "%s - Level %d (%s) %s",
+        petInfo.name,
+        petInfo.level,
+        petInfo.familyName,
+        petInfo.isExotic and "|cFFFF0000Exotic|r" or ""
+    )
+    nameText:SetText(nameString)
+
+    -- Status indicators container
+    local statusContainer = CreateFrame("Frame", nil, textContainer)
+    statusContainer:SetPoint("TOPLEFT", nameText, "BOTTOMLEFT", 0, -2)
+    statusContainer:SetPoint("RIGHT", -5, 0)
+    statusContainer:SetHeight(20)
+
+    -- Favorite indicator (star)
+    if petInfo.isFavorite then
+        local favoriteIcon = statusContainer:CreateTexture(nil, "OVERLAY")
+        favoriteIcon:SetSize(16, 16)
+        favoriteIcon:SetPoint("LEFT", 0, 0)
+        favoriteIcon:SetTexture("Interface/Common/FavoritesIcon")
+        favoriteIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)  -- Trim the texture edges
+        favoriteIcon:SetVertexColor(1, 0.82, 0)  -- Gold color
+    end
+
+    -- Status text (With me/On Stable)
+    local statusText = statusContainer:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    statusText:SetPoint("LEFT", petInfo.isFavorite and 20 or 0, 0)
+    if petInfo.isActive then
+        statusText:SetText("|cFF00FF00With me|r")
+    else
+        statusText:SetText("|cFF888888On Stable|r")
+    end
+
+    -- Hover effect
+    petContainer:SetScript("OnEnter", function(self)
+        local hr, hg, hb = r + 0.1, g + 0.1, b + 0.1
+        self:SetBackdropColor(hr, hg, hb, 0.9)
+    end)
+
+    petContainer:SetScript("OnLeave", function(self)
+        self:SetBackdropColor(r, g, b, 0.9)
+    end)
+
+    return petContainer
+end
+
 
 -- Function to update pet list
 function addon.utils.UpdatePetList(frame, searchText)
@@ -72,106 +205,21 @@ function addon.utils.UpdatePetList(frame, searchText)
     local totalHeight = 0
 
     for index, petInfo in ipairs(filteredPets) do
-        -- Create container for this pet
         local petContainer = CreateFrame("Frame", nil, scrollChild, BackdropTemplateMixin and "BackdropTemplate")
-        petContainer:SetSize(scrollChild:GetWidth(), 70)
+        petContainer:SetSize(scrollChild:GetWidth() - 8, 70)
         if previousElement then
-            petContainer:SetPoint("TOPLEFT", previousElement, "BOTTOMLEFT", 0, -5)
+            petContainer:SetPoint("TOPLEFT", previousElement, "BOTTOMLEFT", 0, -2)
         else
             petContainer:SetPoint("TOPLEFT", 0, 0)
         end
 
-        -- Add background for better visibility
-        petContainer:SetBackdrop({
-            bgFile = "Interface/Tooltips/UI-Tooltip-Background",
-            edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
-            edgeSize = 8,
-            insets = { left = 2, right = 2, top = 2, bottom = 2 }
-        })
-        petContainer:SetBackdropColor(0.1, 0.1, 0.1, 0.5)
-
-        -- Add hover effect
-        petContainer:SetScript("OnEnter", function(self)
-            self:SetBackdropColor(0.2, 0.2, 0.2, 0.7)
-        end)
-
-        petContainer:SetScript("OnLeave", function(self)
-            self:SetBackdropColor(0.1, 0.1, 0.1, 0.5)
-        end)
-
-        -- Add click handling
         petContainer:EnableMouse(true)
         petContainer:SetScript("OnMouseDown", function()
             addon.utils.ShowPetDetails(frame.detailPanel, petInfo)
         end)
 
-        -- Pet icon
-        local iconFrame = CreateFrame("Frame", nil, petContainer)
-        iconFrame:SetSize(50, 50)
-        iconFrame:SetPoint("LEFT", 10, 0)
-
-        local icon = petContainer:CreateTexture(nil, "ARTWORK")
-        icon:SetSize(50, 50)
-        icon:SetPoint("CENTER", iconFrame, "CENTER")
-        icon:SetTexture(petInfo.icon)
-
-        -- Status indicators container
-        local statusContainer = CreateFrame("Frame", nil, petContainer)
-        statusContainer:SetSize(20, 50)
-        statusContainer:SetPoint("RIGHT", petContainer, "RIGHT", -5, 0)
-
-        -- Active pet indicator
-        if petInfo.isActive then
-            local activeIcon = statusContainer:CreateTexture(nil, "ARTWORK")
-            activeIcon:SetSize(16, 16)
-            activeIcon:SetPoint("TOP", statusContainer, "TOP", 0, -5)
-            activeIcon:SetTexture("Interface\\PetBattles\\PetBattle-StatIcons") -- Using a built-in texture
-            activeIcon:SetTexCoord(0, 0.5, 0, 0.5)                              -- Adjust this to get the proper icon section
-
-            -- Add tooltip
-            statusContainer:EnableMouse(true)
-            statusContainer:SetScript("OnEnter", function(self)
-                GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-                GameTooltip:AddLine("Active Pet", 0, 1, 0)
-                GameTooltip:Show()
-            end)
-            statusContainer:SetScript("OnLeave", function()
-                GameTooltip:Hide()
-            end)
-        end
-
-        -- Adjust pet information layout
-        local nameText = petContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
-        nameText:SetPoint("TOPLEFT", iconFrame, "TOPRIGHT", 10, -5)
-        nameText:SetPoint("RIGHT", petContainer, "RIGHT", -10, 0)
-        nameText:SetJustifyH("LEFT")
-        nameText:SetWordWrap(false)
-        nameText:SetText(string.format(
-            "%s - Level %d (%s) %s",
-            petInfo.name,
-            petInfo.level,
-            petInfo.familyName,
-            petInfo.isExotic and "|cFFFF0000Exotic|r" or ""
-        ))
-        -- Status texts
-        if petInfo.isFavorite then
-            local favText = petContainer:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-            favText:SetPoint("TOPLEFT", nameText, "BOTTOMLEFT", 0, -5)
-            favText:SetText("|cFFFFD700★ Favorite|r")
-        end
-
-        if petInfo.isActive then
-            local activeText = petContainer:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-            activeText:SetPoint("TOPLEFT", nameText, "BOTTOMLEFT", 0, petInfo.isFavorite and -20 or -5)
-            activeText:SetText("|cFF00FF00With me|r")
-        else
-            local activeText = petContainer:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-            activeText:SetPoint("TOPLEFT", nameText, "BOTTOMLEFT", 0, petInfo.isFavorite and -20 or -5)
-            activeText:SetText("|cAA00AA00On Stable|r")
-        end
-
+        addon.utils.CreatePetEntry(petContainer, petInfo)
         previousElement = petContainer
-        totalHeight = totalHeight + 75 -- 70 for height + 5 for spacing
     end
 
     scrollChild:SetHeight(math.max(totalHeight, frame:GetHeight()))
@@ -486,9 +534,14 @@ function addon.utils.ShowPetDetails(detailPanel, petInfo)
     end
 end
 
+
+
 -- Create and initialize the addon
 local function InitializeAddon()
+    
+
     local mainFrame = CreateMainFrame()
+    InitializeMinimapButton()
 
     -- Event handling
     local eventFrame = CreateFrame("Frame")
