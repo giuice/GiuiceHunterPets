@@ -44,6 +44,10 @@
 		"UIDropDownMenu_AddButton",
 		"UIDropDownMenu_CreateInfo",
 		"AddonCompartmentFrame",
-		"TooltipDataProcessor"
+		"TooltipDataProcessor",
+		"StableFrame",
+		"STABLE_PET_SPEC_FEROCITY",
+		"STABLE_PET_SPEC_CUNNING",
+		"STABLE_PET_SPEC_TENACITY"
 	]
 }

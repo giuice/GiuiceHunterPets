@@ -1,11 +1,12 @@
-local addonName, addon = ...
+local addonName, GHP = ...
 
 -- Initialize addon table with necessary functions
-addon.utils = {}
-addon.frames = {}
+GHP.utils = {}
+GHP.frames = {}
 
 -- Check for Hunter class first
 if (select(3, UnitClass("player")) ~= 3) then return end
+
 
 -- Check for required libraries
 assert(LibStub, "GiuiceHunterPets requires LibStub")
@@ -20,6 +21,8 @@ GiuiceHunterPetsDB = GiuiceHunterPetsDB or {
     minimap = { hide = false },
 }
 
+
+
 -- Create the LibDataBroker object
 local minimapLDB = LDB:NewDataObject("GiuiceHunterPets", {
     type = "launcher",
@@ -30,7 +33,7 @@ local minimapLDB = LDB:NewDataObject("GiuiceHunterPets", {
                 GiuiceHunterPetsFrame:Hide()
             else
                 GiuiceHunterPetsFrame:Show()
-                addon.utils.UpdatePetList(GiuiceHunterPetsFrame)
+                GHP.utils.UpdatePetList(GiuiceHunterPetsFrame)
             end
         end
     end,
@@ -45,7 +48,7 @@ local function InitializeMinimapButton()
     LibDBIcon:Register("GiuiceHunterPets", minimapLDB, GiuiceHunterPetsDB.minimap)
 end
 
-function addon.utils.GetAllPets()
+function GHP.utils.GetAllPets()
     local allPets = {}
     local activePets = C_StableInfo.GetActivePetList() or {}
     local stabledPets = C_StableInfo.GetStabledPetList() or {}
@@ -65,7 +68,7 @@ function addon.utils.GetAllPets()
     return allPets
 end
 
-function addon.utils.CreatePetEntry(petContainer, petInfo)
+function GHP.utils.CreatePetEntryOld(petContainer, petInfo)
     -- Background improvements
     petContainer:SetBackdrop({
         bgFile = "Interface/Tooltips/UI-Tooltip-Background",
@@ -75,7 +78,7 @@ function addon.utils.CreatePetEntry(petContainer, petInfo)
         edgeSize = 16,
         insets = { left = 4, right = 4, top = 4, bottom = 4 }
     })
-    
+
     -- Set different background colors for active vs stabled pets
     local r, g, b = 0.1, 0.1, 0.1
     if petInfo.isActive then
@@ -110,7 +113,7 @@ function addon.utils.CreatePetEntry(petContainer, petInfo)
     nameText:SetPoint("TOPLEFT", 0, -2)
     nameText:SetPoint("RIGHT", -5, 0)
     nameText:SetJustifyH("LEFT")
-    
+
     -- Create name string with proper coloring
     local nameString = string.format(
         "%s - Level %d (%s) %s",
@@ -133,8 +136,8 @@ function addon.utils.CreatePetEntry(petContainer, petInfo)
         favoriteIcon:SetSize(16, 16)
         favoriteIcon:SetPoint("LEFT", 0, 0)
         favoriteIcon:SetTexture("Interface/Common/FavoritesIcon")
-        favoriteIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)  -- Trim the texture edges
-        favoriteIcon:SetVertexColor(1, 0.82, 0)  -- Gold color
+        favoriteIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9) -- Trim the texture edges
+        favoriteIcon:SetVertexColor(1, 0.82, 0)      -- Gold color
     end
 
     -- Status text (With me/On Stable)
@@ -159,9 +162,14 @@ function addon.utils.CreatePetEntry(petContainer, petInfo)
     return petContainer
 end
 
+function GHP.utils.CreatePetEntry(scrollChild, petInfo)
+    local petContainer = CreateFrame("Button", nil, scrollChild, "GiuiceHunterPetListItemTemplate")
+    petContainer:SetPetInfo(petInfo)
+    return petContainer
+end
 
 -- Function to update pet list
-function addon.utils.UpdatePetList(frame, searchText)
+function GHP.utils.UpdatePetList(frame, searchText)
     local scrollChild = frame.scrollChild
     -- Clear existing contents
     for _, child in pairs({ scrollChild:GetChildren() }) do
@@ -170,8 +178,8 @@ function addon.utils.UpdatePetList(frame, searchText)
     end
 
     -- Get both stabled and active pets
-    local stabledPets = addon.utils.GetAllPets()
-    
+    local stabledPets = GHP.utils.GetAllPets()
+
 
     if not stabledPets then
         print("No pets in stable.")
@@ -205,7 +213,7 @@ function addon.utils.UpdatePetList(frame, searchText)
     local totalHeight = 0
 
     for index, petInfo in ipairs(filteredPets) do
-        local petContainer = CreateFrame("Frame", nil, scrollChild, BackdropTemplateMixin and "BackdropTemplate")
+        local petContainer = GHP.utils.CreatePetEntry(scrollChild, petInfo) --CreateFrame("Frame", nil, scrollChild, BackdropTemplateMixin and "BackdropTemplate")
         petContainer:SetSize(scrollChild:GetWidth() - 8, 70)
         if previousElement then
             petContainer:SetPoint("TOPLEFT", previousElement, "BOTTOMLEFT", 0, -2)
@@ -213,12 +221,12 @@ function addon.utils.UpdatePetList(frame, searchText)
             petContainer:SetPoint("TOPLEFT", 0, 0)
         end
 
-        petContainer:EnableMouse(true)
-        petContainer:SetScript("OnMouseDown", function()
-            addon.utils.ShowPetDetails(frame.detailPanel, petInfo)
-        end)
+        -- petContainer:EnableMouse(true)
+        -- petContainer:SetScript("OnMouseDown", function()
+        --     GHP.utils.ShowPetDetails(frame.detailPanel, petInfo)
+        -- end)
 
-        addon.utils.CreatePetEntry(petContainer, petInfo)
+        --GHP.utils.CreatePetEntry(petContainer, petInfo)
         previousElement = petContainer
     end
 
@@ -227,7 +235,7 @@ end
 
 -- Create main frame
 local function CreateMainFrame()
-    local frame = CreateFrame("Frame", "GiuiceHunterPetsFrame", UIParent, BackdropTemplateMixin and "BackdropTemplate")
+    local frame = CreateFrame("Frame", "GiuiceHunterPetsFrame", UIParent,  "PortraitFrameTemplate")
     frame:SetSize(1000, 700)
     frame:SetFrameStrata("HIGH")
     frame:EnableMouse(true)
@@ -240,45 +248,29 @@ local function CreateMainFrame()
         frame:SetPoint("CENTER")
     end
 
-    -- Make it look like a proper window
-    frame:SetBackdrop({
-        bgFile = "Interface/Tooltips/UI-Tooltip-Background",
-        edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
-        edgeSize = 16,
-        insets = { left = 4, right = 4, top = 4, bottom = 4 }
-    })
-    frame:SetBackdropColor(0, 0, 0, 0.8)
-    frame:SetBackdropBorderColor(0.6, 0.6, 0.6, 1)
+    -- Add hunter icon
+    frame.portraitIcon = "Interface\\Icons\\ClassIcon_Hunter"
+     -- Portrait and title (correct method)
+    SetPortraitToTexture(frame.PortraitContainer.portrait, "Interface\\Icons\\ClassIcon_Hunter")
+        -- Title text
+    frame.TitleContainer.TitleText:SetText("Giuice's hunter pets viewer")
+    
+    -- Movement handling
+    frame:RegisterForDrag("LeftButton")
+    frame:SetScript("OnDragStart", frame.StartMoving)
+    frame:SetScript("OnDragStop", function(self)
+        self:StopMovingOrSizing()
+        local point, relativeTo, relativePoint, xOfs, yOfs = self:GetPoint()
+        GiuiceHunterPetsDB.position = { point, relativeTo, relativePoint, xOfs, yOfs }
+    end)
 
-    -- Title bar
-    local titleBar = CreateFrame("Frame", nil, frame, BackdropTemplateMixin and "BackdropTemplate")
+    local titleBar = CreateFrame("Frame", nil, frame)
     titleBar:SetHeight(24)
     titleBar:SetPoint("TOPLEFT", 0, 0)
     titleBar:SetPoint("TOPRIGHT", 0, 0)
-    titleBar:SetBackdrop({
-        bgFile = "Interface/Tooltips/UI-Tooltip-Background",
-        edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
-        edgeSize = 16,
-        insets = { left = 4, right = 4, top = 4, bottom = 4 }
-    })
-    titleBar:SetBackdropColor(0.1, 0.1, 0.1, 1)
-    titleBar:EnableMouse(true)
-    titleBar:RegisterForDrag("LeftButton")
-    titleBar:SetScript("OnDragStart", function() frame:StartMoving() end)
-    titleBar:SetScript("OnDragStop", function() frame:StopMovingOrSizing() end)
-
-    -- Title text
-    local title = titleBar:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
-    title:SetPoint("CENTER", titleBar, "CENTER")
-    title:SetText("Hunter Stabled Pets")
-
-    -- Close button
-    local closeButton = CreateFrame("Button", nil, titleBar, "UIPanelCloseButton")
-    closeButton:SetPoint("TOPRIGHT", titleBar, "TOPRIGHT", 0, 2)
-    closeButton:SetScript("OnClick", function() frame:Hide() end)
 
 
-
+    
     -- Create detail panel on right side
     local detailPanel = CreateFrame("Frame", nil, frame, BackdropTemplateMixin and "BackdropTemplate")
     detailPanel:SetPoint("TOPLEFT", frame:GetWidth() / 2, -32)
@@ -291,7 +283,6 @@ local function CreateMainFrame()
     })
     detailPanel:SetBackdropColor(0.1, 0.1, 0.1, 0.8)
 
-
     -- Search container frame for better organization
     local searchContainer = CreateFrame("Frame", nil, frame)
     searchContainer:SetHeight(30) -- Height for search elements
@@ -301,11 +292,11 @@ local function CreateMainFrame()
     -- Search box
     local searchBox = CreateFrame("EditBox", nil, searchContainer, "SearchBoxTemplate")
     searchBox:SetSize(200, 20)
-    searchBox:SetPoint("TOPLEFT", titleBar, "BOTTOMLEFT", 10, -5)
+    searchBox:SetPoint("TOPLEFT", titleBar, "BOTTOMLEFT", 65, -5)
     searchBox:SetAutoFocus(false)
     searchBox:SetMaxLetters(50)
     searchBox:SetScript("OnTextChanged", function(self)
-        addon.utils.UpdatePetList(frame, self:GetText())
+        GHP.utils.UpdatePetList(frame, self:GetText())
     end)
 
     -- Search options dropdown
@@ -329,7 +320,7 @@ local function CreateMainFrame()
             info.func = function(self)
                 searchType = self.value
                 UIDropDownMenu_SetText(searchOptions, option.text)
-                addon.utils.UpdatePetList(frame, searchBox:GetText())
+                GHP.utils.UpdatePetList(frame, searchBox:GetText())
             end
             UIDropDownMenu_AddButton(info, level)
         end
@@ -363,10 +354,12 @@ local function CreateMainFrame()
     frame.scrollChild = scrollChild
     frame.detailPanel = detailPanel
     frame:Hide()
+
+    GHP.frames.mainFrame = frame
     return frame
 end
 
-function addon.utils.ShowPetDetails(detailPanel, petInfo)
+function GHP.utils.ShowPetDetails(detailPanel, petInfo)
     -- Clear previous content
     for _, child in pairs({ detailPanel:GetChildren() }) do
         child:Hide()
@@ -374,7 +367,7 @@ function addon.utils.ShowPetDetails(detailPanel, petInfo)
     end
 
     -- Create model viewer
-    local modelViewer = CreateFrame("PlayerModel", nil, detailPanel)
+    local modelViewer = CreateFrame("PlayerModel", nil, detailPanel, "PanningModelSceneMixinTemplate")
     modelViewer:SetPoint("TOPLEFT", detailPanel, "TOPLEFT", 20, -20)
     modelViewer:SetSize(430, 300)
     modelViewer:SetCreature(petInfo.creatureID)
@@ -534,12 +527,8 @@ function addon.utils.ShowPetDetails(detailPanel, petInfo)
     end
 end
 
-
-
 -- Create and initialize the addon
 local function InitializeAddon()
-    
-
     local mainFrame = CreateMainFrame()
     InitializeMinimapButton()
 
@@ -550,7 +539,7 @@ local function InitializeAddon()
 
     eventFrame:SetScript("OnEvent", function(self, event)
         if mainFrame:IsShown() then
-            addon.utils.UpdatePetList(mainFrame)
+            GHP.utils.UpdatePetList(mainFrame)
         end
     end)
 
@@ -561,7 +550,7 @@ local function InitializeAddon()
             mainFrame:Hide()
         else
             mainFrame:Show()
-            addon.utils.UpdatePetList(mainFrame)
+            GHP.utils.UpdatePetList(mainFrame)
         end
     end
 end
