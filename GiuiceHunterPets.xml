@@ -1,69 +1,302 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
-    <Button name="GiuiceHunterPetListItemTemplate" mixin="GiuiceHunterPetListItemMixin" virtual="true">
-		<Size x="265" y="64"/>
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
+	<Button name="GiuiceHunterPetListItemTemplate" mixin="GiuiceHunterPetListItemMixin"
+		virtual="true">
+		<Size x="265" y="64" />
 		<Frames>
 			<Frame parentKey="Portrait">
-				<Size x="45" y="45"/>
+				<Size x="60" y="60" />
 				<Anchors>
-					<Anchor point="LEFT" x="10" y="0"/>
+					<Anchor point="LEFT" x="5" y="0" />
 				</Anchors>
 				<Layers>
 					<Layer level="BACKGROUND" textureSubLevel="0">
-						<Texture parentKey="Background">
-							<Color r="0" g="0" b="0" a="1"/>
-							<Size x="42" y="42"/>
-							<Anchors>
-								<Anchor point="CENTER"/>
-							</Anchors>
-						</Texture>
-					</Layer>
+				<Texture parentKey="Background">
+					<Size x="70" y="70"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+					<Color r="0.1" g="0.1" b="0.1" a="1"/>
+				</Texture>
+
+				<MaskTexture parentKey="BackgroundMask" file="Interface\CharacterFrame\TempPortraitAlphaMask" hWrapMode="CLAMPTOBLACKADDITIVE" vWrapMode="CLAMPTOBLACKADDITIVE">
+					<Size x="70" y="70"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+					<MaskedTextures>
+						<MaskedTexture childKey="Background"/>
+					</MaskedTextures>
+				</MaskTexture>
+			</Layer>
 					<Layer level="BACKGROUND" textureSubLevel="1">
 						<Texture parentKey="Icon">
-							<Size x="40" y="40"/>
+							<Size x="65" y="65" />
 							<Anchors>
-								<Anchor point="CENTER"/>
+								<Anchor point="CENTER" />
 							</Anchors>
 						</Texture>
 					</Layer>
 					<Layer level="BORDER">
-						<Texture parentKey="Border" atlas="pet-list_default-ring" useAtlasSize="false">
-							<Size x="85" y="85"/>
+						<Texture parentKey="Border" atlas="pet-list_default-ring"
+							useAtlasSize="false">
+							<Size x="95" y="95" />
 							<Anchors>
-								<Anchor point="CENTER" relativeKey="$parent.Icon" />
+								<Anchor point="CENTER" />
+							</Anchors>
+						</Texture>
+					</Layer>
+					<Layer level="OVERLAY">
+						<Texture parentKey="FavoriteIcon" atlas="PetJournal-FavoritesIcon" hidden="true">
+							<Size x="35" y="35"/>
+							<Anchors>
+								<Anchor point="TOPLEFT" x="-10" y="10"/>
 							</Anchors>
 						</Texture>
 					</Layer>
 				</Layers>
 			</Frame>
 		</Frames>
+		<HighlightTexture parentKey="Highlight" alphaMode="ADD" alpha="0.4">
+			<Size x="265" y="64"/>
+			<Anchors>
+				<Anchor point="TOPRIGHT"/> 
+			</Anchors>
+		</HighlightTexture>
 		<Layers>
 			<Layer level="BACKGROUND">
 				<Texture parentKey="Background">
 					<Anchors>
-						<Anchor point="TOPLEFT"/>
-						<Anchor point="BOTTOMRIGHT"/>
+						<Anchor point="TOPLEFT" />
+						<Anchor point="BOTTOMRIGHT" />
 					</Anchors>
 				</Texture>
 			</Layer>
 			<Layer level="ARTWORK">
 				<FontString parentKey="Name" inherits="GameFontNormal">
 					<Anchors>
-						<Anchor point="LEFT" relativeKey="$parent.Portrait" relativePoint="RIGHT" x="15" y="8"/>
+						<Anchor point="LEFT" relativeKey="$parent.Portrait" relativePoint="RIGHT"
+							x="15" y="8" />
 					</Anchors>
 				</FontString>
 				<FontString parentKey="Type" inherits="GameFontNormalSmall">
 					<Anchors>
-						<Anchor point="LEFT" relativeKey="$parent.Portrait" relativePoint="RIGHT" x="15" y="-8"/>
+						<Anchor point="LEFT" relativeKey="$parent.Portrait" relativePoint="RIGHT"
+							x="15" y="-8" />
 					</Anchors>
-					<Color r="1" g="0.82" b="0"/>
+					<Color r="1" g="0.82" b="0" />
 				</FontString>
 			</Layer>
 		</Layers>
 		<Scripts>
-			<OnLoad method="OnLoad"/>
-			<OnClick method="OnClick"/>
-			<OnEnter method="OnEnter"/>
-			<OnLeave method="OnLeave"/>
+			<OnLoad method="OnLoad" />
+			<OnClick method="OnClick" />
+			<OnEnter method="OnEnter" />
+			<OnLeave method="OnLeave" />
 		</Scripts>
 	</Button>
+	<!-- Add this to your XML file -->
+	<Button name="GiuiceHunterActivePetButtonTemplate" mixin="GiuiceHunterActivePetButtonMixin" 
+		virtual="true">
+		<Size x="60" y="60"/>
+		<Layers>
+			<Layer level="BACKGROUND" textureSubLevel="0">
+				<Texture parentKey="Background">
+					<Size x="70" y="70"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+					<Color r="0.1" g="0.1" b="0.1" a="1"/>
+				</Texture>
+
+				<MaskTexture parentKey="BackgroundMask" file="Interface\CharacterFrame\TempPortraitAlphaMask" hWrapMode="CLAMPTOBLACKADDITIVE" vWrapMode="CLAMPTOBLACKADDITIVE">
+					<Size x="70" y="70"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+					<MaskedTextures>
+						<MaskedTexture childKey="Background"/>
+					</MaskedTextures>
+				</MaskTexture>
+			</Layer>
+
+			<Layer level="BACKGROUND" textureSubLevel="1">
+				<Texture parentKey="Icon" >
+					<Size x="70" y="70"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+
+			<Layer level="BORDER">
+				<Texture parentKey="Border" atlas="footer_inactive-ring" useAtlasSize="false">
+					<Size x="125" y="125"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+
+				<Texture parentKey="Highlight" atlas="footer_active-ring" useAtlasSize="false" alphaMode="ADD" alpha="0.7" hidden="true">
+					<Size x="85" y="100"/>
+					<Anchors>
+						<Anchor point="CENTER" x="-1"/>
+					</Anchors>
+				</Texture>
+
+				<Texture parentKey="Lock" atlas="worldquest-tracker-lock" useAtlasSize="true" hidden="true">
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad method="OnLoad"/>			
+		</Scripts>
+	</Button>
+	<!-- <Button name="GiuiceHunterActivePetButtonTemplate" mixin="GiuiceHunterActivePetButtonMixin"
+		virtual="true">
+		<Size x="70" y="70" />
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="Icon">
+					<Size x="50" y="50" />
+					<Anchors>
+						<Anchor point="CENTER" />
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="BORDER">
+				<Texture parentKey="Border" atlas="StableSlot" useAtlasSize="true">
+					<Anchors>
+						<Anchor point="CENTER" />
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture parentKey="Lock" atlas="StableSlot-Locked" hidden="true">
+					<Size x="30" y="30" />
+					<Anchors>
+						<Anchor point="CENTER" />
+					</Anchors>
+				</Texture>
+				<Texture parentKey="Highlight" atlas="StableSlot-Highlight" hidden="true"
+					alphaMode="ADD">
+					<Anchors>
+						<Anchor point="CENTER" />
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad method="OnLoad" />
+			<OnEnter method="OnEnter" />
+			<OnLeave method="OnLeave" />
+			<OnClick method="OnClick" />
+		</Scripts>
+	</Button> -->
+	<Frame name="GiuiceHunterActivePetListTemplate" mixin="GiuiceHunterActivePetListMixin"
+		virtual="true">
+		<Size x="1" y="1" />
+		<Layers>
+			<Layer level="OVERLAY">
+				<Texture parentKey="ActivePetListBG" atlas="footer-bg" useAtlasSize="false"
+					alpha="0.6">
+					<Size y="92" />
+					<Anchors>
+						<Anchor point="TOPLEFT" y="90" />
+						<Anchor point="TOPRIGHT" />
+					</Anchors>
+				</Texture>
+				<Texture parentKey="ActivePetListBGBar" atlas="gold-divide" useAtlasSize="false">
+					<Size x="250" y="2" />
+					<Anchors>
+						<Anchor point="BOTTOM" relativeKey="$parent.ActivePetListBG"
+							relativePoint="TOP" y="-2" />
+					</Anchors>
+				</Texture>
+				<FontString parentKey="ListName" inherits="GameFontNormalLarge"
+					text="STABLE_ACTIVE_PET_LIST_LABEL">
+					<Anchors>
+						<Anchor point="LEFT" x="30" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button parentKey="PetButton1" parentArray="PetButtons"
+				inherits="GiuiceHunterActivePetButtonTemplate" id="1">
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.ListName" relativePoint="RIGHT" x="35" />
+				</Anchors>
+			</Button>
+
+			<Button parentKey="PetButton2" parentArray="PetButtons"
+				inherits="GiuiceHunterActivePetButtonTemplate" id="2">
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.PetButton1" relativePoint="RIGHT"
+						x="25" />
+				</Anchors>
+			</Button>
+
+			<Button parentKey="PetButton3" parentArray="PetButtons"
+				inherits="GiuiceHunterActivePetButtonTemplate" id="3">
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.PetButton2" relativePoint="RIGHT"
+						x="25" />
+				</Anchors>
+			</Button>
+
+			<Button parentKey="PetButton4" parentArray="PetButtons"
+				inherits="GiuiceHunterActivePetButtonTemplate" id="4">
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.PetButton3" relativePoint="RIGHT"
+						x="25" />
+				</Anchors>
+			</Button>
+
+			<Button parentKey="PetButton5" parentArray="PetButtons"
+				inherits="GiuiceHunterActivePetButtonTemplate" id="5">
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.PetButton4" relativePoint="RIGHT"
+						x="25" />
+				</Anchors>
+			</Button>
+
+			<Frame parentKey="Divider">
+				<Size x="60" y="3" />
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.PetButton5" relativePoint="RIGHT" />
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture parentKey="Bar">
+							<Size x="30" y="2" />
+							<Anchors>
+								<Anchor point="CENTER" />
+							</Anchors>
+							<Color r="1" g="0.8" b="0" a="0.8" />
+						</Texture>
+					</Layer>
+				</Layers>
+			</Frame>
+
+			<Button parentKey="BeastMasterSecondaryPetButton"
+				inherits="GiuiceHunterActivePetButtonTemplate"
+				mixin="GiuiceHunterBeastMasterSecondaryPetButtonMixin" id="6">
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.Divider" relativePoint="RIGHT" />
+				</Anchors>
+				<Scripts>
+					<OnShow method="OnShow" />
+					<OnHide method="OnHide" />
+					<OnEvent method="OnEvent" />
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad method="OnLoad" />
+		</Scripts>
+	</Frame>
 </Ui>

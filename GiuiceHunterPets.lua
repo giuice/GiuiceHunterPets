@@ -7,7 +7,6 @@ GHP.frames = {}
 -- Check for Hunter class first
 if (select(3, UnitClass("player")) ~= 3) then return end
 
-
 -- Check for required libraries
 assert(LibStub, "GiuiceHunterPets requires LibStub")
 local LDB = LibStub:GetLibrary("LibDataBroker-1.1", true)
@@ -21,6 +20,12 @@ GiuiceHunterPetsDB = GiuiceHunterPetsDB or {
     minimap = { hide = false },
 }
 
+
+local backgroundForPetSpec = {
+	[STABLE_PET_SPEC_CUNNING] = "hunter-stable-bg-art_cunning",
+	[STABLE_PET_SPEC_FEROCITY] = "hunter-stable-bg-art_ferocity",
+	[STABLE_PET_SPEC_TENACITY] = "hunter-stable-bg-art_tenacity",
+};
 
 
 -- Create the LibDataBroker object
@@ -48,195 +53,9 @@ local function InitializeMinimapButton()
     LibDBIcon:Register("GiuiceHunterPets", minimapLDB, GiuiceHunterPetsDB.minimap)
 end
 
-function GHP.utils.GetAllPets()
-    local allPets = {}
-    local activePets = C_StableInfo.GetActivePetList() or {}
-    local stabledPets = C_StableInfo.GetStabledPetList() or {}
-
-    -- First, add active pets
-    for _, pet in ipairs(activePets) do
-        pet.isActive = true
-        table.insert(allPets, pet)
-    end
-
-    -- Then add stabled pets
-    for _, pet in ipairs(stabledPets) do
-        pet.isActive = false
-        table.insert(allPets, pet)
-    end
-
-    return allPets
-end
-
-function GHP.utils.CreatePetEntryOld(petContainer, petInfo)
-    -- Background improvements
-    petContainer:SetBackdrop({
-        bgFile = "Interface/Tooltips/UI-Tooltip-Background",
-        edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
-        tile = true,
-        tileSize = 16,
-        edgeSize = 16,
-        insets = { left = 4, right = 4, top = 4, bottom = 4 }
-    })
-
-    -- Set different background colors for active vs stabled pets
-    local r, g, b = 0.1, 0.1, 0.1
-    if petInfo.isActive then
-        r, g, b = 0.15, 0.2, 0.15
-    end
-    petContainer:SetBackdropColor(r, g, b, 0.9)
-    petContainer:SetBackdropBorderColor(0.3, 0.3, 0.3, 1)
-
-    -- Pet icon with better framing
-    local iconFrame = CreateFrame("Frame", nil, petContainer, BackdropTemplateMixin and "BackdropTemplate")
-    iconFrame:SetSize(54, 54)
-    iconFrame:SetPoint("LEFT", 8, 0)
-    iconFrame:SetBackdrop({
-        edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
-        edgeSize = 8,
-    })
-    iconFrame:SetBackdropBorderColor(0.7, 0.7, 0.7, 1)
-
-    local icon = iconFrame:CreateTexture(nil, "ARTWORK")
-    icon:SetSize(50, 50)
-    icon:SetPoint("CENTER")
-    icon:SetTexture(petInfo.icon)
-
-    -- Create the main text container
-    local textContainer = CreateFrame("Frame", nil, petContainer)
-    textContainer:SetPoint("LEFT", iconFrame, "RIGHT", 12, 0)
-    textContainer:SetPoint("RIGHT", petContainer, "RIGHT", -8, 0)
-    textContainer:SetHeight(50)
-
-    -- Pet name and level
-    local nameText = textContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
-    nameText:SetPoint("TOPLEFT", 0, -2)
-    nameText:SetPoint("RIGHT", -5, 0)
-    nameText:SetJustifyH("LEFT")
-
-    -- Create name string with proper coloring
-    local nameString = string.format(
-        "%s - Level %d (%s) %s",
-        petInfo.name,
-        petInfo.level,
-        petInfo.familyName,
-        petInfo.isExotic and "|cFFFF0000Exotic|r" or ""
-    )
-    nameText:SetText(nameString)
-
-    -- Status indicators container
-    local statusContainer = CreateFrame("Frame", nil, textContainer)
-    statusContainer:SetPoint("TOPLEFT", nameText, "BOTTOMLEFT", 0, -2)
-    statusContainer:SetPoint("RIGHT", -5, 0)
-    statusContainer:SetHeight(20)
-
-    -- Favorite indicator (star)
-    if petInfo.isFavorite then
-        local favoriteIcon = statusContainer:CreateTexture(nil, "OVERLAY")
-        favoriteIcon:SetSize(16, 16)
-        favoriteIcon:SetPoint("LEFT", 0, 0)
-        favoriteIcon:SetTexture("Interface/Common/FavoritesIcon")
-        favoriteIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9) -- Trim the texture edges
-        favoriteIcon:SetVertexColor(1, 0.82, 0)      -- Gold color
-    end
-
-    -- Status text (With me/On Stable)
-    local statusText = statusContainer:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    statusText:SetPoint("LEFT", petInfo.isFavorite and 20 or 0, 0)
-    if petInfo.isActive then
-        statusText:SetText("|cFF00FF00With me|r")
-    else
-        statusText:SetText("|cFF888888On Stable|r")
-    end
-
-    -- Hover effect
-    petContainer:SetScript("OnEnter", function(self)
-        local hr, hg, hb = r + 0.1, g + 0.1, b + 0.1
-        self:SetBackdropColor(hr, hg, hb, 0.9)
-    end)
-
-    petContainer:SetScript("OnLeave", function(self)
-        self:SetBackdropColor(r, g, b, 0.9)
-    end)
-
-    return petContainer
-end
-
-function GHP.utils.CreatePetEntry(scrollChild, petInfo)
-    local petContainer = CreateFrame("Button", nil, scrollChild, "GiuiceHunterPetListItemTemplate")
-    petContainer:SetPetInfo(petInfo)
-    return petContainer
-end
-
--- Function to update pet list
-function GHP.utils.UpdatePetList(frame, searchText)
-    local scrollChild = frame.scrollChild
-    -- Clear existing contents
-    for _, child in pairs({ scrollChild:GetChildren() }) do
-        child:Hide()
-        child:SetParent(nil)
-    end
-
-    -- Get both stabled and active pets
-    local stabledPets = GHP.utils.GetAllPets()
-
-
-    if not stabledPets then
-        print("No pets in stable.")
-        return
-    end
-
-    -- Filter pets based on search
-    local filteredPets = stabledPets
-    if searchText and searchText ~= "" then
-        searchText = searchText:lower()
-        filteredPets = {}
-        local searchType = frame.searchType()
-
-        for _, pet in ipairs(stabledPets) do
-            local match = false
-            if searchType == "name" then
-                match = pet.name:lower():find(searchText, 1, true)
-            elseif searchType == "family" then
-                match = pet.familyName:lower():find(searchText, 1, true)
-            elseif searchType == "level" then
-                match = tostring(pet.level):find(searchText, 1, true)
-            end
-
-            if match then
-                table.insert(filteredPets, pet)
-            end
-        end
-    end
-
-    local previousElement
-    local totalHeight = 0
-
-    for index, petInfo in ipairs(filteredPets) do
-        local petContainer = GHP.utils.CreatePetEntry(scrollChild, petInfo) --CreateFrame("Frame", nil, scrollChild, BackdropTemplateMixin and "BackdropTemplate")
-        petContainer:SetSize(scrollChild:GetWidth() - 8, 70)
-        if previousElement then
-            petContainer:SetPoint("TOPLEFT", previousElement, "BOTTOMLEFT", 0, -2)
-        else
-            petContainer:SetPoint("TOPLEFT", 0, 0)
-        end
-
-        -- petContainer:EnableMouse(true)
-        -- petContainer:SetScript("OnMouseDown", function()
-        --     GHP.utils.ShowPetDetails(frame.detailPanel, petInfo)
-        -- end)
-
-        --GHP.utils.CreatePetEntry(petContainer, petInfo)
-        previousElement = petContainer
-    end
-
-    scrollChild:SetHeight(math.max(totalHeight, frame:GetHeight()))
-end
-
--- Create main frame
 local function CreateMainFrame()
     local frame = CreateFrame("Frame", "GiuiceHunterPetsFrame", UIParent,  "PortraitFrameTemplate")
-    frame:SetSize(1000, 700)
+    frame:SetSize(1200, 700)
     frame:SetFrameStrata("HIGH")
     frame:EnableMouse(true)
     frame:SetMovable(true)
@@ -269,11 +88,9 @@ local function CreateMainFrame()
     titleBar:SetPoint("TOPLEFT", 0, 0)
     titleBar:SetPoint("TOPRIGHT", 0, 0)
 
-
-    
     -- Create detail panel on right side
     local detailPanel = CreateFrame("Frame", nil, frame, BackdropTemplateMixin and "BackdropTemplate")
-    detailPanel:SetPoint("TOPLEFT", frame:GetWidth() / 2, -32)
+    detailPanel:SetPoint("TOPLEFT", 450, -32)
     detailPanel:SetPoint("BOTTOMRIGHT", -8, 8)
     detailPanel:SetBackdrop({
         bgFile = "Interface/Tooltips/UI-Tooltip-Background",
@@ -333,12 +150,12 @@ local function CreateMainFrame()
     -- Scroll frame
     local scrollFrame = CreateFrame("ScrollFrame", nil, frame, "UIPanelScrollFrameTemplate")
     scrollFrame:SetPoint("TOPLEFT", searchContainer, "BOTTOMLEFT", 8, -8) -- Position below search container
-    scrollFrame:SetPoint("BOTTOMRIGHT", frame:GetWidth() / 2 - 14, 8)
+    scrollFrame:SetPoint("BOTTOMRIGHT", 450 - 14, 8)
 
     -- Scroll child adjustment
     local scrollChild = CreateFrame("Frame")
     scrollFrame:SetScrollChild(scrollChild)
-    scrollChild:SetSize(frame:GetWidth() / 2 - 36, 1) -- Adjust width to half
+    scrollChild:SetSize(450 - 36, 1) -- Adjust width to half
 
     frame.searchBox = searchBox
     frame.searchType = function() return searchType end
@@ -359,173 +176,218 @@ local function CreateMainFrame()
     return frame
 end
 
-function GHP.utils.ShowPetDetails(detailPanel, petInfo)
-    -- Clear previous content
-    for _, child in pairs({ detailPanel:GetChildren() }) do
+
+function GHP.utils.CreatePetEntry(scrollChild, petInfo)
+    local petContainer = CreateFrame("Button", nil, scrollChild, "GiuiceHunterPetListItemTemplate")
+    petContainer:SetPetInfo(petInfo)
+    return petContainer
+end
+
+-- Function to update pet list
+function GHP.utils.UpdatePetList(frame, searchText)
+    local scrollChild = frame.scrollChild
+    -- Clear existing contents
+    for _, child in pairs({ scrollChild:GetChildren() }) do
         child:Hide()
         child:SetParent(nil)
     end
 
-    -- Create model viewer
-    local modelViewer = CreateFrame("PlayerModel", nil, detailPanel, "PanningModelSceneMixinTemplate")
-    modelViewer:SetPoint("TOPLEFT", detailPanel, "TOPLEFT", 20, -20)
-    modelViewer:SetSize(430, 300)
-    modelViewer:SetCreature(petInfo.creatureID)
+    -- Get both stabled and active pets
+    local stabledPets = C_StableInfo.GetStabledPetList() --GHP.utils.GetAllPets()
 
-    -- Set initial position (facing forward)
-    modelViewer:SetPosition(0, 0, 0)
-    modelViewer:SetFacing(0)
 
-    -- Set initial camera
-    modelViewer:SetCamera(0)
-    modelViewer.defaultZoom = -3
-    modelViewer.minZoom = -1.5
-    modelViewer.maxZoom = 1.5
-    modelViewer.zoomLevel = modelViewer.defaultZoom
-
-    -- Add basic controls
-    modelViewer:EnableMouse(true)
-    modelViewer:EnableMouseWheel(true)
-
-    -- Improved rotation control
-    local rotationStart = nil
-    modelViewer:SetScript("OnMouseDown", function(self, button)
-        if button == "LeftButton" then
-            rotationStart = GetCursorPosition()
-            self.isRotating = true
-        end
-    end)
-
-    modelViewer:SetScript("OnMouseUp", function(self)
-        self.isRotating = false
-        rotationStart = nil
-    end)
-
-    modelViewer:SetScript("OnUpdate", function(self)
-        if self.isRotating and rotationStart then
-            local x = GetCursorPosition()
-            local rotation = (x - rotationStart) * 0.01
-            self:SetFacing(rotation)
-        end
-    end)
-
-    -- Improved zoom handling
-    modelViewer:SetScript("OnMouseWheel", function(self, delta)
-        local zoomChange = delta * 0.1
-        self.zoomLevel = max(self.minZoom, min(self.maxZoom, self.zoomLevel + zoomChange))
-        self:SetPortraitZoom(self.zoomLevel)
-    end)
-
-    -- Create info container below model
-    local infoContainer = CreateFrame("Frame", nil, detailPanel)
-    infoContainer:SetPoint("TOPLEFT", modelViewer, "BOTTOMLEFT", 0, -20)
-    infoContainer:SetPoint("BOTTOMRIGHT", detailPanel, "BOTTOMRIGHT", -20, 20)
-
-    -- Helper function to create text sections
-    local function CreateInfoSection(parent, label, value, previousSection, spacing)
-        local section = CreateFrame("Frame", nil, parent)
-        section:SetHeight(20)
-        if previousSection then
-            section:SetPoint("TOPLEFT", previousSection, "BOTTOMLEFT", 0, -(spacing or 5))
-            section:SetPoint("TOPRIGHT", previousSection, "BOTTOMRIGHT", 0, -(spacing or 5))
-        else
-            section:SetPoint("TOPLEFT", parent, "TOPLEFT", 0, 0)
-            section:SetPoint("TOPRIGHT", parent, "TOPRIGHT", 0, 0)
-        end
-
-        local labelText = section:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
-        labelText:SetPoint("LEFT", section, "LEFT", 0, 0)
-        labelText:SetTextColor(1, 0.82, 0) -- Gold color
-        labelText:SetText(label .. ":")
-
-        local valueText = section:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-        valueText:SetPoint("LEFT", labelText, "RIGHT", 5, 0)
-        valueText:SetText(value)
-
-        return section
+    if not stabledPets then
+        print("No pets in stable.")
+        return
     end
 
-    -- Create sections for pet information
-    local lastSection
+    -- Filter pets based on search
+    local filteredPets = stabledPets
+    if searchText and searchText ~= "" then
+        searchText = searchText:lower()
+        filteredPets = {}
+        local searchType = frame.searchType()
 
-    -- Name and Level
-    lastSection = CreateInfoSection(infoContainer, "Name",
-        string.format("|cFFFFFFFF%s|r", petInfo.name), nil, 10)
-
-    -- Level and Family
-    lastSection = CreateInfoSection(infoContainer, "Level & Family",
-        string.format("|cFFFFFFFF%d %s|r", petInfo.level, petInfo.familyName), lastSection)
-
-    -- Specialization
-    if petInfo.specialization then
-        lastSection = CreateInfoSection(infoContainer, "Specialization",
-            string.format("|cFFFFFFFF%s|r", petInfo.specialization), lastSection)
-    end
-
-    -- Type
-    lastSection = CreateInfoSection(infoContainer, "Type",
-        string.format("|cFFFFFFFF%s|r", petInfo.type), lastSection)
-
-    -- Exotic Status
-    -- lastSection = CreateInfoSection(infoContainer, "Status",
-    --     string.format("%s%s%s",
-    --         petInfo.isExotic and "|cFFFF0000Exotic|r" or "|cFF00FF00Normal|r",
-    --         petInfo.isFavorite and " |cFFFFD700★ Favorite|r" or "",
-    --         petInfo.slotID and " |cFF00FF00(Active)|r" or ""
-    --     ), lastSection)
-
-    lastSection = CreateInfoSection(infoContainer, "Status",
-        string.format("%s%s%s",
-            petInfo.isExotic and "|cFFFF0000Exotic|r" or "|cFF00FF00Normal|r",
-            petInfo.isFavorite and " |cFFFFD700★ Favorite|r" or "",
-            petInfo.isActive and " |cFF00FF00(Active)|r" or ""
-        ), lastSection)
-
-    -- Pet Number
-    lastSection = CreateInfoSection(infoContainer, "Pet Number",
-        string.format("|cFFFFFFFF%d|r", petInfo.petNumber), lastSection)
-
-    -- Creature ID (useful for debugging/advanced users)
-    lastSection = CreateInfoSection(infoContainer, "Creature ID",
-        string.format("|cFFFFFFFF%d|r", petInfo.creatureID), lastSection)
-
-    -- Abilities Header
-    if petInfo.abilities and #petInfo.abilities > 0 then
-        local abilityHeader = lastSection:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
-        abilityHeader:SetPoint("TOPLEFT", lastSection, "BOTTOMLEFT", 0, -20)
-        abilityHeader:SetTextColor(1, 0.82, 0)
-        abilityHeader:SetText("Abilities:")
-
-        -- Create ability icons
-        local lastAbility
-        for i, abilityID in ipairs(petInfo.abilities) do
-            local abilityIcon = CreateFrame("Button", nil, infoContainer)
-            abilityIcon:SetSize(32, 32)
-            if i == 1 then
-                abilityIcon:SetPoint("TOPLEFT", abilityHeader, "BOTTOMLEFT", 0, -10)
-            else
-                abilityIcon:SetPoint("LEFT", lastAbility, "RIGHT", 5, 0)
+        for _, pet in ipairs(stabledPets) do
+            local match = false
+            if searchType == "name" then
+                match = pet.name:lower():find(searchText, 1, true)
+            elseif searchType == "family" then
+                match = pet.familyName:lower():find(searchText, 1, true)
+            elseif searchType == "level" then
+                match = tostring(pet.level):find(searchText, 1, true)
             end
 
-            local texture = abilityIcon:CreateTexture(nil, "ARTWORK")
-            texture:SetAllPoints()
-            local spellInfo = C_Spell.GetSpellInfo(abilityID)
-            texture:SetTexture(spellInfo.originalIconID)
+            if match then
+                table.insert(filteredPets, pet)
+            end
+        end
+    end
 
-            -- Add tooltip
-            abilityIcon:SetScript("OnEnter", function(self)
-                GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-                GameTooltip:SetSpellByID(abilityID)
+    local previousElement
+    local totalHeight = 0
+
+    for index, petInfo in ipairs(filteredPets) do
+        local petContainer = GHP.utils.CreatePetEntry(scrollChild, petInfo) --CreateFrame("Frame", nil, scrollChild, BackdropTemplateMixin and "BackdropTemplate")
+        petContainer:SetSize(scrollChild:GetWidth() - 8, 70)
+        if previousElement then
+            petContainer:SetPoint("TOPLEFT", previousElement, "BOTTOMLEFT", 0, -2)
+        else
+            petContainer:SetPoint("TOPLEFT", 0, 0)
+        end
+        previousElement = petContainer
+    end
+
+    scrollChild:SetHeight(math.max(totalHeight, frame:GetHeight()))
+end
+
+function GHP.utils.ShowPetDetails(detailPanel, petInfo)
+     -- Clear previous content
+     for _, child in pairs({ detailPanel:GetChildren() }) do
+        child:Hide()
+        child:SetParent(nil)
+    end
+
+    local modelViewer = CreateFrame("ModelScene", nil, detailPanel, "PanningModelSceneMixinTemplate")
+    modelViewer:SetPoint("TOPLEFT", detailPanel, "TOPLEFT", 20, -20)
+    modelViewer:SetPoint("BOTTOMRIGHT", detailPanel, "BOTTOMRIGHT", -20, 20)
+
+    -- Add abilities list header
+    local header = modelViewer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge2")
+    header:SetPoint("TOPLEFT", modelViewer, "TOPLEFT", 20, -20)
+    header:SetText(STABLE_PET_ABILITIES_LIST_HEADER)
+    header:GetShadowOffset(1)
+
+    -- Create abilities list
+    if petInfo.abilities and #petInfo.abilities > 0 then
+        local lastAbility
+        for i, abilityID in ipairs(petInfo.abilities) do
+            local ability = CreateFrame("Frame", nil, modelViewer)
+            ability:SetSize(250, 22)
+            
+            if i == 1 then
+                ability:SetPoint("TOPLEFT", header, "BOTTOMLEFT", 0, -4)
+            else
+                ability:SetPoint("TOPLEFT", lastAbility, "BOTTOMLEFT", 0, -4)
+            end
+
+            -- Create icon texture
+            local icon = ability:CreateTexture(nil, "ARTWORK")
+            icon:SetSize(22, 22)
+            icon:SetPoint("LEFT", 0, 0)
+            
+            local spellInfo = C_Spell.GetSpellInfo(abilityID)
+            icon:SetTexture(spellInfo.iconID)
+
+            -- Create name text
+            local name = ability:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+            name:SetPoint("LEFT", icon, "RIGHT", 8, 0)
+            name:SetText(spellInfo.name)
+            name:SetJustifyH("LEFT")
+
+            -- Setup tooltip
+            ability:EnableMouse(true)
+            ability:SetScript("OnEnter", function()
+                GameTooltip:SetOwner(ability, "ANCHOR_RIGHT")
+                GameTooltip:SetSpellByID(abilityID, true, true)
                 GameTooltip:Show()
             end)
-            abilityIcon:SetScript("OnLeave", function()
+            ability:SetScript("OnLeave", function()
                 GameTooltip:Hide()
             end)
 
-            lastAbility = abilityIcon
+            lastAbility = ability
         end
     end
+
+    -- Add basic info below abilities
+    local infoContainer = CreateFrame("Frame", nil, modelViewer)
+    infoContainer:SetPoint("TOPLEFT", header, "BOTTOMLEFT", 0, -150) -- Adjust spacing as needed
+    infoContainer:SetSize(250, 200)
+
+    -- Add pet info
+    local function AddInfoLine(label, value, previousLine)
+        local container = CreateFrame("Frame", nil, infoContainer)
+        container:SetHeight(20)
+        if previousLine then
+            container:SetPoint("TOPLEFT", previousLine, "BOTTOMLEFT", 0, -5)
+        else
+            container:SetPoint("TOPLEFT", infoContainer, "TOPLEFT")
+        end
+        container:SetWidth(250)
+
+        local labelText = container:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+        labelText:SetPoint("LEFT")
+        labelText:SetText(label .. ":")
+        labelText:SetTextColor(0.8, 0.8, 0.8)
+
+        local valueText = container:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
+        valueText:SetPoint("LEFT", labelText, "RIGHT", 5, 0)
+        valueText:SetText(value)
+
+        return container
+    end
+
+    local lastLine = AddInfoLine("Family", petInfo.familyName)
+    lastLine = AddInfoLine("Specialization", petInfo.specialization, lastLine)
+    lastLine = AddInfoLine("Diet", table.concat(C_StableInfo.GetStablePetFoodTypes(petInfo.slotID), ", "), lastLine)
+    lastLine = AddInfoLine("Status", petInfo.isExotic and "Exotic" or "Normal", lastLine)
+
+    -- Add background layer
+    local background = modelViewer:CreateTexture(nil, "BACKGROUND")
+    background:SetPoint("TOPLEFT")
+    background:SetPoint("BOTTOMRIGHT") 
+    background:SetAtlas(backgroundForPetSpec[petInfo.specialization] or "hunter-stable-bg-art_cunning")
+    background:SetAlpha(0.8)
+
+    -- Add pet shadow
+    local shadow = modelViewer:CreateTexture(nil, "ARTWORK")
+    shadow:SetAtlas("perks-char-shadow")
+    shadow:SetAlpha(0.6)
+    shadow:SetSize(410, 90)
+    shadow:SetPoint("CENTER", modelViewer, "CENTER", -8, -145)
+
+    -- Setup model scene with proper camera
+    local forceSceneChange = true
+    modelViewer:TransitionToModelSceneID(petInfo.uiModelSceneID, CAMERA_TRANSITION_TYPE_IMMEDIATE, CAMERA_MODIFICATION_TYPE_DISCARD, forceSceneChange)
+    
+    -- Create and setup the actor
+    local actor = modelViewer:GetActorByTag("pet")
+    if not actor then
+        actor = modelViewer:CreateActorByTag("pet")
+    end
+    
+    if actor then
+        actor:SetModelByCreatureDisplayID(petInfo.displayID)
+        actor:SetSpellVisualKit(0)
+        actor:Show()
+    end
+
+    -- Add control frame
+    local controlFrame = CreateFrame("Frame", nil, modelViewer, "ModelSceneControlFrameTemplate") 
+    controlFrame:SetPoint("BOTTOM", modelViewer, "BOTTOM", 0, 90)
+    controlFrame:SetModelScene(modelViewer)
+
+    -- Set up mouse wheel zoom
+    modelViewer:SetScript("OnMouseWheel", function(self, delta)
+        local zoomChange = delta * 0.5
+        local actorScale = actor:GetScale()
+        actorScale = math.max(0.1, math.min(3.0, actorScale + zoomChange))
+        actor:SetScale(actorScale)
+    end)
+
+    -- Create the active pets list using the template
+    if not modelViewer.activePetList then
+        modelViewer.activePetList = CreateFrame("Frame", nil, detailPanel, "GiuiceHunterActivePetListTemplate");
+        modelViewer.activePetList:SetPoint("TOPLEFT", modelViewer, "BOTTOMLEFT", 0, 45);
+        modelViewer.activePetList:SetPoint("TOPRIGHT", modelViewer, "BOTTOMRIGHT", 0, 45);
+    end
+    
+    modelViewer.activePetList:Refresh();
+
 end
+
+
 
 -- Create and initialize the addon
 local function InitializeAddon()

@@ -61,9 +61,3 @@ for baseKey, baseValue in pairs(L["enUS"]) do
     end
 end
 
-local function DebugExoticFamilies()
-    for key, value in pairs(GHP.exoticFamilies) do
-        print(key, value)
-    end
-end
-DebugExoticFamilies()
