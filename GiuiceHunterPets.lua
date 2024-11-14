@@ -239,6 +239,10 @@ function GHP.utils.UpdatePetList(frame, searchText)
     end
 
     scrollChild:SetHeight(math.max(totalHeight, frame:GetHeight()))
+    if(filteredPets and #filteredPets > 0) then
+        GHP.utils.ShowPetDetails(GHP.frames.mainFrame.detailPanel,filteredPets[1]);
+    end
+    
 end
 
 function GHP.utils.ShowPetDetails(detailPanel, petInfo)
