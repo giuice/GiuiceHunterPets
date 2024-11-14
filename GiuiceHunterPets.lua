@@ -238,7 +238,12 @@ function GHP.utils.UpdatePetList(frame, searchText)
         previousElement = petContainer
     end
 
+    -- Auto-select the first pet if available
+    if #filteredPets > 0 then
+        GHP.utils.ShowPetDetails(GHP.frames.mainFrame.detailPanel, filteredPets[1])
+    end
     scrollChild:SetHeight(math.max(totalHeight, frame:GetHeight()))
+    
 end
 
 function GHP.utils.ShowPetDetails(detailPanel, petInfo)
