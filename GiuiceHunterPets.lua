@@ -34,11 +34,11 @@ local minimapLDB = LDB:NewDataObject("GiuiceHunterPets", {
     icon = "Interface\\Icons\\Ability_Hunter_Pet_Devilsaur",
     OnClick = function(self, button)
         if button == "LeftButton" then
-            if GiuiceHunterPetsFrame:IsShown() then
-                GiuiceHunterPetsFrame:Hide()
+            if GHP.frames.mainFrame:IsShown() then
+                GHP.frames.mainFrame:Hide()
             else
-                GiuiceHunterPetsFrame:Show()
-                GHP.utils.UpdatePetList(GiuiceHunterPetsFrame)
+                GHP.frames.mainFrame:Show()
+                GHP.utils.UpdatePetList(GHP.frames.mainFrame)
             end
         end
     end,
@@ -211,11 +211,11 @@ function GHP.utils.UpdatePetList(frame, searchText)
         for _, pet in ipairs(stabledPets) do
             local match = false
             if searchType == "name" then
-                match = pet.name:lower():find(searchText, 1, true)
+                match = pet.name:lower():find(searchText, 1, true) ~= nil
             elseif searchType == "family" then
-                match = pet.familyName:lower():find(searchText, 1, true)
+                match = pet.familyName:lower():find(searchText, 1, true) ~= nil
             elseif searchType == "level" then
-                match = tostring(pet.level):find(searchText, 1, true)
+                match = tostring(pet.level):find(searchText, 1, true) ~= nil
             end
 
             if match then
