@@ -80,7 +80,7 @@ local function EnhanceTooltip(tooltip, data)
     tooltip:AddLine("Family: " .. (family or "Unknown"), 1, 1, 1)
     tooltip:AddLine("Classification: " .. (classification or "normal"), 1, 1, 1)
 
-    local tameableText = "Tameable: "
+    local tameableText = "Tamable: "
     if isTameable then
         if IsExoticFamily(family) then
             if not IsPlayerBeastMastery() then
