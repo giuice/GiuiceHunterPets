@@ -34,11 +34,11 @@ local minimapLDB = LDB:NewDataObject("GiuiceHunterPets", {
     icon = "Interface\\Icons\\Ability_Hunter_Pet_Devilsaur",
     OnClick = function(self, button)
         if button == "LeftButton" then
-            if GiuiceHunterPetsFrame:IsShown() then
-                GiuiceHunterPetsFrame:Hide()
+            if GHP.frames.mainFrame:IsShown() then
+                GHP.frames.mainFrame:Hide()
             else
-                GiuiceHunterPetsFrame:Show()
-                GHP.utils.UpdatePetList(GiuiceHunterPetsFrame)
+                GHP.frames.mainFrame:Show()
+                GHP.utils.UpdatePetList(GHP.frames.mainFrame)
             end
         end
     end,
@@ -211,11 +211,11 @@ function GHP.utils.UpdatePetList(frame, searchText)
         for _, pet in ipairs(stabledPets) do
             local match = false
             if searchType == "name" then
-                match = pet.name:lower():find(searchText, 1, true)
+                match = pet.name:lower():find(searchText, 1, true) ~= nil
             elseif searchType == "family" then
-                match = pet.familyName:lower():find(searchText, 1, true)
+                match = pet.familyName:lower():find(searchText, 1, true) ~= nil
             elseif searchType == "level" then
-                match = tostring(pet.level):find(searchText, 1, true)
+                match = tostring(pet.level):find(searchText, 1, true) ~= nil
             end
 
             if match then
@@ -238,10 +238,11 @@ function GHP.utils.UpdatePetList(frame, searchText)
         previousElement = petContainer
     end
 
-    scrollChild:SetHeight(math.max(totalHeight, frame:GetHeight()))
-    if(filteredPets and #filteredPets > 0) then
-        GHP.utils.ShowPetDetails(GHP.frames.mainFrame.detailPanel,filteredPets[1]);
+    -- Auto-select the first pet if available
+    if #filteredPets > 0 then
+        GHP.utils.ShowPetDetails(GHP.frames.mainFrame.detailPanel, filteredPets[1])
     end
+    scrollChild:SetHeight(math.max(totalHeight, frame:GetHeight()))
     
 end
 
@@ -260,7 +261,7 @@ function GHP.utils.ShowPetDetails(detailPanel, petInfo)
     local header = modelViewer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge2")
     header:SetPoint("TOPLEFT", modelViewer, "TOPLEFT", 20, -20)
     header:SetText(STABLE_PET_ABILITIES_LIST_HEADER)
-    header:GetShadowOffset(1)
+    header:GetShadowOffset()
 
     -- Create abilities list
     if petInfo.abilities and #petInfo.abilities > 0 then
@@ -293,7 +294,7 @@ function GHP.utils.ShowPetDetails(detailPanel, petInfo)
             ability:EnableMouse(true)
             ability:SetScript("OnEnter", function()
                 GameTooltip:SetOwner(ability, "ANCHOR_RIGHT")
-                GameTooltip:SetSpellByID(abilityID, true, true)
+                GameTooltip:SetSpellByID(abilityID)
                 GameTooltip:Show()
             end)
             ability:SetScript("OnLeave", function()
