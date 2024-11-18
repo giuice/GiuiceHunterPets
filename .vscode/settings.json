@@ -61,5 +61,6 @@
 		"GameTooltip_AddErrorLine",
 		"StableStabledPetButtonTemplateMixin",
 		"ToggleDropDownMenu"
-	]
+	],
+	"CodeGPT.apiKey": "Ollama"
 }

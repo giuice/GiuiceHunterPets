@@ -18,6 +18,7 @@ assert(LibDBIcon, "GiuiceHunterPets requires LibDBIcon-1.0")
 GiuiceHunterPetsDB = GiuiceHunterPetsDB or {
     position = nil,
     minimap = { hide = false },
+    showPetsOnMap = true,
 }
 
 

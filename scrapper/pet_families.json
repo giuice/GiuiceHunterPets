@@ -1,0 +1,362 @@
+[
+  {
+    "id": 46,
+    "name": "Spirit Beast",
+    "slug": "spirit-beast",
+    "tameable_url": "https://www.wowhead.com/pet=46/spirit-beast#tameable"
+  },
+  {
+    "id": 43,
+    "name": "Clefthoof",
+    "slug": "clefthoof",
+    "tameable_url": "https://www.wowhead.com/pet=43/clefthoof#tameable"
+  },
+  {
+    "id": 45,
+    "name": "Core Hound",
+    "slug": "core-hound",
+    "tameable_url": "https://www.wowhead.com/pet=45/core-hound#tameable"
+  },
+  {
+    "id": 128,
+    "name": "Stone Hound",
+    "slug": "stone-hound",
+    "tameable_url": "https://www.wowhead.com/pet=128/stone-hound#tameable"
+  },
+  {
+    "id": 41,
+    "name": "Aqiri",
+    "slug": "aqiri",
+    "tameable_url": "https://www.wowhead.com/pet=41/aqiri#tameable"
+  },
+  {
+    "id": 39,
+    "name": "Devilsaur",
+    "slug": "devilsaur",
+    "tameable_url": "https://www.wowhead.com/pet=39/devilsaur#tameable"
+  },
+  {
+    "id": 1,
+    "name": "Wolf",
+    "slug": "wolf",
+    "tameable_url": "https://www.wowhead.com/pet=1/wolf#tameable"
+  },
+  {
+    "id": 11,
+    "name": "Raptor",
+    "slug": "raptor",
+    "tameable_url": "https://www.wowhead.com/pet=11/raptor#tameable"
+  },
+  {
+    "id": 303,
+    "name": "Lesser Dragonkin",
+    "slug": "lesser-dragonkin",
+    "tameable_url": "https://www.wowhead.com/pet=303/lesser-dragonkin#tameable"
+  },
+  {
+    "id": 2,
+    "name": "Cat",
+    "slug": "cat",
+    "tameable_url": "https://www.wowhead.com/pet=2/cat#tameable"
+  },
+  {
+    "id": 4,
+    "name": "Bear",
+    "slug": "bear",
+    "tameable_url": "https://www.wowhead.com/pet=4/bear#tameable"
+  },
+  {
+    "id": 160,
+    "name": "Feathermane",
+    "slug": "feathermane",
+    "tameable_url": "https://www.wowhead.com/pet=160/feathermane#tameable"
+  },
+  {
+    "id": 31,
+    "name": "Ravager",
+    "slug": "ravager",
+    "tameable_url": "https://www.wowhead.com/pet=31/ravager#tameable"
+  },
+  {
+    "id": 296,
+    "name": "Blood Beast",
+    "slug": "blood-beast",
+    "tameable_url": "https://www.wowhead.com/pet=296/blood-beast#tameable"
+  },
+  {
+    "id": 156,
+    "name": "Scalehide",
+    "slug": "scalehide",
+    "tameable_url": "https://www.wowhead.com/pet=156/scalehide#tameable"
+  },
+  {
+    "id": 38,
+    "name": "Chimaera",
+    "slug": "chimaera",
+    "tameable_url": "https://www.wowhead.com/pet=38/chimaera#tameable"
+  },
+  {
+    "id": 138,
+    "name": "Direhorn",
+    "slug": "direhorn",
+    "tameable_url": "https://www.wowhead.com/pet=138/direhorn#tameable"
+  },
+  {
+    "id": 292,
+    "name": "Carapid",
+    "slug": "carapid",
+    "tameable_url": "https://www.wowhead.com/pet=292/carapid#tameable"
+  },
+  {
+    "id": 127,
+    "name": "Rodent",
+    "slug": "rodent",
+    "tameable_url": "https://www.wowhead.com/pet=127/rodent#tameable"
+  },
+  {
+    "id": 288,
+    "name": "Lizard",
+    "slug": "lizard",
+    "tameable_url": "https://www.wowhead.com/pet=288/lizard#tameable"
+  },
+  {
+    "id": 68,
+    "name": "Hydra",
+    "slug": "hydra",
+    "tameable_url": "https://www.wowhead.com/pet=68/hydra#tameable"
+  },
+  {
+    "id": 150,
+    "name": "Riverbeast",
+    "slug": "riverbeast",
+    "tameable_url": "https://www.wowhead.com/pet=150/riverbeast#tameable"
+  },
+  {
+    "id": 154,
+    "name": "Mechanical",
+    "slug": "mechanical",
+    "tameable_url": "https://www.wowhead.com/pet=154/mechanical#tameable"
+  },
+  {
+    "id": 7,
+    "name": "Carrion Bird",
+    "slug": "carrion-bird",
+    "tameable_url": "https://www.wowhead.com/pet=7/carrion-bird#tameable"
+  },
+  {
+    "id": 26,
+    "name": "Bird of Prey",
+    "slug": "bird-of-prey",
+    "tameable_url": "https://www.wowhead.com/pet=26/bird-of-prey#tameable"
+  },
+  {
+    "id": 44,
+    "name": "Wasp",
+    "slug": "wasp",
+    "tameable_url": "https://www.wowhead.com/pet=44/wasp#tameable"
+  },
+  {
+    "id": 52,
+    "name": "Hound",
+    "slug": "hound",
+    "tameable_url": "https://www.wowhead.com/pet=52/hound#tameable"
+  },
+  {
+    "id": 9,
+    "name": "Gorilla",
+    "slug": "gorilla",
+    "tameable_url": "https://www.wowhead.com/pet=9/gorilla#tameable"
+  },
+  {
+    "id": 3,
+    "name": "Spider",
+    "slug": "spider",
+    "tameable_url": "https://www.wowhead.com/pet=3/spider#tameable"
+  },
+  {
+    "id": 126,
+    "name": "Water Strider",
+    "slug": "water-strider",
+    "tameable_url": "https://www.wowhead.com/pet=126/water-strider#tameable"
+  },
+  {
+    "id": 21,
+    "name": "Turtle",
+    "slug": "turtle",
+    "tameable_url": "https://www.wowhead.com/pet=21/turtle#tameable"
+  },
+  {
+    "id": 25,
+    "name": "Hyena",
+    "slug": "hyena",
+    "tameable_url": "https://www.wowhead.com/pet=25/hyena#tameable"
+  },
+  {
+    "id": 42,
+    "name": "Worm",
+    "slug": "worm",
+    "tameable_url": "https://www.wowhead.com/pet=42/worm#tameable"
+  },
+  {
+    "id": 55,
+    "name": "Shale Beast",
+    "slug": "shale-beast",
+    "tameable_url": "https://www.wowhead.com/pet=55/shale-beast#tameable"
+  },
+  {
+    "id": 299,
+    "name": "Courser",
+    "slug": "courser",
+    "tameable_url": "https://www.wowhead.com/pet=299/courser#tameable"
+  },
+  {
+    "id": 27,
+    "name": "Wind Serpent",
+    "slug": "wind-serpent",
+    "tameable_url": "https://www.wowhead.com/pet=27/wind-serpent#tameable"
+  },
+  {
+    "id": 32,
+    "name": "Warp Stalker",
+    "slug": "warp-stalker",
+    "tameable_url": "https://www.wowhead.com/pet=32/warp-stalker#tameable"
+  },
+  {
+    "id": 20,
+    "name": "Scorpid",
+    "slug": "scorpid",
+    "tameable_url": "https://www.wowhead.com/pet=20/scorpid#tameable"
+  },
+  {
+    "id": 30,
+    "name": "Dragonhawk",
+    "slug": "dragonhawk",
+    "tameable_url": "https://www.wowhead.com/pet=30/dragonhawk#tameable"
+  },
+  {
+    "id": 290,
+    "name": "Pterrordax",
+    "slug": "pterrordax",
+    "tameable_url": "https://www.wowhead.com/pet=290/pterrordax#tameable"
+  },
+  {
+    "id": 35,
+    "name": "Serpent",
+    "slug": "serpent",
+    "tameable_url": "https://www.wowhead.com/pet=35/serpent#tameable"
+  },
+  {
+    "id": 50,
+    "name": "Fox",
+    "slug": "fox",
+    "tameable_url": "https://www.wowhead.com/pet=50/fox#tameable"
+  },
+  {
+    "id": 291,
+    "name": "Hopper",
+    "slug": "hopper",
+    "tameable_url": "https://www.wowhead.com/pet=291/hopper#tameable"
+  },
+  {
+    "id": 33,
+    "name": "Sporebat",
+    "slug": "sporebat",
+    "tameable_url": "https://www.wowhead.com/pet=33/sporebat#tameable"
+  },
+  {
+    "id": 8,
+    "name": "Crab",
+    "slug": "crab",
+    "tameable_url": "https://www.wowhead.com/pet=8/crab#tameable"
+  },
+  {
+    "id": 51,
+    "name": "Monkey",
+    "slug": "monkey",
+    "tameable_url": "https://www.wowhead.com/pet=51/monkey#tameable"
+  },
+  {
+    "id": 125,
+    "name": "Waterfowl",
+    "slug": "waterfowl",
+    "tameable_url": "https://www.wowhead.com/pet=125/waterfowl#tameable"
+  },
+  {
+    "id": 300,
+    "name": "Mammoth",
+    "slug": "mammoth",
+    "tameable_url": "https://www.wowhead.com/pet=300/mammoth#tameable"
+  },
+  {
+    "id": 5,
+    "name": "Boar",
+    "slug": "boar",
+    "tameable_url": "https://www.wowhead.com/pet=5/boar#tameable"
+  },
+  {
+    "id": 151,
+    "name": "Stag",
+    "slug": "stag",
+    "tameable_url": "https://www.wowhead.com/pet=151/stag#tameable"
+  },
+  {
+    "id": 34,
+    "name": "Ray",
+    "slug": "ray",
+    "tameable_url": "https://www.wowhead.com/pet=34/ray#tameable"
+  },
+  {
+    "id": 130,
+    "name": "Basilisk",
+    "slug": "basilisk",
+    "tameable_url": "https://www.wowhead.com/pet=130/basilisk#tameable"
+  },
+  {
+    "id": 24,
+    "name": "Bat",
+    "slug": "bat",
+    "tameable_url": "https://www.wowhead.com/pet=24/bat#tameable"
+  },
+  {
+    "id": 129,
+    "name": "Gruffhorn",
+    "slug": "gruffhorn",
+    "tameable_url": "https://www.wowhead.com/pet=129/gruffhorn#tameable"
+  },
+  {
+    "id": 157,
+    "name": "Oxen",
+    "slug": "oxen",
+    "tameable_url": "https://www.wowhead.com/pet=157/oxen#tameable"
+  },
+  {
+    "id": 6,
+    "name": "Crocolisk",
+    "slug": "crocolisk",
+    "tameable_url": "https://www.wowhead.com/pet=6/crocolisk#tameable"
+  },
+  {
+    "id": 53,
+    "name": "Beetle",
+    "slug": "beetle",
+    "tameable_url": "https://www.wowhead.com/pet=53/beetle#tameable"
+  },
+  {
+    "id": 37,
+    "name": "Moth",
+    "slug": "moth",
+    "tameable_url": "https://www.wowhead.com/pet=37/moth#tameable"
+  },
+  {
+    "id": 12,
+    "name": "Tallstrider",
+    "slug": "tallstrider",
+    "tameable_url": "https://www.wowhead.com/pet=12/tallstrider#tameable"
+  },
+  {
+    "id": 298,
+    "name": "Camel",
+    "slug": "camel",
+    "tameable_url": "https://www.wowhead.com/pet=298/camel#tameable"
+  }
+]

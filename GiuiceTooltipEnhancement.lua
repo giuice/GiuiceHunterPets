@@ -30,8 +30,9 @@ local function IsInTameableList(creatureID)
     end
 
     -- Since our table is an array of IDs, we need to iterate through it
-    for _, id in ipairs(GHP.TameableBeastIDs) do
-        if id == creatureID then
+    for _, petData in ipairs(GHP.pets_by_zone) do
+        local npcId = petData["NpcId"]
+        if npcId == creatureID then
             return true
         end
     end
@@ -106,7 +107,7 @@ local function EnhanceTooltip(tooltip, data)
     -- tooltip:AddLine("Has Pet UI: " .. (hasUI and "Yes" or "No"), 0.5, 0.5, 0.5)
     -- tooltip:AddLine("Is Hunter Pet: " .. (isHunterPet and "Yes" or "No"), 0.5, 0.5, 0.5)
 
-	local unitID = UnitGUID("mouseover")
+	--local unitID = UnitGUID("mouseover")
 	
 end
 
