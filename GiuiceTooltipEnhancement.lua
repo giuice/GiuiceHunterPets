@@ -8,7 +8,7 @@ local function IsPlayerBeastMastery()
     -- Get current specialization
     local currentSpec = GetSpecialization()
     if not currentSpec then return false end
-    
+
     -- Beast Mastery is spec 1 for hunters
     return currentSpec == 1
 end
@@ -23,14 +23,12 @@ local f = CreateFrame("Frame")
 
 
 local function IsInTameableList(creatureID)
-    
-    
-    if not creatureID then 
-        return false 
+    if not creatureID then
+        return false
     end
 
     -- Since our table is an array of IDs, we need to iterate through it
-    for _, petData in ipairs(GHP.pets_by_zone) do
+    for _, petData in ipairs(GHP.pet_by_zones) do
         local npcId = petData["NpcId"]
         if npcId == creatureID then
             return true
@@ -56,27 +54,27 @@ local function EnhanceTooltip(tooltip, data)
             creatureID = tonumber(id)
         end
     end
-    
+
     -- Check if it's a beast
     local creatureType = UnitCreatureType(unit)
     local isValidBeast = creatureType == "Beast" or -- English
-                        creatureType == "Fera"  or -- Portuguese
-                        creatureType == "Bestia"    -- Spanish
-    
+        creatureType == "Fera" or                   -- Portuguese
+        creatureType == "Bestia"                    -- Spanish
+
     if not isValidBeast then return end
-    
+
     -- Get family information
     local family = UnitCreatureFamily(unit)
-    
+
     -- Check if the creature is in our tameable list
     local isTameable = IsInTameableList(creatureID)
-    
+
     -- Get classification
     local classification = UnitClassification(unit)
-    
-    
+
+
     -- Add our custom lines
-    tooltip:AddLine(" ")  -- Blank line for spacing
+    tooltip:AddLine(" ") -- Blank line for spacing
     tooltip:AddLine("Hunter Pet Information:", 1, 0.82, 0)
     tooltip:AddLine("Family: " .. (family or "Unknown"), 1, 1, 1)
     tooltip:AddLine("Classification: " .. (classification or "normal"), 1, 1, 1)
@@ -96,19 +94,11 @@ local function EnhanceTooltip(tooltip, data)
         tameableText = tameableText .. "|cFFFF0000No|r"
     end
     tooltip:AddLine(tameableText)
-    
+
     -- Add creature ID if it exists
     if creatureID then
         tooltip:AddLine("Creature ID: " .. creatureID, 0.7, 0.7, 0.7)
     end
-    
-    -- -- Debug information
-    -- tooltip:AddLine("Debug Info:", 0.5, 0.5, 0.5)
-    -- tooltip:AddLine("Has Pet UI: " .. (hasUI and "Yes" or "No"), 0.5, 0.5, 0.5)
-    -- tooltip:AddLine("Is Hunter Pet: " .. (isHunterPet and "Yes" or "No"), 0.5, 0.5, 0.5)
-
-	--local unitID = UnitGUID("mouseover")
-	
 end
 
 -- Initialize function

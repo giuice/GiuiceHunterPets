@@ -1,6 +1,196 @@
 # Wow Api Changes
 
 ## 11.x
+
+### Breaking changes
+The Settings API has been changed, particularly around the creation of settings. Refer to Settings API changes for more details.
+- Macros and the macrotext attribute of SecureActionButtonTemplate have new limitations:
+- macrotext limited to 255 characters (same length as real macros)
+- All macros (real and macrotext-based) can no longer chain macros. One macro cannot /click a button that would execute another macro
+- SharedTooltipTemplate and GameTooltipTemplate no longer inherit BackdropTemplate.
+
+### Backdrop System Changes
+Frames no longer provide Backdrop related APIs by default and need to be opted-in by either inheriting BackdropTemplate or including BackdropTemplateMixin and its associated script handlers.
+
+#### Lua Changes
+In the case of Lua-created frames that don't currently inherit a template, the following example would work on both live and beta clients:
+```lua
+local frame = CreateFrame("Frame", nil, UIParent, BackdropTemplateMixin and "BackdropTemplate");
+frame:SetBackdrop({ --[[ Usual backdrop parameters here ]] });
+```
+If necessary, templates can be comma-delimited to specify multiple.
+
+#### XML Changes
+For frames created in XML using the <Backdrop> element, ensure that the frame inherits the required template and instead either specify the parameters for the backdrop as the <KeyValue> elements listed below, or convert the backdrop definition to Lua and call self:SetBackdrop() in an OnLoad script handler.
+
+#### The following <KeyValue> elements are accepted by the template:
+
+Key	Type	Description
+backdropInfo	global table	Name of a global table providing the backdrop definition, with bgFile, edgeFile, etc.
+backdropColor	global table	Name of a global Color table for the background texture vertex color. If not specified, defaults to white. The alpha component is ignored.
+backdropColorAlpha	number [0-1]	Alpha channel value for the background texture vertex color. If not specified, defaults to 1.
+backdropBorderColor	global table	Name of a global Color table for the border texture vertex color. If not specified, defaults to white. The alpha component is ignored.
+backdropBorderColorAlpha	number [0-1]	Alpha channel value for the border texture vertex color. If not specified, defaults to 1.
+backdropBorderBlendMode	string	Name of a BlendMode to apply to the border textures. Optional, defaulting to BLEND.
+Any key above listed as "global table" needs to refer to a table in the global environment which contains the backdrop definition as-would-be-passed to SetBackdrop directly. A full list of common Blizzard backdrops is available here.
+```xml
+<Frame name="TestFrame" parent="UIParent" inherits="BackdropTemplate">
+    <KeyValues>
+        <KeyValue key="backdropInfo" value="BACKDROP_TOOLTIP_16_16_5555" type="global"/>
+        <KeyValue key="backdropBorderColor" value="LEGENDARY_ORANGE_COLOR" type="global"/>
+        <KeyValue key="backdropBorderColorAlpha" value="0.25" type="number"/>
+    </KeyValues>
+    <Size x="300" y="300"/>
+    <Anchors>
+        <Anchor point="CENTER"/>
+    </Anchors>
+    <Scripts>
+        <OnLoad inherit="prepend">
+            print("Loaded!");
+        </OnLoad>
+    </Scripts>
+</Frame>
+```
+#### Script Handlers
+BackdropTemplate installs an OnLoad and OnSizeChanged script handler on any frames that inherit it. If you have custom logic for either of these handlers, ensure that you call the original functions (self:OnBackdropLoaded() and self:OnBackdropSizeChanged()) as part of them. In XML, you can use the inherit="prepend" attribute to do this automatically.
+
+#### Usage
+- Adding a new backdrop
+1. Create a Frame that inherits BackdropTemplate.
+2. Prepare a backdropInfo table, or choose an existing one from FrameXML/Backdrop.lua.
+3. Apply the table in Lua using SetBackdrop(backdropInfo); or in XML using <KeyValue> tags.
+4. Changing the backdrop
+5. Change the vertex colors by calling SetBackdropColor(r, g, b [, a]) and SetBackdropBorderColor(r, g, b [, a]).
+6. Change the other properties by calling SetBackdrop() with a new table (silently fails if its the same table, despite any changes).
+7. Remove a backdrop by calling SetBackdrop() without args
+- Alternatives
+  - Instead of SetBackdrop(backdropInfo), save the table as frame.backdropInfo and call ApplyBackdrop().
+  - Instead of SetBackdrop(nil), call ClearBackdrop()
+  - Instead of creating a new Frame, mixin BackdropTemplateMixin or create custom textures.
+- Table structure
+backdropInfo
+Key	Type	Description
+bgFile	string	Texture path to use for the background.
+edgeFile	string	Texture path to use for the edges.
+tile	boolean	True to tile the background, false to stretch it.
+tileSize	number	Width and height of each tile.
+edgeSize	number	Border thickness and corner size.
+insets	table	How far from the edges the background is drawn.
+insets
+Key	Type	Description
+left	number	Distance inside the left edge.
+right	number	Distance inside the right edge.
+top	number	Distance inside the top edge.
+bottom	number	Distance inside the bottom edge.
+#### Methods
+When applied to any Frame, BackdropTemplateMixin adds the following API:
+
+ApplyBackdrop() - Applies the backdrop currently saved as frame.backdropInfo. {BackdropTemplateMixin:ApplyBackdrop at Townlong-Yak⁠}
+ClearBackdrop() - Hides the current background and border textures. {BackdropTemplateMixin:ClearBackdrop at Townlong-Yak⁠}
+SetBackdrop(backdropInfo) - Saves the table to frame.backdropInfo and calls ApplyBackdrop(), or calls ClearBackdrop() if the argument is nil. {BackdropTemplateMixin:SetBackdrop at Townlong-Yak⁠}
+GetBackdrop() : table - Returns a copy of frame.backdropInfo. {BackdropTemplateMixin:GetBackdrop at Townlong-Yak⁠}
+GetBackdropColor() : r, g, b, a - Returns the background vertex color. {BackdropTemplateMixin:GetBackdropColor at Townlong-Yak⁠}
+GetBackdropBorderColor() : r, g, b, a - Returns the border color. {BackdropTemplateMixin:GetBackdropBorderColor at Townlong-Yak⁠}
+SetBackdropColor(r, g, b [, a]) - Returns the background vertex color. {BackdropTemplateMixin:GetBackdropColor at Townlong-Yak⁠}
+SetBackdropBorderColor(: r, g, b [, a]) - Returns the border color. {BackdropTemplateMixin:GetBackdropBorderColor at Townlong-Yak⁠}
+The following methods also exist, but should not need to be called as they are registered via BackdropTemplate:
+
+OnBackdropLoaded() - OnLoad handler to apply a background if it was set in XML using <KeyValues> tags.
+OnBackdropSizeChanged() - OnSizeChanged handler to update the textures.
+Examples
+Creating a Frame in Lua and calling SetBackdrop()
+
+local backdropInfo =
+{
+	bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
+ 	edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+ 	tile = true,
+ 	tileEdge = true,
+ 	tileSize = 8,
+ 	edgeSize = 8,
+ 	insets = { left = 1, right = 1, top = 1, bottom = 1 },
+}
+
+local frame = CreateFrame("Frame", nil, nil, "BackdropTemplate")
+frame:SetBackdrop(backdropInfo)
+Creating a Frame in Lua and calling ApplyBackdrop()
+
+local frame = CreateFrame("Frame", nil, nil, "BackdropTemplate")
+frame.backdropInfo = BACKDROP_TOOLTIP_8_8_1111  -- from FrameXML/Backdrop.lua
+frame:ApplyBackdrop()
+Creating a Frame in XML with KeyValue tags
+
+ <Frame inherits="BackdropTemplate">
+ 	<KeyValues>
+ 		<KeyValue key="backdropInfo" value="BACKDROP_TOOLTIP_8_8_1111" type="global" />
+ 	</KeyValues>
+ </Frame>
+
+
+### Settings API changes
+The Settings API has been updated to resolve a few usability issues with respect to the creation and management of settings.
+
+- The Settings.RegisterAddOnSetting function has had its signature changed significantly and now requires two additional parameters (variableKey and variableTbl) in the middle of the parameter list. These are used to directly read and write settings from a supplied table, which is typically expected to be the addon's saved variables.
+- The Settings.RegisterProxySetting function has been adjusted and can now be called from insecure code. Proxy settings can be used to execute author-supplied callbacks when reading and writing settings as an alternative to RegisterAddOnSetting.
+- The Settings.OpenToCategory function has been improved and now supports directly opening to a subcategory, as well as automatically expanding any categories that it opens.
+A minimal example of registering both an addon and a proxy setting is provided below.
+```lua
+MyAddOn_SavedVars = {}
+
+local category = Settings.RegisterVerticalLayoutCategory("My AddOn")
+
+local function OnSettingChanged(setting, value)
+	-- This callback will be invoked whenever a setting is modified.
+	print("Setting changed:", setting:GetVariable(), value)
+end
+
+do 
+	-- RegisterAddOnSetting example. This will read/write the setting directly
+	-- to `MyAddOn_SavedVars.toggle`.
+
+    local name = "Test Checkbox"
+    local variable = "MyAddOn_Toggle"
+	local variableKey = "toggle"
+	local variableTbl = MyAddOn_SavedVars
+    local defaultValue = false
+
+    local setting = Settings.RegisterAddOnSetting(category, variable, variableKey, variableTbl, type(defaultValue), name, defaultValue)
+	setting:SetValueChangedCallback(OnSettingChanged)
+
+    local tooltip = "This is a tooltip for the checkbox."
+	Settings.CreateCheckbox(category, setting, tooltip)
+end
+
+do
+	-- RegisterProxySetting example. This will run the GetValue and SetValue
+	-- callbacks whenever access to the setting is required.
+
+	local name = "Test Slider"
+	local variable = "MyAddOn_Slider"
+    local defaultValue = 180
+    local minValue = 90
+    local maxValue = 360
+    local step = 10
+
+	local function GetValue()
+		return MyAddOn_SavedVars.slider or defaultValue
+	end
+
+	local function SetValue(value)
+		MyAddOn_SavedVars.slider = value
+	end
+
+	local setting = Settings.RegisterProxySetting(category, variable, type(defaultValue), name, defaultValue, GetValue, SetValue)
+	setting:SetValueChangedCallback(OnSettingChanged)
+
+	local tooltip = "This is a tooltip for the slider."
+    local options = Settings.CreateSliderOptions(minValue, maxValue, step)
+    options:SetLabelFormatter(MinimalSliderWithSteppersMixin.Label.Right);
+    Settings.CreateSlider(category, setting, options, tooltip)
+end
+
+Settings.RegisterAddOnCategory(category)
+```
 ### New menu system
 A replacement menuing system has been implemented that serves as a replacement for the existing UIDropDownMenu framework.
 
@@ -344,4 +534,123 @@ scrollBarHideTrackIfThumbExceedsTrack	If true, hide the scrollbar track and thum
 scrollBarTemplate	The name of a template to instantiate for the scrollbar. Defaults to MinimalScrollBar.
 scrollBarTopY	Top anchor Vertical offset for the scroll bar.
 scrollBarX	Left anchor offset for the scroll bar.	
+
+### Texture Slicing
+A new texture slicing system has been implemented that allows a single Texture object to render a grid of nine sub-textures without distortion at the corners. The edges and central fill of the rendered texture can be configured to either tile or stretch across their respective dimensions.
+
+This system is recommended to be used in new code going forward as a replacement for both the deprecated Backdrop system and the script-based NineSlice panel layout utility. One of the advantages of this new system is that it only requires a single texture object to render the grid, whereas both the old systems required nine separate objects. This system is fully compatible with custom texture assets and does not require the use of atlases.
+
+To use this system from Lua the TextureBase:SetTextureSliceMargins method should be called to specify the pixel margins that represent the edges of the underlying asset. The TextureBase:SetTextureSliceMode method controls whether or not the central portion of the texture and its surrounding edges will be tiled or stretched, with the default being stretched. The below example demonstrates the usage of these APIs.
+```lua
+local SliceDemo = CreateFrame("Frame", nil, UIParent);
+SliceDemo:SetPoint("CENTER");
+SliceDemo:SetSize(256, 256);
+SliceDemo:SetResizable(true);
+
+SliceDemo.Texture = SliceDemo:CreateTexture();
+SliceDemo.Texture:SetTexture([[interface/soulbinds/soulbindsconduitpendinganimationmask]])
+SliceDemo.Texture:SetTextureSliceMargins(24, 24, 24, 24);
+SliceDemo.Texture:SetTextureSliceMode(Enum.UITextureSliceMode.Tiled);
+SliceDemo.Texture:SetAllPoints(SliceDemo);
+SliceDemo.Texture:SetVertexColor(0, 1, 0);
+
+SliceDemo.ResizeButton = CreateFrame("Button", nil, SliceDemo, "PanelResizeButtonTemplate");
+SliceDemo.ResizeButton:SetPoint("BOTTOMRIGHT");
+SliceDemo.ResizeButton:Init(SliceDemo, 64, 64, 512, 512);
+```
+
+The following new elements in XML can be supplied when defining a Texture object to configure this functionality.
+```xml
+<Texture file="interface/soulbinds/soulbindsconduitpendinganimationmask">
+    <TextureSliceMargins left="24" right="24" top="24" bottom="24"/>
+    <TextureSliceMode mode="Tiled"/>  <!-- Can be "Tiled" or "Stretched" -->
+</Texture>
+```
+
+## Tooltip Changes
+- <GameTooltip> frames no longer expose native methods for retrieving or populating tooltip contents. Instead, a new C_TooltipInfo namespace has been added which provides APIs for retrieving structured data for use in tooltips and a new set of tooltip-related mixins have been added to populate tooltips from these APIs.
+
+### Custom Tooltip Frames
+Any addons that are creating GameTooltip frames should now ensure they inherit GameTooltipTemplate. This template has been updated to include the new GameTooltipDataMixin mixin, which provides automatic updates of tooltip contents from the TOOLTIP_DATA_UPDATE event as well as a subset of backwards-compatible methods for retrieving or populating tooltip contents from the new C_TooltipInfo APIs.
+
+### Scanning Tooltips
+The C_TooltipInfo functions can be used to replace existing tooltip scanning techniques, removing the need to create a tooltip frame. The following example will demonstrate extracting information for a unit tooltip on the player.
+```lua
+local tooltipData = C_TooltipInfo.GetUnit("player")
+
+TooltipUtil.SurfaceArgs(tooltipData)
+
+for _, line in ipairs(tooltipData.lines) do
+    TooltipUtil.SurfaceArgs(line)
+end
+
+-- The above SurfaceArgs calls are required to assign values to the
+-- 'type', 'guid', and 'leftText' fields seen below.
+
+print("Tooltip Type: ", tooltipData.type)
+print("Unit GUID: ", tooltipData.guid)
+print("Unit Name: ", tooltipData.lines[1].leftText)
+print("Unit Info: ", tooltipData.lines[2].leftText)
+print("Unit Faction: ", tooltipData.lines[3].leftText)
+DevTools_Dump({ tooltipData })
+```
+> Tooltip Type: 2 (Enum.TooltipDataType.Unit)
+> Unit GUID: "Player-4184-00227A8F"
+> Unit Name: "Sandse"
+> Unit Info: "Level 70 Gnome Mage (Player)"
+> Unit Faction: "Alliance"
+
+The tooltipData dump below has been significantly shortened to only show the fields written by TooltipUtil.SurfaceArgs.
+```lua
+tooltipData = {
+    type = 2,
+    lines = {
+        [1] = {
+            leftText = "Sandse",
+            leftColor = { r = 1, g = 0.81960791349411, b = 0 },
+            type = 2,
+            unitToken = "player",
+        },
+        [2] = {
+            leftColor = { r = 1, g = 1, b = 1 },
+            type = 0,
+            leftText = "Level 70 Gnome Mage (Player)",
+        },
+        [3] = {
+            leftColor = { r = 1, g = 1, b = 1 },
+            type = 0,
+            leftText = "Alliance",
+        },
+    },
+    guid = "Player-4184-00227A8F",
+    healthGUID = "Player-4184-00227A8F",
+}
+```
+### Tooltip Script Handlers
+The following GameTooltip script handlers have been removed. This change will not be reflected in the UI XML schema definition until a future patch.
+
+OnTooltipAddMoney
+OnTooltipSetAchievement
+OnTooltipSetEquipmentSet
+OnTooltipSetItem
+OnTooltipSetQuest
+OnTooltipSetSpell
+OnTooltipSetUnit
+Usages of these script handlers should be replaced by registering callbacks with the new TooltipDataProcessor.AddTooltipPostCall function. Note that callbacks registered with this mechanism are global and will be triggered for all tooltips which inherit from GameTooltipTemplate.
+```lua
+local function OnTooltipSetItem(tooltip, data)
+    if tooltip == GameTooltip then
+        print("OnTooltipSetItem", tooltip, data)
+    end
+end
+
+-- Replace 'Enum.TooltipDataType.Item' with an appropriate type for the tooltip
+-- data you are wanting to process; eg. use 'Enum.TooltipDataType.Spell' for
+-- replacing usage of OnTooltipSetSpell.
+--
+-- If you wish to respond to all tooltip data updates, you can instead replace
+-- the enum with 'TooltipDataProcessor.AllTypes' (or the string "ALL").
+
+TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, OnTooltipSetItem)
+```
 

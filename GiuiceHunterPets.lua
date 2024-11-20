@@ -14,13 +14,6 @@ assert(LDB, "GiuiceHunterPets requires LibDataBroker-1.1")
 local LibDBIcon = LibStub:GetLibrary("LibDBIcon-1.0", true)
 assert(LibDBIcon, "GiuiceHunterPets requires LibDBIcon-1.0")
 
--- Initialize saved variables with LibDBIcon settings
-GiuiceHunterPetsDB = GiuiceHunterPetsDB or {
-    position = nil,
-    minimap = { hide = false },
-    showPetsOnMap = true,
-}
-
 
 local backgroundForPetSpec = {
 	[STABLE_PET_SPEC_CUNNING] = "hunter-stable-bg-art_cunning",
@@ -41,17 +34,20 @@ local minimapLDB = LDB:NewDataObject("GiuiceHunterPets", {
                 GHP.frames.mainFrame:Show()
                 GHP.utils.UpdatePetList(GHP.frames.mainFrame)
             end
+        elseif button == "RightButton" then
+            Settings.OpenToCategory(GHP.category_id)
         end
     end,
     OnTooltipShow = function(tooltip)
         tooltip:AddLine("GiuiceHunterPets", 1, 0.82, 0)
         tooltip:AddLine("Left Click: Toggle pet window", 1, 1, 1)
+        tooltip:AddLine("Right Click: Open settings", 1, 1, 1)
     end,
 })
 
 -- Function to initialize minimap button
 local function InitializeMinimapButton()
-    LibDBIcon:Register("GiuiceHunterPets", minimapLDB, GiuiceHunterPetsDB.minimap)
+    LibDBIcon:Register("GiuiceHunterPets", minimapLDB, GHP_SavedVars.minimap)
 end
 
 local function CreateMainFrame()
@@ -62,8 +58,8 @@ local function CreateMainFrame()
     frame:SetMovable(true)
 
     -- Set saved position or default
-    if GiuiceHunterPetsDB.position then
-        frame:SetPoint(unpack(GiuiceHunterPetsDB.position))
+    if GHP_SavedVars.position then
+        frame:SetPoint(unpack(GHP_SavedVars.position))
     else
         frame:SetPoint("CENTER")
     end
@@ -81,7 +77,7 @@ local function CreateMainFrame()
     frame:SetScript("OnDragStop", function(self)
         self:StopMovingOrSizing()
         local point, relativeTo, relativePoint, xOfs, yOfs = self:GetPoint()
-        GiuiceHunterPetsDB.position = { point, relativeTo, relativePoint, xOfs, yOfs }
+        GHP_SavedVars.position = { point, relativeTo, relativePoint, xOfs, yOfs }
     end)
 
     local titleBar = CreateFrame("Frame", nil, frame)
@@ -118,45 +114,40 @@ local function CreateMainFrame()
     end)
 
     -- Search options dropdown
-    local searchOptions = CreateFrame("Frame", "GiuiceHunterPetsSearchOptions", searchContainer, "UIDropDownMenuTemplate")
-    searchOptions:SetPoint("LEFT", searchBox, "RIGHT", 0, -2)
+    local Dropdown = CreateFrame("DropdownButton", "GiuiceHunterPetsSearchOptions", searchContainer, "WowStyle1DropdownTemplate")
+    Dropdown:SetDefaultText("Name")
+    Dropdown:SetPoint("LEFT", searchBox, "RIGHT", 0, -2)
 
     local searchType = "name" -- Default search type
 
-    local function InitializeSearchOptions(self, level)
-        local info = UIDropDownMenu_CreateInfo()
-        local options = {
-            { text = "Name",   value = "name" },
-            { text = "Family", value = "family" },
-            { text = "Level",  value = "level" },
-        }
-
-        for _, option in ipairs(options) do
-            info.text = option.text
-            info.value = option.value
-            info.checked = searchType == option.value
-            info.func = function(self)
-                searchType = self.value
-                UIDropDownMenu_SetText(searchOptions, option.text)
-                GHP.utils.UpdatePetList(frame, searchBox:GetText())
-            end
-            UIDropDownMenu_AddButton(info, level)
-        end
-    end
-
-    UIDropDownMenu_Initialize(searchOptions, InitializeSearchOptions)
-    UIDropDownMenu_SetText(searchOptions, "Name")
-    UIDropDownMenu_SetWidth(searchOptions, 100)
+    Dropdown:SetupMenu(function(dropdown, rootDescription)
+        rootDescription:CreateTitle("Search Options")
+        rootDescription:CreateButton("Name", function()
+            searchType = "name"
+            Dropdown:SetDefaultText("Name")
+            GHP.utils.UpdatePetList(frame, searchBox:GetText())
+        end)
+        rootDescription:CreateButton("Family", function()
+            searchType = "family"
+            Dropdown:SetDefaultText("Family")
+            GHP.utils.UpdatePetList(frame, searchBox:GetText())
+        end)
+        rootDescription:CreateButton("Level", function()
+            searchType = "level"
+            Dropdown:SetDefaultText("Level")
+            GHP.utils.UpdatePetList(frame, searchBox:GetText())
+        end)
+    end)
 
     -- Scroll frame
     local scrollFrame = CreateFrame("ScrollFrame", nil, frame, "UIPanelScrollFrameTemplate")
-    scrollFrame:SetPoint("TOPLEFT", searchContainer, "BOTTOMLEFT", 8, -8) -- Position below search container
+    scrollFrame:SetPoint("TOPLEFT", searchContainer, "BOTTOMLEFT", 8, -8)
     scrollFrame:SetPoint("BOTTOMRIGHT", 450 - 14, 8)
 
     -- Scroll child adjustment
     local scrollChild = CreateFrame("Frame")
     scrollFrame:SetScrollChild(scrollChild)
-    scrollChild:SetSize(450 - 36, 1) -- Adjust width to half
+    scrollChild:SetSize(450 - 36, 1)
 
     frame.searchBox = searchBox
     frame.searchType = function() return searchType end
@@ -166,7 +157,7 @@ local function CreateMainFrame()
         self:StopMovingOrSizing()
         -- Save position
         local point, relativeTo, relativePoint, xOfs, yOfs = self:GetPoint()
-        GiuiceHunterPetsDB.position = { point, relativeTo, relativePoint, xOfs, yOfs }
+        GHP_SavedVars.position = { point, relativeTo, relativePoint, xOfs, yOfs }
     end)
 
     frame.scrollChild = scrollChild
