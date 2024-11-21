@@ -14,7 +14,6 @@ local function IsPlayerBeastMastery()
 end
 
 local function IsExoticFamily(family)
-    print("family: " .. family)
     return family and GHP.exoticFamilies[family] or false
 end
 

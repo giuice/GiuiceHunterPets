@@ -1,4 +1,4 @@
-## Interface: 110005  -- (Update to match the current WoW version)
+## Interface: 110007 
 ## Title: GiuiceHunterPets
 ## Author: Giuice(Giuliano Lemes)
 ## Version: 1.0
@@ -18,13 +18,14 @@ Libs\HereBeDragons\HereBeDragons-Pins-2.0.lua
 
 # Locales
 Locales\locales.xml
-# SavedVars
-SavedVars.lua
+
+# Addon Settings panel
+Settings.lua
+
 # Templates
 GiuiceHunterPets.xml
 GiuiceHunterPetListItemMixin.lua
 GiuiceWorldMapButton.lua
-Settings.lua
 
 # Core files
 Localization.lua

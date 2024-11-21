@@ -379,7 +379,7 @@ local function DisplayPetIcons()
     -- 2. Get current map ID
     local playerMapID = C_Map.GetBestMapForUnit("player")
     if not playerMapID then
-        print("Could not determine player's zone ID.")
+        --print("Could not determine player's zone ID.")
         return
     end
 
@@ -485,17 +485,14 @@ end
 
 -- Settings change handler
 GHP.OnWorldMapPinsSettingChanged = function(setting, value)
-    
-    print(setting:GetVariable())
     GHP_SavedVars["worldMapPins"] = value
     
-    if not value then
+    if value == 4 or not value then
         RemoveAllPins()
     end
     ManageWorldMapEvents(value)
-
     -- If enabled and map is currently shown, refresh pins
-    if value and WorldMapFrame:IsVisible() then
+    if value and value ~= 4 and WorldMapFrame:IsVisible() then
         DisplayPetIcons()
     end
 end
@@ -503,7 +500,11 @@ end
 -- Initialize
 local function InitializeWorldMapPins()
     -- Setup initial state based on saved setting
-    ManageWorldMapEvents(GHP_SavedVars.worldMapPins)
+    local currentSetting = GHP_SavedVars.worldMapPins or 1
+    ManageWorldMapEvents(currentSetting)
+    if WorldMapFrame:IsVisible() then
+        DisplayPetIcons()
+    end
 end
 
 local initializeModule = function()
