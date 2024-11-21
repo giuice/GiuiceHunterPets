@@ -12,7 +12,7 @@
 		"utf8": "disable"
 	},
 	"Lua.workspace.library": [
-		"~\\.vscode\\extensions\\ketho.wow-api-0.17.6\\Annotations"
+		"c:\\Users\\giuic\\.cursor\\extensions\\ketho.wow-api-0.17.6\\Annotations"
 	],
 	"Lua.diagnostics.globals": [
 		"SlashCmdList",
@@ -59,6 +59,17 @@
 		"StableActivePetButtonTemplateMixin",
 		"STABLE_SECONDARY_PET_DISABLED",
 		"GameTooltip_AddErrorLine",
-		"StableStabledPetButtonTemplateMixin"
-	]
+		"StableStabledPetButtonTemplateMixin",
+		"ToggleDropDownMenu",
+		"nop",
+		"ActorPool_HideAndClearModel",
+		"ORBIT_CAMERA_MOUSE_PAN_HORIZONTAL",
+		"ORBIT_CAMERA_MOUSE_PAN_VERTICAL",
+		"CreateActorPool",
+		"CreateTexturePool",
+		"CameraRegistry",
+		"ModelSceneMixin",
+		"CreateRectangle"
+	],
+	"CodeGPT.apiKey": "Ollama"
 }

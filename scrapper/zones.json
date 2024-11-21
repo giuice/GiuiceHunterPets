@@ -1,0 +1,4062 @@
+[
+  {
+    "zone_name": "Westfall",
+    "zone_id": 52,
+    "name": "Vultros"
+  },
+  {
+    "zone_name": "Elwynn Forest",
+    "zone_id": 37,
+    "name": "Mother Fang"
+  },
+  {
+    "zone_name": "Duskwood",
+    "zone_id": 47,
+    "name": "Lupos"
+  },
+  {
+    "zone_name": "Duskwood",
+    "zone_id": 47,
+    "name": "Naraxis"
+  },
+  {
+    "zone_name": "Redridge Mountains",
+    "zone_id": 49,
+    "name": "Chatter"
+  },
+  {
+    "zone_name": "Wetlands",
+    "zone_id": 56,
+    "name": "Leech Widow"
+  },
+  {
+    "zone_name": "Dun Morogh",
+    "zone_id": 27,
+    "name": "Bjarn"
+  },
+  {
+    "zone_name": "New Tinkertown",
+    "zone_id": 30,
+    "name": "Timber"
+  },
+  {
+    "zone_name": "Wetlands",
+    "zone_id": 56,
+    "name": "Razormaw Matriarch"
+  },
+  {
+    "zone_name": "The Cape of Stranglethorn",
+    "zone_id": 210,
+    "name": "Scale Belly"
+  },
+  {
+    "zone_name": "Darkshore",
+    "zone_id": 62,
+    "name": "Strider Clutchmother"
+  },
+  {
+    "zone_name": "Darkshore",
+    "zone_id": 62,
+    "name": "Shadowclaw"
+  },
+  {
+    "zone_name": "Loch Modan",
+    "zone_id": 48,
+    "name": "Gosh-Haldir"
+  },
+  {
+    "zone_name": "Badlands",
+    "zone_id": 15,
+    "name": "Barnabus"
+  },
+  {
+    "zone_name": "Badlands",
+    "zone_id": 15,
+    "name": "Broken Tooth"
+  },
+  {
+    "zone_name": "Badlands",
+    "zone_id": 15,
+    "name": "Zaricotl"
+  },
+  {
+    "zone_name": "Mulgore",
+    "zone_id": 7,
+    "name": "Arra'chea"
+  },
+  {
+    "zone_name": "Mulgore",
+    "zone_id": 7,
+    "name": "Mazzranache"
+  },
+  {
+    "zone_name": "Southern Barrens",
+    "zone_id": 199,
+    "name": "Silithid Harvester"
+  },
+  {
+    "zone_name": "Northern Barrens",
+    "zone_id": 10,
+    "name": "Gesharahan"
+  },
+  {
+    "zone_name": "Stormwind City",
+    "zone_id": 84,
+    "name": "Sewer Beast"
+  },
+  {
+    "zone_name": "Stonetalon Mountains",
+    "zone_id": 65,
+    "name": "Pridewing Patriarch"
+  },
+  {
+    "zone_name": "Thousand Needles",
+    "zone_id": 64,
+    "name": "Krkk'kx"
+  },
+  {
+    "zone_name": "Dustwallow Marsh",
+    "zone_id": 70,
+    "name": "Darkmist Widow"
+  },
+  {
+    "zone_name": "Feralas",
+    "zone_id": 69,
+    "name": "Antilus the Soarer"
+  },
+  {
+    "zone_name": "Feralas",
+    "zone_id": 69,
+    "name": "Arash-ethis"
+  },
+  {
+    "zone_name": "Feralas",
+    "zone_id": 69,
+    "name": "Qirot"
+  },
+  {
+    "zone_name": "Feralas",
+    "zone_id": 69,
+    "name": "Old Grizzlegut"
+  },
+  {
+    "zone_name": "Feralas",
+    "zone_id": 69,
+    "name": "Snarler"
+  },
+  {
+    "zone_name": "Mulgore",
+    "zone_id": 7,
+    "name": "The Rake"
+  },
+  {
+    "zone_name": "Durotar",
+    "zone_id": 1,
+    "name": "Death Flayer"
+  },
+  {
+    "zone_name": "Northern Barrens",
+    "zone_id": 10,
+    "name": "Humar the Pridelord"
+  },
+  {
+    "zone_name": "Southern Barrens",
+    "zone_id": 199,
+    "name": "Snort the Heckler"
+  },
+  {
+    "zone_name": "Northern Barrens",
+    "zone_id": 10,
+    "name": "Swiftmane"
+  },
+  {
+    "zone_name": "Southern Barrens",
+    "zone_id": 199,
+    "name": "Thunderstomp"
+  },
+  {
+    "zone_name": "Southern Barrens",
+    "zone_id": 199,
+    "name": "Azzere the Skyblade"
+  },
+  {
+    "zone_name": "Northern Barrens",
+    "zone_id": 10,
+    "name": "Takk the Leaper"
+  },
+  {
+    "zone_name": "Northern Barrens",
+    "zone_id": 10,
+    "name": "Dishu"
+  },
+  {
+    "zone_name": "Stonetalon Mountains",
+    "zone_id": 65,
+    "name": "Sorrow Wing"
+  },
+  {
+    "zone_name": "Thousand Needles",
+    "zone_id": 64,
+    "name": "Ironeye the Invincible"
+  },
+  {
+    "zone_name": "Thousand Needles",
+    "zone_id": 64,
+    "name": "Vile Sting"
+  },
+  {
+    "zone_name": "Un'Goro Crater",
+    "zone_id": 78,
+    "name": "Ravasaur Matriarch"
+  },
+  {
+    "zone_name": "Un'Goro Crater",
+    "zone_id": 78,
+    "name": "Clutchmother Zavas"
+  },
+  {
+    "zone_name": "Un'Goro Crater",
+    "zone_id": 78,
+    "name": "Gruff"
+  },
+  {
+    "zone_name": "Un'Goro Crater",
+    "zone_id": 78,
+    "name": "King Mosh"
+  },
+  {
+    "zone_name": "Un'Goro Crater",
+    "zone_id": 78,
+    "name": "Uhk'loc"
+  },
+  {
+    "zone_name": "Azshara",
+    "zone_id": 76,
+    "name": "Antilos"
+  },
+  {
+    "zone_name": "Tanaris",
+    "zone_id": 71,
+    "name": "Soriid the Devourer"
+  },
+  {
+    "zone_name": "Tanaris",
+    "zone_id": 71,
+    "name": "Haarka the Ravenous"
+  },
+  {
+    "zone_name": "Tanaris",
+    "zone_id": 71,
+    "name": "Emberwing"
+  },
+  {
+    "zone_name": "Tanaris",
+    "zone_id": 71,
+    "name": "Murderous Blisterpaw"
+  },
+  {
+    "zone_name": "The Hinterlands",
+    "zone_id": 26,
+    "name": "Old Cliff Jumper"
+  },
+  {
+    "zone_name": "The Hinterlands",
+    "zone_id": 26,
+    "name": "Ironback"
+  },
+  {
+    "zone_name": "Searing Gorge",
+    "zone_id": 32,
+    "name": "Rekk'tilac"
+  },
+  {
+    "zone_name": "Blasted Lands",
+    "zone_id": 17,
+    "name": "Spiteflayer"
+  },
+  {
+    "zone_name": "Blasted Lands",
+    "zone_id": 17,
+    "name": "Ravage"
+  },
+  {
+    "zone_name": "Blasted Lands",
+    "zone_id": 17,
+    "name": "Clack the Reaver"
+  },
+  {
+    "zone_name": "Blasted Lands",
+    "zone_id": 17,
+    "name": "Deatheye"
+  },
+  {
+    "zone_name": "Blasted Lands",
+    "zone_id": 17,
+    "name": "Grunter"
+  },
+  {
+    "zone_name": "Azshara",
+    "zone_id": 76,
+    "name": "The Evalcharr"
+  },
+  {
+    "zone_name": "Burning Steppes",
+    "zone_id": 36,
+    "name": "Deathmaw"
+  },
+  {
+    "zone_name": "Winterspring",
+    "zone_id": 83,
+    "name": "Rak'shiri"
+  },
+  {
+    "zone_name": "Tirisfal Glades",
+    "zone_id": 18,
+    "name": "Bayne"
+  },
+  {
+    "zone_name": "Tirisfal Glades",
+    "zone_id": 18,
+    "name": "Ressan the Needler"
+  },
+  {
+    "zone_name": "Tirisfal Glades",
+    "zone_id": 18,
+    "name": "Sri'skulk"
+  },
+  {
+    "zone_name": "Ashenvale",
+    "zone_id": 63,
+    "name": "Mist Howler"
+  },
+  {
+    "zone_name": "Winterspring",
+    "zone_id": 83,
+    "name": "Sian-Rotam"
+  },
+  {
+    "zone_name": "Ashenvale",
+    "zone_id": 63,
+    "name": "Ursol'lok"
+  },
+  {
+    "zone_name": "Silverpine Forest",
+    "zone_id": 21,
+    "name": "Gorefang"
+  },
+  {
+    "zone_name": "Silverpine Forest",
+    "zone_id": 21,
+    "name": "Krethis the Shadowspinner"
+  },
+  {
+    "zone_name": "Hillsbrad Foothills",
+    "zone_id": 25,
+    "name": "Araga"
+  },
+  {
+    "zone_name": "Hillsbrad Foothills",
+    "zone_id": 25,
+    "name": "Cranky Benj"
+  },
+  {
+    "zone_name": "Desolace",
+    "zone_id": 66,
+    "name": "Hissperak"
+  },
+  {
+    "zone_name": "Desolace",
+    "zone_id": 66,
+    "name": "Giggler"
+  },
+  {
+    "zone_name": "Dustwallow Marsh",
+    "zone_id": 70,
+    "name": "Dart"
+  },
+  {
+    "zone_name": "Dustwallow Marsh",
+    "zone_id": 70,
+    "name": "Ripscale"
+  },
+  {
+    "zone_name": "Dustwallow Marsh",
+    "zone_id": 70,
+    "name": "Hayoc"
+  },
+  {
+    "zone_name": "Dustwallow Marsh",
+    "zone_id": 70,
+    "name": "Oozeworm"
+  },
+  {
+    "zone_name": "Loch Modan",
+    "zone_id": 48,
+    "name": "Shanda the Spinner"
+  },
+  {
+    "zone_name": "Loch Modan",
+    "zone_id": 48,
+    "name": "Lord Condar"
+  },
+  {
+    "zone_name": "Hillsbrad Foothills",
+    "zone_id": 25,
+    "name": "Creepthess"
+  },
+  {
+    "zone_name": "Hillsbrad Foothills",
+    "zone_id": 25,
+    "name": "Big Samras"
+  },
+  {
+    "zone_name": "Felwood",
+    "zone_id": 77,
+    "name": "Death Howl"
+  },
+  {
+    "zone_name": "Felwood",
+    "zone_id": 77,
+    "name": "Olm the Wise"
+  },
+  {
+    "zone_name": "Felwood",
+    "zone_id": 77,
+    "name": "Mongress"
+  },
+  {
+    "zone_name": "Teldrassil",
+    "zone_id": 57,
+    "name": "Duskstalker"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "Gretheer"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "Lapress"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "Zora"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "Rex Ashil"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "Krellack"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "Grubthor"
+  },
+  {
+    "zone_name": "The Cape of Stranglethorn",
+    "zone_id": 210,
+    "name": "Kurmokk"
+  },
+  {
+    "zone_name": "Nagrand",
+    "zone_id": 107,
+    "name": "Goretooth"
+  },
+  {
+    "zone_name": "Desolace",
+    "zone_id": 66,
+    "name": "Crusty"
+  },
+  {
+    "zone_name": "Zangarmarsh",
+    "zone_id": 102,
+    "name": "Marticar"
+  },
+  {
+    "zone_name": "Netherstorm",
+    "zone_id": 109,
+    "name": "Nuramoc"
+  },
+  {
+    "zone_name": "Borean Tundra",
+    "zone_id": 114,
+    "name": "Icehorn"
+  },
+  {
+    "zone_name": "Zul'Drak",
+    "zone_id": 121,
+    "name": "Terror Spinner"
+  },
+  {
+    "zone_name": "Sholazar Basin",
+    "zone_id": 119,
+    "name": "Aotona"
+  },
+  {
+    "zone_name": "Sholazar Basin",
+    "zone_id": 119,
+    "name": "King Krush"
+  },
+  {
+    "zone_name": "Sholazar Basin",
+    "zone_id": 119,
+    "name": "Loque'nahak"
+  },
+  {
+    "zone_name": "Zul'Drak",
+    "zone_id": 121,
+    "name": "Gondria"
+  },
+  {
+    "zone_name": "The Storm Peaks",
+    "zone_id": 120,
+    "name": "Skoll"
+  },
+  {
+    "zone_name": "Grizzly Hills",
+    "zone_id": 116,
+    "name": "Arcturis"
+  },
+  {
+    "zone_name": "Tanaris",
+    "zone_id": 71,
+    "name": "Scorpitar"
+  },
+  {
+    "zone_name": "Tanaris",
+    "zone_id": 71,
+    "name": "Slaverjaw"
+  },
+  {
+    "zone_name": "Tanaris",
+    "zone_id": 71,
+    "name": "Hellgazer"
+  },
+  {
+    "zone_name": "Loch Modan",
+    "zone_id": 48,
+    "name": "Ashtail"
+  },
+  {
+    "zone_name": "Loch Modan",
+    "zone_id": 48,
+    "name": "Nix"
+  },
+  {
+    "zone_name": "Tanaris",
+    "zone_id": 71,
+    "name": "Ainamiss the Hive Queen"
+  },
+  {
+    "zone_name": "Tanaris",
+    "zone_id": 71,
+    "name": "Harakiss the Infestor"
+  },
+  {
+    "zone_name": "Deepholm",
+    "zone_id": 207,
+    "name": "Jadefang"
+  },
+  {
+    "zone_name": "Abyssal Depths",
+    "zone_id": 204,
+    "name": "Ghostcrawler"
+  },
+  {
+    "zone_name": "Mount Hyjal",
+    "zone_id": 198,
+    "name": "Terrorpene"
+  },
+  {
+    "zone_name": "Twilight Highlands",
+    "zone_id": 241,
+    "name": "Karoma"
+  },
+  {
+    "zone_name": "Uldum",
+    "zone_id": 249,
+    "name": "Madexx"
+  },
+  {
+    "zone_name": "Twilight Highlands",
+    "zone_id": 241,
+    "name": "Sambas"
+  },
+  {
+    "zone_name": "Deathknell",
+    "zone_id": 465,
+    "name": "Fangor"
+  },
+  {
+    "zone_name": "Silverpine Forest",
+    "zone_id": 21,
+    "name": "Kree"
+  },
+  {
+    "zone_name": "Hillsbrad Foothills",
+    "zone_id": 25,
+    "name": "Alitus"
+  },
+  {
+    "zone_name": "Arathi Highlands",
+    "zone_id": 14,
+    "name": "Cackle"
+  },
+  {
+    "zone_name": "Dustwallow Marsh",
+    "zone_id": 70,
+    "name": "Heronis"
+  },
+  {
+    "zone_name": "Stonetalon Mountains",
+    "zone_id": 65,
+    "name": "Quall"
+  },
+  {
+    "zone_name": "Western Plaguelands",
+    "zone_id": 22,
+    "name": "Alit"
+  },
+  {
+    "zone_name": "Winterspring",
+    "zone_id": 83,
+    "name": "Ronak"
+  },
+  {
+    "zone_name": "Winterspring",
+    "zone_id": 83,
+    "name": "Norissis"
+  },
+  {
+    "zone_name": "Winterspring",
+    "zone_id": 83,
+    "name": "Manas"
+  },
+  {
+    "zone_name": "Burning Steppes",
+    "zone_id": 36,
+    "name": "Sunwing"
+  },
+  {
+    "zone_name": "Burning Steppes",
+    "zone_id": 36,
+    "name": "Ornat"
+  },
+  {
+    "zone_name": "Felwood",
+    "zone_id": 77,
+    "name": "Blackbog the Fang"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "Karapax"
+  },
+  {
+    "zone_name": "Felwood",
+    "zone_id": 77,
+    "name": "Spinecrawl"
+  },
+  {
+    "zone_name": "Burning Steppes",
+    "zone_id": 36,
+    "name": "Azelisk"
+  },
+  {
+    "zone_name": "Badlands",
+    "zone_id": 15,
+    "name": "Kalixx"
+  },
+  {
+    "zone_name": "Thousand Needles",
+    "zone_id": 64,
+    "name": "Strix the Barbed"
+  },
+  {
+    "zone_name": "Badlands",
+    "zone_id": 15,
+    "name": "Deathstrike"
+  },
+  {
+    "zone_name": "Burning Steppes",
+    "zone_id": 36,
+    "name": "Venomspine"
+  },
+  {
+    "zone_name": "Badlands",
+    "zone_id": 15,
+    "name": "Needlefang"
+  },
+  {
+    "zone_name": "Dustwallow Marsh",
+    "zone_id": 70,
+    "name": "Blinkeye the Rattler"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "Acroniss"
+  },
+  {
+    "zone_name": "Swamp of Sorrows",
+    "zone_id": 51,
+    "name": "Shimmerscale"
+  },
+  {
+    "zone_name": "Thousand Needles",
+    "zone_id": 64,
+    "name": "Kaxx"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "Qem"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "Manax"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "Qu'rik"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "Losaj"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "Bornix the Burrower"
+  },
+  {
+    "zone_name": "Ahn'Qiraj: The Fallen Kingdom",
+    "zone_id": 327,
+    "name": "Tix"
+  },
+  {
+    "zone_name": "Thousand Needles",
+    "zone_id": 64,
+    "name": "Nyaj"
+  },
+  {
+    "zone_name": "Elwynn Forest",
+    "zone_id": 37,
+    "name": "Tarantis"
+  },
+  {
+    "zone_name": "Stonetalon Mountains",
+    "zone_id": 65,
+    "name": "Iriss the Widow"
+  },
+  {
+    "zone_name": "Tirisfal Glades",
+    "zone_id": 18,
+    "name": "Shadowstalker"
+  },
+  {
+    "zone_name": "Dustwallow Marsh",
+    "zone_id": 70,
+    "name": "Paraliss"
+  },
+  {
+    "zone_name": "Hillsbrad Foothills",
+    "zone_id": 25,
+    "name": "Miasmiss"
+  },
+  {
+    "zone_name": "Arathi Highlands",
+    "zone_id": 14,
+    "name": "Zorn"
+  },
+  {
+    "zone_name": "Eastern Plaguelands",
+    "zone_id": 23,
+    "name": "Likk the Hunter"
+  },
+  {
+    "zone_name": "Felwood",
+    "zone_id": 77,
+    "name": "Needle"
+  },
+  {
+    "zone_name": "Western Plaguelands",
+    "zone_id": 22,
+    "name": "Ironweb"
+  },
+  {
+    "zone_name": "Eastern Plaguelands",
+    "zone_id": 23,
+    "name": "Sporeggon"
+  },
+  {
+    "zone_name": "Dustwallow Marsh",
+    "zone_id": 70,
+    "name": "Anith"
+  },
+  {
+    "zone_name": "Thousand Needles",
+    "zone_id": 64,
+    "name": "Skyshadow"
+  },
+  {
+    "zone_name": "Stonetalon Mountains",
+    "zone_id": 65,
+    "name": "Sparkwing"
+  },
+  {
+    "zone_name": "Winterspring",
+    "zone_id": 83,
+    "name": "Quetzl"
+  },
+  {
+    "zone_name": "Swamp of Sorrows",
+    "zone_id": 51,
+    "name": "Ionis"
+  },
+  {
+    "zone_name": "Burning Steppes",
+    "zone_id": 36,
+    "name": "Chiaa"
+  },
+  {
+    "zone_name": "Swamp of Sorrows",
+    "zone_id": 51,
+    "name": "Yukiko"
+  },
+  {
+    "zone_name": "Tirisfal Glades",
+    "zone_id": 18,
+    "name": "Bonechewer"
+  },
+  {
+    "zone_name": "Arathi Highlands",
+    "zone_id": 14,
+    "name": "Ripwing"
+  },
+  {
+    "zone_name": "Burning Steppes",
+    "zone_id": 36,
+    "name": "Catal"
+  },
+  {
+    "zone_name": "Western Plaguelands",
+    "zone_id": 22,
+    "name": "Heress"
+  },
+  {
+    "zone_name": "Burning Steppes",
+    "zone_id": 36,
+    "name": "Favored of Isiset"
+  },
+  {
+    "zone_name": "Stonetalon Mountains",
+    "zone_id": 65,
+    "name": "Arae"
+  },
+  {
+    "zone_name": "Eastern Plaguelands",
+    "zone_id": 23,
+    "name": "Fene-mal"
+  },
+  {
+    "zone_name": "Silverpine Forest",
+    "zone_id": 21,
+    "name": "Corpsefeeder"
+  },
+  {
+    "zone_name": "Molten Front",
+    "zone_id": 338,
+    "name": "Skarr"
+  },
+  {
+    "zone_name": "Hillsbrad Foothills",
+    "zone_id": 25,
+    "name": "The Dark Prowler"
+  },
+  {
+    "zone_name": "Winterspring",
+    "zone_id": 83,
+    "name": "Iceclaw"
+  },
+  {
+    "zone_name": "Stonetalon Mountains",
+    "zone_id": 65,
+    "name": "Feras"
+  },
+  {
+    "zone_name": "Felwood",
+    "zone_id": 77,
+    "name": "Duskcoat"
+  },
+  {
+    "zone_name": "Swamp of Sorrows",
+    "zone_id": 51,
+    "name": "Kash"
+  },
+  {
+    "zone_name": "Badlands",
+    "zone_id": 15,
+    "name": "Tabbs"
+  },
+  {
+    "zone_name": "Searing Gorge",
+    "zone_id": 32,
+    "name": "Chromehound"
+  },
+  {
+    "zone_name": "Burning Steppes",
+    "zone_id": 36,
+    "name": "Magmagan"
+  },
+  {
+    "zone_name": "Burning Steppes",
+    "zone_id": 36,
+    "name": "Jaxx the Rabid"
+  },
+  {
+    "zone_name": "Eastern Plaguelands",
+    "zone_id": 23,
+    "name": "Snark"
+  },
+  {
+    "zone_name": "Hillsbrad Foothills",
+    "zone_id": 25,
+    "name": "Dustwing"
+  },
+  {
+    "zone_name": "Felwood",
+    "zone_id": 77,
+    "name": "Thicket"
+  },
+  {
+    "zone_name": "Arathi Highlands",
+    "zone_id": 14,
+    "name": "Saurix"
+  },
+  {
+    "zone_name": "Stonetalon Mountains",
+    "zone_id": 65,
+    "name": "Tenok"
+  },
+  {
+    "zone_name": "Dustwallow Marsh",
+    "zone_id": 70,
+    "name": "Nychus"
+  },
+  {
+    "zone_name": "Searing Gorge",
+    "zone_id": 32,
+    "name": "Avis"
+  },
+  {
+    "zone_name": "Swamp of Sorrows",
+    "zone_id": 51,
+    "name": "Chupacabros"
+  },
+  {
+    "zone_name": "Stonetalon Mountains",
+    "zone_id": 65,
+    "name": "Dustflight the Cowardly"
+  },
+  {
+    "zone_name": "Swamp of Sorrows",
+    "zone_id": 51,
+    "name": "Seawing"
+  },
+  {
+    "zone_name": "Arathi Highlands",
+    "zone_id": 14,
+    "name": "Boros"
+  },
+  {
+    "zone_name": "Thousand Needles",
+    "zone_id": 64,
+    "name": "Cyn"
+  },
+  {
+    "zone_name": "Stonetalon Mountains",
+    "zone_id": 65,
+    "name": "Volux"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "Ffexk the Dunestalker"
+  },
+  {
+    "zone_name": "Dustwallow Marsh",
+    "zone_id": 70,
+    "name": "Teromak"
+  },
+  {
+    "zone_name": "Swamp of Sorrows",
+    "zone_id": 51,
+    "name": "Orlix the Swamplord"
+  },
+  {
+    "zone_name": "Felwood",
+    "zone_id": 77,
+    "name": "Cida"
+  },
+  {
+    "zone_name": "Western Plaguelands",
+    "zone_id": 22,
+    "name": "Mutilax"
+  },
+  {
+    "zone_name": "Tirisfal Glades",
+    "zone_id": 18,
+    "name": "Nighthowl"
+  },
+  {
+    "zone_name": "Eastern Plaguelands",
+    "zone_id": 23,
+    "name": "Snort"
+  },
+  {
+    "zone_name": "Elwynn Forest",
+    "zone_id": 37,
+    "name": "Lamepaw the Whimperer"
+  },
+  {
+    "zone_name": "Western Plaguelands",
+    "zone_id": 22,
+    "name": "Warg"
+  },
+  {
+    "zone_name": "Felwood",
+    "zone_id": 77,
+    "name": "Grovepaw"
+  },
+  {
+    "zone_name": "Elwynn Forest",
+    "zone_id": 37,
+    "name": "Grizzled Ben"
+  },
+  {
+    "zone_name": "Hillsbrad Foothills",
+    "zone_id": 25,
+    "name": "Little Bjorn"
+  },
+  {
+    "zone_name": "Tirisfal Glades",
+    "zone_id": 18,
+    "name": "Hibernus the Sleeper"
+  },
+  {
+    "zone_name": "Western Plaguelands",
+    "zone_id": 22,
+    "name": "Mange"
+  },
+  {
+    "zone_name": "Western Plaguelands",
+    "zone_id": 22,
+    "name": "Hamhide"
+  },
+  {
+    "zone_name": "Arathi Highlands",
+    "zone_id": 14,
+    "name": "Swee"
+  },
+  {
+    "zone_name": "Elwynn Forest",
+    "zone_id": 37,
+    "name": "Snoot the Rooter"
+  },
+  {
+    "zone_name": "Dustwallow Marsh",
+    "zone_id": 70,
+    "name": "Scruff"
+  },
+  {
+    "zone_name": "Searing Gorge",
+    "zone_id": 32,
+    "name": "Hogzilla"
+  },
+  {
+    "zone_name": "Eastern Plaguelands",
+    "zone_id": 23,
+    "name": "Varah"
+  },
+  {
+    "zone_name": "Searing Gorge",
+    "zone_id": 32,
+    "name": "Crystalback"
+  },
+  {
+    "zone_name": "Silverpine Forest",
+    "zone_id": 21,
+    "name": "Finn's Gambit"
+  },
+  {
+    "zone_name": "Thousand Needles",
+    "zone_id": 64,
+    "name": "Barnacle Jim"
+  },
+  {
+    "zone_name": "Hillsbrad Foothills",
+    "zone_id": 25,
+    "name": "Carcinak"
+  },
+  {
+    "zone_name": "Dustwallow Marsh",
+    "zone_id": 70,
+    "name": "Hugeclaw"
+  },
+  {
+    "zone_name": "Molten Front",
+    "zone_id": 338,
+    "name": "Karkin"
+  },
+  {
+    "zone_name": "Wetlands",
+    "zone_id": 56,
+    "name": "Chops"
+  },
+  {
+    "zone_name": "Hillsbrad Foothills",
+    "zone_id": 25,
+    "name": "Craw the Ravager"
+  },
+  {
+    "zone_name": "Stonetalon Mountains",
+    "zone_id": 65,
+    "name": "Goldenback"
+  },
+  {
+    "zone_name": "Winterspring",
+    "zone_id": 83,
+    "name": "Gal'dorak"
+  },
+  {
+    "zone_name": "Winterspring",
+    "zone_id": 83,
+    "name": "Bruiser"
+  },
+  {
+    "zone_name": "Winterspring",
+    "zone_id": 83,
+    "name": "Bornak the Gorer"
+  },
+  {
+    "zone_name": "Badlands",
+    "zone_id": 15,
+    "name": "Blackshell the Impenetrable"
+  },
+  {
+    "zone_name": "Thousand Needles",
+    "zone_id": 64,
+    "name": "Venomclaw"
+  },
+  {
+    "zone_name": "Searing Gorge",
+    "zone_id": 32,
+    "name": "Scorpoxx"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "Toxx"
+  },
+  {
+    "zone_name": "Badlands",
+    "zone_id": 15,
+    "name": "Serkett"
+  },
+  {
+    "zone_name": "Thousand Needles",
+    "zone_id": 64,
+    "name": "The Barbed Horror"
+  },
+  {
+    "zone_name": "Searing Gorge",
+    "zone_id": 32,
+    "name": "Snips"
+  },
+  {
+    "zone_name": "Elwynn Forest",
+    "zone_id": 37,
+    "name": "Terrapis"
+  },
+  {
+    "zone_name": "Felwood",
+    "zone_id": 77,
+    "name": "Gezan"
+  },
+  {
+    "zone_name": "Badlands",
+    "zone_id": 15,
+    "name": "Zormus"
+  },
+  {
+    "zone_name": "Badlands",
+    "zone_id": 15,
+    "name": "Vorticus"
+  },
+  {
+    "zone_name": "Hillsbrad Foothills",
+    "zone_id": 25,
+    "name": "Chordix"
+  },
+  {
+    "zone_name": "Felwood",
+    "zone_id": 77,
+    "name": "Dilennaa"
+  },
+  {
+    "zone_name": "Silverpine Forest",
+    "zone_id": 21,
+    "name": "Gnath"
+  },
+  {
+    "zone_name": "Eastern Plaguelands",
+    "zone_id": 23,
+    "name": "Spirocula"
+  },
+  {
+    "zone_name": "Winterspring",
+    "zone_id": 83,
+    "name": "The Deep Tunneler"
+  },
+  {
+    "zone_name": "Western Plaguelands",
+    "zone_id": 22,
+    "name": "Parasitus"
+  },
+  {
+    "zone_name": "Western Plaguelands",
+    "zone_id": 22,
+    "name": "Tracker"
+  },
+  {
+    "zone_name": "Silverpine Forest",
+    "zone_id": 21,
+    "name": "Lost Gilnean Wardog"
+  },
+  {
+    "zone_name": "Arathi Highlands",
+    "zone_id": 14,
+    "name": "Snuffles"
+  },
+  {
+    "zone_name": "Eastern Plaguelands",
+    "zone_id": 23,
+    "name": "Bleakheart"
+  },
+  {
+    "zone_name": "Tirisfal Glades",
+    "zone_id": 18,
+    "name": "Plague"
+  },
+  {
+    "zone_name": "Winterspring",
+    "zone_id": 83,
+    "name": "Arcanus"
+  },
+  {
+    "zone_name": "Felwood",
+    "zone_id": 77,
+    "name": "Fidonis"
+  },
+  {
+    "zone_name": "Searing Gorge",
+    "zone_id": 32,
+    "name": "Rexxus"
+  },
+  {
+    "zone_name": "Swamp of Sorrows",
+    "zone_id": 51,
+    "name": "Gib the Banana-Hoarder"
+  },
+  {
+    "zone_name": "Eastern Plaguelands",
+    "zone_id": 23,
+    "name": "Quirix"
+  },
+  {
+    "zone_name": "Hillsbrad Foothills",
+    "zone_id": 25,
+    "name": "Weevil"
+  },
+  {
+    "zone_name": "Western Plaguelands",
+    "zone_id": 22,
+    "name": "Aphis"
+  },
+  {
+    "zone_name": "Dustwallow Marsh",
+    "zone_id": 70,
+    "name": "Roth-Salam"
+  },
+  {
+    "zone_name": "Stonetalon Mountains",
+    "zone_id": 65,
+    "name": "Khep-Re"
+  },
+  {
+    "zone_name": "Arathi Highlands",
+    "zone_id": 14,
+    "name": "Phalanax"
+  },
+  {
+    "zone_name": "Searing Gorge",
+    "zone_id": 32,
+    "name": "Crystalfang"
+  },
+  {
+    "zone_name": "Arathi Highlands",
+    "zone_id": 14,
+    "name": "Glint"
+  },
+  {
+    "zone_name": "Dustwallow Marsh",
+    "zone_id": 70,
+    "name": "Scintillex"
+  },
+  {
+    "zone_name": "Hillsbrad Foothills",
+    "zone_id": 25,
+    "name": "Lopex"
+  },
+  {
+    "zone_name": "Elwynn Forest",
+    "zone_id": 37,
+    "name": "Bushtail"
+  },
+  {
+    "zone_name": "Uldum",
+    "zone_id": 249,
+    "name": "Madexx"
+  },
+  {
+    "zone_name": "Uldum",
+    "zone_id": 249,
+    "name": "Madexx"
+  },
+  {
+    "zone_name": "Uldum",
+    "zone_id": 249,
+    "name": "Madexx"
+  },
+  {
+    "zone_name": "Uldum",
+    "zone_id": 249,
+    "name": "Madexx"
+  },
+  {
+    "zone_name": "Northern Stranglethorn",
+    "zone_id": 50,
+    "name": "Tsul'Kalu"
+  },
+  {
+    "zone_name": "Northern Stranglethorn",
+    "zone_id": 50,
+    "name": "Mahamba"
+  },
+  {
+    "zone_name": "Northern Stranglethorn",
+    "zone_id": 50,
+    "name": "Pogeyan"
+  },
+  {
+    "zone_name": "Redridge Mountains",
+    "zone_id": 49,
+    "name": "Chitter"
+  },
+  {
+    "zone_name": "Mount Hyjal",
+    "zone_id": 198,
+    "name": "Ankha"
+  },
+  {
+    "zone_name": "Mount Hyjal",
+    "zone_id": 198,
+    "name": "Magria"
+  },
+  {
+    "zone_name": "Mount Hyjal",
+    "zone_id": 198,
+    "name": "Ban'thalos"
+  },
+  {
+    "zone_name": "Molten Front",
+    "zone_id": 338,
+    "name": "Solix"
+  },
+  {
+    "zone_name": "Molten Front",
+    "zone_id": 338,
+    "name": "Deth'tilac"
+  },
+  {
+    "zone_name": "Molten Front",
+    "zone_id": 338,
+    "name": "Kirix"
+  },
+  {
+    "zone_name": "Molten Front",
+    "zone_id": 338,
+    "name": "Skitterflame"
+  },
+  {
+    "zone_name": "Molten Front",
+    "zone_id": 338,
+    "name": "Anthriss"
+  },
+  {
+    "zone_name": "Feralas",
+    "zone_id": 69,
+    "name": "Prince Lakma"
+  },
+  {
+    "zone_name": "Vale of Eternal Blossoms",
+    "zone_id": 390,
+    "name": "Bloodtip"
+  },
+  {
+    "zone_name": "Vale of Eternal Blossoms",
+    "zone_id": 390,
+    "name": "Wulon"
+  },
+  {
+    "zone_name": "Shadowmoon Valley",
+    "zone_id": 539,
+    "name": "Rockhoof"
+  },
+  {
+    "zone_name": "Timeless Isle",
+    "zone_id": 554,
+    "name": "Emerald Gander"
+  },
+  {
+    "zone_name": "Timeless Isle",
+    "zone_id": 554,
+    "name": "Ironfur Steelhorn"
+  },
+  {
+    "zone_name": "Timeless Isle",
+    "zone_id": 554,
+    "name": "Great Turtle Furyshell"
+  },
+  {
+    "zone_name": "Shadowmoon Valley",
+    "zone_id": 539,
+    "name": "Killmaw"
+  },
+  {
+    "zone_name": "Shadowmoon Valley",
+    "zone_id": 539,
+    "name": "Veloss"
+  },
+  {
+    "zone_name": "Gorgrond",
+    "zone_id": 543,
+    "name": "Mother Araneae"
+  },
+  {
+    "zone_name": "Frostfire Ridge",
+    "zone_id": 525,
+    "name": "Coldtusk"
+  },
+  {
+    "zone_name": "Shadowmoon Valley",
+    "zone_id": 539,
+    "name": "Amaukwa"
+  },
+  {
+    "zone_name": "Frostfire Ridge",
+    "zone_id": 525,
+    "name": "Coldstomp the Griever"
+  },
+  {
+    "zone_name": "Frostfire Ridge",
+    "zone_id": 525,
+    "name": "Giantbane"
+  },
+  {
+    "zone_name": "Talador",
+    "zone_id": 535,
+    "name": "Hen-Mother Hami"
+  },
+  {
+    "zone_name": "Talador",
+    "zone_id": 535,
+    "name": "Taladorantula"
+  },
+  {
+    "zone_name": "Talador",
+    "zone_id": 535,
+    "name": "Hammertooth"
+  },
+  {
+    "zone_name": "Talador",
+    "zone_id": 535,
+    "name": "Glimmerwing"
+  },
+  {
+    "zone_name": "Talador",
+    "zone_id": 535,
+    "name": "Ra'kahn"
+  },
+  {
+    "zone_name": "Talador",
+    "zone_id": 535,
+    "name": "Klikixx"
+  },
+  {
+    "zone_name": "Talador",
+    "zone_id": 535,
+    "name": "No'losh"
+  },
+  {
+    "zone_name": "Shadowmoon Valley",
+    "zone_id": 539,
+    "name": "Hypnocroak"
+  },
+  {
+    "zone_name": "Nagrand",
+    "zone_id": 107,
+    "name": "Gaz'orda"
+  },
+  {
+    "zone_name": "Frostfire Ridge",
+    "zone_id": 525,
+    "name": "Chillfang"
+  },
+  {
+    "zone_name": "Talador",
+    "zone_id": 535,
+    "name": "Gennadian"
+  },
+  {
+    "zone_name": "Spires of Arak",
+    "zone_id": 542,
+    "name": "Varasha"
+  },
+  {
+    "zone_name": "Shadowmoon Valley",
+    "zone_id": 539,
+    "name": "Darktalon"
+  },
+  {
+    "zone_name": "Frostfire Ridge",
+    "zone_id": 525,
+    "name": "Jabberjaw"
+  },
+  {
+    "zone_name": "Frostfire Ridge",
+    "zone_id": 525,
+    "name": "Slogtusk the Corpse-Eater"
+  },
+  {
+    "zone_name": "Nagrand",
+    "zone_id": 107,
+    "name": "Greatfeather"
+  },
+  {
+    "zone_name": "Nagrand",
+    "zone_id": 107,
+    "name": "Gnarlhoof the Rabid"
+  },
+  {
+    "zone_name": "Nagrand",
+    "zone_id": 107,
+    "name": "Grizzlemaw"
+  },
+  {
+    "zone_name": "Nagrand",
+    "zone_id": 107,
+    "name": "Flinthide"
+  },
+  {
+    "zone_name": "Gorgrond",
+    "zone_id": 543,
+    "name": "Hive Queen Skrikka"
+  },
+  {
+    "zone_name": "Shadowmoon Valley",
+    "zone_id": 539,
+    "name": "Insha'tar"
+  },
+  {
+    "zone_name": "Nagrand",
+    "zone_id": 107,
+    "name": "Tura'aka"
+  },
+  {
+    "zone_name": "Spires of Arak",
+    "zone_id": 542,
+    "name": "Stonespite"
+  },
+  {
+    "zone_name": "Spires of Arak",
+    "zone_id": 542,
+    "name": "Blightglow"
+  },
+  {
+    "zone_name": "Spires of Arak",
+    "zone_id": 542,
+    "name": "Sunderthorn"
+  },
+  {
+    "zone_name": "Spires of Arak",
+    "zone_id": 542,
+    "name": "Jiasska the Sporegorger"
+  },
+  {
+    "zone_name": "Gorgrond",
+    "zone_id": 543,
+    "name": "Berthora"
+  },
+  {
+    "zone_name": "Gorgrond",
+    "zone_id": 543,
+    "name": "Riptar"
+  },
+  {
+    "zone_name": "Gorgrond",
+    "zone_id": 543,
+    "name": "Venolasix"
+  },
+  {
+    "zone_name": "Gorgrond",
+    "zone_id": 543,
+    "name": "Stompalupagus"
+  },
+  {
+    "zone_name": "Ashran",
+    "zone_id": 588,
+    "name": "Gibby"
+  },
+  {
+    "zone_name": "Nagrand",
+    "zone_id": 107,
+    "name": "Pit Beast"
+  },
+  {
+    "zone_name": "Gorgrond",
+    "zone_id": 543,
+    "name": "Mogamago"
+  },
+  {
+    "zone_name": "Azsuna",
+    "zone_id": 630,
+    "name": "Daggerbeak"
+  },
+  {
+    "zone_name": "Feralas",
+    "zone_id": 69,
+    "name": "Skystormer"
+  },
+  {
+    "zone_name": "Azsuna",
+    "zone_id": 630,
+    "name": "Pridelord Meowl"
+  },
+  {
+    "zone_name": "Tanaan Jungle",
+    "zone_id": 534,
+    "name": "Broodlord Ixkor"
+  },
+  {
+    "zone_name": "Stormheim",
+    "zone_id": 634,
+    "name": "Bloodstalker Alpha"
+  },
+  {
+    "zone_name": "Tanaan Jungle",
+    "zone_id": 534,
+    "name": "Rendrak"
+  },
+  {
+    "zone_name": "Tanaan Jungle",
+    "zone_id": 534,
+    "name": "The Goreclaw"
+  },
+  {
+    "zone_name": "Tanaan Jungle",
+    "zone_id": 534,
+    "name": "Steelsnout"
+  },
+  {
+    "zone_name": "Tanaan Jungle",
+    "zone_id": 534,
+    "name": "Magwia"
+  },
+  {
+    "zone_name": "Tanaan Jungle",
+    "zone_id": 534,
+    "name": "Shadowthrash"
+  },
+  {
+    "zone_name": "Highmountain",
+    "zone_id": 650,
+    "name": "Majestic Elderhorn"
+  },
+  {
+    "zone_name": "Highmountain",
+    "zone_id": 650,
+    "name": "Arru"
+  },
+  {
+    "zone_name": "Highmountain",
+    "zone_id": 650,
+    "name": "Crawshuk the Hungry"
+  },
+  {
+    "zone_name": "Highmountain",
+    "zone_id": 650,
+    "name": "Bristlemaul"
+  },
+  {
+    "zone_name": "Val'sharah",
+    "zone_id": 641,
+    "name": "Wraithtalon"
+  },
+  {
+    "zone_name": "Highmountain",
+    "zone_id": 650,
+    "name": "Tamed Coralback"
+  },
+  {
+    "zone_name": "Highmountain",
+    "zone_id": 650,
+    "name": "Slumber"
+  },
+  {
+    "zone_name": "Thunder Totem",
+    "zone_id": 652,
+    "name": "Sekhan"
+  },
+  {
+    "zone_name": "Val'sharah",
+    "zone_id": 641,
+    "name": "Well-Fed Bear"
+  },
+  {
+    "zone_name": "Suramar",
+    "zone_id": 680,
+    "name": "Baconlisk"
+  },
+  {
+    "zone_name": "Suramar",
+    "zone_id": 680,
+    "name": "Shadowquill"
+  },
+  {
+    "zone_name": "Suramar",
+    "zone_id": 680,
+    "name": "Rauren"
+  },
+  {
+    "zone_name": "Stormheim",
+    "zone_id": 634,
+    "name": "Starbuck"
+  },
+  {
+    "zone_name": "Felwood",
+    "zone_id": 77,
+    "name": "Grimrot"
+  },
+  {
+    "zone_name": "Felwood",
+    "zone_id": 77,
+    "name": "Grimrot"
+  },
+  {
+    "zone_name": "The Hinterlands",
+    "zone_id": 26,
+    "name": "Ol' Muddle"
+  },
+  {
+    "zone_name": "Suramar",
+    "zone_id": 680,
+    "name": "Pinchshank"
+  },
+  {
+    "zone_name": "Suramar",
+    "zone_id": 680,
+    "name": "Myonix"
+  },
+  {
+    "zone_name": "Val'sharah",
+    "zone_id": 641,
+    "name": "Bahagar"
+  },
+  {
+    "zone_name": "Suramar",
+    "zone_id": 680,
+    "name": "Tideclaw"
+  },
+  {
+    "zone_name": "Suramar",
+    "zone_id": 680,
+    "name": "Anax"
+  },
+  {
+    "zone_name": "Stormheim",
+    "zone_id": 634,
+    "name": "Bulvinkel"
+  },
+  {
+    "zone_name": "Suramar",
+    "zone_id": 680,
+    "name": "Maia the White"
+  },
+  {
+    "zone_name": "Azsuna",
+    "zone_id": 630,
+    "name": "Sinister Leyrunner"
+  },
+  {
+    "zone_name": "Azsuna",
+    "zone_id": 630,
+    "name": "Devious Sunrunner"
+  },
+  {
+    "zone_name": "Suramar",
+    "zone_id": 680,
+    "name": "Mar'tura"
+  },
+  {
+    "zone_name": "Suramar",
+    "zone_id": 680,
+    "name": "Pashya"
+  },
+  {
+    "zone_name": "Duskwood",
+    "zone_id": 47,
+    "name": "Lightning Paw"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Umbra'jin"
+  },
+  {
+    "zone_name": "Nazmir",
+    "zone_id": 863,
+    "name": "Overstuffed Saurolisk"
+  },
+  {
+    "zone_name": "Nazmir",
+    "zone_id": 863,
+    "name": "Kal'draxa"
+  },
+  {
+    "zone_name": "Nazmir",
+    "zone_id": 863,
+    "name": "Infected Direhorn"
+  },
+  {
+    "zone_name": "Nazmir",
+    "zone_id": 863,
+    "name": "Krubbs"
+  },
+  {
+    "zone_name": "Nazmir",
+    "zone_id": 863,
+    "name": "Ancient Jawbreaker"
+  },
+  {
+    "zone_name": "Drustvar",
+    "zone_id": 896,
+    "name": "Quillrat Matriarch"
+  },
+  {
+    "zone_name": "Nazmir",
+    "zone_id": 863,
+    "name": "Bajiatha"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Kandak"
+  },
+  {
+    "zone_name": "Nazmir",
+    "zone_id": 863,
+    "name": "Venomjaw"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "Mugg"
+  },
+  {
+    "zone_name": "Drustvar",
+    "zone_id": 896,
+    "name": "Barbthorn Queen"
+  },
+  {
+    "zone_name": "Drustvar",
+    "zone_id": 896,
+    "name": "Vicemaul"
+  },
+  {
+    "zone_name": "Vol'dun",
+    "zone_id": 864,
+    "name": "Scaleclaw Broodmother"
+  },
+  {
+    "zone_name": "Nazmir",
+    "zone_id": 863,
+    "name": "Scrounger Patriarch"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Torraske the Eternal"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Bloodbulge"
+  },
+  {
+    "zone_name": "Nazmir",
+    "zone_id": 863,
+    "name": "Queen Tzxi'kik"
+  },
+  {
+    "zone_name": "Nazmir",
+    "zone_id": 863,
+    "name": "King Kooba"
+  },
+  {
+    "zone_name": "Vol'dun",
+    "zone_id": 864,
+    "name": "Jumbo Sandsnapper"
+  },
+  {
+    "zone_name": "Vol'dun",
+    "zone_id": 864,
+    "name": "Bloated Krolusk"
+  },
+  {
+    "zone_name": "Drustvar",
+    "zone_id": 896,
+    "name": "Beshol"
+  },
+  {
+    "zone_name": "Drustvar",
+    "zone_id": 896,
+    "name": "Gorehorn"
+  },
+  {
+    "zone_name": "Drustvar",
+    "zone_id": 896,
+    "name": "Talon"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Gahz'ralka"
+  },
+  {
+    "zone_name": "Drustvar",
+    "zone_id": 896,
+    "name": "Nevermore"
+  },
+  {
+    "zone_name": "Vol'dun",
+    "zone_id": 864,
+    "name": "Vathikur"
+  },
+  {
+    "zone_name": "Vol'dun",
+    "zone_id": 864,
+    "name": "Ashmane"
+  },
+  {
+    "zone_name": "Vol'dun",
+    "zone_id": 864,
+    "name": "Hivemother Kraxi"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "Broodmother Razora"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Lei-zhi"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "Merianae"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "Pack Leader Asenya"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "Kulett the Ornery"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Tambano"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Bramblewing"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "Bashmu"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "Foxhollow Skyterror"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "Fowlmouth"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Kiboku"
+  },
+  {
+    "zone_name": "Drustvar",
+    "zone_id": 896,
+    "name": "Bilefang Mother"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "Tempestria"
+  },
+  {
+    "zone_name": "Nazmir",
+    "zone_id": 863,
+    "name": "Juba the Scarred"
+  },
+  {
+    "zone_name": "Nazmir",
+    "zone_id": 863,
+    "name": "Lo'kuno"
+  },
+  {
+    "zone_name": "Nazmir",
+    "zone_id": 863,
+    "name": "Zanxib"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Warcrawler Karkithiss"
+  },
+  {
+    "zone_name": "Vol'dun",
+    "zone_id": 864,
+    "name": "First Mate Swainbeak"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Vukuba"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Murderbeak"
+  },
+  {
+    "zone_name": "Vol'dun",
+    "zone_id": 864,
+    "name": "Ak'tar"
+  },
+  {
+    "zone_name": "Stormsong Valley",
+    "zone_id": 942,
+    "name": "Crushtacean"
+  },
+  {
+    "zone_name": "Vol'dun",
+    "zone_id": 864,
+    "name": "Enraged Krolusk"
+  },
+  {
+    "zone_name": "Vol'dun",
+    "zone_id": 864,
+    "name": "Scorpox"
+  },
+  {
+    "zone_name": "Vol'dun",
+    "zone_id": 864,
+    "name": "Jungleweb Hunter"
+  },
+  {
+    "zone_name": "Vol'dun",
+    "zone_id": 864,
+    "name": "Bloodwing Bonepicker"
+  },
+  {
+    "zone_name": "Stormsong Valley",
+    "zone_id": 942,
+    "name": "Broodmother"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "Honey-Coated Slitherer"
+  },
+  {
+    "zone_name": "Vol'dun",
+    "zone_id": 864,
+    "name": "King Clickyclack"
+  },
+  {
+    "zone_name": "Drustvar",
+    "zone_id": 896,
+    "name": "Arclight"
+  },
+  {
+    "zone_name": "Drustvar",
+    "zone_id": 896,
+    "name": "Avalanche"
+  },
+  {
+    "zone_name": "Drustvar",
+    "zone_id": 896,
+    "name": "Gorged Boar"
+  },
+  {
+    "zone_name": "Stormsong Valley",
+    "zone_id": 942,
+    "name": "Nestmother Acada"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "Blackthorne"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "Gulliver"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "Tort Jaw"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "Ranja"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "Sythian the Swift"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "Shiverscale the Toxic"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "Maison the Portable"
+  },
+  {
+    "zone_name": "Stormsong Valley",
+    "zone_id": 942,
+    "name": "Pinku'shon"
+  },
+  {
+    "zone_name": "Stormsong Valley",
+    "zone_id": 942,
+    "name": "Deepfang"
+  },
+  {
+    "zone_name": "Stormsong Valley",
+    "zone_id": 942,
+    "name": "Sandfang"
+  },
+  {
+    "zone_name": "Stormsong Valley",
+    "zone_id": 942,
+    "name": "Croaker"
+  },
+  {
+    "zone_name": "Stormsong Valley",
+    "zone_id": 942,
+    "name": "Kickers"
+  },
+  {
+    "zone_name": "Stormsong Valley",
+    "zone_id": 942,
+    "name": "Osca the Bloodied"
+  },
+  {
+    "zone_name": "Stormsong Valley",
+    "zone_id": 942,
+    "name": "Whirlwing"
+  },
+  {
+    "zone_name": "Redridge Mountains",
+    "zone_id": 49,
+    "name": "Gnollfeaster"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "N'chala the Egg Thief"
+  },
+  {
+    "zone_name": "Darkshore",
+    "zone_id": 62,
+    "name": "Glimmerspine"
+  },
+  {
+    "zone_name": "Darkshore",
+    "zone_id": 62,
+    "name": "Shadowclaw"
+  },
+  {
+    "zone_name": "Mechagon",
+    "zone_id": 1462,
+    "name": "Bonepicker"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Soundless"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Deepglider"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Siltstalker the Packmother"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Toxigore the Alpha"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Banescale the Packfather"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Iridescent Glimmershell"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Needlespine"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Shassera"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Garnetscale"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Chasm-Haunter"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Sandclaw Stoneshell"
+  },
+  {
+    "zone_name": "Mechagon",
+    "zone_id": 1462,
+    "name": "Scrapclaw"
+  },
+  {
+    "zone_name": "Vision of Stormwind",
+    "zone_id": 1470,
+    "name": "Sewer Beastling"
+  },
+  {
+    "zone_name": "Uldum",
+    "zone_id": 1527,
+    "name": "Skikx'traz"
+  },
+  {
+    "zone_name": "Uldum",
+    "zone_id": 1527,
+    "name": "Qho"
+  },
+  {
+    "zone_name": "Uldum",
+    "zone_id": 1527,
+    "name": "Corpse Eater"
+  },
+  {
+    "zone_name": "Northern Barrens",
+    "zone_id": 11,
+    "name": "Trigore the Lasher"
+  },
+  {
+    "zone_name": "Feralas",
+    "zone_id": 69,
+    "name": "The Razza"
+  },
+  {
+    "zone_name": "Sethekk Halls",
+    "zone_id": 259,
+    "name": "Anzu"
+  },
+  {
+    "zone_name": "Karazhan",
+    "zone_id": 350,
+    "name": "Shadikith the Glider"
+  },
+  {
+    "zone_name": "Isle Of Giants",
+    "zone_id": 507,
+    "name": "Oondasta"
+  },
+  {
+    "zone_name": "Orgrimmar Raid",
+    "zone_id": 559,
+    "name": "Thok the Bloodthirsty"
+  },
+  {
+    "zone_name": "Throne Of Thunder",
+    "zone_id": 511,
+    "name": "Ji-Kun"
+  },
+  {
+    "zone_name": "Blackwing Lair",
+    "zone_id": 1560,
+    "name": "Chromaggus"
+  },
+  {
+    "zone_name": "Molten Core",
+    "zone_id": 232,
+    "name": "Magmadar"
+  },
+  {
+    "zone_name": "Drak Tharon Keep",
+    "zone_id": 160,
+    "name": "King Dred"
+  },
+  {
+    "zone_name": "Maraudon",
+    "zone_id": 281,
+    "name": "Rotgrip"
+  },
+  {
+    "zone_name": "Throne Of Thunder",
+    "zone_id": 509,
+    "name": "Horridon"
+  },
+  {
+    "zone_name": "Karazhan",
+    "zone_id": 350,
+    "name": "Rokad the Ravager"
+  },
+  {
+    "zone_name": "Blackwing Descent",
+    "zone_id": 286,
+    "name": "Chimaeron"
+  },
+  {
+    "zone_name": "The Underbog",
+    "zone_id": 262,
+    "name": "Ghaz'an"
+  },
+  {
+    "zone_name": "Blackrock Depths",
+    "zone_id": 243,
+    "name": "Verek"
+  },
+  {
+    "zone_name": "Zul Farrak",
+    "zone_id": 219,
+    "name": "Gahz'rilla"
+  },
+  {
+    "zone_name": "Ruins of AhnQiraj",
+    "zone_id": 247,
+    "name": "Buruthe Gorger"
+  },
+  {
+    "zone_name": "Ruins of AhnQiraj",
+    "zone_id": 247,
+    "name": "Kurinnaxx"
+  },
+  {
+    "zone_name": "Blackrock Spire",
+    "zone_id": 251,
+    "name": "Crystal Fang"
+  },
+  {
+    "zone_name": "Blackrock Spire",
+    "zone_id": 251,
+    "name": "Mother Smolderweb"
+  },
+  {
+    "zone_name": "The Underbog",
+    "zone_id": 262,
+    "name": "The Black Stalker"
+  },
+  {
+    "zone_name": "Ruins of AhnQiraj",
+    "zone_id": 247,
+    "name": "Ayamiss the Hunter"
+  },
+  {
+    "zone_name": "Blackrock Spire",
+    "zone_id": 254,
+    "name": "Gizrul the Slavener"
+  },
+  {
+    "zone_name": "Blackrock Spire",
+    "zone_id": 254,
+    "name": "Halycon"
+  },
+  {
+    "zone_name": "Wailing Caverns",
+    "zone_id": 279,
+    "name": "Kresh"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Elderspawn Nalaada"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Shiz'narasz the Consumer"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "ScaleMatriarch Zodia"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "ScaleMatriarch Gratinax"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "ScaleMatriarch Vynara"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "Qroshekx"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "Ssinkrix"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "Xaarshej"
+  },
+  {
+    "zone_name": "Darkshore",
+    "zone_id": 62,
+    "name": "Alash'anir"
+  },
+  {
+    "zone_name": "Thousand Needles",
+    "zone_id": 64,
+    "name": "Rrakk"
+  },
+  {
+    "zone_name": "Arathi Highlands",
+    "zone_id": 14,
+    "name": "Skullripper"
+  },
+  {
+    "zone_name": "Arathi Highlands",
+    "zone_id": 14,
+    "name": "Venomarus"
+  },
+  {
+    "zone_name": "Arathi Highlands",
+    "zone_id": 14,
+    "name": "Plaguefeather"
+  },
+  {
+    "zone_name": "Razorfen Kraul",
+    "zone_id": 301,
+    "name": "Enormous Bullfrog"
+  },
+  {
+    "zone_name": "Searing Gorge",
+    "zone_id": 32,
+    "name": "Slavermaw"
+  },
+  {
+    "zone_name": "Isle of Thunder",
+    "zone_id": 504,
+    "name": "Goda"
+  },
+  {
+    "zone_name": "Frostfire Ridge",
+    "zone_id": 525,
+    "name": "Canyon Icemother"
+  },
+  {
+    "zone_name": "Spires of Arak",
+    "zone_id": 542,
+    "name": "Echidna"
+  },
+  {
+    "zone_name": "Tanaan Jungle",
+    "zone_id": 534,
+    "name": "Deathtalon"
+  },
+  {
+    "zone_name": "Tanaan Jungle",
+    "zone_id": 534,
+    "name": "Keravnos"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Vileclaw"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Mu'gra"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Direhoof"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Thek'talon"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Aogexon"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Nakk the Thunderer"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Bergruu"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Xelganak"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Lernaea"
+  },
+  {
+    "zone_name": "Timeless Isle",
+    "zone_id": 554,
+    "name": "Tsavo'ka"
+  },
+  {
+    "zone_name": "Timeless Isle",
+    "zone_id": 554,
+    "name": "Bufo"
+  },
+  {
+    "zone_name": "Timeless Isle",
+    "zone_id": 554,
+    "name": "Monstrous Spineclaw"
+  },
+  {
+    "zone_name": "Azsuna",
+    "zone_id": 630,
+    "name": "Stormfeather"
+  },
+  {
+    "zone_name": "Highmountain",
+    "zone_id": 650,
+    "name": "Ala'washte"
+  },
+  {
+    "zone_name": "BrokenShore",
+    "zone_id": 646,
+    "name": "Somber Dawn"
+  },
+  {
+    "zone_name": "Val'sharah",
+    "zone_id": 641,
+    "name": "Gorebeak"
+  },
+  {
+    "zone_name": "Vol'dun",
+    "zone_id": 864,
+    "name": "Golanar"
+  },
+  {
+    "zone_name": "Krokuun",
+    "zone_id": 830,
+    "name": "Naroua"
+  },
+  {
+    "zone_name": "Mac'Aree",
+    "zone_id": 882,
+    "name": "Sabuul"
+  },
+  {
+    "zone_name": "Mac'Aree",
+    "zone_id": 882,
+    "name": "Umbraliss"
+  },
+  {
+    "zone_name": "Stormsong Valley",
+    "zone_id": 942,
+    "name": "Beehemoth"
+  },
+  {
+    "zone_name": "Vale of Eternal Blossoms",
+    "zone_id": 1530,
+    "name": "Stormhowl"
+  },
+  {
+    "zone_name": "Vale of Eternal Blossoms",
+    "zone_id": 1530,
+    "name": "Jade Watcher"
+  },
+  {
+    "zone_name": "The Underrot",
+    "zone_id": 1041,
+    "name": "Rotmaw"
+  },
+  {
+    "zone_name": "Arathi Highlands",
+    "zone_id": 14,
+    "name": "Plaguefeather"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Caverndark Terror"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1500,
+    "name": "Caverndark Terror"
+  },
+  {
+    "zone_name": "Ashran",
+    "zone_id": 588,
+    "name": "Goregore"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Chitterspine Deeplurker"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Glimmershell Hulk"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Chitterspine Guillotine"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Braxicus"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Siltridge Marauder"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Stonemaw Devourer"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Voidscale Trenchstalker"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "ScaleLord Theronar"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Colossal SkyRay"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Deepcoil Constrictor"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Voltscale Guardian"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Snapdragon Vicejaw"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Snapdragon Terrormaw"
+  },
+  {
+    "zone_name": "Nazjatar",
+    "zone_id": 1355,
+    "name": "Snapdragon Matriarch"
+  },
+  {
+    "zone_name": "Utgarde Pinnacle",
+    "zone_id": 136,
+    "name": "Bloodthirsty TundraWolf"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "Lord Skwol"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "The Dukeof Fathoms"
+  },
+  {
+    "zone_name": "Silithus",
+    "zone_id": 81,
+    "name": "Deathclasp"
+  },
+  {
+    "zone_name": "Dustwallow Marsh",
+    "zone_id": 70,
+    "name": "Strashaz Hydra"
+  },
+  {
+    "zone_name": "Icecrown",
+    "zone_id": 118,
+    "name": "Grimkor's Hound"
+  },
+  {
+    "zone_name": "Northern Stranglethorn",
+    "zone_id": 50,
+    "name": "CrystalSpine Matriarch"
+  },
+  {
+    "zone_name": "Nagrand",
+    "zone_id": 107,
+    "name": "Brokentoe"
+  },
+  {
+    "zone_name": "Terokkar Forest",
+    "zone_id": 108,
+    "name": "Deathskitter"
+  },
+  {
+    "zone_name": "Terokkar Forest",
+    "zone_id": 108,
+    "name": "Gezzarak the Huntress"
+  },
+  {
+    "zone_name": "Shadowmoon Valley (BC)",
+    "zone_id": 104,
+    "name": "Uvuros"
+  },
+  {
+    "zone_name": "Zul'Aman",
+    "zone_id": 333,
+    "name": "Amani Lynx"
+  },
+  {
+    "zone_name": "Zul'Aman",
+    "zone_id": 333,
+    "name": "Amani Bear"
+  },
+  {
+    "zone_name": "Zul'Aman",
+    "zone_id": 333,
+    "name": "Amani Bear Mount"
+  },
+  {
+    "zone_name": "Zul'Aman",
+    "zone_id": 333,
+    "name": "AmaniElder Lynx"
+  },
+  {
+    "zone_name": "Zul'Aman",
+    "zone_id": 333,
+    "name": "Amani Lynx"
+  },
+  {
+    "zone_name": "Zul'Aman",
+    "zone_id": 333,
+    "name": "Amani Dragonhawk"
+  },
+  {
+    "zone_name": "Grizzly Hills",
+    "zone_id": 116,
+    "name": "Goremaw"
+  },
+  {
+    "zone_name": "Desolace",
+    "zone_id": 66,
+    "name": "Enraged Kodo"
+  },
+  {
+    "zone_name": "Redridge Mountains",
+    "zone_id": 49,
+    "name": "Blackrock Battle Worg"
+  },
+  {
+    "zone_name": "Tanaris",
+    "zone_id": 71,
+    "name": "Sarinexx"
+  },
+  {
+    "zone_name": "The Hinterlands",
+    "zone_id": 26,
+    "name": "Shadra"
+  },
+  {
+    "zone_name": "Un'Goro Crater",
+    "zone_id": 78,
+    "name": "Devilsaur"
+  },
+  {
+    "zone_name": "Un'Goro Crater",
+    "zone_id": 78,
+    "name": "Ironhide Devilsaur"
+  },
+  {
+    "zone_name": "Un'Goro Crater",
+    "zone_id": 78,
+    "name": "Tyrant Devilsaur"
+  },
+  {
+    "zone_name": "Un'Goro Crater",
+    "zone_id": 78,
+    "name": "Devilsaur Queen"
+  },
+  {
+    "zone_name": "Un'Goro Crater",
+    "zone_id": 78,
+    "name": "Spiked Stegodon"
+  },
+  {
+    "zone_name": "Un'Goro Crater",
+    "zone_id": 78,
+    "name": "Plated Stegodon"
+  },
+  {
+    "zone_name": "Un'Goro Crater",
+    "zone_id": 78,
+    "name": "Stegodon"
+  },
+  {
+    "zone_name": "Un'Goro Crater",
+    "zone_id": 78,
+    "name": "Thunderstomp Stegodon"
+  },
+  {
+    "zone_name": "Un'Goro Crater",
+    "zone_id": 78,
+    "name": "Gorishi Fledgling Colossus"
+  },
+  {
+    "zone_name": "Halls of Origination",
+    "zone_id": 279,
+    "name": "Venomous Skitterer"
+  },
+  {
+    "zone_name": "Halls of Origination",
+    "zone_id": 279,
+    "name": "Blistering Scarab"
+  },
+  {
+    "zone_name": "The Bastion of Twilight",
+    "zone_id": 294,
+    "name": "Lava Scarab"
+  },
+  {
+    "zone_name": "Molten Front",
+    "zone_id": 338,
+    "name": "Lost Emberspit Scorpion"
+  },
+  {
+    "zone_name": "The Jade Forest",
+    "zone_id": 371,
+    "name": "Rakira"
+  },
+  {
+    "zone_name": "The Jade Forest",
+    "zone_id": 371,
+    "name": "Savage"
+  },
+  {
+    "zone_name": "The Jade Forest",
+    "zone_id": 371,
+    "name": "Ruukti"
+  },
+  {
+    "zone_name": "The Jade Forest",
+    "zone_id": 371,
+    "name": "Ro'shen"
+  },
+  {
+    "zone_name": "The Jade Forest",
+    "zone_id": 371,
+    "name": "Hutia"
+  },
+  {
+    "zone_name": "The Jade Forest",
+    "zone_id": 371,
+    "name": "Sungraze Behemoth"
+  },
+  {
+    "zone_name": "The Jade Forest",
+    "zone_id": 371,
+    "name": "Glimmer"
+  },
+  {
+    "zone_name": "The Jade Forest",
+    "zone_id": 371,
+    "name": "Chibee"
+  },
+  {
+    "zone_name": "Valley of the Four Winds",
+    "zone_id": 376,
+    "name": "Patrannache"
+  },
+  {
+    "zone_name": "Valley of the Four Winds",
+    "zone_id": 376,
+    "name": "Degu"
+  },
+  {
+    "zone_name": "Valley of the Four Winds",
+    "zone_id": 376,
+    "name": "Mothallus"
+  },
+  {
+    "zone_name": "Valley of the Four Winds",
+    "zone_id": 376,
+    "name": "Darkhide"
+  },
+  {
+    "zone_name": "Vale of Eternal Blossoms",
+    "zone_id": 390,
+    "name": "Portent"
+  },
+  {
+    "zone_name": "Kun-Lai Summit",
+    "zone_id": 379,
+    "name": "Enraged Mushan"
+  },
+  {
+    "zone_name": "Kun-Lai Summit",
+    "zone_id": 379,
+    "name": "Furious Gruffhorn"
+  },
+  {
+    "zone_name": "Kun-Lai Summit",
+    "zone_id": 379,
+    "name": "King Spineclaw"
+  },
+  {
+    "zone_name": "Kun-Lai Summit",
+    "zone_id": 379,
+    "name": "Stompy"
+  },
+  {
+    "zone_name": "Kun-Lai Summit",
+    "zone_id": 379,
+    "name": "Gumi"
+  },
+  {
+    "zone_name": "Kun-Lai Summit",
+    "zone_id": 379,
+    "name": "Bristlespine"
+  },
+  {
+    "zone_name": "Kun-Lai Summit",
+    "zone_id": 379,
+    "name": "Zhing"
+  },
+  {
+    "zone_name": "Townlong Steppes",
+    "zone_id": 388,
+    "name": "Rockhide the Immovable"
+  },
+  {
+    "zone_name": "Krasarang Wilds",
+    "zone_id": 418,
+    "name": "Bloodtooth"
+  },
+  {
+    "zone_name": "Krasarang Wilds",
+    "zone_id": 418,
+    "name": "Bombyx"
+  },
+  {
+    "zone_name": "Krasarang Wilds",
+    "zone_id": 418,
+    "name": "Venerable Viseclaw"
+  },
+  {
+    "zone_name": "Krasarang Wilds",
+    "zone_id": 418,
+    "name": "Elder Viseclaw"
+  },
+  {
+    "zone_name": "Krasarang Wilds",
+    "zone_id": 418,
+    "name": "Feverbite"
+  },
+  {
+    "zone_name": "Krasarang Wilds",
+    "zone_id": 418,
+    "name": "Elder Seadragon"
+  },
+  {
+    "zone_name": "Krasarang Wilds",
+    "zone_id": 418,
+    "name": "Snapclaw"
+  },
+  {
+    "zone_name": "Dread Wastes",
+    "zone_id": 422,
+    "name": "Hexapos"
+  },
+  {
+    "zone_name": "Dread Wastes",
+    "zone_id": 422,
+    "name": "Dread Matriarch"
+  },
+  {
+    "zone_name": "Dread Wastes",
+    "zone_id": 422,
+    "name": "Pengsong"
+  },
+  {
+    "zone_name": "Dread Wastes",
+    "zone_id": 422,
+    "name": "Ik'thik Amberstinger"
+  },
+  {
+    "zone_name": "Dread Wastes",
+    "zone_id": 422,
+    "name": "Ik'thik Terrorclaw"
+  },
+  {
+    "zone_name": "Mount Hyjal",
+    "zone_id": 198,
+    "name": "Smolderos the Carbonizer"
+  },
+  {
+    "zone_name": "Crypt of Forgotten Kings",
+    "zone_id": 481,
+    "name": "Guardian of Sacrifice"
+  },
+  {
+    "zone_name": "Crypt of Forgotten Kings",
+    "zone_id": 481,
+    "name": "Quilen Watcher"
+  },
+  {
+    "zone_name": "Crypt of Forgotten Kings",
+    "zone_id": 481,
+    "name": "Quilen Statue"
+  },
+  {
+    "zone_name": "Dragonblight",
+    "zone_id": 115,
+    "name": "Hulking Jormungar"
+  },
+  {
+    "zone_name": "Isle of Thunder",
+    "zone_id": 504,
+    "name": "Bloodrender Devilsaur"
+  },
+  {
+    "zone_name": "Isle of Thunder",
+    "zone_id": 504,
+    "name": "Kroshik"
+  },
+  {
+    "zone_name": "Isle of Thunder",
+    "zone_id": 504,
+    "name": "Kroshik"
+  },
+  {
+    "zone_name": "Isle of Thunder",
+    "zone_id": 504,
+    "name": "Adolescent Direhorn"
+  },
+  {
+    "zone_name": "Isle of Thunder",
+    "zone_id": 504,
+    "name": "Zandalari Battlebeast"
+  },
+  {
+    "zone_name": "Isle of Thunder",
+    "zone_id": 504,
+    "name": "Defiant Direhorn"
+  },
+  {
+    "zone_name": "Talador",
+    "zone_id": 535,
+    "name": "Kil'uun"
+  },
+  {
+    "zone_name": "Talador",
+    "zone_id": 535,
+    "name": "Grom'kar Warbeast"
+  },
+  {
+    "zone_name": "Talador",
+    "zone_id": 535,
+    "name": "Hilaani"
+  },
+  {
+    "zone_name": "The Storm Peaks",
+    "zone_id": 120,
+    "name": "Oloh"
+  },
+  {
+    "zone_name": "Shadowmoon Valley",
+    "zone_id": 539,
+    "name": "Shadowmoon Packleader"
+  },
+  {
+    "zone_name": "Shadowmoon Valley",
+    "zone_id": 539,
+    "name": "Maa'run"
+  },
+  {
+    "zone_name": "Shadowmoon Valley",
+    "zone_id": 539,
+    "name": "Kliaa"
+  },
+  {
+    "zone_name": "Frostfire Ridge",
+    "zone_id": 525,
+    "name": "Blazing Pyreclaw"
+  },
+  {
+    "zone_name": "Frostfire Ridge",
+    "zone_id": 525,
+    "name": "Ironwing Flamespitter"
+  },
+  {
+    "zone_name": "Frostfire Ridge",
+    "zone_id": 525,
+    "name": "Chilltongue"
+  },
+  {
+    "zone_name": "Frostfire Ridge",
+    "zone_id": 525,
+    "name": "Icemaw Matriarch"
+  },
+  {
+    "zone_name": "Frostfire Ridge",
+    "zone_id": 525,
+    "name": "Nok-Karosh"
+  },
+  {
+    "zone_name": "Frostfire Ridge",
+    "zone_id": 525,
+    "name": "Garn Nighthowl"
+  },
+  {
+    "zone_name": "Gorgrond",
+    "zone_id": 543,
+    "name": "Roardan the Sky Terror"
+  },
+  {
+    "zone_name": "Gorgrond",
+    "zone_id": 543,
+    "name": "Charl Doomwing"
+  },
+  {
+    "zone_name": "Gorgrond",
+    "zone_id": 543,
+    "name": "Iron Banshee"
+  },
+  {
+    "zone_name": "Gorgrond",
+    "zone_id": 543,
+    "name": "Khargax the Devourer"
+  },
+  {
+    "zone_name": "Gorgrond",
+    "zone_id": 543,
+    "name": "Typhon Broodmother"
+  },
+  {
+    "zone_name": "Spires of Arak",
+    "zone_id": 542,
+    "name": "Dread Raven"
+  },
+  {
+    "zone_name": "Spires of Arak",
+    "zone_id": 542,
+    "name": "Dread Raven"
+  },
+  {
+    "zone_name": "Spires of Arak",
+    "zone_id": 542,
+    "name": "Dread Raven"
+  },
+  {
+    "zone_name": "Spires of Arak",
+    "zone_id": 542,
+    "name": "Brood Mother Xylax"
+  },
+  {
+    "zone_name": "Spires of Arak",
+    "zone_id": 542,
+    "name": "Venombarb"
+  },
+  {
+    "zone_name": "Spires of Arak",
+    "zone_id": 542,
+    "name": "Spineslicer"
+  },
+  {
+    "zone_name": "Spires of Arak",
+    "zone_id": 542,
+    "name": "Rukhmar"
+  },
+  {
+    "zone_name": "Tanaan Jungle",
+    "zone_id": 534,
+    "name": "Keravnos Scout"
+  },
+  {
+    "zone_name": "Tanaan Jungle",
+    "zone_id": 534,
+    "name": "Fel Raven"
+  },
+  {
+    "zone_name": "Tanaan Jungle",
+    "zone_id": 534,
+    "name": "Diresnout Felboar"
+  },
+  {
+    "zone_name": "Tanaan Jungle",
+    "zone_id": 534,
+    "name": "Reassigned Warbeast"
+  },
+  {
+    "zone_name": "Tanaan Jungle",
+    "zone_id": 534,
+    "name": "Fathomless Mauler"
+  },
+  {
+    "zone_name": "Tanaan Jungle",
+    "zone_id": 534,
+    "name": "Keravnos Monitor"
+  },
+  {
+    "zone_name": "Tanaan Jungle",
+    "zone_id": 534,
+    "name": "Ancient Matriarch"
+  },
+  {
+    "zone_name": "Tanaan Jungle",
+    "zone_id": 534,
+    "name": "Keravnos Wanderer"
+  },
+  {
+    "zone_name": "Tanaan Jungle",
+    "zone_id": 534,
+    "name": "Keravnos Broodmother"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Leatherhide Earthshaker"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Direbeak Windroc"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Ironhide Bull"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Lernaean Scout"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Vicious Razorclaw"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Lernaean Broodmother"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Lernaean Monitor"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Wetland Trampler"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Thorncoat Buck"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Direfang Alpha"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Deadly Gloomstalker"
+  },
+  {
+    "zone_name": "Nagrand (Draenor)",
+    "zone_id": 550,
+    "name": "Venombore Hive Guard"
+  },
+  {
+    "zone_name": "Timeless Isle",
+    "zone_id": 554,
+    "name": "Primal Stalker"
+  },
+  {
+    "zone_name": "Timeless Isle",
+    "zone_id": 554,
+    "name": "Brilliant Windfeather"
+  },
+  {
+    "zone_name": "Timeless Isle",
+    "zone_id": 554,
+    "name": "Ancient Spineclaw"
+  },
+  {
+    "zone_name": "Timeless Isle",
+    "zone_id": 554,
+    "name": "Ironfur Great Bull"
+  },
+  {
+    "zone_name": "Timeless Isle",
+    "zone_id": 554,
+    "name": "Gulp Frog"
+  },
+  {
+    "zone_name": "Timeless Isle",
+    "zone_id": 554,
+    "name": "Elder Great Turtle"
+  },
+  {
+    "zone_name": "Timeless Isle",
+    "zone_id": 554,
+    "name": "Great Turtle"
+  },
+  {
+    "zone_name": "Blackrock Foundry",
+    "zone_id": 599,
+    "name": "Faultline"
+  },
+  {
+    "zone_name": "Blackrock Foundry",
+    "zone_id": 599,
+    "name": "Dreadwing"
+  },
+  {
+    "zone_name": "Upper Blackrock Spire",
+    "zone_id": 618,
+    "name": "Ironbarb Skyreaver"
+  },
+  {
+    "zone_name": "Azsuna",
+    "zone_id": 630,
+    "name": "Leytusk"
+  },
+  {
+    "zone_name": "Azsuna",
+    "zone_id": 630,
+    "name": "CoveGull"
+  },
+  {
+    "zone_name": "Azsuna",
+    "zone_id": 630,
+    "name": "Mac the Bear"
+  },
+  {
+    "zone_name": "Azsuna",
+    "zone_id": 630,
+    "name": "Resting Dauorbjorn"
+  },
+  {
+    "zone_name": "Azsuna",
+    "zone_id": 630,
+    "name": "Bloodgazer Patriarch"
+  },
+  {
+    "zone_name": "Azsuna",
+    "zone_id": 630,
+    "name": "Bloodgazer Matriarch"
+  },
+  {
+    "zone_name": "Azsuna",
+    "zone_id": 630,
+    "name": "Netherbeak"
+  },
+  {
+    "zone_name": "Highmountain",
+    "zone_id": 650,
+    "name": "Irewing"
+  },
+  {
+    "zone_name": "Highmountain",
+    "zone_id": 650,
+    "name": "Spinesever"
+  },
+  {
+    "zone_name": "Highmountain",
+    "zone_id": 650,
+    "name": "Great Eagle"
+  },
+  {
+    "zone_name": "Highmountain",
+    "zone_id": 650,
+    "name": "Rashar"
+  },
+  {
+    "zone_name": "Highmountain",
+    "zone_id": 650,
+    "name": "Snowfeather Patriarch"
+  },
+  {
+    "zone_name": "Highmountain",
+    "zone_id": 650,
+    "name": "Morashu"
+  },
+  {
+    "zone_name": "Highmountain",
+    "zone_id": 650,
+    "name": "Thornback Spinner"
+  },
+  {
+    "zone_name": "Highmountain",
+    "zone_id": 650,
+    "name": "Snowfeather Matriarch"
+  },
+  {
+    "zone_name": "Stormheim",
+    "zone_id": 634,
+    "name": "Stonefang"
+  },
+  {
+    "zone_name": "Stormheim",
+    "zone_id": 634,
+    "name": "Spitefeather"
+  },
+  {
+    "zone_name": "Stormheim",
+    "zone_id": 634,
+    "name": "Direbeak Patriarch"
+  },
+  {
+    "zone_name": "Stormheim",
+    "zone_id": 634,
+    "name": "Direbeak Matriarch"
+  },
+  {
+    "zone_name": "Hellfire Citadel",
+    "zone_id": 665,
+    "name": "Fel Raven"
+  },
+  {
+    "zone_name": "Val'sharah",
+    "zone_id": 641,
+    "name": "Sharptalon Patriarch"
+  },
+  {
+    "zone_name": "Val'sharah",
+    "zone_id": 641,
+    "name": "Sharptalon Matriarch"
+  },
+  {
+    "zone_name": "Val'sharah",
+    "zone_id": 641,
+    "name": "Wandering Shellback"
+  },
+  {
+    "zone_name": "Eye of Azshara",
+    "zone_id": 713,
+    "name": "Varoudnir"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "KingK'tal"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Ten'gor"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Xibalan Apex"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Savagelands Devilsaur"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Pinky"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Azuresail the Ancient"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Kil'Tawan"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Sabertusk Empress"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Prime Thumpknuckle"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Nol'ixwan"
+  },
+  {
+    "zone_name": "Zuldazar",
+    "zone_id": 862,
+    "name": "Ji'arak Broodling"
+  },
+  {
+    "zone_name": "Nazmir",
+    "zone_id": 863,
+    "name": "Monstrous Pterrordax"
+  },
+  {
+    "zone_name": "Nazmir",
+    "zone_id": 863,
+    "name": "Gruesh"
+  },
+  {
+    "zone_name": "Nazmir",
+    "zone_id": 863,
+    "name": "Makatau"
+  },
+  {
+    "zone_name": "Nazmir",
+    "zone_id": 863,
+    "name": "Zulajin"
+  },
+  {
+    "zone_name": "Nazmir",
+    "zone_id": 863,
+    "name": "Tojek"
+  },
+  {
+    "zone_name": "Vol'dun",
+    "zone_id": 864,
+    "name": "Sevriss"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "Old Frostclaw"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "Wild Gryphon"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "Wild Gryphon"
+  },
+  {
+    "zone_name": "Tiragarde Sound",
+    "zone_id": 895,
+    "name": "The Hornet"
+  },
+  {
+    "zone_name": "Drustvar",
+    "zone_id": 896,
+    "name": "The Rime Huntress"
+  },
+  {
+    "zone_name": "Stormsong Valley",
+    "zone_id": 942,
+    "name": "Thundersnout"
+  },
+  {
+    "zone_name": "Stormsong Valley",
+    "zone_id": 942,
+    "name": "Razorclaw Alpha"
+  },
+  {
+    "zone_name": "Temple of Sethraliss",
+    "zone_id": 1038,
+    "name": "Sand-crusted Striker"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "The Lonely Matriarch"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "Dustwilt Gorger"
+  },
+  {
+    "zone_name": "The Necrotic Wake",
+    "zone_id": 1666,
+    "name": "Bonefang"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "Dustwilt Acidmaw"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "Dustwilt Scythehorn"
+  },
+  {
+    "zone_name": "Eastern Plaguelands",
+    "zone_id": 23,
+    "name": "Blight-Howl"
+  },
+  {
+    "zone_name": "Eastern Plaguelands",
+    "zone_id": 23,
+    "name": "Plaguefang"
+  },
+  {
+    "zone_name": "Revendreth",
+    "zone_id": 1525,
+    "name": "Nightwidow Horror"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "Gladestalker"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "Dustwilt Husk"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "Wounded Forest Guardian"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "Monstrous Needler"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "Terrified Guardian"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "Mist-Maddened Wader"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "Unnerved Wader"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "Deranged Guardian"
+  },
+  {
+    "zone_name": "Revendreth",
+    "zone_id": 1525,
+    "name": "Great Granitefur"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "War-gorm"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "Fog-Frenzied Gladestalker"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "Frightened Gladestalker"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "Hazebroken Guardian"
+  },
+  {
+    "zone_name": "Revendreth",
+    "zone_id": 1525,
+    "name": "Dire Evedweller"
+  },
+  {
+    "zone_name": "The Maw",
+    "zone_id": 1543,
+    "name": "Gargantuan Seeker"
+  },
+  {
+    "zone_name": "Maldraxxus",
+    "zone_id": 1536,
+    "name": "Flayedwing Fleshripper"
+  },
+  {
+    "zone_name": "Maldraxxus",
+    "zone_id": 1536,
+    "name": "Ragerider Battlehorn"
+  },
+  {
+    "zone_name": "Maldraxxus",
+    "zone_id": 1536,
+    "name": "Chosen Warhound"
+  },
+  {
+    "zone_name": "Maldraxxus",
+    "zone_id": 1536,
+    "name": "Unfallen Warhound"
+  },
+  {
+    "zone_name": "Maldraxxus",
+    "zone_id": 1536,
+    "name": "Unfallen Warhound"
+  },
+  {
+    "zone_name": "Bastion",
+    "zone_id": 1533,
+    "name": "Lumbering Crystalback"
+  },
+  {
+    "zone_name": "Revendreth",
+    "zone_id": 1525,
+    "name": "TombBurster"
+  },
+  {
+    "zone_name": "Spires of Ascension",
+    "zone_id": 1693,
+    "name": "Azules"
+  },
+  {
+    "zone_name": "Bastion",
+    "zone_id": 1533,
+    "name": "Corrupted Cloud feather"
+  },
+  {
+    "zone_name": "Maldraxxus",
+    "zone_id": 1536,
+    "name": "Tahonta"
+  },
+  {
+    "zone_name": "Bastion",
+    "zone_id": 1533,
+    "name": "Kala"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "Deifir the Untamed"
+  },
+  {
+    "zone_name": "Bastion",
+    "zone_id": 1533,
+    "name": "Spiritwing Emperor"
+  },
+  {
+    "zone_name": "Bastion",
+    "zone_id": 1533,
+    "name": "Argentwing Patriarch"
+  },
+  {
+    "zone_name": "Bastion",
+    "zone_id": 1533,
+    "name": "Basilofos,KingoftheHill"
+  },
+  {
+    "zone_name": "Bastion",
+    "zone_id": 1533,
+    "name": "Gorgebeak"
+  },
+  {
+    "zone_name": "Maldraxxus",
+    "zone_id": 1536,
+    "name": "TrainedHellhound"
+  },
+  {
+    "zone_name": "Bastion",
+    "zone_id": 1533,
+    "name": "Cloudfeather Guardian"
+  },
+  {
+    "zone_name": "Revendreth",
+    "zone_id": 1525,
+    "name": "SoulstalkerAlpha"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "OldArdeite"
+  },
+  {
+    "zone_name": "Bastion",
+    "zone_id": 1533,
+    "name": "Baedos"
+  },
+  {
+    "zone_name": "Revendreth",
+    "zone_id": 1525,
+    "name": "Hopecrusher"
+  },
+  {
+    "zone_name": "Bastion",
+    "zone_id": 1533,
+    "name": "Kala"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "Fortified Dessicator"
+  },
+  {
+    "zone_name": "Maldraxxus",
+    "zone_id": 1536,
+    "name": "Galescreamer Elder"
+  },
+  {
+    "zone_name": "Maldraxxus",
+    "zone_id": 1536,
+    "name": "Ragewing"
+  },
+  {
+    "zone_name": "Maldraxxus",
+    "zone_id": 1536,
+    "name": "Boneweave Rampager"
+  },
+  {
+    "zone_name": "Maldraxxus",
+    "zone_id": 1536,
+    "name": "Ravenomous"
+  },
+  {
+    "zone_name": "Maldraxxus",
+    "zone_id": 1536,
+    "name": "Pesticide"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "Gormbore"
+  },
+  {
+    "zone_name": "The Maw",
+    "zone_id": 1543,
+    "name": "Dread Soulseeker"
+  },
+  {
+    "zone_name": "Bastion",
+    "zone_id": 1533,
+    "name": "Nemaeus"
+  },
+  {
+    "zone_name": "Maldraxxus",
+    "zone_id": 1536,
+    "name": "Sister Chelicerae"
+  },
+  {
+    "zone_name": "Maldraxxus",
+    "zone_id": 1536,
+    "name": "Deathfang"
+  },
+  {
+    "zone_name": "Maldraxxus",
+    "zone_id": 1536,
+    "name": "Deathfang"
+  },
+  {
+    "zone_name": "Maldraxxus",
+    "zone_id": 1536,
+    "name": "Bloodtusk Ancient"
+  },
+  {
+    "zone_name": "Bastion",
+    "zone_id": 1533,
+    "name": "Cloudtail"
+  },
+  {
+    "zone_name": "Bastion",
+    "zone_id": 1533,
+    "name": "Sigilback"
+  },
+  {
+    "zone_name": "Bastion",
+    "zone_id": 1533,
+    "name": "Aethon"
+  },
+  {
+    "zone_name": "Bastion",
+    "zone_id": 1533,
+    "name": "Darkwing"
+  },
+  {
+    "zone_name": "Maldraxxus",
+    "zone_id": 1536,
+    "name": "Gristlebeak"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "Egg-TenderLeh'go"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "EngorgedBorer"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "TheSlumberingEmperor"
+  },
+  {
+    "zone_name": "Bastion",
+    "zone_id": 1533,
+    "name": "Sundancer"
+  },
+  {
+    "zone_name": "The Maw",
+    "zone_id": 1543,
+    "name": "SkitteringBroodmother"
+  },
+  {
+    "zone_name": "Bastion",
+    "zone_id": 1533,
+    "name": "BehemothGlimmerfly"
+  },
+  {
+    "zone_name": "Revendreth",
+    "zone_id": 1525,
+    "name": "Doom"
+  },
+  {
+    "zone_name": "Revendreth",
+    "zone_id": 1525,
+    "name": "Justice"
+  },
+  {
+    "zone_name": "Maldraxxus",
+    "zone_id": 1536,
+    "name": "BloodtuskAncient"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "Dambala"
+  },
+  {
+    "zone_name": "Ardenweald",
+    "zone_id": 1565,
+    "name": "Dambala"
+  }
+]
