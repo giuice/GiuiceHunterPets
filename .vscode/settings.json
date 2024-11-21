@@ -59,6 +59,7 @@
 		"StableActivePetButtonTemplateMixin",
 		"STABLE_SECONDARY_PET_DISABLED",
 		"GameTooltip_AddErrorLine",
-		"StableStabledPetButtonTemplateMixin"
+		"StableStabledPetButtonTemplateMixin",
+		"ModelSceneMixin"
 	]
 }
