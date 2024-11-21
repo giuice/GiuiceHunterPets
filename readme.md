@@ -7,9 +7,9 @@ GiuiceHunterPets is a World of Warcraft addon that lists all hunter pets in a cu
 ## Features
 
 - Displays a list of all hunter pets with their name, level, and active status.
-- Displays a list of all battle pets with their name and level.
+- ~~Displays a list of all battle pets with their name and level.~~ (not implemented yet maybe in future versions)
 - Customizable frame with scroll functionality.
-- Toggle the pet list frame with a slash command.
+- Minimap button to open/close the petlist window.
 
 ## Installation
 
@@ -27,31 +27,27 @@ GiuiceHunterPets is a World of Warcraft addon that lists all hunter pets in a cu
 - `GiuiceHunterPets.lua`: Main Lua file for the hunter pets functionality.
 - `GiuiceBattlePets.lua`: Lua file for the battle pets functionality.
 - `GiuiceHunterPets.toc`: Table of contents file for the addon.
+- `GiuiceHunterPets.xml`: Frames, button templates
+- `GiuiceHunterPetListItemMixin.lua`: Scripts for the templates
+- `GiuiceTooltipEnhacement.lua`: Show pet info on tooltips, if it's tamable, family exotic...
+- `Data.lua`: Some data that helps detecting pets
 - `libs/`: Directory containing required libraries.
+
+## Acknowledgments
+
+- **Aspect of the Hunter Addon**: Some data and functionalities are inspired by the [Aspect of the Hunter](https://www.curseforge.com/wow/addons/aspect-of-the-hunter) addon. Special thanks for their valuable contributions to the community.
+
+## Donations
+
+If you find this addon helpful, consider supporting its development:
+
+[![Pay me a Donut!](https://img.shields.io/badge/PayPal-Donate-yellow.svg)](https://www.paypal.com/donate/?hosted_button_id=9HWWVZPE8EKLU)
+
 
 ## Dependencies
 
-- AceGUI-3.0
-- LibSharedMedia-3.0
+- Ace(CallbackHandler, LibDataBroker,LibDBIcon, LibStub)
 
-## Code Structure
-
-### GiuiceHunterPets.lua
-
-- Creates the main frame for displaying hunter pets.
-- Defines the `ListHunterPets` function to list all hunter pets.
-- Sets up the slash command `/hunterpets` to toggle the hunter pet list frame.
-
-### GiuiceBattlePets.lua
-
-- Creates the main frame for displaying battle pets.
-- Defines the `ListAllPets` function to list all battle pets.
-- Sets up the slash command `/petlist` to toggle the battle pet list frame.
-
-### GiuiceHunterPets.toc
-
-- Specifies metadata for the addon.
-- Lists the Lua files and dependencies required by the addon.
 
 ## License
 
@@ -63,6 +59,4 @@ Giuliano Lemes @giuice@gmail.com
 
 ## Notes
 
-- Ensure that the `Interface` version in the `.toc` file matches the current WoW version.
-- Customize the frame size and position as needed.
-git
+[GitHub](https://github.com/giuice/GiuiceHunterPets)

@@ -3,19 +3,28 @@
 ## Author: Giuice(Giuliano Lemes)
 ## Version: 1.0
 ## Notes: Lists all hunter pets in a custom frame.
-## SavedVariables: GiuiceHunterPetsDB
+## SavedVariables: GHP_SavedVars
 ## IconTexture: Interface\AddOns\GiuiceHunterPets\huntericon.blp  
 ## Icon: huntericon.blp
 
 # Libraries
 Libs\LibStub\LibStub.lua
 Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+Libs\AceLocale-3.0\AceLocale-3.0.lua
 Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
 Libs\LibDBIcon-1.0\LibDBIcon-1.0.lua
+Libs\HereBeDragons\HereBeDragons-2.0.lua
+Libs\HereBeDragons\HereBeDragons-Pins-2.0.lua
 
+# Locales
+Locales\locales.xml
+# SavedVars
+SavedVars.lua
 # Templates
 GiuiceHunterPets.xml
 GiuiceHunterPetListItemMixin.lua
+GiuiceWorldMapButton.lua
+Settings.lua
 
 # Core files
 Localization.lua
