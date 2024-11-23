@@ -3,75 +3,10 @@ local HBD = LibStub("HereBeDragons-2.0");
 local petPins = LibStub("HereBeDragons-Pins-2.0");
 if (select(3, UnitClass("player")) ~= 3) then return end
 
+-- Create model frame once
+local petTooltipModel = CreateFrame("PlayerModel", "GHPTooltipModel", GameTooltip)
+petTooltipModel:Hide()
 
-local function CreateFamilyInfoWindowOld()
-    -- Create main frame if it doesn't exist
-    if not GHP.familyInfoFrame then
-        local frame = CreateFrame("Frame", "GHPFamilyInfoFrame", UIParent, "TooltipBorderBackdropTemplate")
-        frame:SetFrameStrata("FULLSCREEN_DIALOG")
-        frame:SetSize(400, 300)
-
-        --create close button Here
-        frame.closeButton = CreateFrame("Button", nil, frame, "UIPanelCloseButton")
-        frame.closeButton:SetPoint("TOPRIGHT", 0, 0)
-        frame.closeButton:SetScript("OnClick", function()
-            frame:Hide()
-        end)
-
-
-        -- Title
-        frame.title = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge2")
-        frame.title:SetPoint("TOPLEFT", 15, -15)
-
-        -- Pet Type
-        frame.petType = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
-        frame.petType:SetPoint("TOPLEFT", frame.title, "BOTTOMLEFT", 0, -10)
-
-        frame.modelViewer = CreateFrame("ModelScene", nil, frame, "PanningModelSceneMixinTemplate") -- Create the model frame in the right position
-        frame.modelViewer:SetPoint("TOPLEFT", frame, "TOPLEFT", 140, -80)
-        frame.modelViewer:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -40, 20)
-
-
-        -- Diet
-        frame.diet = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
-        frame.diet:SetPoint("TOPLEFT", frame.petType, "BOTTOMLEFT", 0, -5)
-
-        -- Exotic Status
-        frame.exotic = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
-        frame.exotic:SetPoint("TOPLEFT", frame.diet, "BOTTOMLEFT", 0, -5)
-
-        -- class Status
-        frame.class = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
-        frame.class:SetPoint("TOPLEFT", frame.exotic, "BOTTOMLEFT", 0, -5)
-
-        -- Abilities Header
-        frame.abilitiesHeader = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge2")
-        frame.abilitiesHeader:SetText("Abilities")
-        frame.abilitiesHeader:SetPoint("TOPLEFT", frame.exotic, "BOTTOMLEFT", 0, -15)
-
-        -- Abilities Container
-        frame.abilities = CreateFrame("Frame", nil, frame)
-        frame.abilities:SetPoint("TOPLEFT", frame.abilitiesHeader, "BOTTOMLEFT", 0, -5)
-        frame.abilities:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -15, 15)
-
-        -- Style the frame
-        frame:SetBackdropBorderColor(0.6, 0.6, 0.6)
-        frame:SetBackdropColor(0, 0, 0, 0.8)
-
-        -- Modal handling
-        frame:SetScript("OnShow", function(self)
-            GameTooltip:Hide() -- Hide the tooltip when opening
-        end)
-
-        frame:SetScript("OnHide", function(self)
-
-        end)
-
-        GHP.familyInfoFrame = frame
-    end
-
-    return GHP.familyInfoFrame
-end
 
 
 local function CreateFamilyInfoWindow()
@@ -153,71 +88,6 @@ local function CreateFamilyInfoWindow()
 end
 
 
-
-local function SetModelViewerOld(frame, displayId)
-    -- Clear previous scene and actors
-    frame.modelViewer:ClearScene()
-
-    -- Set up camera parameters
-    frame.modelViewer:SetCameraPosition(0, 0, 20) -- Adjust Z to move camera back
-    frame.modelViewer:SetCameraFieldOfView(0.9)   -- Narrower FOV to reduce perspective distortion
-    frame.modelViewer:SetCameraNearClip(0.1)      -- Closer near clip plane
-    frame.modelViewer:SetCameraFarClip(100)       -- Further far clip plane
-
-
-    -- Use proper transition with camera settings
-    local forceSceneChange = true
-    frame.modelViewer:TransitionToModelSceneID(718,
-        CAMERA_TRANSITION_TYPE_IMMEDIATE,
-        CAMERA_MODIFICATION_TYPE_DISCARD,
-        forceSceneChange
-    )
-
-    local actor = frame.modelViewer:GetActorByTag("pet")
-    if not actor then
-        actor = frame.modelViewer:CreateActorFromScene(displayId) -- Better actor creation
-        if not actor then
-            actor = frame.modelViewer:AcquireActor()              -- Fallback
-        end
-    end
-
-    if actor then
-        actor:SetModelByCreatureDisplayID(displayId)
-        
-        -- Center the actor in the safe area
-        actor:SetPosition(0, 0, -2)
-        -- Set initial scale that works with the insets
-        actor:SetScale(0.7)
-        actor:Show()
-        
-        frame.modelViewer:AddOrUpdateDropShadow(actor, 1.0)
-    end
-
-    -- Control frame (create once)
-    if not frame.modelViewer.ControlFrame then
-        local controlFrame = CreateFrame("Frame", nil, frame.modelViewer, "ModelSceneControlFrameTemplate")
-        controlFrame:SetPoint("BOTTOM", frame.modelViewer, "BOTTOM", 0, 10)
-        controlFrame:SetModelScene(frame.modelViewer)
-        frame.modelViewer.ControlFrame = controlFrame
-        -- Mouse over events for control frame
-        frame.modelViewer:SetScript("OnEnter", function(self)
-            self.ControlFrame:Show()
-        end)
-        frame.modelViewer:SetScript("OnLeave", function(self)
-            self.ControlFrame:Hide()
-        end)
-    end
-
-    -- Zoom via actor scaling
-    frame.modelViewer:SetScript("OnMouseWheel", function(self, delta)
-        local zoomChange = delta * 0.1
-        local actorScale = actor and actor:GetScale() or 1
-        actorScale = math.max(0.1, math.min(3.0, actorScale + zoomChange))
-        if actor then actor:SetScale(actorScale) end
-    end)
-
-    frame:Show()
-end
 
 local function SetModelViewer(frame, displayId)
     -- Clear previous scene and actors
@@ -369,6 +239,35 @@ local pinSettingsTableOptions = {
     [3] = "elitepets",
     [4] = "nopets"
 }
+
+
+local function SetupTooltipModel(displayId)
+     -- Get the diet text line from tooltip
+     
+    --GameTooltip:SetPadding(60, 10)
+    local tooltipWidth = GameTooltip:GetWidth()
+    local tooltipHeight = GameTooltip:GetHeight()
+    print("tooltipWidth: " .. tooltipWidth, "tooltipHeight: " .. tooltipHeight)
+    --petTooltipModel:SetSize(tooltipWidth / 1.5, tooltipHeight*4)
+    petTooltipModel:SetSize(130, 130)
+    petTooltipModel:SetDisplayInfo(displayId)
+    petTooltipModel:SetFrameStrata("TOOLTIP")
+    -- Position to right of tooltip content
+    --petTooltipModel:ClearAllPoints()
+    --petTooltipModel:SetPoint("TOPRIGHT",-4,  -40)
+    petTooltipModel:SetPoint("TOPRIGHT", GameTooltip, "TOPRIGHT", -4, -30)
+    --petTooltipModel:SetPoint("TOPLEFT", GameTooltip, "TOPRIGHT", -10, 0)
+    petTooltipModel:SetFacing(20 * math.pi / 180)
+    petTooltipModel:Show()
+end
+
+local function GetTooltipPaddingForDiet(dietText)
+    local baseLength = 70  -- Length that works for "Diet: Fish, Bread, Fungus, Fruit"
+    local currentLength = #("Diet: " .. dietText)
+    local padding = math.max(0, baseLength - currentLength)
+    return string.rep(" ", padding)
+end
+
 local function DisplayPetIcons()
     if not GHP_SavedVars.worldMapPins or GHP_SavedVars.worldMapPins == 4 then
         return
@@ -404,16 +303,19 @@ local function DisplayPetIcons()
                 local familyName = petData.family[2];
 
                 -- 4. Create pin frame
-                local pin = CreateFrame("Frame", nil, WorldMapFrame)
+                --local pin = CreateFrame("Frame", nil, WorldMapFrame)
+                local pin = CreateFrame("Button", nil, WorldMapFrame:GetCanvas())
+                pin:SetFrameLevel(2800)
                 pin:SetSize(24, 24)
 
                 -- 5. Setup pin texture
                 local texture = pin:CreateTexture(nil, "OVERLAY")
                 texture:SetAllPoints()
-
-                local texturePath = "Interface\\AddOns\\GiuiceHunterPets\\icons\\PetIcons\\32x32\\" ..
-                    familyName .. ".blp"
+                local path = "Interface\\AddOns\\GiuiceHunterPets\\icons\\PetIcons\\32x32\\"
+                local texturePath = path .. familyName .. ".blp"
+                local highlightTexture = path .. "Highlight.blp"	
                 texture:SetTexture(texturePath)
+                pin:SetHighlightTexture(highlightTexture, "ADD");
                 if not texture:GetTexture() then
                     local familyAtlasName = "Interface\\Icons\\Ability_Hunter_Pet_" ..
                         familyName:gsub("(%a)([%w_']*)", function(first, rest)
@@ -421,39 +323,56 @@ local function DisplayPetIcons()
                         end):gsub("%s+", "")
 
                     texture:SetTexture(familyAtlasName)
-                    if not texture:GetTexture() then
-                        texturePath = "Interface\\AddOns\\GiuiceHunterPets\\icons\\PetIcons\\32x32\\Unknown.blp"
-                        texture:SetTexture(texturePath)
-                    end
+                    -- if not texture:GetTexture() then
+                    --     texturePath = "Interface\\AddOns\\GiuiceHunterPets\\icons\\PetIcons\\32x32\\Unknown.blp"
+                    --     texture:SetTexture(texturePath)
+                    -- end
                 end
 
-                --texture:SetTexture(texturePath)
+                -- Modify DisplayPetIcons OnEnter script
                 pin:SetScript("OnEnter", function(self)
                     GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-                    GameTooltip:SetText(petData.name)
+                    GameTooltip:SetMinimumWidth(350)
+                    -- Title with class color
+                    local classColor = petData.class == "Elite" and "|cFFFFD100" or "|cFFFFFFFF"
+                    GameTooltip:SetText(classColor .. petData.name .. " (" .. petData.family[2] .. ")|r")
+                    
+                    -- Basic info
+                    GameTooltip:AddLine(string.format("Level %d-%d", petData.minlevel, petData.maxlevel), 1, 1, 1)
+                    GameTooltip:AddLine(petData.class, 0.7, 0.7, 0.7)
+                    
+                    -- Family info
                     local familyInfo = GHP.FAMILY_DATA[petData.family[1]]
-                    GameTooltip:AddLine(" ")
-                    GameTooltip:AddLine("|cFFFFD100Family:|r " .. petData.family[2], 1, 1, 1)
-                    -- Add any additional family info if available
-                    if familyInfo.specialization then
-                        GameTooltip:AddLine("|cFFFFD100Specialization:|r " .. familyInfo.specialization, 1, 1, 1)
-                    end
-                    -- Add hint for abilities
-                    if familyInfo.abilities and #familyInfo.abilities > 0 then
+                    if familyInfo then
                         GameTooltip:AddLine(" ")
-                        GameTooltip:AddLine("|cFFFFD100Abilities:|r Click to view", 0.5, 0.8, 1)
+                        GameTooltip:AddLine("Type: " .. familyInfo.pet_type, 1, 1, 1)
+                        local dietPadding = GetTooltipPaddingForDiet(familyInfo.diet)
+                        GameTooltip:AddLine("Diet: " .. familyInfo.diet .. dietPadding, 1, 1, 1)
+                        if familyInfo.exotic == 1 then
+                            GameTooltip:AddLine("Exotic Pet", 1, 0.8, 0)
+                        end
+                        
+                        -- Abilities
+                        if familyInfo.abilities then
+                            --GameTooltip:AddLine("                                                                                                 ")
+                            GameTooltip:AddLine("Abilities:")
+                            for _, ability in ipairs(familyInfo.abilities) do
+                                local spellInfo = C_Spell.GetSpellInfo(ability.spell_id)
+                                if spellInfo then
+                                    GameTooltip:AddLine(ability.name:gsub("^%l", string.upper), 1, 1, 1)
+                                    GameTooltip:AddTexture(spellInfo.iconID)
+                                end
+                            end
+                        end
                     end
+                    
+                    SetupTooltipModel(petData.displayId)
                     GameTooltip:Show()
                 end)
 
                 pin:SetScript("OnLeave", function(self)
                     GameTooltip:Hide()
-                end)
-
-                pin:SetScript("OnMouseDown", function(self)
-                    GameTooltip:Hide()
-                    local familyData = GHP.FAMILY_DATA[petData.family[1]]
-                    ShowFamilyInfoWindow(familyData, petData, self)
+                    petTooltipModel:Hide()
                 end)
 
                 -- 7. Add the pin using HBD-Pins
