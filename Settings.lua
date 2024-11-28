@@ -49,10 +49,8 @@ do
     )
 
     Settings.CreateDropdown(category, setting, GetOptions, tooltip)
-    --Settings.SetOnValueChangedCallback(variableKey, GHP.OnWorldMapPinsSettingChanged)
-
+    
     setting:SetValueChangedCallback(function(setting, value)
-        --GHP_SavedVars.worldMapPins = value -- Ensure the value is saved
         GHP.OnWorldMapPinsSettingChanged(setting, value)
     end)
 end
@@ -60,41 +58,44 @@ end
 
 
 do
-    -- Tooltips checkbox
-    local name = "Enable Enhanced Tooltips"
-    local variable = "GHP_Tooltips"
-    local variableKey = "tooltips"
-    local defaultValue = true
-
-    local setting = Settings.RegisterAddOnSetting(category,
-        variable,
-        variableKey,
-        GHP_SavedVars, -- Pass the table here
-        type(defaultValue),
-        name,
-        defaultValue)
-
-    local tooltip = "Show additional information in tooltips for tameable pets"
-    Settings.CreateCheckbox(category, setting, tooltip)
-end
-
-do
     -- Minimap Pins checkbox
     local name = "Show Pet Pins on Minimap"
     local variable = "GHP_MinimapPins"
     local variableKey = "minimapPins"
+    local variableTbl = GHP_SavedVars -- Pass the table here
     local defaultValue = true
 
-    local setting = Settings.RegisterAddOnSetting(category,
-        variable,
+    local function GetValue()
+        return GHP_SavedVars.minimapPins or defaultValue
+    end
+
+    local function SetValue(value)
+        GHP_SavedVars.minimapPins = value
+    end
+
+    local setting = Settings.RegisterProxySetting(category,
         variableKey,
-        GHP_SavedVars, -- Pass the table here
         type(defaultValue),
         name,
-        defaultValue)
+        defaultValue,
+        GetValue,
+        SetValue
+    )
+
+    -- local setting = Settings.RegisterAddOnSetting(category,
+    --     variableKey,    -- Key in the saved variables table
+    --     variable,       -- Variable name 
+    --     variableTbl,    -- Table to store the setting
+    --     type(defaultValue), -- Type
+    --     name,           -- Display name
+    --     defaultValue)   -- Default value
 
     local tooltip = "Enable or disable showing nearby tameable pets on the minimap"
+    setting:SetValueChangedCallback(function(setting, value)
+        GHP.OnMinimapPinsSettingChanged(setting, value)
+    end)
     Settings.CreateCheckbox(category, setting, tooltip)
+    
 end
 
 -- Register the category

@@ -242,12 +242,7 @@ local pinSettingsTableOptions = {
 
 
 local function SetupTooltipModel(displayId)
-     -- Get the diet text line from tooltip
-     
-    --GameTooltip:SetPadding(60, 10)
-    local tooltipWidth = GameTooltip:GetWidth()
-    local tooltipHeight = GameTooltip:GetHeight()
-    print("tooltipWidth: " .. tooltipWidth, "tooltipHeight: " .. tooltipHeight)
+    
     --petTooltipModel:SetSize(tooltipWidth / 1.5, tooltipHeight*4)
     petTooltipModel:SetSize(130, 130)
     petTooltipModel:SetDisplayInfo(displayId)
@@ -266,6 +261,108 @@ local function GetTooltipPaddingForDiet(dietText)
     local currentLength = #("Diet: " .. dietText)
     local padding = math.max(0, baseLength - currentLength)
     return string.rep(" ", padding)
+end
+
+local function getMinimapData()
+    
+    local frameLevel = Minimap:GetFrameLevel() + 5
+    local frameStrata = Minimap:GetFrameStrata()
+    return frameLevel, frameStrata
+end
+
+local function showToolTip(pin, petName)
+    local tooltip = GameTooltip
+    tooltip:SetOwner(pin, "ANCHOR_TOP")
+    tooltip:SetText(petName)
+    tooltip:Show()
+end
+
+local function ClearMinimapPins()
+    petPins:RemoveAllMinimapIcons("GiuiceHunterPetsMinimapIcons")
+end
+
+local function getMinimapButton(name, familyName, mapId, frameStrata, frameLevel, x, y)
+    if not Minimap:IsVisible() then return end
+    if not mapId then return end
+
+    -- Create unique pin ID
+    local pinId = "GHP_Pin_" .. name .. x .. y
+    local pinFrame = CreateFrame("Button", pinId, Minimap)
+    
+    -- Frame setup
+    pinFrame:EnableMouse(true)
+    pinFrame:SetSize(16, 16) -- Consistent size
+    pinFrame:SetFrameStrata(frameStrata)
+    pinFrame:SetFrameLevel(frameLevel)
+    
+    -- Texture setup
+    local texture = pinFrame:CreateTexture(nil, "OVERLAY")
+    texture:SetTexture("Interface\\AddOns\\GiuiceHunterPets\\icons\\PetIcons\\32x32\\" .. familyName .. ".blp")
+    texture:SetAllPoints()
+    texture:SetTexCoord(0, 1, 0, 1)
+    
+    -- Mouse interactions
+    pinFrame:SetScript("OnEnter", function(pin)
+        showToolTip(pin, name)
+    end)
+    pinFrame:SetScript("OnLeave", function()
+        GameTooltip:Hide()
+    end)
+
+    -- Add to minimap
+    petPins:AddMinimapIconMap("GiuiceHunterPetsMinimapIcons", pinFrame, mapId, x, y, true)
+    
+    return pinFrame
+end
+
+
+local function UpdateMinimapPins()
+    -- Check settings
+    if not GHP_SavedVars.minimapPins then
+        ClearMinimapPins()
+        return
+    end
+
+    if not Minimap:IsVisible() then return end
+
+    -- Get player's current map
+    local playerMapID = HBD:GetPlayerZone()
+    if not playerMapID then return end
+
+    -- Clear existing pins
+    ClearMinimapPins()
+
+    -- Get minimap frame data
+    local frameLevel, frameStrata = getMinimapData()
+
+    -- Filter pets based on world map settings
+    local filteredPets = {}
+    for _, petData in ipairs(GHP.pet_by_zones) do
+        if petData.zoneID == playerMapID then
+            local setting = pinSettingsTableOptions[GHP_SavedVars.worldMapPins or 1]
+            if (setting == "rarepets" and petData.class == "Rare") or
+               (setting == "elitepets" and petData.class == "Elite") or
+               (setting == "allpets") then
+                table.insert(filteredPets, petData)
+            end
+        end
+    end
+
+    -- Create minimap pins
+    for _, petData in ipairs(filteredPets) do
+        for _, coords in ipairs(petData.coords) do
+            local x, y = unpack(coords)
+            getMinimapButton(
+                petData.name,
+                petData.family[2],
+                playerMapID,
+                frameStrata,
+                frameLevel,
+                x/100,
+                y/100
+            )
+        end
+    end
 end
 
 local function DisplayPetIcons()
@@ -411,8 +508,61 @@ GHP.OnWorldMapPinsSettingChanged = function(setting, value)
     end
     ManageWorldMapEvents(value)
     -- If enabled and map is currently shown, refresh pins
-    if value and value ~= 4 and WorldMapFrame:IsVisible() then
+    if value and value ~= 4 then --and WorldMapFrame:IsVisible() then
         DisplayPetIcons()
+        UpdateMinimapPins()
+    end
+end
+
+-- Update minimap event handlers with additional events
+local minimapFrame = CreateFrame("Frame")
+minimapFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
+minimapFrame:RegisterEvent("ZONE_CHANGED")
+minimapFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+minimapFrame:RegisterEvent("ZONE_CHANGED_INDOORS")
+minimapFrame:RegisterEvent("MINIMAP_UPDATE_ZOOM")
+minimapFrame:RegisterEvent("ADDON_LOADED")
+
+minimapFrame:SetScript("OnEvent", function(self, event, ...)
+    if event == "ADDON_LOADED" and ... == "GiuiceHunterPets" then
+        -- Initial setup
+        if GHP_SavedVars.minimapPins then
+            print("Minimap pins enabled")
+            UpdateMinimapPins()
+        end
+    elseif event == "PLAYER_ENTERING_WORLD" then
+        -- Delay slightly to ensure map data is ready
+        C_Timer.After(4, function()
+            if GHP_SavedVars.minimapPins then
+                UpdateMinimapPins()
+            end
+        end)
+    else
+        -- All other events
+        if GHP_SavedVars.minimapPins then
+            UpdateMinimapPins()
+        end
+    end
+end)
+
+-- Add minimap show/hide hooks
+Minimap:HookScript("OnShow", function()
+    if GHP_SavedVars.minimapPins then
+        UpdateMinimapPins()
+    end
+end)
+
+Minimap:HookScript("OnHide", function()
+    ClearMinimapPins()
+end)
+
+-- Update minimap setting handler
+function GHP.OnMinimapPinsSettingChanged(setting, value)
+    GHP_SavedVars["minimapPins"] = value
+    if value then
+        UpdateMinimapPins()
+    else
+        ClearMinimapPins()
     end
 end
 
