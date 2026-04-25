@@ -67,7 +67,8 @@ local function CreateMainFrame()
     -- Add hunter icon
     frame.portraitIcon = "Interface\\Icons\\ClassIcon_Hunter"
      -- Portrait and title (correct method)
-    SetPortraitToTexture(frame.PortraitContainer.portrait, "Interface\\Icons\\ClassIcon_Hunter")
+    frame:SetPortraitToAsset("Interface\\Icons\\ClassIcon_Hunter") 
+    --SetPortraitToTexture(frame.PortraitContainer.portrait, "Interface\\Icons\\ClassIcon_Hunter")
         -- Title text
     frame.TitleContainer.TitleText:SetText("Giuice's hunter pets viewer")
     

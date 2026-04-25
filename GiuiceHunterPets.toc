@@ -1,4 +1,4 @@
-## Interface: 110007 
+## Interface: 11508, 11507, 20505, 30405, 38001, 40402, 50503, 50502, 120001, 120005, 120000
 ## Title: GiuiceHunterPets
 ## Author: Giuice(Giuliano Lemes)
 ## Version: 1.0

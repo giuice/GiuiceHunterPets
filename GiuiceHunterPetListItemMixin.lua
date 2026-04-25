@@ -31,7 +31,8 @@ local function IsActivePetSlotUnlocked(activePetSlot)
     if activePetSlot == 6 then
         return true
     end
-	return IsSpellKnown(CALL_PET_SPELL_IDS[activePetSlot]);
+    return C_SpellBook.IsSpellInSpellBook(CALL_PET_SPELL_IDS[activePetSlot]);
+	-- return IsSpellKnown(CALL_PET_SPELL_IDS[activePetSlot]);
 end
 
 local function GetBeastmasterSecondaryPet()

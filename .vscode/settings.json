@@ -7,7 +7,6 @@
 		"ModelSceneMixin",
 		"GameTooltip",
 		"SlashCmdList",
-		"CreateFromMixins",
 		"STABLE_SECONDARY_PET_DISABLED",
 		"GameFontHighlightMed2",
 		"GameFontNormalSmall2",
@@ -28,10 +27,10 @@
 		"MapCanvasDataProviderMixin",
 		"MapCanvasPinMixin",
 		"CreateUnsecuredRegionPoolInstance",
-		"Mixin",
 		"CreateFramePool",
 		"AddonCompartmentFrame",
-		"WOW_PROJECT_MAINLINE"
+		"WOW_PROJECT_MAINLINE",
+		"Lerp"
 	],
 	"Lua.runtime.version": "Lua 5.1",
 	"Lua.runtime.builtin": {
@@ -46,7 +45,10 @@
 		"utf8": "disable"
 	},
 	"Lua.workspace.library": [
-		"~\\.vscode\\extensions\\ketho.wow-api-0.17.8\\Annotations"
+		"~/.vscode/extensions/ketho.wow-api-0.22.3/Annotations/Core"
 	],
-	"CodeGPT.apiKey": "Ollama"
+	"CodeGPT.apiKey": "Ollama",
+	"Lua.diagnostics.disable": [
+		"assign-type-mismatch"
+	]
 }
