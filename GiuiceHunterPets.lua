@@ -1,8 +1,8 @@
 local addonName, GHP = ...
 
 -- Initialize addon table with necessary functions
-GHP.utils = {}
-GHP.frames = {}
+GHP.utils = GHP.utils or {}
+GHP.frames = GHP.frames or {}
 
 -- Check for Hunter class first
 if (select(3, UnitClass("player")) ~= 3) then return end
@@ -162,6 +162,15 @@ local function CreateMainFrame()
     end)
 
     frame.scrollChild = scrollChild
+
+    local emptyState = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+    emptyState:SetPoint("TOPLEFT", scrollFrame, "TOPLEFT", 16, -16)
+    emptyState:SetPoint("RIGHT", scrollFrame, "RIGHT", -16, 0)
+    emptyState:SetJustifyH("LEFT")
+    emptyState:SetText("")
+    emptyState:Hide()
+
+    frame.emptyState = emptyState
     frame.detailPanel = detailPanel
     frame:Hide()
 
@@ -179,49 +188,31 @@ end
 -- Function to update pet list
 function GHP.utils.UpdatePetList(frame, searchText)
     local scrollChild = frame.scrollChild
-    -- Clear existing contents
+
     for _, child in pairs({ scrollChild:GetChildren() }) do
         child:Hide()
         child:SetParent(nil)
     end
 
-    -- Get both stabled and active pets
-    local stabledPets = C_StableInfo.GetStabledPetList() --GHP.utils.GetAllPets()
+    local stabledPets = C_StableInfo.GetStabledPetList()
+    local activePets = C_StableInfo.GetActivePetList()
+    local state = GHP.utils.GetStablePetListState(stabledPets, activePets)
+    local filteredPets = GHP.utils.FilterStablePets(state.pets, searchText, frame.searchType())
 
-
-    if not stabledPets then
-        print("No pets in stable.")
-        return
-    end
-
-    -- Filter pets based on search
-    local filteredPets = stabledPets
-    if searchText and searchText ~= "" then
-        searchText = searchText:lower()
-        filteredPets = {}
-        local searchType = frame.searchType()
-
-        for _, pet in ipairs(stabledPets) do
-            local match = false
-            if searchType == "name" then
-                match = pet.name:lower():find(searchText, 1, true) ~= nil
-            elseif searchType == "family" then
-                match = pet.familyName:lower():find(searchText, 1, true) ~= nil
-            elseif searchType == "level" then
-                match = tostring(pet.level):find(searchText, 1, true) ~= nil
-            end
-
-            if match then
-                table.insert(filteredPets, pet)
-            end
+    if frame.emptyState then
+        if state.message and #filteredPets == 0 then
+            frame.emptyState:SetText(state.message)
+            frame.emptyState:Show()
+        else
+            frame.emptyState:Hide()
         end
     end
 
     local previousElement
     local totalHeight = 0
 
-    for index, petInfo in ipairs(filteredPets) do
-        local petContainer = GHP.utils.CreatePetEntry(scrollChild, petInfo) --CreateFrame("Frame", nil, scrollChild, BackdropTemplateMixin and "BackdropTemplate")
+    for _, petInfo in ipairs(filteredPets) do
+        local petContainer = GHP.utils.CreatePetEntry(scrollChild, petInfo)
         petContainer:SetSize(scrollChild:GetWidth() - 8, 70)
         if previousElement then
             petContainer:SetPoint("TOPLEFT", previousElement, "BOTTOMLEFT", 0, -2)
@@ -229,9 +220,9 @@ function GHP.utils.UpdatePetList(frame, searchText)
             petContainer:SetPoint("TOPLEFT", 0, 0)
         end
         previousElement = petContainer
+        totalHeight = totalHeight + 72
     end
 
-    -- Auto-select the first pet if available
     if #filteredPets > 0 then
         GHP.utils.ShowPetDetails(GHP.frames.mainFrame.detailPanel, filteredPets[1])
     end
@@ -246,6 +237,8 @@ function GHP.utils.ShowPetDetails(detailPanel, petInfo)
         child:SetParent(nil)
     end
 
+    local abilities = GHP.utils.GetPetDisplayAbilities(petInfo)
+
     local modelViewer = CreateFrame("ModelScene", nil, detailPanel, "PanningModelSceneMixinTemplate")
     modelViewer:SetPoint("TOPLEFT", detailPanel, "TOPLEFT", 20, -20)
     modelViewer:SetPoint("BOTTOMRIGHT", detailPanel, "BOTTOMRIGHT", -20, 20)
@@ -257,9 +250,9 @@ function GHP.utils.ShowPetDetails(detailPanel, petInfo)
     header:GetShadowOffset()
 
     -- Create abilities list
-    if petInfo.abilities and #petInfo.abilities > 0 then
+    if #abilities > 0 then
         local lastAbility
-        for i, abilityID in ipairs(petInfo.abilities) do
+        for i, abilityID in ipairs(abilities) do
             local ability = CreateFrame("Frame", nil, modelViewer)
             ability:SetSize(250, 22)
             
@@ -275,12 +268,12 @@ function GHP.utils.ShowPetDetails(detailPanel, petInfo)
             icon:SetPoint("LEFT", 0, 0)
             
             local spellInfo = C_Spell.GetSpellInfo(abilityID)
-            icon:SetTexture(spellInfo.iconID)
+            icon:SetTexture(spellInfo and spellInfo.iconID or "Interface\\Icons\\INV_Misc_QuestionMark")
 
             -- Create name text
             local name = ability:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
             name:SetPoint("LEFT", icon, "RIGHT", 8, 0)
-            name:SetText(spellInfo.name)
+            name:SetText(spellInfo and spellInfo.name or tostring(abilityID))
             name:SetJustifyH("LEFT")
 
             -- Setup tooltip
@@ -328,7 +321,12 @@ function GHP.utils.ShowPetDetails(detailPanel, petInfo)
 
     local lastLine = AddInfoLine("Family", petInfo.familyName)
     lastLine = AddInfoLine("Specialization", petInfo.specialization, lastLine)
-    lastLine = AddInfoLine("Diet", table.concat(C_StableInfo.GetStablePetFoodTypes(petInfo.slotID), ", "), lastLine)
+    local foodTypes
+    local ok, result = pcall(C_StableInfo.GetStablePetFoodTypes, petInfo.slotID)
+    if ok then
+        foodTypes = result
+    end
+    lastLine = AddInfoLine("Diet", foodTypes and table.concat(foodTypes, ", ") or "Unknown", lastLine)
     lastLine = AddInfoLine("Status", petInfo.isExotic and "Exotic" or "Normal", lastLine)
 
     -- Add background layer
@@ -399,7 +397,7 @@ local function InitializeAddon()
 
     eventFrame:SetScript("OnEvent", function(self, event)
         if mainFrame:IsShown() then
-            GHP.utils.UpdatePetList(mainFrame)
+            GHP.utils.UpdatePetList(mainFrame, mainFrame.searchBox:GetText())
         end
     end)
 

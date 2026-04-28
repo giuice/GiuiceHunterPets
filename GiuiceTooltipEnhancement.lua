@@ -26,15 +26,8 @@ local function IsInTameableList(creatureID)
         return false
     end
 
-    -- Since our table is an array of IDs, we need to iterate through it
-    for _, petData in ipairs(GHP.pet_by_zones) do
-        local npcId = petData["NpcId"]
-        if npcId == creatureID then
-            return true
-        end
-    end
-
-    return false
+    GHP.tameableCreatureIndex = GHP.tameableCreatureIndex or GHP.BuildTameableCreatureIndex(GHP.pet_by_zones)
+    return GHP.tameableCreatureIndex[creatureID] == true
 end
 
 -- Function to enhance tooltip
