@@ -1,3 +1,5 @@
 docs/Blizzard_StableUI.lua.md
 docs/Blizzard_StableUI.xml.md
 .worktrees/
+scrapper/generated/cache/
+scrapper/generated/refresh-manifest.json

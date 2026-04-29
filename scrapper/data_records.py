@@ -84,11 +84,11 @@ def source_tameable_rows(rows: list[dict[str, Any]]) -> list[TameablePetSourceRo
                 id=int(row["id"]),
                 name=str(row["name"]),
                 family=int(row.get("family") or 0),
-                classification=row.get("classification"),
+                classification=int(row["classification"]) if row.get("classification") is not None else None,
                 location=[int(value) for value in row.get("location", [])],
                 react=[int(value or 0) for value in row.get("react", [0, 0])],
-                minlevel=row.get("minlevel"),
-                maxlevel=row.get("maxlevel"),
+                minlevel=int(row["minlevel"]) if row.get("minlevel") is not None else None,
+                maxlevel=int(row["maxlevel"]) if row.get("maxlevel") is not None else None,
             )
         )
     return result
@@ -165,7 +165,7 @@ def _first_entry(entries: Any) -> dict[str, Any] | None:
 def _coords(mapper_entry: dict[str, Any]) -> tuple[tuple[float, float], ...]:
     coords = []
     for value in mapper_entry.get("coords", []):
-        if len(value) != 2:
+        if len(value) < 2:
             continue
         x = float(value[0])
         y = float(value[1])
