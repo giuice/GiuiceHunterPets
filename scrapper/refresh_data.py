@@ -79,7 +79,7 @@ def generate_pets(
     try:
         index_source = source_cache.get_text(HUNTER_PETS_URL, "pet-index")
     except SourceFetchError as error:
-        _write_lines(generated_dir / "pet-refresh-blockers.md", [str(error)])
+        _write_pet_blockers(generated_dir, [str(error)])
         return 1
     try:
         families = _listview_rows_from_source(
@@ -92,15 +92,12 @@ def generate_pets(
         )
     except ValueError as semantic_error:
         error = str(semantic_error)
-        _write_lines(generated_dir / "pet-refresh-blockers.md", [error])
+        _write_pet_blockers(generated_dir, [error])
         return 1
     if not families:
         error = f"No pet families found in pet index source: {index_source.url}"
         source_cache.invalidate(index_source.url, index_source.role, error)
-        _write_lines(
-            generated_dir / "pet-refresh-blockers.md",
-            [error],
-        )
+        _write_pet_blockers(generated_dir, [error])
         return 1
     if limit_families:
         families = families[:limit_families]
@@ -114,10 +111,7 @@ def generate_pets(
             try:
                 family_source = source_cache.get_text(family_url, "pet-family")
             except SourceFetchError as error:
-                _write_lines(
-                    generated_dir / "pet-refresh-blockers.md",
-                    [str(error)],
-                )
+                _write_pet_blockers(generated_dir, [str(error)])
                 return 1
             try:
                 tameable_rows = _listview_rows_from_source(
@@ -130,15 +124,12 @@ def generate_pets(
                 )
             except ValueError as semantic_error:
                 error = str(semantic_error)
-                _write_lines(generated_dir / "pet-refresh-blockers.md", [error])
+                _write_pet_blockers(generated_dir, [error])
                 return 1
             if not tameable_rows:
                 error = f"No tameable pets found for family {family.name}: {family_source.url}"
                 source_cache.invalidate(family_source.url, family_source.role, error)
-                _write_lines(
-                    generated_dir / "pet-refresh-blockers.md",
-                    [error],
-                )
+                _write_pet_blockers(generated_dir, [error])
                 return 1
             futures = [
                 executor.submit(_build_pet_record_from_source, family, tameable, source_cache)
@@ -148,7 +139,7 @@ def generate_pets(
                 try:
                     tameable, record = future.result()
                 except SourceFetchError as error:
-                    _write_lines(generated_dir / "pet-refresh-blockers.md", [str(error)])
+                    _write_pet_blockers(generated_dir, [str(error)])
                     return 1
                 if record is None:
                     skipped.append(f"{tameable.id} {tameable.name}: no mapper coordinates")
@@ -156,12 +147,12 @@ def generate_pets(
                 records.append(record)
 
     if not records:
-        _write_lines(generated_dir / "pet-refresh-blockers.md", skipped or ["No pet records validated."])
+        _write_pet_blockers(generated_dir, skipped or ["No pet records validated."])
         return 1
 
     errors = validate_pet_records(records)
     if errors:
-        _write_lines(generated_dir / "pet-validation-errors.md", errors)
+        _write_pet_validation_errors(generated_dir, errors)
         return 1
 
     _clear_lines(generated_dir / "pet-refresh-blockers.md")
@@ -196,7 +187,7 @@ def generate_stable_masters(
     try:
         search_source = source_cache.get_text(STABLE_MASTER_SEARCH_URL, "stable-master-search")
     except SourceFetchError as error:
-        _write_lines(generated_dir / "stable-master-blockers.md", [str(error)])
+        _write_stable_master_blockers(generated_dir, [str(error)])
         return 1
     try:
         raw_rows = _listview_rows_from_source(
@@ -208,18 +199,18 @@ def generate_stable_masters(
         )
     except ValueError as semantic_error:
         error = str(semantic_error)
-        _write_lines(generated_dir / "stable-master-blockers.md", [error])
+        _write_stable_master_blockers(generated_dir, [error])
         return 1
     if not raw_rows:
         error = f"No stable master rows found in search source: {search_source.url}"
         source_cache.invalidate(search_source.url, search_source.role, error)
-        _write_lines(generated_dir / "stable-master-blockers.md", [error])
+        _write_stable_master_blockers(generated_dir, [error])
         return 1
     rows = [row for row in raw_rows if "Stable Master" in str(row.get("tag", ""))]
     if not rows:
         error = f"No stable master rows found in search source: {search_source.url}"
         source_cache.invalidate(search_source.url, search_source.role, error)
-        _write_lines(generated_dir / "stable-master-blockers.md", [error])
+        _write_stable_master_blockers(generated_dir, [error])
         return 1
     try:
         rows_with_values = [
@@ -235,7 +226,7 @@ def generate_stable_masters(
     except SEMANTIC_SOURCE_ERRORS as parse_error:
         error = f"Malformed stable master search source: {search_source.url}: {parse_error}"
         source_cache.invalidate(search_source.url, search_source.role, error)
-        _write_lines(generated_dir / "stable-master-blockers.md", [error])
+        _write_stable_master_blockers(generated_dir, [error])
         return 1
     if limit:
         rows_with_values = rows_with_values[:limit]
@@ -252,11 +243,11 @@ def generate_stable_masters(
             _validate_mapper_data_for_locations(mapper_data, locations)
             record = build_stable_master_record(row, mapper_data)
         except SourceFetchError as error:
-            _write_lines(generated_dir / "stable-master-blockers.md", [str(error)])
+            _write_stable_master_blockers(generated_dir, [str(error)])
             return 1
         except SEMANTIC_SOURCE_ERRORS as parse_error:
             error = _malformed_mapper_source_error(source_cache, source, parse_error)
-            _write_lines(generated_dir / "stable-master-blockers.md", [str(error)])
+            _write_stable_master_blockers(generated_dir, [str(error)])
             return 1
         if record is None:
             skipped.append(f"{row.get('id')} {row.get('name')}: no valid stable master coordinates")
@@ -265,11 +256,11 @@ def generate_stable_masters(
 
     errors = validate_stable_master_records(records)
     if errors:
-        _write_lines(generated_dir / "stable-master-validation-errors.md", errors)
+        _write_stable_master_validation_errors(generated_dir, errors)
         return 1
 
     if not records:
-        _write_lines(generated_dir / "stable-master-blockers.md", skipped or ["No stable master records validated."])
+        _write_stable_master_blockers(generated_dir, skipped or ["No stable master records validated."])
         return 1
 
     _clear_lines(generated_dir / "stable-master-blockers.md")
@@ -496,6 +487,26 @@ def _malformed_mapper_source_error(source_cache: SourceCache, source, parse_erro
 
 def _clear_lines(path: Path) -> None:
     path.unlink(missing_ok=True)
+
+
+def _write_pet_blockers(generated_dir: Path, lines: list[str]) -> None:
+    _clear_lines(generated_dir / "pet-validation-errors.md")
+    _write_lines(generated_dir / "pet-refresh-blockers.md", lines)
+
+
+def _write_pet_validation_errors(generated_dir: Path, lines: list[str]) -> None:
+    _clear_lines(generated_dir / "pet-refresh-blockers.md")
+    _write_lines(generated_dir / "pet-validation-errors.md", lines)
+
+
+def _write_stable_master_blockers(generated_dir: Path, lines: list[str]) -> None:
+    _clear_lines(generated_dir / "stable-master-validation-errors.md")
+    _write_lines(generated_dir / "stable-master-blockers.md", lines)
+
+
+def _write_stable_master_validation_errors(generated_dir: Path, lines: list[str]) -> None:
+    _clear_lines(generated_dir / "stable-master-blockers.md")
+    _write_lines(generated_dir / "stable-master-validation-errors.md", lines)
 
 
 def _write_lines(path: Path, lines: list[str]) -> None:

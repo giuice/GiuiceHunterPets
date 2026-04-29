@@ -1460,6 +1460,47 @@ class RefreshDataCacheTest(unittest.TestCase):
         self.assertFalse((self.root / "pet-refresh-blockers.md").exists())
         self.assertFalse((self.root / "pet-validation-errors.md").exists())
 
+    def test_pet_blocker_failure_clears_stale_validation_artifact(self):
+        (self.root / "pet-validation-errors.md").write_text("- stale validation\n", encoding="utf-8")
+        cache = SourceCache(
+            self.cache_dir,
+            self.manifest_path,
+            fetcher=lambda url: "<html><title>blocked</title></html>",
+        )
+
+        exit_code = generate_pets(
+            self.root / "Data.lua",
+            limit_families=0,
+            source_cache=cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(exit_code, 1)
+        self.assertTrue((self.root / "pet-refresh-blockers.md").exists())
+        self.assertFalse((self.root / "pet-validation-errors.md").exists())
+
+    def test_pet_validation_failure_clears_stale_blocker_artifact(self):
+        (self.root / "pet-refresh-blockers.md").write_text("- stale blocker\n", encoding="utf-8")
+        pages = {
+            HUNTER_PETS_URL: pets_index_html(),
+            pet_family_url(46): pet_family_html(),
+            npc_url(32517): npc_mapper_html(),
+        }
+        cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=lambda url: pages[url])
+
+        with patch("scrapper.refresh_data.validate_pet_records", return_value=["bad pet record"]):
+            exit_code = generate_pets(
+                self.root / "Data.lua",
+                limit_families=0,
+                source_cache=cache,
+                generated_dir=self.root,
+            )
+
+        self.assertEqual(exit_code, 1)
+        self.assertFalse((self.root / "pet-refresh-blockers.md").exists())
+        validation_errors = (self.root / "pet-validation-errors.md").read_text(encoding="utf-8")
+        self.assertIn("bad pet record", validation_errors)
+
     def test_generate_stable_masters_uses_source_cache(self):
         pages = {
             STABLE_MASTER_SEARCH_URL: stable_search_html(),
@@ -2167,6 +2208,46 @@ class RefreshDataCacheTest(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertFalse((self.root / "stable-master-blockers.md").exists())
         self.assertFalse((self.root / "stable-master-validation-errors.md").exists())
+
+    def test_stable_master_blocker_failure_clears_stale_validation_artifact(self):
+        (self.root / "stable-master-validation-errors.md").write_text("- stale validation\n", encoding="utf-8")
+        cache = SourceCache(
+            self.cache_dir,
+            self.manifest_path,
+            fetcher=lambda url: "<html><title>blocked</title></html>",
+        )
+
+        exit_code = generate_stable_masters(
+            self.root / "StableMastersData.lua",
+            limit=0,
+            source_cache=cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(exit_code, 1)
+        self.assertTrue((self.root / "stable-master-blockers.md").exists())
+        self.assertFalse((self.root / "stable-master-validation-errors.md").exists())
+
+    def test_stable_master_validation_failure_clears_stale_blocker_artifact(self):
+        (self.root / "stable-master-blockers.md").write_text("- stale blocker\n", encoding="utf-8")
+        pages = {
+            STABLE_MASTER_SEARCH_URL: stable_search_html(),
+            npc_url(185561): stable_mapper_html(),
+        }
+        cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=lambda url: pages[url])
+
+        with patch("scrapper.refresh_data.validate_stable_master_records", return_value=["bad stable master"]):
+            exit_code = generate_stable_masters(
+                self.root / "StableMastersData.lua",
+                limit=0,
+                source_cache=cache,
+                generated_dir=self.root,
+            )
+
+        self.assertEqual(exit_code, 1)
+        self.assertFalse((self.root / "stable-master-blockers.md").exists())
+        validation_errors = (self.root / "stable-master-validation-errors.md").read_text(encoding="utf-8")
+        self.assertIn("bad stable master", validation_errors)
 
     def test_main_reset_cache_clears_existing_sources_before_refresh(self):
         stale_pages = {
