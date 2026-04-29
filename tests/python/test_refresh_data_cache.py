@@ -102,7 +102,12 @@ class RefreshDataCacheTest(unittest.TestCase):
         resumed_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=blocked_fetcher)
         output = self.root / "Data.lua"
 
-        exit_code = generate_pets(output, limit_families=0, source_cache=resumed_cache)
+        exit_code = generate_pets(
+            output,
+            limit_families=0,
+            source_cache=resumed_cache,
+            generated_dir=self.root,
+        )
 
         self.assertEqual(exit_code, 0)
         lua = output.read_text(encoding="utf-8")
