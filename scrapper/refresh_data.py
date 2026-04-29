@@ -310,16 +310,16 @@ def _require_list_rows(rows, listview_id: str) -> None:
 
 def _validate_pet_family_rows(rows: list[dict[str, Any]]) -> None:
     for index, row in enumerate(rows):
-        _required_int(row, index, "pet family", "id")
+        _required_positive_int(row, index, "pet family", "id")
         _required_name(row, index, "pet family")
 
 
 def _validate_tameable_pet_rows(rows: list[dict[str, Any]]) -> None:
     for index, row in enumerate(rows):
-        _required_int(row, index, "tameable pet", "id")
+        _required_positive_int(row, index, "tameable pet", "id")
         _required_name(row, index, "tameable pet")
         _required_int(row, index, "tameable pet", "classification")
-        _required_int_list(row, index, "tameable pet", "location")
+        _required_positive_int_list(row, index, "tameable pet", "location")
         _required_react(row, index, "tameable pet")
         _required_int(row, index, "tameable pet", "minlevel")
         _required_int(row, index, "tameable pet", "maxlevel")
@@ -332,6 +332,13 @@ def _required_int(row: dict[str, Any], index: int, row_name: str, field: str) ->
     if not _is_json_int(raw_value):
         raise ValueError(f"{row_name} row {index} {field} must be an integer")
     return raw_value
+
+
+def _required_positive_int(row: dict[str, Any], index: int, row_name: str, field: str) -> int:
+    value = _required_int(row, index, row_name, field)
+    if value <= 0:
+        raise ValueError(f"{row_name} row {index} {field} must be a positive integer")
+    return value
 
 
 def _required_name(row: dict[str, Any], index: int, row_name: str) -> str:
@@ -350,16 +357,25 @@ def _required_int_list(row: dict[str, Any], index: int, row_name: str, field: st
     return raw_values
 
 
+def _required_positive_int_list(row: dict[str, Any], index: int, row_name: str, field: str) -> list[int]:
+    values = _required_int_list(row, index, row_name, field)
+    if not all(value > 0 for value in values):
+        raise ValueError(f"{row_name} row {index} {field} values must be positive integers")
+    return values
+
+
 def _required_react(row: dict[str, Any], index: int, row_name: str) -> None:
     react = row.get("react")
-    if not isinstance(react, list) or len(react) < 2:
-        raise ValueError(f"{row_name} row {index} react must be a list with at least two values")
+    if not isinstance(react, list) or len(react) != 2:
+        raise ValueError(f"{row_name} row {index} react must be a list with exactly two values")
     if not all(_is_json_int(value) for value in react):
         raise ValueError(f"{row_name} row {index} react values must be integers")
+    if not all(value in {-1, 0, 1} for value in react):
+        raise ValueError(f"{row_name} row {index} react values must be -1, 0, or 1")
 
 
 def _stable_master_npc_id(row: dict, index: int) -> int:
-    return _required_int(row, index, "stable master", "id")
+    return _required_positive_int(row, index, "stable master", "id")
 
 
 def _stable_master_name(row: dict, index: int) -> str:
@@ -377,6 +393,8 @@ def _stable_master_location_ids(row: dict, index: int) -> list[int]:
         )
     if not all(_is_json_int(value) for value in raw_locations):
         raise ValueError(f"stable master row {index} location values must be integers")
+    if not all(value > 0 for value in raw_locations):
+        raise ValueError(f"stable master row {index} location values must be positive integers")
     return raw_locations
 
 

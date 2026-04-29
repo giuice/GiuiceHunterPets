@@ -122,6 +122,46 @@ def pet_family_with_string_react_html():
     """
 
 
+def pet_family_with_tameable_id_html(tameable_id):
+    return f"""
+    <script>
+    new Listview({{
+        id: 'tameable',
+        data: [{{
+            "id":{tameable_id},
+            "name":"Loque'nahak",
+            "family":46,
+            "classification":4,
+            "location":[3711],
+            "react":[-1,-1],
+            "minlevel":30,
+            "maxlevel":30
+        }}]
+    }});
+    </script>
+    """
+
+
+def pet_family_with_tameable_react_html(react):
+    return f"""
+    <script>
+    new Listview({{
+        id: 'tameable',
+        data: [{{
+            "id":32517,
+            "name":"Loque'nahak",
+            "family":46,
+            "classification":4,
+            "location":[3711],
+            "react":{json.dumps(react)},
+            "minlevel":30,
+            "maxlevel":30
+        }}]
+    }});
+    </script>
+    """
+
+
 def pet_family_object_data_html():
     return """
     <script>
@@ -270,6 +310,40 @@ def stable_search_string_react_html():
     """
 
 
+def stable_search_with_id_html(stable_id):
+    return f"""
+    <script>
+    new Listview({{
+        id: 'npcs',
+        data: [{{
+            "id":{stable_id},
+            "name":"Kaestrasz",
+            "tag":"Stable Master",
+            "react":[1,1],
+            "location":[13862]
+        }}]
+    }});
+    </script>
+    """
+
+
+def stable_search_with_react_html(react):
+    return f"""
+    <script>
+    new Listview({{
+        id: 'npcs',
+        data: [{{
+            "id":185561,
+            "name":"Kaestrasz",
+            "tag":"Stable Master",
+            "react":{json.dumps(react)},
+            "location":[13862]
+        }}]
+    }});
+    </script>
+    """
+
+
 def stable_search_without_stable_masters_html():
     return """
     <script>
@@ -371,10 +445,131 @@ class RefreshDataCacheTest(unittest.TestCase):
         self.tempdir.cleanup()
 
     def assert_source_invalidated(self, url):
-        manifest = json.loads(self.manifest_path.read_text(encoding="utf-8"))
+        self.assert_manifest_source_invalidated(self.manifest_path, url)
+
+    def assert_manifest_source_invalidated(self, manifest_path, url):
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         entry = next(entry for entry in manifest["sources"].values() if entry["url"] == url)
         self.assertEqual(entry["status"], "error")
         self.assertIsNone(entry["path"])
+
+    def assert_bad_pet_family_source_reruns_before_npc_fetch(self, family_html):
+        with tempfile.TemporaryDirectory() as tempdir:
+            root = Path(tempdir)
+            cache_dir = root / "cache"
+            manifest_path = root / "refresh-manifest.json"
+            family_url = pet_family_url(46)
+            first_pages = {
+                HUNTER_PETS_URL: pets_index_html(),
+                family_url: family_html,
+                npc_url(32517): npc_mapper_html(),
+            }
+            first_calls = []
+
+            def first_fetcher(url):
+                first_calls.append(url)
+                return first_pages[url]
+
+            first_cache = SourceCache(cache_dir, manifest_path, fetcher=first_fetcher)
+            first_output = root / "Data.lua"
+
+            first_exit_code = generate_pets(
+                first_output,
+                limit_families=0,
+                source_cache=first_cache,
+                generated_dir=root,
+            )
+
+            self.assertEqual(first_exit_code, 1)
+            self.assertFalse(first_output.exists())
+            self.assertEqual(first_calls, [HUNTER_PETS_URL, family_url])
+            blockers = (root / "pet-refresh-blockers.md").read_text(encoding="utf-8")
+            self.assertIn("Malformed tameable pets source", blockers)
+            self.assertIn(family_url, blockers)
+            self.assert_manifest_source_invalidated(manifest_path, family_url)
+
+            second_pages = {
+                HUNTER_PETS_URL: pets_index_html(),
+                family_url: pet_family_html(),
+                npc_url(32517): npc_mapper_html(),
+            }
+            second_calls = []
+
+            def second_fetcher(url):
+                second_calls.append(url)
+                return second_pages[url]
+
+            resumed_cache = SourceCache(cache_dir, manifest_path, fetcher=second_fetcher)
+            second_output = root / "Data.second.lua"
+
+            second_exit_code = generate_pets(
+                second_output,
+                limit_families=0,
+                source_cache=resumed_cache,
+                generated_dir=root,
+            )
+
+            self.assertEqual(second_exit_code, 0)
+            self.assertIn(family_url, second_calls)
+            self.assertIn("Loque'nahak", second_output.read_text(encoding="utf-8"))
+
+    def assert_bad_stable_search_reruns_before_npc_fetch(self, search_html):
+        with tempfile.TemporaryDirectory() as tempdir:
+            root = Path(tempdir)
+            cache_dir = root / "cache"
+            manifest_path = root / "refresh-manifest.json"
+            stable_npc_url = npc_url(185561)
+            first_pages = {
+                STABLE_MASTER_SEARCH_URL: search_html,
+                stable_npc_url: stable_mapper_html(),
+            }
+            first_calls = []
+
+            def first_fetcher(url):
+                first_calls.append(url)
+                return first_pages[url]
+
+            first_cache = SourceCache(cache_dir, manifest_path, fetcher=first_fetcher)
+            first_output = root / "StableMastersData.lua"
+
+            first_exit_code = generate_stable_masters(
+                first_output,
+                limit=0,
+                source_cache=first_cache,
+                generated_dir=root,
+            )
+
+            self.assertEqual(first_exit_code, 1)
+            self.assertFalse(first_output.exists())
+            self.assertEqual(first_calls, [STABLE_MASTER_SEARCH_URL])
+            blockers = (root / "stable-master-blockers.md").read_text(encoding="utf-8")
+            self.assertIn("Malformed stable master search source", blockers)
+            self.assertIn(STABLE_MASTER_SEARCH_URL, blockers)
+            self.assert_manifest_source_invalidated(manifest_path, STABLE_MASTER_SEARCH_URL)
+
+            second_pages = {
+                STABLE_MASTER_SEARCH_URL: stable_search_html(),
+                stable_npc_url: stable_mapper_html(),
+            }
+            second_calls = []
+
+            def second_fetcher(url):
+                second_calls.append(url)
+                return second_pages[url]
+
+            resumed_cache = SourceCache(cache_dir, manifest_path, fetcher=second_fetcher)
+            second_output = root / "StableMastersData.second.lua"
+
+            second_exit_code = generate_stable_masters(
+                second_output,
+                limit=0,
+                source_cache=resumed_cache,
+                generated_dir=root,
+            )
+
+            self.assertEqual(second_exit_code, 0)
+            self.assertIn(STABLE_MASTER_SEARCH_URL, second_calls)
+            self.assertIn("Kaestrasz", second_output.read_text(encoding="utf-8"))
 
     def test_generate_pets_reuses_cached_sources_without_fetching(self):
         pages = {
@@ -783,6 +978,20 @@ class RefreshDataCacheTest(unittest.TestCase):
         self.assertEqual(second_exit_code, 0)
         self.assertIn(family_url, second_calls)
         self.assertIn("Loque'nahak", second_output.read_text(encoding="utf-8"))
+
+    def test_non_positive_tameable_ids_invalidate_family_and_retry_before_npc_fetch(self):
+        for bad_id in (0, -32517):
+            with self.subTest(bad_id=bad_id):
+                self.assert_bad_pet_family_source_reruns_before_npc_fetch(
+                    pet_family_with_tameable_id_html(bad_id)
+                )
+
+    def test_bad_tameable_react_domain_invalidates_family_and_retry_before_npc_fetch(self):
+        for react in ([2, 2], [1, -1, 0]):
+            with self.subTest(react=react):
+                self.assert_bad_pet_family_source_reruns_before_npc_fetch(
+                    pet_family_with_tameable_react_html(react)
+                )
 
     def test_malformed_pet_family_rows_are_invalidated_and_retried_on_rerun(self):
         family_url = pet_family_url(46)
@@ -1471,6 +1680,13 @@ class RefreshDataCacheTest(unittest.TestCase):
         self.assertIn(STABLE_MASTER_SEARCH_URL, calls)
         self.assertIn("Kaestrasz", second_output.read_text(encoding="utf-8"))
 
+    def test_non_positive_stable_master_ids_are_invalidated_and_retried_before_npc_fetch(self):
+        for bad_id in (0, -185561):
+            with self.subTest(bad_id=bad_id):
+                self.assert_bad_stable_search_reruns_before_npc_fetch(
+                    stable_search_with_id_html(bad_id)
+                )
+
     def test_stable_master_search_string_react_is_invalidated_and_retried_before_npc_fetch(self):
         stable_npc_url = npc_url(185561)
         first_pages = {
@@ -1524,6 +1740,13 @@ class RefreshDataCacheTest(unittest.TestCase):
         self.assertEqual(second_exit_code, 0)
         self.assertIn(STABLE_MASTER_SEARCH_URL, calls)
         self.assertIn("Kaestrasz", second_output.read_text(encoding="utf-8"))
+
+    def test_bad_stable_master_react_domain_is_invalidated_and_retried_before_npc_fetch(self):
+        for react in ([2, 2], [1, -1, 0]):
+            with self.subTest(react=react):
+                self.assert_bad_stable_search_reruns_before_npc_fetch(
+                    stable_search_with_react_html(react)
+                )
 
     def test_stable_master_search_rows_missing_name_are_invalidated_before_npc_fetch(self):
         stable_npc_url = npc_url(185561)
