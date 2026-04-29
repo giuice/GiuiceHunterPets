@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 from scrapper.data_records import (
@@ -27,6 +28,7 @@ from scrapper.wowhead_source import (
 
 
 GENERATED_DIR = Path("scrapper/generated")
+FETCH_WORKERS = 12
 
 
 def main() -> int:
@@ -59,18 +61,21 @@ def generate_pets(output: Path, limit_families: int = 0) -> int:
 
     records = []
     skipped = []
-    for family_index, family in enumerate(families, start=1):
-        print(f"Fetching family {family_index}/{len(families)}: {family.name}", flush=True)
-        family_html = fetch_text(pet_family_url(family.id))
-        tameable_rows = source_tameable_rows(extract_listview_data(family_html, "tameable"))
-        for tameable in tameable_rows:
-            npc_html = fetch_text(npc_url(tameable.id))
-            mapper_data = extract_mapper_data(npc_html)
-            record = build_pet_record(family, tameable, mapper_data)
-            if record is None:
-                skipped.append(f"{tameable.id} {tameable.name}: no mapper coordinates")
-                continue
-            records.append(record)
+    with ThreadPoolExecutor(max_workers=FETCH_WORKERS) as executor:
+        for family_index, family in enumerate(families, start=1):
+            print(f"Fetching family {family_index}/{len(families)}: {family.name}", flush=True)
+            family_html = fetch_text(pet_family_url(family.id))
+            tameable_rows = source_tameable_rows(extract_listview_data(family_html, "tameable"))
+            futures = [
+                executor.submit(_build_pet_record_from_source, family, tameable)
+                for tameable in tameable_rows
+            ]
+            for future in as_completed(futures):
+                tameable, record = future.result()
+                if record is None:
+                    skipped.append(f"{tameable.id} {tameable.name}: no mapper coordinates")
+                    continue
+                records.append(record)
 
     errors = validate_pet_records(records)
     if errors:
@@ -81,6 +86,12 @@ def generate_pets(output: Path, limit_families: int = 0) -> int:
     _write_lines(GENERATED_DIR / "pet-skipped.md", skipped)
     print(f"Wrote {len(records)} pet records to {output}")
     return 0
+
+
+def _build_pet_record_from_source(family, tameable):
+    npc_html = fetch_text(npc_url(tameable.id))
+    mapper_data = extract_mapper_data(npc_html)
+    return tameable, build_pet_record(family, tameable, mapper_data)
 
 
 def generate_stable_masters(output: Path, limit: int = 0) -> int:
