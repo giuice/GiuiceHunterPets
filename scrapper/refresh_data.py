@@ -88,6 +88,7 @@ def generate_pets(
             "pets",
             "Malformed pet index source",
             source_family_rows,
+            row_validator=_validate_pet_family_rows,
         )
     except ValueError as semantic_error:
         error = str(semantic_error)
@@ -125,6 +126,7 @@ def generate_pets(
                     "tameable",
                     f"Malformed tameable pets source for family {family.name}",
                     source_tameable_rows,
+                    row_validator=_validate_tameable_pet_rows,
                 )
             except ValueError as semantic_error:
                 error = str(semantic_error)
@@ -282,11 +284,14 @@ def _listview_rows_from_source(
     source,
     listview_id: str,
     error_prefix: str,
-    normalizer: Callable[[list[dict]], T],
+    normalizer: Callable[[list[dict[str, Any]]], T],
+    row_validator: Callable[[list[dict[str, Any]]], None] | None = None,
 ) -> T:
     try:
         rows = extract_listview_data(source.text, listview_id)
         _require_list_rows(rows, listview_id)
+        if row_validator is not None:
+            row_validator(rows)
         return normalizer(rows)
     except SEMANTIC_SOURCE_ERRORS as parse_error:
         error = f"{error_prefix}: {source.url}: {parse_error}"
@@ -300,6 +305,63 @@ def _require_list_rows(rows, listview_id: str) -> None:
     for index, row in enumerate(rows):
         if not isinstance(row, dict):
             raise ValueError(f"listview {listview_id} row {index} must be an object, got {type(row).__name__}")
+
+
+def _validate_pet_family_rows(rows: list[dict[str, Any]]) -> None:
+    for index, row in enumerate(rows):
+        _required_int(row, index, "pet family", "id")
+        _required_name(row, index, "pet family")
+
+
+def _validate_tameable_pet_rows(rows: list[dict[str, Any]]) -> None:
+    for index, row in enumerate(rows):
+        _required_int(row, index, "tameable pet", "id")
+        _required_name(row, index, "tameable pet")
+        _required_int(row, index, "tameable pet", "classification")
+        _required_int_list(row, index, "tameable pet", "location")
+        _required_react(row, index)
+        _required_int(row, index, "tameable pet", "minlevel")
+        _required_int(row, index, "tameable pet", "maxlevel")
+
+
+def _required_int(row: dict[str, Any], index: int, row_name: str, field: str) -> int:
+    raw_value = row.get(field)
+    if raw_value is None or raw_value == "":
+        raise ValueError(f"{row_name} row {index} is missing {field}")
+    try:
+        return int(raw_value)
+    except (TypeError, ValueError) as error:
+        raise ValueError(f"{row_name} row {index} {field} must be an integer") from error
+
+
+def _required_name(row: dict[str, Any], index: int, row_name: str) -> str:
+    raw_name = row.get("name")
+    if not isinstance(raw_name, str) or not raw_name.strip():
+        raise ValueError(f"{row_name} row {index} is missing name")
+    return raw_name
+
+
+def _required_int_list(row: dict[str, Any], index: int, row_name: str, field: str) -> list[int]:
+    raw_values = row.get(field)
+    if not isinstance(raw_values, list) or not raw_values:
+        raise ValueError(f"{row_name} row {index} {field} must be a non-empty list")
+    try:
+        return [int(value) for value in raw_values]
+    except (TypeError, ValueError) as error:
+        raise ValueError(f"{row_name} row {index} {field} values must be integers") from error
+
+
+def _required_react(row: dict[str, Any], index: int) -> None:
+    react = row.get("react")
+    if not isinstance(react, list) or len(react) != 2:
+        raise ValueError(f"tameable pet row {index} react must be a two-item list")
+    for value in react:
+        if value is None:
+            continue
+        try:
+            int(value)
+        except (TypeError, ValueError) as error:
+            raise ValueError(f"tameable pet row {index} react values must be integers") from error
 
 
 def _stable_master_npc_id(row: dict, index: int) -> int:

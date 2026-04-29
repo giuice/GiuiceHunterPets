@@ -22,6 +22,17 @@ def pets_index_html():
     """
 
 
+def pets_index_with_malformed_family_html():
+    return """
+    <script>
+    new Listview({
+        id: 'pets',
+        data: [{"id":46,"name":"Spirit Beast"},{"name":"Broken Family"}]
+    });
+    </script>
+    """
+
+
 def pet_family_html():
     return """
     <script>
@@ -36,6 +47,35 @@ def pet_family_html():
             "react":[-1,-1],
             "minlevel":30,
             "maxlevel":30
+        }]
+    });
+    </script>
+    """
+
+
+def pet_family_with_bad_minlevel_html():
+    return """
+    <script>
+    new Listview({
+        id: 'tameable',
+        data: [{
+            "id":32517,
+            "name":"Loque'nahak",
+            "family":46,
+            "classification":4,
+            "location":[3711],
+            "react":[-1,-1],
+            "minlevel":30,
+            "maxlevel":30
+        },{
+            "id":99999,
+            "name":"Broken Cat",
+            "family":46,
+            "classification":0,
+            "location":[3712],
+            "react":[-1,-1],
+            "minlevel":"bad",
+            "maxlevel":20
         }]
     });
     </script>
@@ -358,6 +398,54 @@ class RefreshDataCacheTest(unittest.TestCase):
         self.assertIn(HUNTER_PETS_URL, calls)
         self.assertIn("Loque'nahak", second_output.read_text(encoding="utf-8"))
 
+    def test_malformed_pet_index_row_invalidates_index_and_retries_on_rerun(self):
+        first_pages = {
+            HUNTER_PETS_URL: pets_index_with_malformed_family_html(),
+            pet_family_url(46): pet_family_html(),
+            npc_url(32517): npc_mapper_html(),
+        }
+        first_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=lambda url: first_pages[url])
+        first_output = self.root / "Data.lua"
+
+        first_exit_code = generate_pets(
+            first_output,
+            limit_families=0,
+            source_cache=first_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(first_exit_code, 1)
+        self.assertFalse(first_output.exists())
+        blockers = (self.root / "pet-refresh-blockers.md").read_text(encoding="utf-8")
+        self.assertIn("Malformed pet index source", blockers)
+        self.assertIn(HUNTER_PETS_URL, blockers)
+        self.assert_source_invalidated(HUNTER_PETS_URL)
+
+        second_pages = {
+            HUNTER_PETS_URL: pets_index_html(),
+            pet_family_url(46): pet_family_html(),
+            npc_url(32517): npc_mapper_html(),
+        }
+        calls = []
+
+        def fetcher(url):
+            calls.append(url)
+            return second_pages[url]
+
+        resumed_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=fetcher)
+        second_output = self.root / "Data.second.lua"
+
+        second_exit_code = generate_pets(
+            second_output,
+            limit_families=0,
+            source_cache=resumed_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(second_exit_code, 0)
+        self.assertIn(HUNTER_PETS_URL, calls)
+        self.assertIn("Loque'nahak", second_output.read_text(encoding="utf-8"))
+
     def test_generate_pets_records_source_failure_and_does_not_write_lua(self):
         def fetcher(url):
             if url == HUNTER_PETS_URL:
@@ -458,6 +546,64 @@ class RefreshDataCacheTest(unittest.TestCase):
 
         self.assertEqual(second_exit_code, 0)
         self.assertIn(family_url, calls)
+        self.assertIn("Loque'nahak", second_output.read_text(encoding="utf-8"))
+
+    def test_bad_tameable_minlevel_invalidates_family_before_npc_fetch_and_retries(self):
+        family_url = pet_family_url(46)
+        first_pages = {
+            HUNTER_PETS_URL: pets_index_html(),
+            family_url: pet_family_with_bad_minlevel_html(),
+            npc_url(32517): npc_mapper_html(),
+            npc_url(99999): npc_mapper_html_for(3712, "Retry Basin"),
+        }
+        first_calls = []
+
+        def first_fetcher(url):
+            first_calls.append(url)
+            return first_pages[url]
+
+        first_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=first_fetcher)
+        first_output = self.root / "Data.lua"
+
+        first_exit_code = generate_pets(
+            first_output,
+            limit_families=0,
+            source_cache=first_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(first_exit_code, 1)
+        self.assertFalse(first_output.exists())
+        self.assertNotIn(npc_url(32517), first_calls)
+        self.assertNotIn(npc_url(99999), first_calls)
+        blockers = (self.root / "pet-refresh-blockers.md").read_text(encoding="utf-8")
+        self.assertIn("Malformed tameable pets source", blockers)
+        self.assertIn(family_url, blockers)
+        self.assert_source_invalidated(family_url)
+
+        second_pages = {
+            HUNTER_PETS_URL: pets_index_html(),
+            family_url: pet_family_html(),
+            npc_url(32517): npc_mapper_html(),
+        }
+        second_calls = []
+
+        def second_fetcher(url):
+            second_calls.append(url)
+            return second_pages[url]
+
+        resumed_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=second_fetcher)
+        second_output = self.root / "Data.second.lua"
+
+        second_exit_code = generate_pets(
+            second_output,
+            limit_families=0,
+            source_cache=resumed_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(second_exit_code, 0)
+        self.assertIn(family_url, second_calls)
         self.assertIn("Loque'nahak", second_output.read_text(encoding="utf-8"))
 
     def test_malformed_pet_family_rows_are_invalidated_and_retried_on_rerun(self):
