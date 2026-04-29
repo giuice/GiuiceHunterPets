@@ -86,6 +86,13 @@ class SourceCache:
             from_cache=False,
         )
 
+    def invalidate(self, url: str, role: str, error: str) -> None:
+        normalized_url = self._normalize_url(url)
+        cache_key = self._cache_key(normalized_url)
+        path = self.cache_dir / f"{cache_key}.html"
+        path.unlink(missing_ok=True)
+        self._record_error(normalized_url, role, cache_key, error)
+
     def _record_ok(self, url: str, role: str, cache_key: str, path: Path) -> None:
         with self._manifest_lock:
             manifest = self._load_manifest()

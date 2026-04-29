@@ -1,3 +1,4 @@
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -41,10 +42,47 @@ def pet_family_html():
     """
 
 
+def pet_family_two_pets_html():
+    return """
+    <script>
+    new Listview({
+        id: 'tameable',
+        data: [{
+            "id":32517,
+            "name":"Loque'nahak",
+            "family":46,
+            "classification":4,
+            "location":[3711],
+            "react":[-1,-1],
+            "minlevel":30,
+            "maxlevel":30
+        },{
+            "id":99999,
+            "name":"Retry Cat",
+            "family":46,
+            "classification":0,
+            "location":[3712],
+            "react":[-1,-1],
+            "minlevel":20,
+            "maxlevel":20
+        }]
+    });
+    </script>
+    """
+
+
 def npc_mapper_html():
     return """
     <script>
     var g_mapperData = {"3711":[{"uiMapId":119,"uiMapName":"Sholazar Basin","coords":[[36.6,30.8]]}]};
+    </script>
+    """
+
+
+def npc_mapper_html_for(location_id, zone_name):
+    return f"""
+    <script>
+    var g_mapperData = {{"{location_id}":[{{"uiMapId":119,"uiMapName":"{zone_name}","coords":[[36.6,30.8]]}}]}};
     </script>
     """
 
@@ -136,6 +174,53 @@ class RefreshDataCacheTest(unittest.TestCase):
         self.assertIn("pet index", blockers)
         self.assertIn(HUNTER_PETS_URL, blockers)
 
+    def test_blocked_pet_index_is_invalidated_and_retried_on_rerun(self):
+        first_cache = SourceCache(
+            self.cache_dir,
+            self.manifest_path,
+            fetcher=lambda url: "<html><title>blocked</title></html>",
+        )
+        first_output = self.root / "Data.lua"
+
+        first_exit_code = generate_pets(
+            first_output,
+            limit_families=0,
+            source_cache=first_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(first_exit_code, 1)
+        self.assertFalse(first_output.exists())
+        manifest = json.loads(self.manifest_path.read_text(encoding="utf-8"))
+        index_entry = next(entry for entry in manifest["sources"].values() if entry["url"] == HUNTER_PETS_URL)
+        self.assertEqual(index_entry["status"], "error")
+        self.assertIsNone(index_entry["path"])
+
+        pages = {
+            HUNTER_PETS_URL: pets_index_html(),
+            pet_family_url(46): pet_family_html(),
+            npc_url(32517): npc_mapper_html(),
+        }
+        calls = []
+
+        def fetcher(url):
+            calls.append(url)
+            return pages[url]
+
+        resumed_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=fetcher)
+        second_output = self.root / "Data.second.lua"
+
+        second_exit_code = generate_pets(
+            second_output,
+            limit_families=0,
+            source_cache=resumed_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(second_exit_code, 0)
+        self.assertIn(HUNTER_PETS_URL, calls)
+        self.assertIn("Loque'nahak", second_output.read_text(encoding="utf-8"))
+
     def test_generate_pets_records_source_failure_and_does_not_write_lua(self):
         def fetcher(url):
             if url == HUNTER_PETS_URL:
@@ -186,11 +271,70 @@ class RefreshDataCacheTest(unittest.TestCase):
         self.assertIn("No tameable pets found", blockers)
         self.assertIn(pet_family_url(46), blockers)
 
+    def test_blocked_pet_family_is_invalidated_and_retried_on_rerun(self):
+        family_url = pet_family_url(46)
+        first_pages = {
+            HUNTER_PETS_URL: pets_index_html(),
+            family_url: """
+            <script>
+            new Listview({
+                id: 'tameable',
+                data: []
+            });
+            </script>
+            """,
+        }
+        first_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=lambda url: first_pages[url])
+        first_output = self.root / "Data.lua"
+
+        first_exit_code = generate_pets(
+            first_output,
+            limit_families=0,
+            source_cache=first_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(first_exit_code, 1)
+        self.assertFalse(first_output.exists())
+        manifest = json.loads(self.manifest_path.read_text(encoding="utf-8"))
+        family_entry = next(entry for entry in manifest["sources"].values() if entry["url"] == family_url)
+        self.assertEqual(family_entry["status"], "error")
+        self.assertIsNone(family_entry["path"])
+
+        second_pages = {
+            HUNTER_PETS_URL: pets_index_html(),
+            family_url: pet_family_html(),
+            npc_url(32517): npc_mapper_html(),
+        }
+        calls = []
+
+        def fetcher(url):
+            calls.append(url)
+            return second_pages[url]
+
+        resumed_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=fetcher)
+        second_output = self.root / "Data.second.lua"
+
+        second_exit_code = generate_pets(
+            second_output,
+            limit_families=0,
+            source_cache=resumed_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(second_exit_code, 0)
+        self.assertIn(family_url, calls)
+        self.assertIn("Loque'nahak", second_output.read_text(encoding="utf-8"))
+
     def test_generate_pets_blocks_all_skipped_records(self):
         pages = {
             HUNTER_PETS_URL: pets_index_html(),
             pet_family_url(46): pet_family_html(),
-            npc_url(32517): "<html><title>no mapper data</title></html>",
+            npc_url(32517): """
+            <script>
+            var g_mapperData = {"3711":[{"uiMapId":119,"uiMapName":"Sholazar Basin","coords":[]}]};
+            </script>
+            """,
         }
         cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=lambda url: pages[url])
         output = self.root / "Data.lua"
@@ -206,6 +350,62 @@ class RefreshDataCacheTest(unittest.TestCase):
         self.assertFalse(output.exists())
         blockers = (self.root / "pet-refresh-blockers.md").read_text(encoding="utf-8")
         self.assertIn("32517 Loque'nahak: no mapper coordinates", blockers)
+
+    def test_blocked_pet_npc_mapper_is_invalidated_and_retried_on_rerun(self):
+        blocked_npc_url = npc_url(99999)
+        first_pages = {
+            HUNTER_PETS_URL: pets_index_html(),
+            pet_family_url(46): pet_family_two_pets_html(),
+            npc_url(32517): npc_mapper_html_for(3711, "Sholazar Basin"),
+            blocked_npc_url: "<html><title>blocked</title></html>",
+        }
+        first_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=lambda url: first_pages[url])
+        first_output = self.root / "Data.lua"
+
+        first_exit_code = generate_pets(
+            first_output,
+            limit_families=0,
+            source_cache=first_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(first_exit_code, 1)
+        self.assertFalse(first_output.exists())
+        blockers = (self.root / "pet-refresh-blockers.md").read_text(encoding="utf-8")
+        self.assertIn(blocked_npc_url, blockers)
+        self.assertIn("g_mapperData", blockers)
+        manifest = json.loads(self.manifest_path.read_text(encoding="utf-8"))
+        npc_entry = next(entry for entry in manifest["sources"].values() if entry["url"] == blocked_npc_url)
+        self.assertEqual(npc_entry["status"], "error")
+        self.assertIsNone(npc_entry["path"])
+
+        second_pages = {
+            HUNTER_PETS_URL: pets_index_html(),
+            pet_family_url(46): pet_family_two_pets_html(),
+            npc_url(32517): npc_mapper_html_for(3711, "Sholazar Basin"),
+            blocked_npc_url: npc_mapper_html_for(3712, "Retry Zone"),
+        }
+        calls = []
+
+        def fetcher(url):
+            calls.append(url)
+            return second_pages[url]
+
+        resumed_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=fetcher)
+        second_output = self.root / "Data.second.lua"
+
+        second_exit_code = generate_pets(
+            second_output,
+            limit_families=0,
+            source_cache=resumed_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(second_exit_code, 0)
+        self.assertIn(blocked_npc_url, calls)
+        lua = second_output.read_text(encoding="utf-8")
+        self.assertIn("Loque'nahak", lua)
+        self.assertIn("Retry Cat", lua)
 
     def test_successful_pet_resume_clears_stale_failure_artifacts(self):
         (self.root / "pet-refresh-blockers.md").write_text("- stale blocker\n", encoding="utf-8")
@@ -268,6 +468,104 @@ class RefreshDataCacheTest(unittest.TestCase):
         )
 
         self.assertEqual(second_exit_code, 0)
+        self.assertIn("Kaestrasz", second_output.read_text(encoding="utf-8"))
+
+    def test_blocked_stable_master_search_is_invalidated_and_retried_on_rerun(self):
+        first_cache = SourceCache(
+            self.cache_dir,
+            self.manifest_path,
+            fetcher=lambda url: "<html><title>blocked</title></html>",
+        )
+        first_output = self.root / "StableMastersData.lua"
+
+        first_exit_code = generate_stable_masters(
+            first_output,
+            limit=0,
+            source_cache=first_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(first_exit_code, 1)
+        self.assertFalse(first_output.exists())
+        manifest = json.loads(self.manifest_path.read_text(encoding="utf-8"))
+        search_entry = next(
+            entry for entry in manifest["sources"].values() if entry["url"] == STABLE_MASTER_SEARCH_URL
+        )
+        self.assertEqual(search_entry["status"], "error")
+        self.assertIsNone(search_entry["path"])
+
+        pages = {
+            STABLE_MASTER_SEARCH_URL: stable_search_html(),
+            npc_url(185561): stable_mapper_html(),
+        }
+        calls = []
+
+        def fetcher(url):
+            calls.append(url)
+            return pages[url]
+
+        resumed_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=fetcher)
+        second_output = self.root / "StableMastersData.second.lua"
+
+        second_exit_code = generate_stable_masters(
+            second_output,
+            limit=0,
+            source_cache=resumed_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(second_exit_code, 0)
+        self.assertIn(STABLE_MASTER_SEARCH_URL, calls)
+        self.assertIn("Kaestrasz", second_output.read_text(encoding="utf-8"))
+
+    def test_blocked_stable_master_npc_is_invalidated_and_retried_on_rerun(self):
+        stable_npc_url = npc_url(185561)
+        first_pages = {
+            STABLE_MASTER_SEARCH_URL: stable_search_html(),
+            stable_npc_url: "<html><title>blocked</title></html>",
+        }
+        first_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=lambda url: first_pages[url])
+        first_output = self.root / "StableMastersData.lua"
+
+        first_exit_code = generate_stable_masters(
+            first_output,
+            limit=0,
+            source_cache=first_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(first_exit_code, 1)
+        self.assertFalse(first_output.exists())
+        blockers = (self.root / "stable-master-blockers.md").read_text(encoding="utf-8")
+        self.assertIn(stable_npc_url, blockers)
+        self.assertIn("g_mapperData", blockers)
+        manifest = json.loads(self.manifest_path.read_text(encoding="utf-8"))
+        npc_entry = next(entry for entry in manifest["sources"].values() if entry["url"] == stable_npc_url)
+        self.assertEqual(npc_entry["status"], "error")
+        self.assertIsNone(npc_entry["path"])
+
+        second_pages = {
+            STABLE_MASTER_SEARCH_URL: stable_search_html(),
+            stable_npc_url: stable_mapper_html(),
+        }
+        calls = []
+
+        def fetcher(url):
+            calls.append(url)
+            return second_pages[url]
+
+        resumed_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=fetcher)
+        second_output = self.root / "StableMastersData.second.lua"
+
+        second_exit_code = generate_stable_masters(
+            second_output,
+            limit=0,
+            source_cache=resumed_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(second_exit_code, 0)
+        self.assertIn(stable_npc_url, calls)
         self.assertIn("Kaestrasz", second_output.read_text(encoding="utf-8"))
 
     def test_successful_stable_master_resume_clears_stale_failure_artifacts(self):

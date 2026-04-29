@@ -20,8 +20,8 @@ from scrapper.source_cache import SourceCache, SourceFetchError
 from scrapper.wowhead_source import (
     HUNTER_PETS_URL,
     STABLE_MASTER_SEARCH_URL,
+    extract_js_assignment,
     extract_listview_data,
-    extract_mapper_data,
     fetch_text,
     npc_url,
     pet_family_url,
@@ -73,15 +73,23 @@ def generate_pets(
         generated_dir / "refresh-manifest.json",
     )
     try:
-        index_html = source_cache.get_text(HUNTER_PETS_URL, "pet-index").text
+        index_source = source_cache.get_text(HUNTER_PETS_URL, "pet-index")
     except SourceFetchError as error:
         _write_lines(generated_dir / "pet-refresh-blockers.md", [str(error)])
         return 1
-    families = source_family_rows(extract_listview_data(index_html, "pets"))
+    try:
+        families = source_family_rows(extract_listview_data(index_source.text, "pets"))
+    except ValueError as parse_error:
+        error = f"Malformed pet index source: {index_source.url}: {parse_error}"
+        source_cache.invalidate(index_source.url, index_source.role, error)
+        _write_lines(generated_dir / "pet-refresh-blockers.md", [error])
+        return 1
     if not families:
+        error = f"No pet families found in pet index source: {index_source.url}"
+        source_cache.invalidate(index_source.url, index_source.role, error)
         _write_lines(
             generated_dir / "pet-refresh-blockers.md",
-            [f"No pet families found in pet index source: {HUNTER_PETS_URL}"],
+            [error],
         )
         return 1
     if limit_families:
@@ -94,18 +102,26 @@ def generate_pets(
             print(f"Fetching family {family_index}/{len(families)}: {family.name}", flush=True)
             family_url = pet_family_url(family.id)
             try:
-                family_html = source_cache.get_text(family_url, "pet-family").text
+                family_source = source_cache.get_text(family_url, "pet-family")
             except SourceFetchError as error:
                 _write_lines(
                     generated_dir / "pet-refresh-blockers.md",
                     [str(error)],
                 )
                 return 1
-            tameable_rows = source_tameable_rows(extract_listview_data(family_html, "tameable"))
+            try:
+                tameable_rows = source_tameable_rows(extract_listview_data(family_source.text, "tameable"))
+            except ValueError as parse_error:
+                error = f"Malformed tameable pets source for family {family.name}: {family_source.url}: {parse_error}"
+                source_cache.invalidate(family_source.url, family_source.role, error)
+                _write_lines(generated_dir / "pet-refresh-blockers.md", [error])
+                return 1
             if not tameable_rows:
+                error = f"No tameable pets found for family {family.name}: {family_source.url}"
+                source_cache.invalidate(family_source.url, family_source.role, error)
                 _write_lines(
                     generated_dir / "pet-refresh-blockers.md",
-                    [f"No tameable pets found for family {family.name}: {family_url}"],
+                    [error],
                 )
                 return 1
             futures = [
@@ -142,8 +158,7 @@ def generate_pets(
 
 def _build_pet_record_from_source(family, tameable, source_cache: SourceCache):
     source_url = npc_url(tameable.id)
-    npc_html = source_cache.get_text(source_url, "pet-npc").text
-    mapper_data = extract_mapper_data(npc_html)
+    mapper_data = _extract_mapper_data_from_source(source_cache, source_url, "pet-npc")
     return tameable, build_pet_record(family, tameable, mapper_data)
 
 
@@ -158,12 +173,23 @@ def generate_stable_masters(
         generated_dir / "refresh-manifest.json",
     )
     try:
-        search_html = source_cache.get_text(STABLE_MASTER_SEARCH_URL, "stable-master-search").text
+        search_source = source_cache.get_text(STABLE_MASTER_SEARCH_URL, "stable-master-search")
     except SourceFetchError as error:
         _write_lines(generated_dir / "stable-master-blockers.md", [str(error)])
         return 1
-    rows = extract_listview_data(search_html, "npcs")
-    rows = [row for row in rows if "Stable Master" in str(row.get("tag", ""))]
+    try:
+        raw_rows = extract_listview_data(search_source.text, "npcs")
+    except ValueError as parse_error:
+        error = f"Malformed stable master search source: {search_source.url}: {parse_error}"
+        source_cache.invalidate(search_source.url, search_source.role, error)
+        _write_lines(generated_dir / "stable-master-blockers.md", [error])
+        return 1
+    if not raw_rows:
+        error = f"No stable master rows found in search source: {search_source.url}"
+        source_cache.invalidate(search_source.url, search_source.role, error)
+        _write_lines(generated_dir / "stable-master-blockers.md", [error])
+        return 1
+    rows = [row for row in raw_rows if "Stable Master" in str(row.get("tag", ""))]
     if limit:
         rows = rows[:limit]
 
@@ -171,11 +197,15 @@ def generate_stable_masters(
     skipped = []
     for row in rows:
         try:
-            html = source_cache.get_text(npc_url(int(row["id"])), "stable-master-npc").text
+            mapper_data = _extract_mapper_data_from_source(
+                source_cache,
+                npc_url(int(row["id"])),
+                "stable-master-npc",
+            )
         except SourceFetchError as error:
             _write_lines(generated_dir / "stable-master-blockers.md", [str(error)])
             return 1
-        record = build_stable_master_record(row, extract_mapper_data(html))
+        record = build_stable_master_record(row, mapper_data)
         if record is None:
             skipped.append(f"{row.get('id')} {row.get('name')}: no valid stable master coordinates")
             continue
@@ -196,6 +226,21 @@ def generate_stable_masters(
     _write_lines(generated_dir / "stable-master-skipped.md", skipped)
     print(f"Wrote {len(records)} stable master records to {output}")
     return 0
+
+
+def _extract_mapper_data_from_source(source_cache: SourceCache, url: str, role: str):
+    source = source_cache.get_text(url, role)
+    try:
+        mapper_data = extract_js_assignment(source.text, "g_mapperData")
+    except ValueError as parse_error:
+        error = f"Malformed g_mapperData assignment in source: {source.url}: {parse_error}"
+        source_cache.invalidate(source.url, source.role, error)
+        raise SourceFetchError(source.url, source.role, ValueError(error)) from parse_error
+    if mapper_data is None:
+        error = f"Missing g_mapperData assignment in source: {source.url}"
+        source_cache.invalidate(source.url, source.role, error)
+        raise SourceFetchError(source.url, source.role, ValueError(error))
+    return mapper_data
 
 
 def _clear_lines(path: Path) -> None:
