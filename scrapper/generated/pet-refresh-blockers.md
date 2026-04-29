@@ -1,0 +1,1 @@
+- https://www.wowhead.com/hunter-pets: HTTP Error 403: Forbidden

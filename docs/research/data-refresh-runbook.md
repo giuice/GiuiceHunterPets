@@ -40,6 +40,7 @@ Review requirements:
 - Generated pet count is plausible compared with checked-in `Data.lua`.
 - Sample current expansion pets appear in the generated output.
 - `scrapper/generated/pet-validation-errors.md` is empty or absent.
+- If Wowhead blocks source fetches, `scrapper/generated/pet-refresh-blockers.md` records the HTTP error and production `Data.lua` must not be replaced.
 - Coordinate-heavy diffs are expected; missing-coordinate records are not accepted into generated output.
 
 ## Stable Master Feasibility

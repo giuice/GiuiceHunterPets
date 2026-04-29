@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
+from urllib.error import HTTPError, URLError
 
 from scrapper.data_records import (
     build_pet_record,
@@ -28,7 +29,7 @@ from scrapper.wowhead_source import (
 
 
 GENERATED_DIR = Path("scrapper/generated")
-FETCH_WORKERS = 12
+FETCH_WORKERS = 4
 
 
 def main() -> int:
@@ -54,7 +55,11 @@ def main() -> int:
 
 
 def generate_pets(output: Path, limit_families: int = 0) -> int:
-    index_html = fetch_text(HUNTER_PETS_URL)
+    try:
+        index_html = fetch_text(HUNTER_PETS_URL)
+    except (HTTPError, URLError) as error:
+        _write_lines(GENERATED_DIR / "pet-refresh-blockers.md", [f"{HUNTER_PETS_URL}: {error}"])
+        return 1
     families = source_family_rows(extract_listview_data(index_html, "pets"))
     if limit_families:
         families = families[:limit_families]
@@ -64,14 +69,25 @@ def generate_pets(output: Path, limit_families: int = 0) -> int:
     with ThreadPoolExecutor(max_workers=FETCH_WORKERS) as executor:
         for family_index, family in enumerate(families, start=1):
             print(f"Fetching family {family_index}/{len(families)}: {family.name}", flush=True)
-            family_html = fetch_text(pet_family_url(family.id))
+            try:
+                family_html = fetch_text(pet_family_url(family.id))
+            except (HTTPError, URLError) as error:
+                _write_lines(
+                    GENERATED_DIR / "pet-refresh-blockers.md",
+                    [f"{pet_family_url(family.id)}: {error}"],
+                )
+                return 1
             tameable_rows = source_tameable_rows(extract_listview_data(family_html, "tameable"))
             futures = [
                 executor.submit(_build_pet_record_from_source, family, tameable)
                 for tameable in tameable_rows
             ]
             for future in as_completed(futures):
-                tameable, record = future.result()
+                try:
+                    tameable, record = future.result()
+                except (HTTPError, URLError) as error:
+                    _write_lines(GENERATED_DIR / "pet-refresh-blockers.md", [str(error)])
+                    return 1
                 if record is None:
                     skipped.append(f"{tameable.id} {tameable.name}: no mapper coordinates")
                     continue
@@ -95,7 +111,11 @@ def _build_pet_record_from_source(family, tameable):
 
 
 def generate_stable_masters(output: Path, limit: int = 0) -> int:
-    search_html = fetch_text(STABLE_MASTER_SEARCH_URL)
+    try:
+        search_html = fetch_text(STABLE_MASTER_SEARCH_URL)
+    except (HTTPError, URLError) as error:
+        _write_lines(GENERATED_DIR / "stable-master-blockers.md", [f"{STABLE_MASTER_SEARCH_URL}: {error}"])
+        return 1
     rows = extract_listview_data(search_html, "npcs")
     rows = [row for row in rows if "Stable Master" in str(row.get("tag", ""))]
     if limit:
