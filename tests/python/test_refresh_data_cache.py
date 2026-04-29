@@ -1,6 +1,7 @@
 import json
 import tempfile
 import unittest
+from io import StringIO
 from pathlib import Path
 from unittest.mock import patch
 from urllib.error import HTTPError
@@ -2287,12 +2288,12 @@ class RefreshDataCacheTest(unittest.TestCase):
 
         original_generate_pets = refresh_data.generate_pets
 
-        def generate_pets_in_temp(output, limit_families, source_cache):
+        def generate_pets_in_temp(output, limit_families, source_cache, generated_dir):
             return original_generate_pets(
                 output,
                 limit_families,
                 source_cache=source_cache,
-                generated_dir=self.root,
+                generated_dir=generated_dir,
             )
 
         argv = [
@@ -2315,6 +2316,32 @@ class RefreshDataCacheTest(unittest.TestCase):
         self.assertTrue(self.manifest_path.exists())
         self.assertIn("Loque'nahak", (self.root / "Data.lua").read_text(encoding="utf-8"))
         self.assertIn(pets_index_html(), cached.path.read_text(encoding="utf-8"))
+
+    def test_main_prints_pet_failure_report_location(self):
+        argv = [
+            "refresh_data.py",
+            "pets",
+            "--output",
+            str(self.root / "Data.lua"),
+            "--resume",
+        ]
+
+        def blocked_fetcher(url):
+            raise HTTPError(url, 403, "Forbidden", hdrs=None, fp=None)
+
+        stderr = StringIO()
+        with patch.object(refresh_data, "GENERATED_DIR", self.root):
+            with patch.object(refresh_data, "MANIFEST_PATH", self.manifest_path):
+                with patch.object(refresh_data, "fetch_text", side_effect=blocked_fetcher):
+                    with patch("sys.argv", argv):
+                        with patch("sys.stderr", stderr):
+                            exit_code = refresh_data.main()
+
+        self.assertEqual(exit_code, 1)
+        message = stderr.getvalue()
+        self.assertIn("Refresh failed", message)
+        self.assertIn(str(self.root / "pet-refresh-blockers.md"), message)
+        self.assertIn("HTTP Error 403: Forbidden", message)
 
 
 if __name__ == "__main__":

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import math
+import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any, Callable, TypeVar
@@ -60,9 +61,23 @@ def main() -> int:
         source_cache.reset()
 
     if args.command == "pets":
-        return generate_pets(Path(args.output), args.limit_families, source_cache=source_cache)
+        exit_code = generate_pets(
+            Path(args.output),
+            args.limit_families,
+            source_cache=source_cache,
+            generated_dir=GENERATED_DIR,
+        )
+        _print_failure_report(exit_code, "pets", GENERATED_DIR)
+        return exit_code
     if args.command == "stable-masters":
-        return generate_stable_masters(Path(args.output), args.limit, source_cache=source_cache)
+        exit_code = generate_stable_masters(
+            Path(args.output),
+            args.limit,
+            source_cache=source_cache,
+            generated_dir=GENERATED_DIR,
+        )
+        _print_failure_report(exit_code, "stable-masters", GENERATED_DIR)
+        return exit_code
     raise AssertionError(args.command)
 
 
@@ -487,6 +502,31 @@ def _malformed_mapper_source_error(source_cache: SourceCache, source, parse_erro
 
 def _clear_lines(path: Path) -> None:
     path.unlink(missing_ok=True)
+
+
+def _print_failure_report(exit_code: int, command: str, generated_dir: Path) -> None:
+    if exit_code == 0:
+        return
+    report_paths = {
+        "pets": [
+            generated_dir / "pet-refresh-blockers.md",
+            generated_dir / "pet-validation-errors.md",
+        ],
+        "stable-masters": [
+            generated_dir / "stable-master-blockers.md",
+            generated_dir / "stable-master-validation-errors.md",
+        ],
+    }[command]
+    existing_reports = [path for path in report_paths if path.exists()]
+    if not existing_reports:
+        print("Refresh failed. No failure report was written.", file=sys.stderr)
+        return
+    print("Refresh failed. See:", file=sys.stderr)
+    for path in existing_reports:
+        print(f"- {path}", file=sys.stderr)
+        summary = path.read_text(encoding="utf-8").strip()
+        if summary:
+            print(summary, file=sys.stderr)
 
 
 def _write_pet_blockers(generated_dir: Path, lines: list[str]) -> None:

@@ -1,5 +1,39 @@
 # Data Refresh Runbook
 
+## Guia Rapido Em Portugues
+
+Rode a partir da raiz do repositorio:
+
+```bash
+rtk python3 -m scrapper.refresh_data pets --output scrapper/generated/Data.lua --resume
+```
+
+Se der certo, o arquivo novo aparece em `scrapper/generated/Data.lua`.
+
+Se falhar, o comando imprime o arquivo de diagnostico. Para pets, leia:
+
+```bash
+rtk sed -n '1,120p' scrapper/generated/pet-refresh-blockers.md
+rtk sed -n '1,120p' scrapper/generated/pet-validation-errors.md
+```
+
+O erro `HTTP Error 403: Forbidden` quer dizer que o Wowhead bloqueou a coleta antes de baixar os dados. Nesse caso o pipeline nao escreve `Data.lua`, de proposito, para evitar trocar dados bons por uma coleta incompleta.
+
+Para stable masters:
+
+```bash
+rtk python3 -m scrapper.refresh_data stable-masters --output scrapper/generated/StableMastersData.lua --resume
+rtk sed -n '1,120p' scrapper/generated/stable-master-blockers.md
+rtk sed -n '1,120p' scrapper/generated/stable-master-validation-errors.md
+```
+
+O cache/progresso fica em:
+
+- `scrapper/generated/cache/`
+- `scrapper/generated/refresh-manifest.json`
+
+Use `--reset-cache` somente quando quiser descartar o cache e tentar tudo do zero.
+
 ## Source Shape
 
 Validated with `agent-browser 0.26.0` on 2026-04-28/2026-04-29:
