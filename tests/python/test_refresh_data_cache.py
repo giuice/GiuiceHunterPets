@@ -74,11 +74,6 @@ def stable_mapper_html():
     """
 
 
-def assert_empty_or_missing(test_case, path):
-    if path.exists():
-        test_case.assertEqual("", path.read_text(encoding="utf-8"))
-
-
 class RefreshDataCacheTest(unittest.TestCase):
     def setUp(self):
         self.tempdir = tempfile.TemporaryDirectory()
@@ -163,6 +158,34 @@ class RefreshDataCacheTest(unittest.TestCase):
         self.assertIn(pet_family_url(46), blockers)
         self.assertIn("HTTP Error 403: Forbidden", blockers)
 
+    def test_generate_pets_blocks_empty_tameable_family_source(self):
+        pages = {
+            HUNTER_PETS_URL: pets_index_html(),
+            pet_family_url(46): """
+            <script>
+            new Listview({
+                id: 'tameable',
+                data: []
+            });
+            </script>
+            """,
+        }
+        cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=lambda url: pages[url])
+        output = self.root / "Data.lua"
+
+        exit_code = generate_pets(
+            output,
+            limit_families=0,
+            source_cache=cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(exit_code, 1)
+        self.assertFalse(output.exists())
+        blockers = (self.root / "pet-refresh-blockers.md").read_text(encoding="utf-8")
+        self.assertIn("No tameable pets found", blockers)
+        self.assertIn(pet_family_url(46), blockers)
+
     def test_generate_pets_blocks_all_skipped_records(self):
         pages = {
             HUNTER_PETS_URL: pets_index_html(),
@@ -213,8 +236,8 @@ class RefreshDataCacheTest(unittest.TestCase):
         )
 
         self.assertEqual(exit_code, 0)
-        assert_empty_or_missing(self, self.root / "pet-refresh-blockers.md")
-        assert_empty_or_missing(self, self.root / "pet-validation-errors.md")
+        self.assertFalse((self.root / "pet-refresh-blockers.md").exists())
+        self.assertFalse((self.root / "pet-validation-errors.md").exists())
 
     def test_generate_stable_masters_uses_source_cache(self):
         pages = {
@@ -274,8 +297,8 @@ class RefreshDataCacheTest(unittest.TestCase):
         )
 
         self.assertEqual(exit_code, 0)
-        assert_empty_or_missing(self, self.root / "stable-master-blockers.md")
-        assert_empty_or_missing(self, self.root / "stable-master-validation-errors.md")
+        self.assertFalse((self.root / "stable-master-blockers.md").exists())
+        self.assertFalse((self.root / "stable-master-validation-errors.md").exists())
 
     def test_main_reset_cache_clears_existing_sources_before_refresh(self):
         stale_pages = {

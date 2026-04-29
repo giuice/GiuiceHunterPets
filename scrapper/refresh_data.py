@@ -199,7 +199,7 @@ def generate_stable_masters(
 
 
 def _clear_lines(path: Path) -> None:
-    path.write_text("", encoding="utf-8")
+    path.unlink(missing_ok=True)
 
 
 def _write_lines(path: Path, lines: list[str]) -> None:
