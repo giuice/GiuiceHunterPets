@@ -228,6 +228,7 @@ def generate_stable_masters(
                 _stable_master_npc_id(row, index),
                 _stable_master_name(row, index),
                 _stable_master_location_ids(row, index),
+                _required_react(row, index, "stable master"),
             )
             for index, row in enumerate(rows)
         ]
@@ -241,7 +242,7 @@ def generate_stable_masters(
 
     records = []
     skipped = []
-    for row, npc_id, _name, locations in rows_with_values:
+    for row, npc_id, _name, locations, _react in rows_with_values:
         try:
             source, mapper_data = _extract_mapper_data_from_source(
                 source_cache,
@@ -319,7 +320,7 @@ def _validate_tameable_pet_rows(rows: list[dict[str, Any]]) -> None:
         _required_name(row, index, "tameable pet")
         _required_int(row, index, "tameable pet", "classification")
         _required_int_list(row, index, "tameable pet", "location")
-        _required_react(row, index)
+        _required_react(row, index, "tameable pet")
         _required_int(row, index, "tameable pet", "minlevel")
         _required_int(row, index, "tameable pet", "maxlevel")
 
@@ -349,24 +350,16 @@ def _required_int_list(row: dict[str, Any], index: int, row_name: str, field: st
     return raw_values
 
 
-def _required_react(row: dict[str, Any], index: int) -> None:
+def _required_react(row: dict[str, Any], index: int, row_name: str) -> None:
     react = row.get("react")
-    if not isinstance(react, list) or len(react) != 2:
-        raise ValueError(f"tameable pet row {index} react must be a two-item list")
-    for value in react:
-        if value is None:
-            continue
-        try:
-            int(value)
-        except (TypeError, ValueError) as error:
-            raise ValueError(f"tameable pet row {index} react values must be integers") from error
+    if not isinstance(react, list) or len(react) < 2:
+        raise ValueError(f"{row_name} row {index} react must be a list with at least two values")
+    if not all(_is_json_int(value) for value in react):
+        raise ValueError(f"{row_name} row {index} react values must be integers")
 
 
 def _stable_master_npc_id(row: dict, index: int) -> int:
-    raw_id = row.get("id")
-    if raw_id is None or raw_id == "":
-        raise ValueError(f"stable master row {index} is missing id")
-    return int(raw_id)
+    return _required_int(row, index, "stable master", "id")
 
 
 def _stable_master_name(row: dict, index: int) -> str:
@@ -384,7 +377,7 @@ def _stable_master_location_ids(row: dict, index: int) -> list[int]:
         )
     if not all(_is_json_int(value) for value in raw_locations):
         raise ValueError(f"stable master row {index} location values must be integers")
-    return [int(value) for value in raw_locations]
+    return raw_locations
 
 
 def _is_json_int(value: Any) -> bool:

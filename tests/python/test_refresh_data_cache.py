@@ -102,6 +102,26 @@ def pet_family_with_string_classification_html():
     """
 
 
+def pet_family_with_string_react_html():
+    return """
+    <script>
+    new Listview({
+        id: 'tameable',
+        data: [{
+            "id":32517,
+            "name":"Loque'nahak",
+            "family":46,
+            "classification":4,
+            "location":[3711],
+            "react":["-1","-1"],
+            "minlevel":30,
+            "maxlevel":30
+        }]
+    });
+    </script>
+    """
+
+
 def pet_family_object_data_html():
     return """
     <script>
@@ -209,6 +229,40 @@ def stable_search_missing_name_html():
             "id":185561,
             "tag":"Stable Master",
             "react":[1,1],
+            "location":[13862]
+        }]
+    });
+    </script>
+    """
+
+
+def stable_search_bool_id_html():
+    return """
+    <script>
+    new Listview({
+        id: 'npcs',
+        data: [{
+            "id":true,
+            "name":"Kaestrasz",
+            "tag":"Stable Master",
+            "react":[1,1],
+            "location":[13862]
+        }]
+    });
+    </script>
+    """
+
+
+def stable_search_string_react_html():
+    return """
+    <script>
+    new Listview({
+        id: 'npcs',
+        data: [{
+            "id":185561,
+            "name":"Kaestrasz",
+            "tag":"Stable Master",
+            "react":["1","-1"],
             "location":[13862]
         }]
     });
@@ -673,6 +727,62 @@ class RefreshDataCacheTest(unittest.TestCase):
         self.assertEqual(second_exit_code, 0)
         self.assertIn(family_url, second_calls)
         self.assertIn('["class"] = "Rare"', second_output.read_text(encoding="utf-8"))
+
+    def test_string_tameable_react_invalidates_family_and_retries_before_npc_fetch(self):
+        family_url = pet_family_url(46)
+        first_pages = {
+            HUNTER_PETS_URL: pets_index_html(),
+            family_url: pet_family_with_string_react_html(),
+            npc_url(32517): npc_mapper_html(),
+        }
+        first_calls = []
+
+        def first_fetcher(url):
+            first_calls.append(url)
+            return first_pages[url]
+
+        first_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=first_fetcher)
+        first_output = self.root / "Data.lua"
+
+        first_exit_code = generate_pets(
+            first_output,
+            limit_families=0,
+            source_cache=first_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(first_exit_code, 1)
+        self.assertFalse(first_output.exists())
+        self.assertNotIn(npc_url(32517), first_calls)
+        blockers = (self.root / "pet-refresh-blockers.md").read_text(encoding="utf-8")
+        self.assertIn("Malformed tameable pets source", blockers)
+        self.assertIn(family_url, blockers)
+        self.assert_source_invalidated(family_url)
+
+        second_pages = {
+            HUNTER_PETS_URL: pets_index_html(),
+            family_url: pet_family_html(),
+            npc_url(32517): npc_mapper_html(),
+        }
+        second_calls = []
+
+        def second_fetcher(url):
+            second_calls.append(url)
+            return second_pages[url]
+
+        resumed_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=second_fetcher)
+        second_output = self.root / "Data.second.lua"
+
+        second_exit_code = generate_pets(
+            second_output,
+            limit_families=0,
+            source_cache=resumed_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(second_exit_code, 0)
+        self.assertIn(family_url, second_calls)
+        self.assertIn("Loque'nahak", second_output.read_text(encoding="utf-8"))
 
     def test_malformed_pet_family_rows_are_invalidated_and_retried_on_rerun(self):
         family_url = pet_family_url(46)
@@ -1292,6 +1402,114 @@ class RefreshDataCacheTest(unittest.TestCase):
         def fetcher(url):
             calls.append(url)
             return pages[url]
+
+        resumed_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=fetcher)
+        second_output = self.root / "StableMastersData.second.lua"
+
+        second_exit_code = generate_stable_masters(
+            second_output,
+            limit=0,
+            source_cache=resumed_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(second_exit_code, 0)
+        self.assertIn(STABLE_MASTER_SEARCH_URL, calls)
+        self.assertIn("Kaestrasz", second_output.read_text(encoding="utf-8"))
+
+    def test_stable_master_search_bool_id_is_invalidated_and_retried_before_npc_fetch(self):
+        stable_npc_url = npc_url(185561)
+        first_pages = {
+            STABLE_MASTER_SEARCH_URL: stable_search_bool_id_html(),
+            stable_npc_url: stable_mapper_html(),
+        }
+        first_calls = []
+
+        def first_fetcher(url):
+            first_calls.append(url)
+            return first_pages[url]
+
+        first_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=first_fetcher)
+        first_output = self.root / "StableMastersData.lua"
+
+        first_exit_code = generate_stable_masters(
+            first_output,
+            limit=0,
+            source_cache=first_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(first_exit_code, 1)
+        self.assertFalse(first_output.exists())
+        blockers = (self.root / "stable-master-blockers.md").read_text(encoding="utf-8")
+        self.assertIn("Malformed stable master search source", blockers)
+        self.assertIn(STABLE_MASTER_SEARCH_URL, blockers)
+        self.assert_source_invalidated(STABLE_MASTER_SEARCH_URL)
+        self.assertNotIn(stable_npc_url, first_calls)
+
+        second_pages = {
+            STABLE_MASTER_SEARCH_URL: stable_search_html(),
+            stable_npc_url: stable_mapper_html(),
+        }
+        calls = []
+
+        def fetcher(url):
+            calls.append(url)
+            return second_pages[url]
+
+        resumed_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=fetcher)
+        second_output = self.root / "StableMastersData.second.lua"
+
+        second_exit_code = generate_stable_masters(
+            second_output,
+            limit=0,
+            source_cache=resumed_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(second_exit_code, 0)
+        self.assertIn(STABLE_MASTER_SEARCH_URL, calls)
+        self.assertIn("Kaestrasz", second_output.read_text(encoding="utf-8"))
+
+    def test_stable_master_search_string_react_is_invalidated_and_retried_before_npc_fetch(self):
+        stable_npc_url = npc_url(185561)
+        first_pages = {
+            STABLE_MASTER_SEARCH_URL: stable_search_string_react_html(),
+            stable_npc_url: stable_mapper_html(),
+        }
+        first_calls = []
+
+        def first_fetcher(url):
+            first_calls.append(url)
+            return first_pages[url]
+
+        first_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=first_fetcher)
+        first_output = self.root / "StableMastersData.lua"
+
+        first_exit_code = generate_stable_masters(
+            first_output,
+            limit=0,
+            source_cache=first_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(first_exit_code, 1)
+        self.assertFalse(first_output.exists())
+        blockers = (self.root / "stable-master-blockers.md").read_text(encoding="utf-8")
+        self.assertIn("Malformed stable master search source", blockers)
+        self.assertIn(STABLE_MASTER_SEARCH_URL, blockers)
+        self.assert_source_invalidated(STABLE_MASTER_SEARCH_URL)
+        self.assertNotIn(stable_npc_url, first_calls)
+
+        second_pages = {
+            STABLE_MASTER_SEARCH_URL: stable_search_html(),
+            stable_npc_url: stable_mapper_html(),
+        }
+        calls = []
+
+        def fetcher(url):
+            calls.append(url)
+            return second_pages[url]
 
         resumed_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=fetcher)
         second_output = self.root / "StableMastersData.second.lua"
