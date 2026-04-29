@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import shutil
+import tempfile
 import threading
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -74,7 +75,7 @@ class SourceCache:
             self._record_error(normalized_url, role, cache_key, str(error))
             raise SourceFetchError(normalized_url, role, error) from error
 
-        path.write_text(text, encoding="utf-8")
+        self._write_text_atomic(path, text)
         self._record_ok(normalized_url, role, cache_key, path)
         return SourceResult(
             url=normalized_url,
@@ -120,10 +121,29 @@ class SourceCache:
 
     def _write_manifest(self, manifest: dict) -> None:
         self.manifest_path.parent.mkdir(parents=True, exist_ok=True)
-        self.manifest_path.write_text(
+        self._write_text_atomic(
+            self.manifest_path,
             json.dumps(manifest, indent=2, sort_keys=True) + "\n",
-            encoding="utf-8",
         )
+
+    def _write_text_atomic(self, path: Path, text: str) -> None:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        temp_path = None
+        try:
+            with tempfile.NamedTemporaryFile(
+                "w",
+                encoding="utf-8",
+                dir=path.parent,
+                prefix=f".{path.name}.",
+                suffix=".tmp",
+                delete=False,
+            ) as temp_file:
+                temp_file.write(text)
+                temp_path = Path(temp_file.name)
+            temp_path.replace(path)
+        finally:
+            if temp_path is not None and temp_path.exists():
+                temp_path.unlink()
 
     def _normalize_url(self, url: str) -> str:
         return url.strip()
