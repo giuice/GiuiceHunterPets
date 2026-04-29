@@ -43,6 +43,19 @@ Review requirements:
 - If Wowhead blocks source fetches, `scrapper/generated/pet-refresh-blockers.md` records the HTTP error and production `Data.lua` must not be replaced.
 - Coordinate-heavy diffs are expected; missing-coordinate records are not accepted into generated output.
 
+## Resume And Cache Requirements
+
+Full refreshes must be resumable. The pipeline should persist fetched Wowhead pages and progress metadata before attempting Lua export.
+
+Required behavior:
+
+- Cache each fetched source page under `scrapper/generated/cache/`.
+- Record progress and failures in a manifest file.
+- Reuse cached pages on rerun instead of downloading them again.
+- Retry only failed or missing URLs.
+- Generate production Lua only from a complete validated source set.
+- Never discard successfully fetched source data when a later request fails.
+
 ## Stable Master Feasibility
 
 ```bash
