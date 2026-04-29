@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
+from typing import Callable, TypeVar
 
 from scrapper.data_records import (
     build_pet_record,
@@ -31,6 +32,8 @@ from scrapper.wowhead_source import (
 GENERATED_DIR = Path("scrapper/generated")
 MANIFEST_PATH = GENERATED_DIR / "refresh-manifest.json"
 FETCH_WORKERS = 4
+T = TypeVar("T")
+SEMANTIC_SOURCE_ERRORS = (ValueError, TypeError, KeyError, AttributeError)
 
 
 def main() -> int:
@@ -78,10 +81,15 @@ def generate_pets(
         _write_lines(generated_dir / "pet-refresh-blockers.md", [str(error)])
         return 1
     try:
-        families = source_family_rows(extract_listview_data(index_source.text, "pets"))
-    except ValueError as parse_error:
-        error = f"Malformed pet index source: {index_source.url}: {parse_error}"
-        source_cache.invalidate(index_source.url, index_source.role, error)
+        families = _listview_rows_from_source(
+            source_cache,
+            index_source,
+            "pets",
+            "Malformed pet index source",
+            source_family_rows,
+        )
+    except ValueError as semantic_error:
+        error = str(semantic_error)
         _write_lines(generated_dir / "pet-refresh-blockers.md", [error])
         return 1
     if not families:
@@ -110,10 +118,15 @@ def generate_pets(
                 )
                 return 1
             try:
-                tameable_rows = source_tameable_rows(extract_listview_data(family_source.text, "tameable"))
-            except ValueError as parse_error:
-                error = f"Malformed tameable pets source for family {family.name}: {family_source.url}: {parse_error}"
-                source_cache.invalidate(family_source.url, family_source.role, error)
+                tameable_rows = _listview_rows_from_source(
+                    source_cache,
+                    family_source,
+                    "tameable",
+                    f"Malformed tameable pets source for family {family.name}",
+                    source_tameable_rows,
+                )
+            except ValueError as semantic_error:
+                error = str(semantic_error)
                 _write_lines(generated_dir / "pet-refresh-blockers.md", [error])
                 return 1
             if not tameable_rows:
@@ -178,10 +191,15 @@ def generate_stable_masters(
         _write_lines(generated_dir / "stable-master-blockers.md", [str(error)])
         return 1
     try:
-        raw_rows = extract_listview_data(search_source.text, "npcs")
-    except ValueError as parse_error:
-        error = f"Malformed stable master search source: {search_source.url}: {parse_error}"
-        source_cache.invalidate(search_source.url, search_source.role, error)
+        raw_rows = _listview_rows_from_source(
+            source_cache,
+            search_source,
+            "npcs",
+            "Malformed stable master search source",
+            lambda rows: rows,
+        )
+    except ValueError as semantic_error:
+        error = str(semantic_error)
         _write_lines(generated_dir / "stable-master-blockers.md", [error])
         return 1
     if not raw_rows:
@@ -195,16 +213,23 @@ def generate_stable_masters(
         source_cache.invalidate(search_source.url, search_source.role, error)
         _write_lines(generated_dir / "stable-master-blockers.md", [error])
         return 1
+    try:
+        rows_with_ids = [(row, _stable_master_npc_id(row, index)) for index, row in enumerate(rows)]
+    except SEMANTIC_SOURCE_ERRORS as parse_error:
+        error = f"Malformed stable master search source: {search_source.url}: {parse_error}"
+        source_cache.invalidate(search_source.url, search_source.role, error)
+        _write_lines(generated_dir / "stable-master-blockers.md", [error])
+        return 1
     if limit:
-        rows = rows[:limit]
+        rows_with_ids = rows_with_ids[:limit]
 
     records = []
     skipped = []
-    for row in rows:
+    for row, npc_id in rows_with_ids:
         try:
             mapper_data = _extract_mapper_data_from_source(
                 source_cache,
-                npc_url(int(row["id"])),
+                npc_url(npc_id),
                 "stable-master-npc",
             )
         except SourceFetchError as error:
@@ -231,6 +256,38 @@ def generate_stable_masters(
     _write_lines(generated_dir / "stable-master-skipped.md", skipped)
     print(f"Wrote {len(records)} stable master records to {output}")
     return 0
+
+
+def _listview_rows_from_source(
+    source_cache: SourceCache,
+    source,
+    listview_id: str,
+    error_prefix: str,
+    normalizer: Callable[[list[dict]], T],
+) -> T:
+    try:
+        rows = extract_listview_data(source.text, listview_id)
+        _require_list_rows(rows, listview_id)
+        return normalizer(rows)
+    except SEMANTIC_SOURCE_ERRORS as parse_error:
+        error = f"{error_prefix}: {source.url}: {parse_error}"
+        source_cache.invalidate(source.url, source.role, error)
+        raise ValueError(error) from parse_error
+
+
+def _require_list_rows(rows, listview_id: str) -> None:
+    if not isinstance(rows, list):
+        raise ValueError(f"listview {listview_id} data must be a list of objects, got {type(rows).__name__}")
+    for index, row in enumerate(rows):
+        if not isinstance(row, dict):
+            raise ValueError(f"listview {listview_id} row {index} must be an object, got {type(row).__name__}")
+
+
+def _stable_master_npc_id(row: dict, index: int) -> int:
+    raw_id = row.get("id")
+    if raw_id is None or raw_id == "":
+        raise ValueError(f"stable master row {index} is missing id")
+    return int(raw_id)
 
 
 def _extract_mapper_data_from_source(source_cache: SourceCache, url: str, role: str):
