@@ -190,6 +190,11 @@ def generate_stable_masters(
         _write_lines(generated_dir / "stable-master-blockers.md", [error])
         return 1
     rows = [row for row in raw_rows if "Stable Master" in str(row.get("tag", ""))]
+    if not rows:
+        error = f"No stable master rows found in search source: {search_source.url}"
+        source_cache.invalidate(search_source.url, search_source.role, error)
+        _write_lines(generated_dir / "stable-master-blockers.md", [error])
+        return 1
     if limit:
         rows = rows[:limit]
 
@@ -238,6 +243,13 @@ def _extract_mapper_data_from_source(source_cache: SourceCache, url: str, role: 
         raise SourceFetchError(source.url, source.role, ValueError(error)) from parse_error
     if mapper_data is None:
         error = f"Missing g_mapperData assignment in source: {source.url}"
+        source_cache.invalidate(source.url, source.role, error)
+        raise SourceFetchError(source.url, source.role, ValueError(error))
+    if not isinstance(mapper_data, dict):
+        error = (
+            f"Invalid g_mapperData assignment in source: {source.url}: "
+            f"expected object, got {type(mapper_data).__name__}"
+        )
         source_cache.invalidate(source.url, source.role, error)
         raise SourceFetchError(source.url, source.role, ValueError(error))
     return mapper_data
