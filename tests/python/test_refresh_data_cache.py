@@ -1,8 +1,10 @@
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 from urllib.error import HTTPError
 
+from scrapper import refresh_data
 from scrapper.refresh_data import generate_pets, generate_stable_masters
 from scrapper.source_cache import SourceCache
 from scrapper.wowhead_source import HUNTER_PETS_URL, STABLE_MASTER_SEARCH_URL, npc_url, pet_family_url
@@ -166,6 +168,39 @@ class RefreshDataCacheTest(unittest.TestCase):
 
         self.assertEqual(second_exit_code, 0)
         self.assertIn("Kaestrasz", second_output.read_text(encoding="utf-8"))
+
+    def test_main_reset_cache_clears_existing_sources_before_refresh(self):
+        pages = {
+            HUNTER_PETS_URL: pets_index_html(),
+            pet_family_url(46): pet_family_html(),
+            npc_url(32517): npc_mapper_html(),
+        }
+        cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=lambda url: pages[url])
+        cached = cache.get_text(HUNTER_PETS_URL, "pet-index")
+        self.assertTrue(cached.path.exists())
+
+        created_caches = []
+
+        def cache_factory(cache_dir, manifest_path, fetcher):
+            created = SourceCache(self.cache_dir, self.manifest_path, fetcher=lambda url: pages[url])
+            created_caches.append(created)
+            return created
+
+        argv = [
+            "refresh_data.py",
+            "pets",
+            "--output",
+            str(self.root / "Data.lua"),
+            "--reset-cache",
+        ]
+        with patch.object(refresh_data, "SourceCache", side_effect=cache_factory):
+            with patch("sys.argv", argv):
+                exit_code = refresh_data.main()
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(len(created_caches), 1)
+        self.assertTrue(self.manifest_path.exists())
+        self.assertIn("Loque'nahak", (self.root / "Data.lua").read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":
