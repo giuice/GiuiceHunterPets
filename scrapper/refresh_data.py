@@ -171,8 +171,12 @@ def generate_pets(
 
 def _build_pet_record_from_source(family, tameable, source_cache: SourceCache):
     source_url = npc_url(tameable.id)
-    mapper_data = _extract_mapper_data_from_source(source_cache, source_url, "pet-npc")
-    return tameable, build_pet_record(family, tameable, mapper_data)
+    source, mapper_data = _extract_mapper_data_from_source(source_cache, source_url, "pet-npc")
+    try:
+        record = build_pet_record(family, tameable, mapper_data)
+    except SEMANTIC_SOURCE_ERRORS as parse_error:
+        raise _malformed_mapper_source_error(source_cache, source, parse_error) from parse_error
+    return tameable, record
 
 
 def generate_stable_masters(
@@ -227,15 +231,19 @@ def generate_stable_masters(
     skipped = []
     for row, npc_id in rows_with_ids:
         try:
-            mapper_data = _extract_mapper_data_from_source(
+            source, mapper_data = _extract_mapper_data_from_source(
                 source_cache,
                 npc_url(npc_id),
                 "stable-master-npc",
             )
+            record = build_stable_master_record(row, mapper_data)
         except SourceFetchError as error:
             _write_lines(generated_dir / "stable-master-blockers.md", [str(error)])
             return 1
-        record = build_stable_master_record(row, mapper_data)
+        except SEMANTIC_SOURCE_ERRORS as parse_error:
+            error = _malformed_mapper_source_error(source_cache, source, parse_error)
+            _write_lines(generated_dir / "stable-master-blockers.md", [str(error)])
+            return 1
         if record is None:
             skipped.append(f"{row.get('id')} {row.get('name')}: no valid stable master coordinates")
             continue
@@ -309,7 +317,13 @@ def _extract_mapper_data_from_source(source_cache: SourceCache, url: str, role: 
         )
         source_cache.invalidate(source.url, source.role, error)
         raise SourceFetchError(source.url, source.role, ValueError(error))
-    return mapper_data
+    return source, mapper_data
+
+
+def _malformed_mapper_source_error(source_cache: SourceCache, source, parse_error: Exception) -> SourceFetchError:
+    error = f"Malformed g_mapperData values in source: {source.url}: {parse_error}"
+    source_cache.invalidate(source.url, source.role, error)
+    return SourceFetchError(source.url, source.role, ValueError(error))
 
 
 def _clear_lines(path: Path) -> None:
