@@ -40,14 +40,14 @@ def main() -> int:
     pets = subparsers.add_parser("pets")
     pets.add_argument("--output", default=str(GENERATED_DIR / "Data.lua"))
     pets.add_argument("--limit-families", type=int, default=0)
-    pets.add_argument("--resume", action="store_true")
-    pets.add_argument("--reset-cache", action="store_true")
+    pets.add_argument("--resume", action="store_true", help="Reuse cached source pages when available.")
+    pets.add_argument("--reset-cache", action="store_true", help="Delete cached source pages before fetching.")
 
     stable = subparsers.add_parser("stable-masters")
     stable.add_argument("--output", default=str(GENERATED_DIR / "StableMastersData.lua"))
     stable.add_argument("--limit", type=int, default=0)
-    stable.add_argument("--resume", action="store_true")
-    stable.add_argument("--reset-cache", action="store_true")
+    stable.add_argument("--resume", action="store_true", help="Reuse cached source pages when available.")
+    stable.add_argument("--reset-cache", action="store_true", help="Delete cached source pages before fetching.")
 
     args = parser.parse_args()
     GENERATED_DIR.mkdir(parents=True, exist_ok=True)
