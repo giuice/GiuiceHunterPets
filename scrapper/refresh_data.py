@@ -221,7 +221,12 @@ def generate_stable_masters(
         return 1
     try:
         rows_with_values = [
-            (row, _stable_master_npc_id(row, index), _stable_master_location_ids(row, index))
+            (
+                row,
+                _stable_master_npc_id(row, index),
+                _stable_master_name(row, index),
+                _stable_master_location_ids(row, index),
+            )
             for index, row in enumerate(rows)
         ]
     except SEMANTIC_SOURCE_ERRORS as parse_error:
@@ -234,7 +239,7 @@ def generate_stable_masters(
 
     records = []
     skipped = []
-    for row, npc_id, locations in rows_with_values:
+    for row, npc_id, _name, locations in rows_with_values:
         try:
             source, mapper_data = _extract_mapper_data_from_source(
                 source_cache,
@@ -302,6 +307,13 @@ def _stable_master_npc_id(row: dict, index: int) -> int:
     if raw_id is None or raw_id == "":
         raise ValueError(f"stable master row {index} is missing id")
     return int(raw_id)
+
+
+def _stable_master_name(row: dict, index: int) -> str:
+    raw_name = row.get("name")
+    if not isinstance(raw_name, str) or not raw_name.strip():
+        raise ValueError(f"stable master row {index} is missing name")
+    return raw_name
 
 
 def _stable_master_location_ids(row: dict, index: int) -> list[int]:
@@ -385,10 +397,18 @@ def _validate_mapper_coords(location_id: int, key: Any, coords: Any) -> None:
             raise ValueError(
                 f"mapper location {location_id} entry {key} coords {index} must have finite numeric x/y values"
             )
+        if not _is_percentage_coordinate(x) or not _is_percentage_coordinate(y):
+            raise ValueError(
+                f"mapper location {location_id} entry {key} coords {index} x/y values must be between 0 and 100"
+            )
 
 
 def _is_finite_real_number(value: Any) -> bool:
     return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+
+
+def _is_percentage_coordinate(value: int | float) -> bool:
+    return 0 <= value <= 100
 
 
 def _malformed_mapper_source_error(source_cache: SourceCache, source, parse_error: Exception) -> SourceFetchError:
