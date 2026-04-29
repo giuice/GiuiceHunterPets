@@ -24,6 +24,8 @@ Settings.lua
 
 # Templates
 GiuiceHunterPets.xml
+StablePetList.lua
+MapPetIndex.lua
 GiuiceHunterPetListItemMixin.lua
 GiuiceWorldMapButton.lua
 

@@ -3,9 +3,21 @@ local HBD = LibStub("HereBeDragons-2.0");
 local petPins = LibStub("HereBeDragons-Pins-2.0");
 if (select(3, UnitClass("player")) ~= 3) then return end
 
--- Create model frame once
-local petTooltipModel = CreateFrame("PlayerModel", "GHPTooltipModel", GameTooltip)
-petTooltipModel:Hide()
+local function EnsurePetIndexes()
+    if not GHP.pet_by_zones then
+        return
+    end
+
+    if GHP.mapPetIndexSource ~= GHP.pet_by_zones then
+        GHP.mapPetIndex = GHP.BuildMapPetIndex(GHP.pet_by_zones)
+        GHP.tameableCreatureIndex = GHP.BuildTameableCreatureIndex(GHP.pet_by_zones)
+        GHP.mapPetIndexSource = GHP.pet_by_zones
+    end
+end
+
+EnsurePetIndexes()
+
+local petTooltipModel
 
 
 
@@ -233,26 +245,33 @@ local function RemoveAllPins()
     petPins:RemoveAllWorldMapIcons("GiuiceHunterPetsIcons")
 end
 
-local pinSettingsTableOptions = {
-    [1] = "allpets",
-    [2] = "rarepets",
-    [3] = "elitepets",
-    [4] = "nopets"
-}
-
-
 local function SetupTooltipModel(displayId)
-    
-    --petTooltipModel:SetSize(tooltipWidth / 1.5, tooltipHeight*4)
-    petTooltipModel:SetSize(130, 130)
-    petTooltipModel:SetDisplayInfo(displayId)
-    petTooltipModel:SetFrameStrata("TOOLTIP")
-    -- Position to right of tooltip content
-    --petTooltipModel:ClearAllPoints()
-    --petTooltipModel:SetPoint("TOPRIGHT",-4,  -40)
+    if not displayId then
+        return
+    end
+
+    if not petTooltipModel then
+        petTooltipModel = CreateFrame("ModelScene", "GHPTooltipModel", GameTooltip, "PanningModelSceneMixinTemplate")
+        petTooltipModel:SetSize(130, 130)
+        petTooltipModel:SetFrameStrata("TOOLTIP")
+    end
+
+    petTooltipModel:ClearAllPoints()
     petTooltipModel:SetPoint("TOPRIGHT", GameTooltip, "TOPRIGHT", -4, -30)
-    --petTooltipModel:SetPoint("TOPLEFT", GameTooltip, "TOPRIGHT", -10, 0)
-    petTooltipModel:SetFacing(20 * math.pi / 180)
+    petTooltipModel:ClearScene()
+    petTooltipModel:TransitionToModelSceneID(718, CAMERA_TRANSITION_TYPE_IMMEDIATE, CAMERA_MODIFICATION_TYPE_DISCARD, true)
+
+    local actor = petTooltipModel:GetActorByTag("pet")
+    if not actor then
+        actor = petTooltipModel:CreateActorByTag("pet")
+    end
+
+    if actor then
+        actor:SetModelByCreatureDisplayID(displayId)
+        actor:SetScale(0.8)
+        actor:Show()
+    end
+
     petTooltipModel:Show()
 end
 
@@ -329,24 +348,15 @@ local function UpdateMinimapPins()
     local playerMapID = HBD:GetPlayerZone()
     if not playerMapID then return end
 
+    EnsurePetIndexes()
+
     -- Clear existing pins
     ClearMinimapPins()
 
     -- Get minimap frame data
     local frameLevel, frameStrata = getMinimapData()
 
-    -- Filter pets based on world map settings
-    local filteredPets = {}
-    for _, petData in ipairs(GHP.pet_by_zones) do
-        if petData.zoneID == playerMapID then
-            local setting = pinSettingsTableOptions[GHP_SavedVars.worldMapPins or 1]
-            if (setting == "rarepets" and petData.class == "Rare") or
-               (setting == "elitepets" and petData.class == "Elite") or
-               (setting == "allpets") then
-                table.insert(filteredPets, petData)
-            end
-        end
-    end
+    local filteredPets = GHP.GetPetsForMap(GHP.mapPetIndex, playerMapID, GHP_SavedVars.worldMapPins or 1)
 
     -- Create minimap pins
     for _, petData in ipairs(filteredPets) do
@@ -365,12 +375,12 @@ local function UpdateMinimapPins()
     end
 end
 
+local lastWorldMapPinKey
+
 local function DisplayPetIcons()
     if not GHP_SavedVars.worldMapPins or GHP_SavedVars.worldMapPins == 4 then
         return
     end  
-    -- 1. Clear existing pins
-    petPins:RemoveAllWorldMapIcons("GiuiceHunterPetsIcons")
 
     -- 2. Get current map ID
     local playerMapID = C_Map.GetBestMapForUnit("player")
@@ -379,18 +389,18 @@ local function DisplayPetIcons()
         return
     end
 
-     -- Filter pets based on settings
-     local filteredPets = {}
-     for _, petData in ipairs(GHP.pet_by_zones) do
-         if petData.zoneID == playerMapID then
-             local setting = pinSettingsTableOptions[GHP_SavedVars.worldMapPins]
-             if (setting == "rarepets" and petData.class == "Rare") or
-                (setting == "elitepets" and petData.class == "Elite") or
-                (setting == "allpets") then
-                 table.insert(filteredPets, petData)
-             end
-         end
-     end
+    EnsurePetIndexes()
+
+    local pinKey = tostring(playerMapID) .. ":" .. tostring(GHP_SavedVars.worldMapPins or 1)
+    if lastWorldMapPinKey == pinKey then
+        return
+    end
+    lastWorldMapPinKey = pinKey
+
+    -- 1. Clear existing pins
+    petPins:RemoveAllWorldMapIcons("GiuiceHunterPetsIcons")
+
+    local filteredPets = GHP.GetPetsForMap(GHP.mapPetIndex, playerMapID, GHP_SavedVars.worldMapPins)
 
     -- 3. Add pins for each pet location
     for _, petData in ipairs(filteredPets) do
@@ -469,7 +479,9 @@ local function DisplayPetIcons()
 
                 pin:SetScript("OnLeave", function(self)
                     GameTooltip:Hide()
-                    petTooltipModel:Hide()
+                    if petTooltipModel then
+                        petTooltipModel:Hide()
+                    end
                 end)
 
                 -- 7. Add the pin using HBD-Pins
@@ -482,20 +494,25 @@ end
 
 
 -- Function to manage events based on setting
+local worldMapHooksRegistered = false
+
 local function ManageWorldMapEvents(value)
     if value ~= 4 then
-        WorldMapFrame:HookScript("OnShow", DisplayPetIcons)
         WorldMapFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-        WorldMapFrame:HookScript("OnEvent", DisplayPetIcons)
-    else
+
+        if not worldMapHooksRegistered then
+            WorldMapFrame:HookScript("OnShow", DisplayPetIcons)
+            WorldMapFrame:HookScript("OnEvent", function(_, event)
+                if event == "ZONE_CHANGED_NEW_AREA" then
+                    lastWorldMapPinKey = nil
+                    DisplayPetIcons()
+                end
+            end)
+            worldMapHooksRegistered = true
+        end
+    elseif value == 4 then
         WorldMapFrame:UnregisterEvent("ZONE_CHANGED_NEW_AREA")
-        -- Unhook scripts if possible
-        if WorldMapFrame.OnShow then
-            WorldMapFrame:SetScript("OnShow", WorldMapFrame.OnShow)
-        end
-        if WorldMapFrame.OnEvent then
-            WorldMapFrame:SetScript("OnEvent", WorldMapFrame.OnEvent)
-        end
+        lastWorldMapPinKey = nil
     end
 end
 
@@ -504,6 +521,7 @@ GHP.OnWorldMapPinsSettingChanged = function(setting, value)
     GHP_SavedVars["worldMapPins"] = value
     
     if value == 4 or not value then
+        lastWorldMapPinKey = nil
         RemoveAllPins()
     end
     ManageWorldMapEvents(value)

@@ -22,6 +22,10 @@ GiuiceHunterPets is a World of Warcraft addon that lists all hunter pets in a cu
 - To toggle the hunter pet list frame, use the slash command: /hunterpets
 - To toggle the battle pet list frame, use the slash command: /petlist
 
+## Stable Data Behavior
+
+The pet list uses Blizzard's `C_StableInfo` APIs. If the game client has not loaded the full stable for the current hunter yet, GiuiceHunterPets shows a message instead of an empty silent list. Opening a stable master on that hunter loads the full stable data and the addon refreshes after the stable update events.
+
 ## Files
 
 - `GiuiceHunterPets.lua`: Main Lua file for the hunter pets functionality.
