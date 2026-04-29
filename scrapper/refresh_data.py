@@ -326,12 +326,11 @@ def _validate_tameable_pet_rows(rows: list[dict[str, Any]]) -> None:
 
 def _required_int(row: dict[str, Any], index: int, row_name: str, field: str) -> int:
     raw_value = row.get(field)
-    if raw_value is None or raw_value == "":
+    if raw_value is None:
         raise ValueError(f"{row_name} row {index} is missing {field}")
-    try:
-        return int(raw_value)
-    except (TypeError, ValueError) as error:
-        raise ValueError(f"{row_name} row {index} {field} must be an integer") from error
+    if not _is_json_int(raw_value):
+        raise ValueError(f"{row_name} row {index} {field} must be an integer")
+    return raw_value
 
 
 def _required_name(row: dict[str, Any], index: int, row_name: str) -> str:
@@ -345,10 +344,9 @@ def _required_int_list(row: dict[str, Any], index: int, row_name: str, field: st
     raw_values = row.get(field)
     if not isinstance(raw_values, list) or not raw_values:
         raise ValueError(f"{row_name} row {index} {field} must be a non-empty list")
-    try:
-        return [int(value) for value in raw_values]
-    except (TypeError, ValueError) as error:
-        raise ValueError(f"{row_name} row {index} {field} values must be integers") from error
+    if not all(_is_json_int(value) for value in raw_values):
+        raise ValueError(f"{row_name} row {index} {field} values must be integers")
+    return raw_values
 
 
 def _required_react(row: dict[str, Any], index: int) -> None:
@@ -384,7 +382,13 @@ def _stable_master_location_ids(row: dict, index: int) -> list[int]:
         raise ValueError(
             f"stable master row {index} location must be a list, got {type(raw_locations).__name__}"
         )
+    if not all(_is_json_int(value) for value in raw_locations):
+        raise ValueError(f"stable master row {index} location values must be integers")
     return [int(value) for value in raw_locations]
+
+
+def _is_json_int(value: Any) -> bool:
+    return isinstance(value, int) and not isinstance(value, bool)
 
 
 def _extract_mapper_data_from_source(source_cache: SourceCache, url: str, role: str):
