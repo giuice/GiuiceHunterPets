@@ -25,7 +25,7 @@ Expected:
 ## Full Pet Refresh
 
 ```bash
-rtk python3 -m scrapper.refresh_data pets --output scrapper/generated/Data.lua
+rtk python3 -m scrapper.refresh_data pets --output scrapper/generated/Data.lua --resume
 ```
 
 Before replacing production `Data.lua`:
@@ -43,23 +43,44 @@ Review requirements:
 - If Wowhead blocks source fetches, `scrapper/generated/pet-refresh-blockers.md` records the HTTP error and production `Data.lua` must not be replaced.
 - Coordinate-heavy diffs are expected; missing-coordinate records are not accepted into generated output.
 
-## Resume And Cache Requirements
+## Resume And Cache Workflow
 
-Full refreshes must be resumable. The pipeline should persist fetched Wowhead pages and progress metadata before attempting Lua export.
+Full refreshes are resumable. The pipeline persists fetched Wowhead pages under `scrapper/generated/cache/` and records progress in `scrapper/generated/refresh-manifest.json`.
+
+Resume is the safe default when cached pages exist. Use `--resume` in manual commands to make intent explicit:
+
+```bash
+rtk python3 -m scrapper.refresh_data pets --output scrapper/generated/Data.lua --resume
+rtk python3 -m scrapper.refresh_data stable-masters --output scrapper/generated/StableMastersData.lua --resume
+```
+
+Use `--reset-cache` only when intentionally discarding saved source pages:
+
+```bash
+rtk python3 -m scrapper.refresh_data pets --output scrapper/generated/Data.lua --reset-cache
+rtk python3 -m scrapper.refresh_data stable-masters --output scrapper/generated/StableMastersData.lua --reset-cache
+```
+
+Inspect the manifest when a refresh fails:
+
+```bash
+rtk sed -n '1,200p' scrapper/generated/refresh-manifest.json
+rtk sed -n '1,120p' scrapper/generated/pet-refresh-blockers.md
+rtk sed -n '1,120p' scrapper/generated/stable-master-blockers.md
+```
 
 Required behavior:
 
-- Cache each fetched source page under `scrapper/generated/cache/`.
-- Record progress and failures in a manifest file.
-- Reuse cached pages on rerun instead of downloading them again.
-- Retry only failed or missing URLs.
-- Generate production Lua only from a complete validated source set.
-- Never discard successfully fetched source data when a later request fails.
+- Successful cached pages are reused indefinitely.
+- Missing or failed URLs are retried on rerun.
+- `--reset-cache` removes saved pages and starts a fresh collection.
+- Generated Lua is written only from a complete validated source set.
+- Production `Data.lua` and `StableMastersData.lua` are replaced only after generated output validates and the diff is reviewed.
 
 ## Stable Master Feasibility
 
 ```bash
-rtk python3 -m scrapper.refresh_data stable-masters --output scrapper/generated/StableMastersData.lua
+rtk python3 -m scrapper.refresh_data stable-masters --output scrapper/generated/StableMastersData.lua --resume
 ```
 
 If the command exits `0`, review:
