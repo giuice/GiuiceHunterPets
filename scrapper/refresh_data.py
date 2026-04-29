@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
-from typing import Callable, TypeVar
+from typing import Any, Callable, TypeVar
 
 from scrapper.data_records import (
     build_pet_record,
@@ -173,6 +173,7 @@ def _build_pet_record_from_source(family, tameable, source_cache: SourceCache):
     source_url = npc_url(tameable.id)
     source, mapper_data = _extract_mapper_data_from_source(source_cache, source_url, "pet-npc")
     try:
+        _validate_mapper_data_for_locations(mapper_data, tameable.location)
         record = build_pet_record(family, tameable, mapper_data)
     except SEMANTIC_SOURCE_ERRORS as parse_error:
         raise _malformed_mapper_source_error(source_cache, source, parse_error) from parse_error
@@ -236,6 +237,8 @@ def generate_stable_masters(
                 npc_url(npc_id),
                 "stable-master-npc",
             )
+            locations = [int(value) for value in row.get("location", [])]
+            _validate_mapper_data_for_locations(mapper_data, locations)
             record = build_stable_master_record(row, mapper_data)
         except SourceFetchError as error:
             _write_lines(generated_dir / "stable-master-blockers.md", [str(error)])
@@ -318,6 +321,38 @@ def _extract_mapper_data_from_source(source_cache: SourceCache, url: str, role: 
         source_cache.invalidate(source.url, source.role, error)
         raise SourceFetchError(source.url, source.role, ValueError(error))
     return source, mapper_data
+
+
+def _validate_mapper_data_for_locations(mapper_data: dict[str, Any], locations: list[int]) -> None:
+    for location_id in locations:
+        for key in (str(location_id), location_id):
+            if key in mapper_data:
+                _validate_mapper_entries(location_id, mapper_data[key])
+
+
+def _validate_mapper_entries(location_id: int, entries: Any) -> None:
+    if isinstance(entries, list):
+        for index, entry in enumerate(entries):
+            _validate_mapper_entry(location_id, index, entry)
+        return
+    if isinstance(entries, dict):
+        for key, entry in entries.items():
+            _validate_mapper_entry(location_id, key, entry)
+        return
+    raise ValueError(
+        f"mapper location {location_id} entries must be a list or object, got {type(entries).__name__}"
+    )
+
+
+def _validate_mapper_entry(location_id: int, key: Any, entry: Any) -> None:
+    if not isinstance(entry, dict):
+        raise ValueError(
+            f"mapper location {location_id} entry {key} must be an object, got {type(entry).__name__}"
+        )
+    if "coords" in entry and not isinstance(entry["coords"], list):
+        raise ValueError(
+            f"mapper location {location_id} entry {key} coords must be a list, got {type(entry['coords']).__name__}"
+        )
 
 
 def _malformed_mapper_source_error(source_cache: SourceCache, source, parse_error: Exception) -> SourceFetchError:
