@@ -170,21 +170,50 @@ class RefreshDataCacheTest(unittest.TestCase):
         self.assertIn("Kaestrasz", second_output.read_text(encoding="utf-8"))
 
     def test_main_reset_cache_clears_existing_sources_before_refresh(self):
+        stale_pages = {
+            HUNTER_PETS_URL: """
+            <script>
+            new Listview({
+                id: 'pets',
+                data: [{"id":999,"name":"Stale Family"}]
+            });
+            </script>
+            """,
+        }
         pages = {
             HUNTER_PETS_URL: pets_index_html(),
             pet_family_url(46): pet_family_html(),
             npc_url(32517): npc_mapper_html(),
         }
-        cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=lambda url: pages[url])
+        cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=lambda url: stale_pages[url])
         cached = cache.get_text(HUNTER_PETS_URL, "pet-index")
         self.assertTrue(cached.path.exists())
+
+        class TrackingSourceCache(SourceCache):
+            def __init__(self, cache_dir, manifest_path, fetcher):
+                super().__init__(cache_dir, manifest_path, fetcher)
+                self.reset_called = False
+
+            def reset(self):
+                self.reset_called = True
+                super().reset()
 
         created_caches = []
 
         def cache_factory(cache_dir, manifest_path, fetcher):
-            created = SourceCache(self.cache_dir, self.manifest_path, fetcher=lambda url: pages[url])
+            created = TrackingSourceCache(cache_dir, manifest_path, fetcher=lambda url: pages[url])
             created_caches.append(created)
             return created
+
+        original_generate_pets = refresh_data.generate_pets
+
+        def generate_pets_in_temp(output, limit_families, source_cache):
+            return original_generate_pets(
+                output,
+                limit_families,
+                source_cache=source_cache,
+                generated_dir=self.root,
+            )
 
         argv = [
             "refresh_data.py",
@@ -193,14 +222,19 @@ class RefreshDataCacheTest(unittest.TestCase):
             str(self.root / "Data.lua"),
             "--reset-cache",
         ]
-        with patch.object(refresh_data, "SourceCache", side_effect=cache_factory):
-            with patch("sys.argv", argv):
-                exit_code = refresh_data.main()
+        with patch.object(refresh_data, "GENERATED_DIR", self.root):
+            with patch.object(refresh_data, "MANIFEST_PATH", self.manifest_path):
+                with patch.object(refresh_data, "SourceCache", side_effect=cache_factory):
+                    with patch.object(refresh_data, "generate_pets", side_effect=generate_pets_in_temp):
+                        with patch("sys.argv", argv):
+                            exit_code = refresh_data.main()
 
         self.assertEqual(exit_code, 0)
         self.assertEqual(len(created_caches), 1)
+        self.assertTrue(created_caches[0].reset_called)
         self.assertTrue(self.manifest_path.exists())
         self.assertIn("Loque'nahak", (self.root / "Data.lua").read_text(encoding="utf-8"))
+        self.assertIn(pets_index_html(), cached.path.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":
