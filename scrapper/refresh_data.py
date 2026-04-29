@@ -78,6 +78,12 @@ def generate_pets(
         _write_lines(generated_dir / "pet-refresh-blockers.md", [str(error)])
         return 1
     families = source_family_rows(extract_listview_data(index_html, "pets"))
+    if not families:
+        _write_lines(
+            generated_dir / "pet-refresh-blockers.md",
+            [f"No pet families found in pet index source: {HUNTER_PETS_URL}"],
+        )
+        return 1
     if limit_families:
         families = families[:limit_families]
 
@@ -96,6 +102,12 @@ def generate_pets(
                 )
                 return 1
             tameable_rows = source_tameable_rows(extract_listview_data(family_html, "tameable"))
+            if not tameable_rows:
+                _write_lines(
+                    generated_dir / "pet-refresh-blockers.md",
+                    [f"No tameable pets found for family {family.name}: {family_url}"],
+                )
+                return 1
             futures = [
                 executor.submit(_build_pet_record_from_source, family, tameable, source_cache)
                 for tameable in tameable_rows
@@ -111,11 +123,17 @@ def generate_pets(
                     continue
                 records.append(record)
 
+    if not records:
+        _write_lines(generated_dir / "pet-refresh-blockers.md", skipped or ["No pet records validated."])
+        return 1
+
     errors = validate_pet_records(records)
     if errors:
         _write_lines(generated_dir / "pet-validation-errors.md", errors)
         return 1
 
+    _clear_lines(generated_dir / "pet-refresh-blockers.md")
+    _clear_lines(generated_dir / "pet-validation-errors.md")
     output.write_text(export_pet_data(records), encoding="utf-8")
     _write_lines(generated_dir / "pet-skipped.md", skipped)
     print(f"Wrote {len(records)} pet records to {output}")
@@ -172,10 +190,16 @@ def generate_stable_masters(
         _write_lines(generated_dir / "stable-master-blockers.md", skipped or ["No stable master records validated."])
         return 1
 
+    _clear_lines(generated_dir / "stable-master-blockers.md")
+    _clear_lines(generated_dir / "stable-master-validation-errors.md")
     output.write_text(export_stable_master_data(records), encoding="utf-8")
     _write_lines(generated_dir / "stable-master-skipped.md", skipped)
     print(f"Wrote {len(records)} stable master records to {output}")
     return 0
+
+
+def _clear_lines(path: Path) -> None:
+    path.write_text("", encoding="utf-8")
 
 
 def _write_lines(path: Path, lines: list[str]) -> None:

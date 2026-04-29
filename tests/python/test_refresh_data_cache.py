@@ -74,6 +74,11 @@ def stable_mapper_html():
     """
 
 
+def assert_empty_or_missing(test_case, path):
+    if path.exists():
+        test_case.assertEqual("", path.read_text(encoding="utf-8"))
+
+
 class RefreshDataCacheTest(unittest.TestCase):
     def setUp(self):
         self.tempdir = tempfile.TemporaryDirectory()
@@ -116,6 +121,26 @@ class RefreshDataCacheTest(unittest.TestCase):
         self.assertIn("Loque'nahak", lua)
         self.assertIn("Sholazar Basin", lua)
 
+    def test_generate_pets_blocks_empty_pet_index_source(self):
+        pages = {
+            HUNTER_PETS_URL: "<html><title>blocked</title></html>",
+        }
+        cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=lambda url: pages[url])
+        output = self.root / "Data.lua"
+
+        exit_code = generate_pets(
+            output,
+            limit_families=0,
+            source_cache=cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(exit_code, 1)
+        self.assertFalse(output.exists())
+        blockers = (self.root / "pet-refresh-blockers.md").read_text(encoding="utf-8")
+        self.assertIn("pet index", blockers)
+        self.assertIn(HUNTER_PETS_URL, blockers)
+
     def test_generate_pets_records_source_failure_and_does_not_write_lua(self):
         def fetcher(url):
             if url == HUNTER_PETS_URL:
@@ -137,6 +162,59 @@ class RefreshDataCacheTest(unittest.TestCase):
         blockers = (self.root / "pet-refresh-blockers.md").read_text(encoding="utf-8")
         self.assertIn(pet_family_url(46), blockers)
         self.assertIn("HTTP Error 403: Forbidden", blockers)
+
+    def test_generate_pets_blocks_all_skipped_records(self):
+        pages = {
+            HUNTER_PETS_URL: pets_index_html(),
+            pet_family_url(46): pet_family_html(),
+            npc_url(32517): "<html><title>no mapper data</title></html>",
+        }
+        cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=lambda url: pages[url])
+        output = self.root / "Data.lua"
+
+        exit_code = generate_pets(
+            output,
+            limit_families=0,
+            source_cache=cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(exit_code, 1)
+        self.assertFalse(output.exists())
+        blockers = (self.root / "pet-refresh-blockers.md").read_text(encoding="utf-8")
+        self.assertIn("32517 Loque'nahak: no mapper coordinates", blockers)
+
+    def test_successful_pet_resume_clears_stale_failure_artifacts(self):
+        (self.root / "pet-refresh-blockers.md").write_text("- stale blocker\n", encoding="utf-8")
+        (self.root / "pet-validation-errors.md").write_text("- stale validation\n", encoding="utf-8")
+        pages = {
+            HUNTER_PETS_URL: pets_index_html(),
+            pet_family_url(46): pet_family_html(),
+            npc_url(32517): npc_mapper_html(),
+        }
+        seed_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=lambda url: pages[url])
+        for url, role in (
+            (HUNTER_PETS_URL, "pet-index"),
+            (pet_family_url(46), "pet-family"),
+            (npc_url(32517), "pet-npc"),
+        ):
+            seed_cache.get_text(url, role)
+
+        def blocked_fetcher(url):
+            raise AssertionError("cached pet refresh should not fetch live source")
+
+        resumed_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=blocked_fetcher)
+
+        exit_code = generate_pets(
+            self.root / "Data.lua",
+            limit_families=0,
+            source_cache=resumed_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(exit_code, 0)
+        assert_empty_or_missing(self, self.root / "pet-refresh-blockers.md")
+        assert_empty_or_missing(self, self.root / "pet-validation-errors.md")
 
     def test_generate_stable_masters_uses_source_cache(self):
         pages = {
@@ -168,6 +246,36 @@ class RefreshDataCacheTest(unittest.TestCase):
 
         self.assertEqual(second_exit_code, 0)
         self.assertIn("Kaestrasz", second_output.read_text(encoding="utf-8"))
+
+    def test_successful_stable_master_resume_clears_stale_failure_artifacts(self):
+        (self.root / "stable-master-blockers.md").write_text("- stale blocker\n", encoding="utf-8")
+        (self.root / "stable-master-validation-errors.md").write_text("- stale validation\n", encoding="utf-8")
+        pages = {
+            STABLE_MASTER_SEARCH_URL: stable_search_html(),
+            npc_url(185561): stable_mapper_html(),
+        }
+        seed_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=lambda url: pages[url])
+        for url, role in (
+            (STABLE_MASTER_SEARCH_URL, "stable-master-search"),
+            (npc_url(185561), "stable-master-npc"),
+        ):
+            seed_cache.get_text(url, role)
+
+        def blocked_fetcher(url):
+            raise AssertionError("stable master refresh should reuse cached source")
+
+        resumed_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=blocked_fetcher)
+
+        exit_code = generate_stable_masters(
+            self.root / "StableMastersData.lua",
+            limit=0,
+            source_cache=resumed_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(exit_code, 0)
+        assert_empty_or_missing(self, self.root / "stable-master-blockers.md")
+        assert_empty_or_missing(self, self.root / "stable-master-validation-errors.md")
 
     def test_main_reset_cache_clears_existing_sources_before_refresh(self):
         stale_pages = {
