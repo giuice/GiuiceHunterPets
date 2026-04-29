@@ -189,6 +189,31 @@ def mapper_coords_object_html(location_id):
     """
 
 
+def mapper_bad_coord_pair_html(location_id, x):
+    return f"""
+    <script>
+    var g_mapperData = {{"{location_id}":[{{"uiMapId":119,"uiMapName":"Bad","coords":[[{x}]]}}]}};
+    </script>
+    """
+
+
+def stable_search_bad_location_html():
+    return """
+    <script>
+    new Listview({
+        id: 'npcs',
+        data: [{
+            "id":185561,
+            "name":"Kaestrasz",
+            "tag":"Stable Master",
+            "react":[1,1],
+            "location":["bad"]
+        }]
+    });
+    </script>
+    """
+
+
 class RefreshDataCacheTest(unittest.TestCase):
     def setUp(self):
         self.tempdir = tempfile.TemporaryDirectory()
@@ -681,6 +706,60 @@ class RefreshDataCacheTest(unittest.TestCase):
         self.assertIn("Loque'nahak", lua)
         self.assertIn("Retry Cat", lua)
 
+    def test_pet_npc_mapper_bad_coord_pair_is_invalidated_and_does_not_write_partial_lua(self):
+        bad_npc_url = npc_url(32517)
+        valid_npc_url = npc_url(99999)
+        first_pages = {
+            HUNTER_PETS_URL: pets_index_html(),
+            pet_family_url(46): pet_family_two_pets_html(),
+            bad_npc_url: mapper_bad_coord_pair_html(3711, 36.6),
+            valid_npc_url: npc_mapper_html_for(3712, "Retry Zone"),
+        }
+        first_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=lambda url: first_pages[url])
+        first_output = self.root / "Data.lua"
+
+        first_exit_code = generate_pets(
+            first_output,
+            limit_families=0,
+            source_cache=first_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(first_exit_code, 1)
+        self.assertFalse(first_output.exists())
+        blockers = (self.root / "pet-refresh-blockers.md").read_text(encoding="utf-8")
+        self.assertIn(bad_npc_url, blockers)
+        self.assertIn("coords", blockers)
+        self.assert_source_invalidated(bad_npc_url)
+
+        second_pages = {
+            HUNTER_PETS_URL: pets_index_html(),
+            pet_family_url(46): pet_family_two_pets_html(),
+            bad_npc_url: npc_mapper_html_for(3711, "Sholazar Basin"),
+            valid_npc_url: npc_mapper_html_for(3712, "Retry Zone"),
+        }
+        calls = []
+
+        def fetcher(url):
+            calls.append(url)
+            return second_pages[url]
+
+        resumed_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=fetcher)
+        second_output = self.root / "Data.second.lua"
+
+        second_exit_code = generate_pets(
+            second_output,
+            limit_families=0,
+            source_cache=resumed_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(second_exit_code, 0)
+        self.assertIn(bad_npc_url, calls)
+        lua = second_output.read_text(encoding="utf-8")
+        self.assertIn("Loque'nahak", lua)
+        self.assertIn("Retry Cat", lua)
+
     def test_successful_pet_resume_clears_stale_failure_artifacts(self):
         (self.root / "pet-refresh-blockers.md").write_text("- stale blocker\n", encoding="utf-8")
         (self.root / "pet-validation-errors.md").write_text("- stale validation\n", encoding="utf-8")
@@ -1018,6 +1097,107 @@ class RefreshDataCacheTest(unittest.TestCase):
 
         self.assertEqual(second_exit_code, 0)
         self.assertIn(stable_npc_url, calls)
+        self.assertIn("Kaestrasz", second_output.read_text(encoding="utf-8"))
+
+    def test_stable_master_npc_mapper_bad_coord_pair_is_invalidated_and_retried_on_rerun(self):
+        stable_npc_url = npc_url(185561)
+        first_pages = {
+            STABLE_MASTER_SEARCH_URL: stable_search_html(),
+            stable_npc_url: mapper_bad_coord_pair_html(13862, 62.0),
+        }
+        first_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=lambda url: first_pages[url])
+        first_output = self.root / "StableMastersData.lua"
+
+        first_exit_code = generate_stable_masters(
+            first_output,
+            limit=0,
+            source_cache=first_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(first_exit_code, 1)
+        self.assertFalse(first_output.exists())
+        blockers = (self.root / "stable-master-blockers.md").read_text(encoding="utf-8")
+        self.assertIn(stable_npc_url, blockers)
+        self.assertIn("coords", blockers)
+        self.assert_source_invalidated(stable_npc_url)
+
+        second_pages = {
+            STABLE_MASTER_SEARCH_URL: stable_search_html(),
+            stable_npc_url: stable_mapper_html(),
+        }
+        calls = []
+
+        def fetcher(url):
+            calls.append(url)
+            return second_pages[url]
+
+        resumed_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=fetcher)
+        second_output = self.root / "StableMastersData.second.lua"
+
+        second_exit_code = generate_stable_masters(
+            second_output,
+            limit=0,
+            source_cache=resumed_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(second_exit_code, 0)
+        self.assertIn(stable_npc_url, calls)
+        self.assertIn("Kaestrasz", second_output.read_text(encoding="utf-8"))
+
+    def test_stable_master_search_bad_location_is_invalidated_and_retried_on_rerun(self):
+        stable_npc_url = npc_url(185561)
+        first_pages = {
+            STABLE_MASTER_SEARCH_URL: stable_search_bad_location_html(),
+            stable_npc_url: stable_mapper_html(),
+        }
+        first_calls = []
+
+        def first_fetcher(url):
+            first_calls.append(url)
+            return first_pages[url]
+
+        first_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=first_fetcher)
+        first_output = self.root / "StableMastersData.lua"
+
+        first_exit_code = generate_stable_masters(
+            first_output,
+            limit=0,
+            source_cache=first_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(first_exit_code, 1)
+        self.assertFalse(first_output.exists())
+        blockers = (self.root / "stable-master-blockers.md").read_text(encoding="utf-8")
+        self.assertIn("Malformed stable master search source", blockers)
+        self.assertIn(STABLE_MASTER_SEARCH_URL, blockers)
+        self.assert_source_invalidated(STABLE_MASTER_SEARCH_URL)
+        self.assertNotIn(stable_npc_url, first_calls)
+
+        second_pages = {
+            STABLE_MASTER_SEARCH_URL: stable_search_html(),
+            stable_npc_url: stable_mapper_html(),
+        }
+        calls = []
+
+        def fetcher(url):
+            calls.append(url)
+            return second_pages[url]
+
+        resumed_cache = SourceCache(self.cache_dir, self.manifest_path, fetcher=fetcher)
+        second_output = self.root / "StableMastersData.second.lua"
+
+        second_exit_code = generate_stable_masters(
+            second_output,
+            limit=0,
+            source_cache=resumed_cache,
+            generated_dir=self.root,
+        )
+
+        self.assertEqual(second_exit_code, 0)
+        self.assertIn(STABLE_MASTER_SEARCH_URL, calls)
         self.assertIn("Kaestrasz", second_output.read_text(encoding="utf-8"))
 
     def test_successful_stable_master_resume_clears_stale_failure_artifacts(self):

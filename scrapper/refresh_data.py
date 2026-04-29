@@ -219,25 +219,27 @@ def generate_stable_masters(
         _write_lines(generated_dir / "stable-master-blockers.md", [error])
         return 1
     try:
-        rows_with_ids = [(row, _stable_master_npc_id(row, index)) for index, row in enumerate(rows)]
+        rows_with_values = [
+            (row, _stable_master_npc_id(row, index), _stable_master_location_ids(row, index))
+            for index, row in enumerate(rows)
+        ]
     except SEMANTIC_SOURCE_ERRORS as parse_error:
         error = f"Malformed stable master search source: {search_source.url}: {parse_error}"
         source_cache.invalidate(search_source.url, search_source.role, error)
         _write_lines(generated_dir / "stable-master-blockers.md", [error])
         return 1
     if limit:
-        rows_with_ids = rows_with_ids[:limit]
+        rows_with_values = rows_with_values[:limit]
 
     records = []
     skipped = []
-    for row, npc_id in rows_with_ids:
+    for row, npc_id, locations in rows_with_values:
         try:
             source, mapper_data = _extract_mapper_data_from_source(
                 source_cache,
                 npc_url(npc_id),
                 "stable-master-npc",
             )
-            locations = [int(value) for value in row.get("location", [])]
             _validate_mapper_data_for_locations(mapper_data, locations)
             record = build_stable_master_record(row, mapper_data)
         except SourceFetchError as error:
@@ -301,6 +303,15 @@ def _stable_master_npc_id(row: dict, index: int) -> int:
     return int(raw_id)
 
 
+def _stable_master_location_ids(row: dict, index: int) -> list[int]:
+    raw_locations = row.get("location", [])
+    if not isinstance(raw_locations, list):
+        raise ValueError(
+            f"stable master row {index} location must be a list, got {type(raw_locations).__name__}"
+        )
+    return [int(value) for value in raw_locations]
+
+
 def _extract_mapper_data_from_source(source_cache: SourceCache, url: str, role: str):
     source = source_cache.get_text(url, role)
     try:
@@ -349,10 +360,30 @@ def _validate_mapper_entry(location_id: int, key: Any, entry: Any) -> None:
         raise ValueError(
             f"mapper location {location_id} entry {key} must be an object, got {type(entry).__name__}"
         )
-    if "coords" in entry and not isinstance(entry["coords"], list):
+    if "coords" in entry:
+        _validate_mapper_coords(location_id, key, entry["coords"])
+
+
+def _validate_mapper_coords(location_id: int, key: Any, coords: Any) -> None:
+    if not isinstance(coords, list):
         raise ValueError(
-            f"mapper location {location_id} entry {key} coords must be a list, got {type(entry['coords']).__name__}"
+            f"mapper location {location_id} entry {key} coords must be a list, got {type(coords).__name__}"
         )
+    for index, coord in enumerate(coords):
+        if not isinstance(coord, (list, tuple)):
+            raise ValueError(
+                f"mapper location {location_id} entry {key} coords {index} must be a coordinate pair, "
+                f"got {type(coord).__name__}"
+            )
+        if len(coord) < 2:
+            raise ValueError(
+                f"mapper location {location_id} entry {key} coords {index} must have at least two values"
+            )
+        x, y = coord[0], coord[1]
+        if not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
+            raise ValueError(
+                f"mapper location {location_id} entry {key} coords {index} must have numeric x/y values"
+            )
 
 
 def _malformed_mapper_source_error(source_cache: SourceCache, source, parse_error: Exception) -> SourceFetchError:

@@ -165,7 +165,7 @@ def _first_entry(entries: Any) -> dict[str, Any] | None:
 def _coords(mapper_entry: dict[str, Any]) -> tuple[tuple[float, float], ...]:
     coords = []
     for value in mapper_entry.get("coords", []):
-        if len(value) != 2:
+        if len(value) < 2:
             continue
         x = float(value[0])
         y = float(value[1])
