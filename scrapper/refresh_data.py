@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import math
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any, Callable, TypeVar
@@ -380,10 +381,14 @@ def _validate_mapper_coords(location_id: int, key: Any, coords: Any) -> None:
                 f"mapper location {location_id} entry {key} coords {index} must have at least two values"
             )
         x, y = coord[0], coord[1]
-        if not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
+        if not _is_finite_real_number(x) or not _is_finite_real_number(y):
             raise ValueError(
-                f"mapper location {location_id} entry {key} coords {index} must have numeric x/y values"
+                f"mapper location {location_id} entry {key} coords {index} must have finite numeric x/y values"
             )
+
+
+def _is_finite_real_number(value: Any) -> bool:
+    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
 
 
 def _malformed_mapper_source_error(source_cache: SourceCache, source, parse_error: Exception) -> SourceFetchError:
