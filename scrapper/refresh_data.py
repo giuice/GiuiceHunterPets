@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import argparse
+import json
 import math
+import subprocess
 import sys
-from concurrent.futures import ThreadPoolExecutor, as_completed
+import time
 from pathlib import Path
 from typing import Any, Callable, TypeVar
 
@@ -33,48 +35,258 @@ from scrapper.wowhead_source import (
 
 GENERATED_DIR = Path("scrapper/generated")
 MANIFEST_PATH = GENERATED_DIR / "refresh-manifest.json"
-FETCH_WORKERS = 4
 T = TypeVar("T")
 SEMANTIC_SOURCE_ERRORS = (ValueError, TypeError, KeyError, AttributeError)
+
+
+class PageBudget:
+    def __init__(self, limit_pages: int, delay: float):
+        if limit_pages < 1:
+            raise ValueError("--limit-pages must be at least 1")
+        if delay < 0:
+            raise ValueError("--delay must be zero or greater")
+        self.limit_pages = limit_pages
+        self.delay = delay
+        self.collected = 0
+
+    def exhausted(self) -> bool:
+        return self.collected >= self.limit_pages
+
+    def mark_collected(self) -> None:
+        self.collected += 1
+        if not self.exhausted() and self.delay:
+            time.sleep(self.delay)
+
+
+class AgentBrowserFetcher:
+    def __call__(self, url: str) -> str:
+        self._run(["agent-browser", "open", url])
+        raw_html = self._run(["agent-browser", "eval", "document.documentElement.outerHTML"])
+        html = json.loads(raw_html)
+        if not isinstance(html, str):
+            raise ValueError(f"agent-browser returned {type(html).__name__}, expected HTML string")
+        return html
+
+    def close(self) -> None:
+        subprocess.run(["agent-browser", "close"], check=False, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    def _run(self, command: list[str]) -> str:
+        completed = subprocess.run(command, check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        return completed.stdout
+
+
+def _fetcher_for_backend(backend: str):
+    if backend == "agent-browser":
+        return AgentBrowserFetcher()
+    if backend == "python":
+        return fetch_text
+    raise ValueError(f"unknown backend: {backend}")
+
+
+def collect_pets_sources(
+    limit_pages: int,
+    delay: float,
+    backend: str,
+    source_cache: SourceCache | None = None,
+) -> int:
+    source_cache = source_cache or SourceCache(GENERATED_DIR / "cache", MANIFEST_PATH)
+    fetcher = _fetcher_for_backend(backend)
+    budget = PageBudget(limit_pages, delay)
+    try:
+        if not _collect_one(source_cache, fetcher, HUNTER_PETS_URL, "pet-index", budget):
+            return _finish_collection("pets", budget)
+
+        try:
+            index_source = source_cache.read_text(HUNTER_PETS_URL, "pet-index")
+            families = _listview_rows_from_source(
+                source_cache,
+                index_source,
+                "pets",
+                "Malformed pet index source",
+                source_family_rows,
+                row_validator=_validate_pet_family_rows,
+            )
+        except (SourceFetchError, ValueError) as error:
+            _write_pet_blockers(GENERATED_DIR, [str(error)])
+            return 1
+
+        for family in families:
+            family_url = pet_family_url(family.id)
+            if not _collect_one(source_cache, fetcher, family_url, "pet-family", budget):
+                return _finish_collection("pets", budget)
+            try:
+                family_source = source_cache.read_text(family_url, "pet-family")
+                tameable_ids = _tameable_npc_ids_from_source(source_cache, family_source, family.name)
+            except (SourceFetchError, ValueError) as error:
+                _write_pet_blockers(GENERATED_DIR, [str(error)])
+                return 1
+            for tameable_id in tameable_ids:
+                if not _collect_one(source_cache, fetcher, npc_url(tameable_id), "pet-npc", budget):
+                    return _finish_collection("pets", budget)
+    except SourceFetchError as error:
+        _write_pet_blockers(GENERATED_DIR, [str(error)])
+        return 1
+    finally:
+        if isinstance(fetcher, AgentBrowserFetcher):
+            fetcher.close()
+    return _finish_collection("pets", budget)
+
+
+def collect_stable_master_sources(
+    limit_pages: int,
+    delay: float,
+    backend: str,
+    source_cache: SourceCache | None = None,
+) -> int:
+    source_cache = source_cache or SourceCache(GENERATED_DIR / "cache", MANIFEST_PATH)
+    fetcher = _fetcher_for_backend(backend)
+    budget = PageBudget(limit_pages, delay)
+    try:
+        if not _collect_one(source_cache, fetcher, STABLE_MASTER_SEARCH_URL, "stable-master-search", budget):
+            return _finish_collection("stable-masters", budget)
+        try:
+            search_source = source_cache.read_text(STABLE_MASTER_SEARCH_URL, "stable-master-search")
+            raw_rows = _listview_rows_from_source(
+                source_cache,
+                search_source,
+                "npcs",
+                "Malformed stable master search source",
+                lambda rows: rows,
+            )
+            rows = [row for row in raw_rows if "Stable Master" in str(row.get("tag", ""))]
+        except (SourceFetchError, ValueError) as error:
+            _write_stable_master_blockers(GENERATED_DIR, [str(error)])
+            return 1
+        for index, row in enumerate(rows):
+            try:
+                npc_id = _stable_master_npc_id(row, index)
+            except SEMANTIC_SOURCE_ERRORS as error:
+                source_cache.record_semantic_error(
+                    search_source.url,
+                    search_source.role,
+                    "parse_error",
+                    f"Malformed stable master search source: {search_source.url}: {error}",
+                )
+                _write_stable_master_blockers(GENERATED_DIR, [str(error)])
+                return 1
+            if not _collect_one(source_cache, fetcher, npc_url(npc_id), "stable-master-npc", budget):
+                return _finish_collection("stable-masters", budget)
+    except SourceFetchError as error:
+        _write_stable_master_blockers(GENERATED_DIR, [str(error)])
+        return 1
+    finally:
+        if isinstance(fetcher, AgentBrowserFetcher):
+            fetcher.close()
+    return _finish_collection("stable-masters", budget)
+
+
+def _collect_one(source_cache: SourceCache, fetcher, url: str, role: str, budget: PageBudget) -> bool:
+    if source_cache.has_text(url):
+        print(f"Cached {role}: {url}", flush=True)
+        return True
+    if budget.exhausted():
+        return False
+    try:
+        text = fetcher(url)
+    except Exception as error:
+        source_cache.record_semantic_error(url, role, "error", str(error))
+        raise SourceFetchError(url, role, error) from error
+    result = source_cache.store_text(url, role, text)
+    budget.mark_collected()
+    print(f"Collected {budget.collected}/{budget.limit_pages} {role}: {result.path}", flush=True)
+    return True
+
+
+def _finish_collection(name: str, budget: PageBudget) -> int:
+    if name == "pets":
+        _clear_lines(GENERATED_DIR / "pet-refresh-blockers.md")
+    elif name == "stable-masters":
+        _clear_lines(GENERATED_DIR / "stable-master-blockers.md")
+    print(f"Collected {budget.collected} new {name} source page(s).")
+    if budget.exhausted():
+        print("Page limit reached; rerun the collect command to continue.")
+    return 0
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Refresh GiuiceHunterPets generated data.")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
+    collect_pets = subparsers.add_parser("collect-pets")
+    collect_pets.add_argument("--limit-pages", type=int, required=True)
+    collect_pets.add_argument("--delay", type=float, default=5.0)
+    collect_pets.add_argument("--backend", choices=("agent-browser", "python"), default="agent-browser")
+    collect_pets.add_argument("--reset-cache", action="store_true", help="Delete cached source pages before collecting.")
+
+    build_pets = subparsers.add_parser("build-pets")
+    build_pets.add_argument("--output", default=str(GENERATED_DIR / "Data.lua"))
+    build_pets.add_argument("--limit-families", type=int, default=0)
+    build_pets.add_argument("--from-cache", action="store_true", required=True)
+
+    collect_stable = subparsers.add_parser("collect-stable-masters")
+    collect_stable.add_argument("--limit-pages", type=int, required=True)
+    collect_stable.add_argument("--delay", type=float, default=5.0)
+    collect_stable.add_argument("--backend", choices=("agent-browser", "python"), default="agent-browser")
+    collect_stable.add_argument("--reset-cache", action="store_true", help="Delete cached source pages before collecting.")
+
+    build_stable = subparsers.add_parser("build-stable-masters")
+    build_stable.add_argument("--output", default=str(GENERATED_DIR / "StableMastersData.lua"))
+    build_stable.add_argument("--limit", type=int, default=0)
+    build_stable.add_argument("--from-cache", action="store_true", required=True)
+
     pets = subparsers.add_parser("pets")
     pets.add_argument("--output", default=str(GENERATED_DIR / "Data.lua"))
     pets.add_argument("--limit-families", type=int, default=0)
-    pets.add_argument("--resume", action="store_true", help="Reuse cached source pages when available.")
-    pets.add_argument("--reset-cache", action="store_true", help="Delete cached source pages before fetching.")
+    pets.add_argument("--resume", action="store_true", help="Deprecated alias for build-pets --from-cache.")
+    pets.add_argument("--reset-cache", action="store_true", help="Deprecated; use collect-pets --reset-cache.")
 
     stable = subparsers.add_parser("stable-masters")
     stable.add_argument("--output", default=str(GENERATED_DIR / "StableMastersData.lua"))
     stable.add_argument("--limit", type=int, default=0)
-    stable.add_argument("--resume", action="store_true", help="Reuse cached source pages when available.")
-    stable.add_argument("--reset-cache", action="store_true", help="Delete cached source pages before fetching.")
+    stable.add_argument("--resume", action="store_true", help="Deprecated alias for build-stable-masters --from-cache.")
+    stable.add_argument("--reset-cache", action="store_true", help="Deprecated; use collect-stable-masters --reset-cache.")
 
     args = parser.parse_args()
     GENERATED_DIR.mkdir(parents=True, exist_ok=True)
     source_cache = SourceCache(GENERATED_DIR / "cache", MANIFEST_PATH, fetcher=fetch_text)
-    if args.reset_cache:
+    if getattr(args, "reset_cache", False):
         source_cache.reset()
 
-    if args.command == "pets":
+    if args.command == "collect-pets":
+        exit_code = collect_pets_sources(
+            args.limit_pages,
+            args.delay,
+            args.backend,
+            source_cache=source_cache,
+        )
+        _print_failure_report(exit_code, "pets", GENERATED_DIR)
+        return exit_code
+    if args.command == "collect-stable-masters":
+        exit_code = collect_stable_master_sources(
+            args.limit_pages,
+            args.delay,
+            args.backend,
+            source_cache=source_cache,
+        )
+        _print_failure_report(exit_code, "stable-masters", GENERATED_DIR)
+        return exit_code
+    if args.command in {"build-pets", "pets"}:
         exit_code = generate_pets(
             Path(args.output),
             args.limit_families,
             source_cache=source_cache,
             generated_dir=GENERATED_DIR,
+            from_cache=True,
         )
         _print_failure_report(exit_code, "pets", GENERATED_DIR)
         return exit_code
-    if args.command == "stable-masters":
+    if args.command in {"build-stable-masters", "stable-masters"}:
         exit_code = generate_stable_masters(
             Path(args.output),
             args.limit,
             source_cache=source_cache,
             generated_dir=GENERATED_DIR,
+            from_cache=True,
         )
         _print_failure_report(exit_code, "stable-masters", GENERATED_DIR)
         return exit_code
@@ -86,13 +298,14 @@ def generate_pets(
     limit_families: int = 0,
     source_cache: SourceCache | None = None,
     generated_dir: Path = GENERATED_DIR,
+    from_cache: bool = False,
 ) -> int:
     source_cache = source_cache or SourceCache(
         generated_dir / "cache",
         generated_dir / "refresh-manifest.json",
     )
     try:
-        index_source = source_cache.get_text(HUNTER_PETS_URL, "pet-index")
+        index_source = _source_text(source_cache, HUNTER_PETS_URL, "pet-index", from_cache)
     except SourceFetchError as error:
         _write_pet_blockers(generated_dir, [str(error)])
         return 1
@@ -119,47 +332,42 @@ def generate_pets(
 
     records = []
     skipped = []
-    with ThreadPoolExecutor(max_workers=FETCH_WORKERS) as executor:
-        for family_index, family in enumerate(families, start=1):
-            print(f"Fetching family {family_index}/{len(families)}: {family.name}", flush=True)
-            family_url = pet_family_url(family.id)
+    for family_index, family in enumerate(families, start=1):
+        print(f"Reading family {family_index}/{len(families)}: {family.name}", flush=True)
+        family_url = pet_family_url(family.id)
+        try:
+            family_source = _source_text(source_cache, family_url, "pet-family", from_cache)
+        except SourceFetchError as error:
+            _write_pet_blockers(generated_dir, [str(error)])
+            return 1
+        try:
+            tameable_rows = _listview_rows_from_source(
+                source_cache,
+                family_source,
+                "tameable",
+                f"Malformed tameable pets source for family {family.name}",
+                source_tameable_rows,
+                row_validator=_validate_tameable_pet_rows,
+            )
+        except ValueError as semantic_error:
+            error = str(semantic_error)
+            _write_pet_blockers(generated_dir, [error])
+            return 1
+        if not tameable_rows:
+            error = f"No tameable pets found for family {family.name}: {family_source.url}"
+            source_cache.invalidate(family_source.url, family_source.role, error)
+            _write_pet_blockers(generated_dir, [error])
+            return 1
+        for tameable in tameable_rows:
             try:
-                family_source = source_cache.get_text(family_url, "pet-family")
+                tameable, record = _build_pet_record_from_source(family, tameable, source_cache, from_cache)
             except SourceFetchError as error:
                 _write_pet_blockers(generated_dir, [str(error)])
                 return 1
-            try:
-                tameable_rows = _listview_rows_from_source(
-                    source_cache,
-                    family_source,
-                    "tameable",
-                    f"Malformed tameable pets source for family {family.name}",
-                    source_tameable_rows,
-                    row_validator=_validate_tameable_pet_rows,
-                )
-            except ValueError as semantic_error:
-                error = str(semantic_error)
-                _write_pet_blockers(generated_dir, [error])
-                return 1
-            if not tameable_rows:
-                error = f"No tameable pets found for family {family.name}: {family_source.url}"
-                source_cache.invalidate(family_source.url, family_source.role, error)
-                _write_pet_blockers(generated_dir, [error])
-                return 1
-            futures = [
-                executor.submit(_build_pet_record_from_source, family, tameable, source_cache)
-                for tameable in tameable_rows
-            ]
-            for future in as_completed(futures):
-                try:
-                    tameable, record = future.result()
-                except SourceFetchError as error:
-                    _write_pet_blockers(generated_dir, [str(error)])
-                    return 1
-                if record is None:
-                    skipped.append(f"{tameable.id} {tameable.name}: no mapper coordinates")
-                    continue
-                records.append(record)
+            if record is None:
+                skipped.append(f"{tameable.id} {tameable.name}: no mapper coordinates")
+                continue
+            records.append(record)
 
     if not records:
         _write_pet_blockers(generated_dir, skipped or ["No pet records validated."])
@@ -178,9 +386,9 @@ def generate_pets(
     return 0
 
 
-def _build_pet_record_from_source(family, tameable, source_cache: SourceCache):
+def _build_pet_record_from_source(family, tameable, source_cache: SourceCache, from_cache: bool = False):
     source_url = npc_url(tameable.id)
-    source, mapper_data = _extract_mapper_data_from_source(source_cache, source_url, "pet-npc")
+    source, mapper_data = _extract_mapper_data_from_source(source_cache, source_url, "pet-npc", from_cache)
     try:
         _validate_mapper_data_for_locations(mapper_data, tameable.location)
         record = build_pet_record(family, tameable, mapper_data)
@@ -194,13 +402,14 @@ def generate_stable_masters(
     limit: int = 0,
     source_cache: SourceCache | None = None,
     generated_dir: Path = GENERATED_DIR,
+    from_cache: bool = False,
 ) -> int:
     source_cache = source_cache or SourceCache(
         generated_dir / "cache",
         generated_dir / "refresh-manifest.json",
     )
     try:
-        search_source = source_cache.get_text(STABLE_MASTER_SEARCH_URL, "stable-master-search")
+        search_source = _source_text(source_cache, STABLE_MASTER_SEARCH_URL, "stable-master-search", from_cache)
     except SourceFetchError as error:
         _write_stable_master_blockers(generated_dir, [str(error)])
         return 1
@@ -254,6 +463,7 @@ def generate_stable_masters(
                 source_cache,
                 npc_url(npc_id),
                 "stable-master-npc",
+                from_cache,
             )
             _validate_mapper_data_for_locations(mapper_data, locations)
             record = build_stable_master_record(row, mapper_data)
@@ -306,6 +516,20 @@ def _listview_rows_from_source(
         raise ValueError(error) from parse_error
 
 
+def _tameable_npc_ids_from_source(source_cache: SourceCache, source, family_name: str) -> list[int]:
+    try:
+        rows = extract_listview_data(source.text, "tameable")
+        _require_list_rows(rows, "tameable")
+        npc_ids = []
+        for index, row in enumerate(rows):
+            npc_ids.append(_required_positive_int(row, index, "tameable pet", "id"))
+        return npc_ids
+    except SEMANTIC_SOURCE_ERRORS as parse_error:
+        error = f"Malformed tameable pets source for family {family_name}: {source.url}: {parse_error}"
+        source_cache.invalidate(source.url, source.role, error)
+        raise ValueError(error) from parse_error
+
+
 def _require_list_rows(rows, listview_id: str) -> None:
     if not isinstance(rows, list):
         raise ValueError(f"listview {listview_id} data must be a list of objects, got {type(rows).__name__}")
@@ -324,11 +548,11 @@ def _validate_tameable_pet_rows(rows: list[dict[str, Any]]) -> None:
     for index, row in enumerate(rows):
         _required_positive_int(row, index, "tameable pet", "id")
         _required_name(row, index, "tameable pet")
-        _required_int(row, index, "tameable pet", "classification")
-        _required_positive_int_list(row, index, "tameable pet", "location")
+        _optional_int(row, index, "tameable pet", "classification")
+        _optional_positive_int_list(row, index, "tameable pet", "location")
         _required_react(row, index, "tameable pet")
-        _required_int(row, index, "tameable pet", "minlevel")
-        _required_int(row, index, "tameable pet", "maxlevel")
+        _optional_int(row, index, "tameable pet", "minlevel")
+        _optional_int(row, index, "tameable pet", "maxlevel")
 
 
 def _required_int(row: dict[str, Any], index: int, row_name: str, field: str) -> int:
@@ -337,6 +561,15 @@ def _required_int(row: dict[str, Any], index: int, row_name: str, field: str) ->
         raise ValueError(f"{row_name} row {index} is missing {field}")
     if not _is_json_int(raw_value):
         raise ValueError(f"{row_name} row {index} {field} must be an integer")
+    return raw_value
+
+
+def _optional_int(row: dict[str, Any], index: int, row_name: str, field: str) -> int | None:
+    raw_value = row.get(field)
+    if raw_value is None:
+        return None
+    if not _is_json_int(raw_value):
+        raise ValueError(f"{row_name} row {index} {field} must be an integer when present")
     return raw_value
 
 
@@ -370,14 +603,24 @@ def _required_positive_int_list(row: dict[str, Any], index: int, row_name: str, 
     return values
 
 
+def _optional_positive_int_list(row: dict[str, Any], index: int, row_name: str, field: str) -> list[int] | None:
+    raw_values = row.get(field)
+    if raw_values is None or raw_values == []:
+        return None
+    values = _required_int_list(row, index, row_name, field)
+    if not all(value > 0 for value in values):
+        raise ValueError(f"{row_name} row {index} {field} values must be positive integers")
+    return values
+
+
 def _required_react(row: dict[str, Any], index: int, row_name: str) -> None:
-    react = row.get("react")
+    react = row.get("react", [0, 0])
     if not isinstance(react, list) or len(react) != 2:
         raise ValueError(f"{row_name} row {index} react must be a list with exactly two values")
-    if not all(_is_json_int(value) for value in react):
-        raise ValueError(f"{row_name} row {index} react values must be integers")
-    if not all(value in {-1, 0, 1} for value in react):
-        raise ValueError(f"{row_name} row {index} react values must be -1, 0, or 1")
+    if not all(value is None or _is_json_int(value) for value in react):
+        raise ValueError(f"{row_name} row {index} react values must be integers or null")
+    if not all(value is None or value in {-1, 0, 1} for value in react):
+        raise ValueError(f"{row_name} row {index} react values must be -1, 0, 1, or null")
 
 
 def _stable_master_npc_id(row: dict, index: int) -> int:
@@ -408,8 +651,14 @@ def _is_json_int(value: Any) -> bool:
     return isinstance(value, int) and not isinstance(value, bool)
 
 
-def _extract_mapper_data_from_source(source_cache: SourceCache, url: str, role: str):
-    source = source_cache.get_text(url, role)
+def _source_text(source_cache: SourceCache, url: str, role: str, from_cache: bool):
+    if from_cache:
+        return source_cache.read_text(url, role)
+    return source_cache.get_text(url, role)
+
+
+def _extract_mapper_data_from_source(source_cache: SourceCache, url: str, role: str, from_cache: bool = False):
+    source = _source_text(source_cache, url, role, from_cache)
     try:
         mapper_data = extract_js_assignment(source.text, "g_mapperData")
     except ValueError as parse_error:

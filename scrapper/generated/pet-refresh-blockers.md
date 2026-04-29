@@ -1,1 +1,1 @@
-- https://www.wowhead.com/hunter-pets: HTTP Error 403: Forbidden
+- https://www.wowhead.com/npc=130743: Command '['agent-browser', 'open', 'https://www.wowhead.com/npc=130743']' returned non-zero exit status 1.

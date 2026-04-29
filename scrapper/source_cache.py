@@ -59,14 +59,7 @@ class SourceCache:
         path = self.cache_dir / f"{cache_key}.html"
 
         if path.exists():
-            return SourceResult(
-                url=normalized_url,
-                role=role,
-                cache_key=cache_key,
-                path=path,
-                text=path.read_text(encoding="utf-8"),
-                from_cache=True,
-            )
+            return self.read_text(normalized_url, role)
 
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         try:
@@ -86,12 +79,62 @@ class SourceCache:
             from_cache=False,
         )
 
-    def invalidate(self, url: str, role: str, error: str) -> None:
+    def has_text(self, url: str) -> bool:
+        return self.path_for(url).exists()
+
+    def read_text(self, url: str, role: str) -> SourceResult:
         normalized_url = self._normalize_url(url)
         cache_key = self._cache_key(normalized_url)
         path = self.cache_dir / f"{cache_key}.html"
-        path.unlink(missing_ok=True)
-        self._record_error(normalized_url, role, cache_key, error)
+        if not path.exists():
+            raise SourceFetchError(
+                normalized_url,
+                role,
+                FileNotFoundError(f"missing cached source: {normalized_url}"),
+            )
+        return SourceResult(
+            url=normalized_url,
+            role=role,
+            cache_key=cache_key,
+            path=path,
+            text=path.read_text(encoding="utf-8"),
+            from_cache=True,
+        )
+
+    def store_text(self, url: str, role: str, text: str) -> SourceResult:
+        normalized_url = self._normalize_url(url)
+        cache_key = self._cache_key(normalized_url)
+        path = self.cache_dir / f"{cache_key}.html"
+        self._write_text_atomic(path, text)
+        self._record_ok(normalized_url, role, cache_key, path)
+        return SourceResult(
+            url=normalized_url,
+            role=role,
+            cache_key=cache_key,
+            path=path,
+            text=text,
+            from_cache=False,
+        )
+
+    def invalidate(self, url: str, role: str, error: str) -> None:
+        self.record_semantic_error(url, role, "parse_error", error)
+
+    def record_semantic_error(self, url: str, role: str, status: str, error: str) -> None:
+        normalized_url = self._normalize_url(url)
+        cache_key = self._cache_key(normalized_url)
+        path = self.path_for(normalized_url)
+        self._record_error(
+            normalized_url,
+            role,
+            cache_key,
+            error,
+            status=status,
+            path=path if path.exists() else None,
+        )
+
+    def path_for(self, url: str) -> Path:
+        normalized_url = self._normalize_url(url)
+        return self.cache_dir / f"{self._cache_key(normalized_url)}.html"
 
     def _record_ok(self, url: str, role: str, cache_key: str, path: Path) -> None:
         with self._manifest_lock:
@@ -107,15 +150,23 @@ class SourceCache:
             }
             self._write_manifest(manifest)
 
-    def _record_error(self, url: str, role: str, cache_key: str, error: str) -> None:
+    def _record_error(
+        self,
+        url: str,
+        role: str,
+        cache_key: str,
+        error: str,
+        status: str = "error",
+        path: Path | None = None,
+    ) -> None:
         with self._manifest_lock:
             manifest = self._load_manifest()
             manifest["sources"][cache_key] = {
                 "url": url,
                 "cache_key": cache_key,
                 "role": role,
-                "status": "error",
-                "path": None,
+                "status": status,
+                "path": str(path) if path is not None else None,
                 "fetched_at": self._now(),
                 "error": error,
             }

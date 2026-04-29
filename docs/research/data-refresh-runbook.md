@@ -5,10 +5,11 @@
 Rode a partir da raiz do repositorio:
 
 ```bash
-rtk python3 -m scrapper.refresh_data pets --output scrapper/generated/Data.lua --resume
+rtk python3 -m scrapper.refresh_data collect-pets --limit-pages 10 --delay 5
+rtk python3 -m scrapper.refresh_data build-pets --from-cache --output scrapper/generated/Data.lua
 ```
 
-Se der certo, o arquivo novo aparece em `scrapper/generated/Data.lua`.
+O primeiro comando coleta HTML e salva em cache. O segundo comando gera Lua somente a partir do cache local, sem bater no Wowhead.
 
 Se falhar, o comando imprime o arquivo de diagnostico. Para pets, leia:
 
@@ -22,7 +23,8 @@ O erro `HTTP Error 403: Forbidden` quer dizer que o Wowhead bloqueou a coleta an
 Para stable masters:
 
 ```bash
-rtk python3 -m scrapper.refresh_data stable-masters --output scrapper/generated/StableMastersData.lua --resume
+rtk python3 -m scrapper.refresh_data collect-stable-masters --limit-pages 10 --delay 5
+rtk python3 -m scrapper.refresh_data build-stable-masters --from-cache --output scrapper/generated/StableMastersData.lua
 rtk sed -n '1,120p' scrapper/generated/stable-master-blockers.md
 rtk sed -n '1,120p' scrapper/generated/stable-master-validation-errors.md
 ```
@@ -32,7 +34,7 @@ O cache/progresso fica em:
 - `scrapper/generated/cache/`
 - `scrapper/generated/refresh-manifest.json`
 
-Use `--reset-cache` somente quando quiser descartar o cache e tentar tudo do zero.
+Use `--reset-cache` somente quando quiser descartar o cache e tentar tudo do zero. Nao use durante investigacao normal.
 
 ## Source Shape
 
@@ -46,7 +48,8 @@ Validated with `agent-browser 0.26.0` on 2026-04-28/2026-04-29:
 ## Pet Sample
 
 ```bash
-rtk python3 -m scrapper.refresh_data pets --limit-families 1 --output scrapper/generated/Data.sample.lua
+rtk python3 -m scrapper.refresh_data collect-pets --limit-pages 10 --delay 5
+rtk python3 -m scrapper.refresh_data build-pets --from-cache --limit-families 1 --output scrapper/generated/Data.sample.lua
 ```
 
 Expected:
@@ -59,7 +62,8 @@ Expected:
 ## Full Pet Refresh
 
 ```bash
-rtk python3 -m scrapper.refresh_data pets --output scrapper/generated/Data.lua --resume
+rtk python3 -m scrapper.refresh_data collect-pets --limit-pages 10 --delay 5
+rtk python3 -m scrapper.refresh_data build-pets --from-cache --output scrapper/generated/Data.lua
 ```
 
 Before replacing production `Data.lua`:
@@ -81,18 +85,25 @@ Review requirements:
 
 Full refreshes are resumable. The pipeline persists fetched Wowhead pages under `scrapper/generated/cache/` and records progress in `scrapper/generated/refresh-manifest.json`.
 
-Resume is the safe default when cached pages exist. Use `--resume` in manual commands to make intent explicit:
+Collection is cache-first and resumable. Rerun the collect command to continue from the existing manifest and fetch only missing pages:
 
 ```bash
-rtk python3 -m scrapper.refresh_data pets --output scrapper/generated/Data.lua --resume
-rtk python3 -m scrapper.refresh_data stable-masters --output scrapper/generated/StableMastersData.lua --resume
+rtk python3 -m scrapper.refresh_data collect-pets --limit-pages 10 --delay 5
+rtk python3 -m scrapper.refresh_data collect-stable-masters --limit-pages 10 --delay 5
+```
+
+Build commands are offline and must use cache only:
+
+```bash
+rtk python3 -m scrapper.refresh_data build-pets --from-cache --output scrapper/generated/Data.lua
+rtk python3 -m scrapper.refresh_data build-stable-masters --from-cache --output scrapper/generated/StableMastersData.lua
 ```
 
 Use `--reset-cache` only when intentionally discarding saved source pages:
 
 ```bash
-rtk python3 -m scrapper.refresh_data pets --output scrapper/generated/Data.lua --reset-cache
-rtk python3 -m scrapper.refresh_data stable-masters --output scrapper/generated/StableMastersData.lua --reset-cache
+rtk python3 -m scrapper.refresh_data collect-pets --limit-pages 1 --delay 5 --reset-cache
+rtk python3 -m scrapper.refresh_data collect-stable-masters --limit-pages 1 --delay 5 --reset-cache
 ```
 
 Inspect the manifest when a refresh fails:
@@ -107,14 +118,17 @@ Required behavior:
 
 - Successful cached pages are reused indefinitely.
 - Missing or failed URLs are retried on rerun.
+- Every successful page is written to `scrapper/generated/cache/` before parsing the next page.
+- Parser or validation failures keep the cached HTML and record the local path in the manifest.
 - `--reset-cache` removes saved pages and starts a fresh collection.
-- Generated Lua is written only from a complete validated source set.
+- Generated Lua is written only from a complete validated cached source set.
 - Production `Data.lua` and `StableMastersData.lua` are replaced only after generated output validates and the diff is reviewed.
 
 ## Stable Master Feasibility
 
 ```bash
-rtk python3 -m scrapper.refresh_data stable-masters --output scrapper/generated/StableMastersData.lua --resume
+rtk python3 -m scrapper.refresh_data collect-stable-masters --limit-pages 10 --delay 5
+rtk python3 -m scrapper.refresh_data build-stable-masters --from-cache --output scrapper/generated/StableMastersData.lua
 ```
 
 If the command exits `0`, review:

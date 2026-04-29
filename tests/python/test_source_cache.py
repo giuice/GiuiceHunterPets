@@ -83,7 +83,7 @@ class SourceCacheTest(unittest.TestCase):
         self.assertIsNone(entry["path"])
         self.assertIn("HTTP Error 403: Forbidden", entry["error"])
 
-    def test_invalidate_removes_cache_file_and_records_error(self):
+    def test_invalidate_preserves_cache_file_and_records_parse_error(self):
         def fetcher(url):
             return "<html>blocked</html>"
 
@@ -92,13 +92,14 @@ class SourceCacheTest(unittest.TestCase):
 
         cache.invalidate("https://www.wowhead.com/npc=6", "pet-npc", "missing g_mapperData")
 
-        self.assertFalse(result.path.exists())
+        self.assertTrue(result.path.exists())
+        self.assertEqual(result.path.read_text(encoding="utf-8"), "<html>blocked</html>")
         manifest = json.loads(self.manifest_path.read_text(encoding="utf-8"))
         entry = manifest["sources"][result.cache_key]
-        self.assertEqual(entry["status"], "error")
+        self.assertEqual(entry["status"], "parse_error")
         self.assertEqual(entry["url"], "https://www.wowhead.com/npc=6")
         self.assertEqual(entry["role"], "pet-npc")
-        self.assertIsNone(entry["path"])
+        self.assertEqual(entry["path"], str(result.path))
         self.assertEqual(entry["error"], "missing g_mapperData")
 
     def test_previous_success_is_preserved_because_cache_hit_does_not_refetch(self):
