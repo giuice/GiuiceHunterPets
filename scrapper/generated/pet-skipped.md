@@ -1,0 +1,2 @@
+- 118244 Lightning Paw: no mapper coordinates
+- 213428 Aradan: no mapper coordinates

@@ -24,6 +24,26 @@ class DataRecordsTest(unittest.TestCase):
         self.assertEqual(faction_label([1, 1]), "Neutral")
         self.assertEqual(faction_label([0, 0]), "Neutral")
 
+    def test_source_tameable_rows_normalizes_null_react_values(self):
+        from scrapper.data_records import source_tameable_rows
+
+        rows = source_tameable_rows(
+            [
+                {
+                    "id": 88710,
+                    "name": "Lost Netherwolf",
+                    "family": 46,
+                    "classification": 0,
+                    "location": [672],
+                    "react": [-1, None],
+                    "minlevel": 10,
+                    "maxlevel": 10,
+                }
+            ]
+        )
+
+        self.assertEqual(rows[0].react, [-1, 0])
+
     def test_build_pet_record_uses_mapper_ui_map_id_and_coords(self):
         family = PetFamilySourceRow(id=1, name="Wolf")
         tameable = TameablePetSourceRow(
@@ -55,6 +75,25 @@ class DataRecordsTest(unittest.TestCase):
         self.assertEqual(record.family, (1, "Wolf"))
         self.assertEqual(record.pet_class, "Normal")
         self.assertEqual(record.coords, ((59.4, 34.6), (59.6, 34.4)))
+
+    def test_build_pet_record_accepts_nested_mapper_entries(self):
+        family = PetFamilySourceRow(id=46, name="Spirit Beast")
+        tameable = TameablePetSourceRow(
+            id=60410,
+            name="Elegon",
+            family=46,
+            classification=0,
+            location=[6125],
+            react=[0, 0],
+            minlevel=35,
+            maxlevel=35,
+        )
+        mapper_data = {"6125": {"3": {"count": 2, "coords": [[20.6, 51.5], [20.7, 51.1]]}}}
+
+        record = build_pet_record(family, tameable, mapper_data)
+
+        self.assertEqual(record.zone_id, 6125)
+        self.assertEqual(record.coords, ((20.6, 51.5), (20.7, 51.1)))
 
     def test_build_stable_master_record(self):
         row = {

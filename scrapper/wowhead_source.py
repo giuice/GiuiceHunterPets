@@ -7,6 +7,19 @@ from urllib.request import Request, urlopen
 
 
 USER_AGENT = "GiuiceHunterPets data refresh research"
+WOWHEAD_BASE = "https://www.wowhead.com"
+HUNTER_PETS_URL = f"{WOWHEAD_BASE}/hunter-pets"
+STABLE_MASTER_SEARCH_URL = f"{WOWHEAD_BASE}/search?q=stable%20master"
+
+
+def pet_family_url(family_id: int, slug: str | None = None) -> str:
+    suffix = f"/{slug}" if slug else ""
+    return f"{WOWHEAD_BASE}/pet={family_id}{suffix}"
+
+
+def npc_url(npc_id: int, slug: str | None = None) -> str:
+    suffix = f"/{slug}" if slug else ""
+    return f"{WOWHEAD_BASE}/npc={npc_id}{suffix}"
 
 
 def fetch_text(url: str, timeout: int = 60) -> str:
@@ -90,7 +103,60 @@ def _parse_jsonish_value(text: str, value_start: int):
     if end == -1:
         raise ValueError("unterminated JSON value")
 
-    return json.loads(text[value_start : end + 1])
+    return json.loads(_quote_unquoted_property_names(text[value_start : end + 1]))
+
+
+def _quote_unquoted_property_names(value_text: str) -> str:
+    result = []
+    in_string = False
+    quote = ""
+    escaped = False
+    index = 0
+
+    while index < len(value_text):
+        char = value_text[index]
+        if in_string:
+            result.append(char)
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == quote:
+                in_string = False
+            index += 1
+            continue
+
+        if char in ("'", '"'):
+            in_string = True
+            quote = char
+            result.append(char)
+            index += 1
+            continue
+
+        if char in "{,":
+            result.append(char)
+            index += 1
+            while index < len(value_text) and value_text[index].isspace():
+                result.append(value_text[index])
+                index += 1
+            name_start = index
+            if index < len(value_text) and (value_text[index].isalpha() or value_text[index] in "_$"):
+                index += 1
+                while index < len(value_text) and (value_text[index].isalnum() or value_text[index] in "_$"):
+                    index += 1
+                probe = index
+                while probe < len(value_text) and value_text[probe].isspace():
+                    probe += 1
+                if probe < len(value_text) and value_text[probe] == ":":
+                    result.append(f'"{value_text[name_start:index]}"')
+                    continue
+            result.append(value_text[name_start:index])
+            continue
+
+        result.append(char)
+        index += 1
+
+    return "".join(result)
 
 
 def _find_matching_bracket(text: str, start: int, opener: str, closer: str) -> int:

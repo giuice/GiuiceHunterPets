@@ -86,7 +86,7 @@ def source_tameable_rows(rows: list[dict[str, Any]]) -> list[TameablePetSourceRo
                 family=int(row["family"]),
                 classification=row.get("classification"),
                 location=[int(value) for value in row.get("location", [])],
-                react=[int(value) for value in row.get("react", [0, 0])],
+                react=[int(value or 0) for value in row.get("react", [0, 0])],
                 minlevel=row.get("minlevel"),
                 maxlevel=row.get("maxlevel"),
             )
@@ -146,8 +146,19 @@ def build_stable_master_record(
 def _first_mapper_entry(locations: list[int], mapper_data: dict[str, Any]) -> dict[str, Any] | None:
     for location_id in locations:
         entries = mapper_data.get(str(location_id)) or mapper_data.get(location_id)
-        if entries:
-            return entries[0]
+        entry = _first_entry(entries)
+        if entry is not None:
+            return entry
+    return None
+
+
+def _first_entry(entries: Any) -> dict[str, Any] | None:
+    if isinstance(entries, list) and entries:
+        return entries[0]
+    if isinstance(entries, dict) and entries:
+        first_value = next(iter(entries.values()))
+        if isinstance(first_value, dict):
+            return first_value
     return None
 
 

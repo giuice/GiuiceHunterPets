@@ -35,6 +35,21 @@ class WowheadSourceTest(unittest.TestCase):
         self.assertEqual(data["12"][0]["uiMapId"], 37)
         self.assertEqual(data["12"][0]["coords"], [[72.4, 65.0]])
 
+    def test_extracts_listview_data_with_unquoted_js_keys(self):
+        html = """
+        <script>
+        new Listview({
+            template: 'npc',
+            id: 'tameable',
+            data: [{"id":32517,"name":"Loque'nahak",skin: ""}]
+        });
+        </script>
+        """
+
+        rows = extract_listview_data(html, "tameable")
+
+        self.assertEqual(rows, [{"id": 32517, "name": "Loque'nahak", "skin": ""}])
+
     def test_extracts_mapper_data(self):
         html = """
         <script>
