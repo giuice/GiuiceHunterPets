@@ -59,7 +59,8 @@ def generate_pets(output: Path, limit_families: int = 0) -> int:
 
     records = []
     skipped = []
-    for family in families:
+    for family_index, family in enumerate(families, start=1):
+        print(f"Fetching family {family_index}/{len(families)}: {family.name}", flush=True)
         family_html = fetch_text(pet_family_url(family.id))
         tameable_rows = source_tameable_rows(extract_listview_data(family_html, "tameable"))
         for tameable in tameable_rows:

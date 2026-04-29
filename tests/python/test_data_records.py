@@ -44,6 +44,23 @@ class DataRecordsTest(unittest.TestCase):
 
         self.assertEqual(rows[0].react, [-1, 0])
 
+    def test_source_tameable_rows_allows_missing_family(self):
+        from scrapper.data_records import source_tameable_rows
+
+        rows = source_tameable_rows(
+            [
+                {
+                    "id": 122963,
+                    "name": "Rezan",
+                    "classification": 1,
+                    "location": [9028],
+                    "react": [-1, -1],
+                }
+            ]
+        )
+
+        self.assertEqual(rows[0].family, 0)
+
     def test_build_pet_record_uses_mapper_ui_map_id_and_coords(self):
         family = PetFamilySourceRow(id=1, name="Wolf")
         tameable = TameablePetSourceRow(

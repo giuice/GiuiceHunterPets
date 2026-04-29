@@ -83,7 +83,7 @@ def source_tameable_rows(rows: list[dict[str, Any]]) -> list[TameablePetSourceRo
             TameablePetSourceRow(
                 id=int(row["id"]),
                 name=str(row["name"]),
-                family=int(row["family"]),
+                family=int(row.get("family") or 0),
                 classification=row.get("classification"),
                 location=[int(value) for value in row.get("location", [])],
                 react=[int(value or 0) for value in row.get("react", [0, 0])],
