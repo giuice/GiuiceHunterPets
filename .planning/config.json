@@ -6,6 +6,7 @@
   "brave_search": false,
   "firecrawl": false,
   "exa_search": false,
+  "response_language": "brazilian portuguese",
   "git": {
     "branching_strategy": "none",
     "phase_branch_template": "gsd/phase-{phase}-{slug}",

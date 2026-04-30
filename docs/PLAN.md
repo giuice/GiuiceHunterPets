@@ -1,4 +1,4 @@
-# Plan — Resilient Refresh + wow_pets.db Fallback
+# Plan — Resilient Refresh + Data.lua Baseline Fallback
 
 ## Context
 
@@ -6,9 +6,9 @@ The Wowhead refresh pipeline at `scrapper/refresh_data.py` aborts the build on t
 
 **The architectural correction:** rename what the pipeline IS.
 
-> **`scrapper/wow_pets.db` is the source of truth for historical pet data (7,071 pets, 6,711 with coords, validated in-game by 12k+ users). The Wowhead scraper applies corrective/additive updates. The build is a merge: scraper output replaces DB records where it succeeds, DB fills gaps where scraper fails.**
+> **The checked-in production `Data.lua` is the trusted shipped baseline for hunter pet location data. It is the data shape already consumed by the addon and validated by real player use. Wowhead scraping applies corrective/additive updates when it succeeds. `scrapper/wow_pets.db` is only a structured auxiliary source because it may have helped generate the shipped data; it must not be treated as more authoritative than `Data.lua` without comparison.**
 
-With this framing, even if scraping fails 100% the build still produces a `Data.lua` equivalent to the DB content. **The user never loses data.**
+With this framing, even if scraping fails for individual pets, the build can preserve the shipped player-useful locations from `Data.lua`. **The user never loses known-good map pins just because a current Wowhead page is malformed.**
 
 User priority is explicit: completeness > speed. This plan does NOT change delays, backend, or concurrency.
 
@@ -18,21 +18,10 @@ User priority is explicit: completeness > speed. This plan does NOT change delay
 - Lower `--delay`
 - Parallel fetches
 - Manifest write amplification
-- DOM-marker fallback when `g_mapperData` is missing (DB covers same cases for now)
-- Stable master fallback (DB has no stable masters; feature hasn't shipped)
+- DOM-marker fallback when `g_mapperData` is missing (the shipped pet baseline covers the same practical pet-location gap for now)
+- Stable master fallback (there is no shipped stable master baseline and the feature hasn't shipped)
 
-## Prerequisite — kill stale background processes
 
-Two zombie `while true` loops are still running:
-- PID 198591 — `bash -lic ... while true; do ... collect-pets ...; done`
-- PID 200174 — duplicate
-
-Both compete on the same manifest, race-write, and waste Wowhead requests. **Kill both before any other work.**
-
-```bash
-kill 198591 200174
-ps -ef | grep -E "refresh_data|collect-pets" | grep -v grep   # confirm empty
-```
 
 ## Files
 
@@ -41,7 +30,8 @@ ps -ef | grep -E "refresh_data|collect-pets" | grep -v grep   # confirm empty
 - `scrapper/data_records.py` — `PetRecord` (25-36), `source_tameable_rows` (77-94)
 - `scrapper/lua_export.py` — `validate_pet_records` (63-82, note `zone_id == 0` rejection at 73-74)
 - `scrapper/source_cache.py` — manifest write path (139-185)
-- `scrapper/wow_pets.db` — schema confirmed: `pets(npc_id PK, family_id, name, min_level, max_level, pet_class, zone_name, zone_id, alliance_react, horde_react, display_id, coords TEXT, last_updated, mapID)`
+- `Data.lua` — shipped production pet baseline; parse `GHP.pet_by_zones` into `PetRecord` fallback records keyed by `NpcId`
+- `scrapper/wow_pets.db` — auxiliary comparison source only; schema confirmed: `pets(npc_id PK, family_id, name, min_level, max_level, pet_class, zone_name, zone_id, alliance_react, horde_react, display_id, coords TEXT, last_updated, mapID)`
 
 **Modify:**
 - `scrapper/refresh_data.py`
@@ -49,41 +39,50 @@ ps -ef | grep -E "refresh_data|collect-pets" | grep -v grep   # confirm empty
 - `docs/research/data-refresh-runbook.md`
 
 **Create:**
-- `scrapper/existing_pet_db.py`
-- `tests/python/test_existing_pet_db.py`
+- `scrapper/existing_pet_data.py`
+- `tests/python/test_existing_pet_data.py`
 
-## Sequence — 7 commits, ~3.5 days junior
+## Sequence — 7 commits plus one optional audit, ~3.5-4 days junior
 
 ### Commit 0 — test fixture prep (skip unless needed)
 
 Skim `tests/python/test_refresh_data_cache.py` for shared fail-fast helpers. Extract if present, skip otherwise.
 
-### Commit 1 — wow_pets.db reader (~0.5 day)
+### Commit 1 — Data.lua baseline reader (~0.75 day)
 
-Create `scrapper/existing_pet_db.py`:
+Create `scrapper/existing_pet_data.py`:
 
 ```python
-def load_existing_pet_records(db_path: Path) -> dict[int, PetRecord]:
+def load_existing_pet_records(data_lua_path: Path) -> dict[int, PetRecord]:
     ...
 ```
 
-- Open SQLite read-only.
-- `SELECT npc_id, family_id, name, min_level, max_level, pet_class, zone_name, mapID, display_id, coords FROM pets`.
-- Build `PetRecord` per row. Use `mapID` as `zone_id`.
-- **Discard rows where `mapID` is NULL/0.** Without a Wowhead `uiMapId`, the record fails `validate_pet_records` (lua_export.py:73). Estimate: pre-Pandaria pets without mapID. Log discarded count.
-- **Discard rows where `coords` is empty/null/`[]`.** No fallback usable.
-- Family name: query `families.name` joined on `family_id`. If missing, use placeholder — but we'll prefer Wowhead's family info (see Commit 2).
-- Parse `coords` JSON string into tuple of (x, y) pairs.
+- Read the checked-in production `Data.lua` as the fallback baseline.
+- Parse only the existing `GHP.pet_by_zones` assignment shape; do not build a general Lua interpreter.
+- Build `PetRecord` per table entry using existing exported keys: `zone_name`, `zoneID`, `name`, `maxlevel`, `minlevel`, `class`, `family`, `displayId`, `NpcId`, `coords`.
+- **Discard rows where `zoneID` is missing/0.** Without a map ID, the record fails `validate_pet_records` and cannot guide a hunter.
+- **Parse coordinates defensively.** Keep every identifiable valid `(x, y)` pair and discard only malformed coordinate entries. Drop the full pet row only when no valid coordinate pair remains.
+- Keep a small summary of loaded/dropped/salvaged counts so maintainers can see whether useful shipped data was preserved.
 - Return `{npc_id: PetRecord}` keyed by int.
 
-Tests at `tests/python/test_existing_pet_db.py`:
-- Loads from a fixture DB with 3-5 records.
-- Drops rows with NULL `mapID`.
-- Drops rows with empty `coords`.
-- Parses multi-coord pets.
-- Returns `{}` for missing DB file.
+Tests at `tests/python/test_existing_pet_data.py`:
+- Loads from a fixture `Data.lua` with 3-5 records.
+- Drops rows with missing/zero `zoneID`.
+- Drops rows only when all coordinates are empty or invalid.
+- Salvages partial coordinate lists by preserving valid coordinate pairs.
+- Parses multi-coordinate pets.
+- Returns `{}` for a missing `Data.lua` path and reports the absence without breaking builds.
 
-### Commit 2 — `generate_pets` skip-and-continue + DB fallback + diff log (~1.25 days)
+### Commit 1.5 — optional DB comparison audit (~0.5 day, only if useful)
+
+Use `scrapper/wow_pets.db` only to compare against the shipped baseline, not to define the fallback baseline.
+
+- If the DB is readable, compare DB rows against `Data.lua` by NPC ID.
+- Emit an audit summary for DB-only rows, Data-only rows, and zone/coordinate differences.
+- Do not let DB-only rows enter fallback automatically in v1; they need explicit review because `Data.lua` is the proven shipped dataset.
+- If this audit is too large for the milestone, defer it. It is not required for the first resilient build.
+
+### Commit 2 — `generate_pets` skip-and-continue + shipped-baseline fallback + diff log (~1.25 days)
 
 In `scrapper/refresh_data.py`:
 
@@ -98,7 +97,7 @@ In `scrapper/refresh_data.py`:
      - Append the fallback record to `records`, log to `fallback_log`.
    - Else: append to `skipped`, continue.
 
-4. **Successful scrape AND fallback exists:** scraper wins, but log a diff entry in `pet-scraper-vs-db-diff.md` (Strategy B):
+4. **Successful scrape AND fallback exists:** scraper wins, but log a diff entry in `pet-scraper-vs-baseline-diff.md`:
    - Compare `scraped.zone_id` vs `fallback.zone_id` — if different, log "ZONE_DIFF".
    - Compare `scraped.coords` vs `fallback.coords` — if any coord differs by >5% or count differs by >50%, log "COORD_DIFF".
    - Diff log is informational — does not block build. User audits manually.
@@ -107,15 +106,15 @@ In `scrapper/refresh_data.py`:
 
 6. New report files (clear with `_clear_lines` on success):
    - `scrapper/generated/pet-skipped.md` — pets with no fallback (existing concept)
-   - `scrapper/generated/pet-fallback.md` — pets recovered from DB
-   - `scrapper/generated/pet-scraper-vs-db-diff.md` — discrepancies for audit (NEW)
+   - `scrapper/generated/pet-fallback.md` — pets recovered from shipped baseline
+   - `scrapper/generated/pet-scraper-vs-baseline-diff.md` — discrepancies for audit (NEW)
 
 7. In `main()`, BEFORE calling `generate_pets`:
    ```python
-   from scrapper.existing_pet_db import load_existing_pet_records
-   fallback = load_existing_pet_records(Path("scrapper/wow_pets.db"))
+   from scrapper.existing_pet_data import load_existing_pet_records
+   fallback = load_existing_pet_records(Path("Data.lua"))
    ```
-   Pass `fallback_records=fallback`. **Load ONCE, never re-read mid-build** (output may overwrite, though here output is `Data.lua` not `.db` so safe — still load once for clarity).
+   Pass `fallback_records=fallback`. **Load ONCE, before writing any generated output.** Production `Data.lua` is the baseline and must not be overwritten during a build unless the generated file validates and the diff is reviewed.
 
 Test updates in `test_refresh_data_cache.py`:
 
@@ -131,16 +130,17 @@ self.assertIn("32517", (generated_dir / "pet-skipped.md").read_text())
 ```
 
 Add new tests:
-- `test_per_pet_failure_uses_db_fallback_when_available`
-- `test_per_pet_failure_skipped_when_db_has_no_record`
-- `test_db_fallback_overrides_family_with_wowhead_classification`
-- `test_db_record_with_null_mapid_is_dropped_at_load_time` (Commit 1 contract)
-- `test_db_record_with_empty_coords_is_dropped_at_load_time`
+- `test_per_pet_failure_uses_data_lua_fallback_when_available`
+- `test_per_pet_failure_skipped_when_baseline_has_no_record`
+- `test_data_lua_fallback_overrides_family_with_wowhead_classification`
+- `test_baseline_record_with_missing_zoneid_is_dropped_at_load_time` (Commit 1 contract)
+- `test_baseline_record_with_all_invalid_coords_is_dropped_at_load_time`
+- `test_baseline_record_with_partial_bad_coords_keeps_valid_pairs`
 - `test_empty_family_skipped_and_invalidated_for_retry`
 - `test_zero_records_still_returns_1`
-- `test_scraper_vs_db_zone_difference_logged_to_diff_file`
-- `test_scraper_vs_db_coord_difference_logged_to_diff_file`
-- `test_db_loaded_once_in_main_not_per_build`
+- `test_scraper_vs_baseline_zone_difference_logged_to_diff_file`
+- `test_scraper_vs_baseline_coord_difference_logged_to_diff_file`
+- `test_baseline_loaded_once_in_main_not_per_build`
 
 ### Commit 2.5 — collect-time location filter (~0.5 day)
 
@@ -163,7 +163,7 @@ Tests:
 
 ### Commit 3 — `generate_stable_masters` skip-and-continue (~0.5 day)
 
-Same shape as Commit 2, no fallback (no historical stable master DB).
+Same shape as Commit 2, no fallback because there is no shipped stable master baseline.
 
 In `refresh_data.py:460-489`: replace per-record `return 1` with `continue` + skipped log. Keep cache invalidation. Final `return 1` only when zero records.
 
@@ -215,19 +215,19 @@ rtk python3 -m scrapper.refresh_data build-pets --from-cache --output /tmp/Data.
 # Expect:
 # - exit code 0
 # - /tmp/Data.test.lua exists, contains "GHP.pet_by_zones = {"
-# - scrapper/generated/pet-skipped.md lists pets with no DB fallback
-# - scrapper/generated/pet-fallback.md lists pets recovered from DB
-# - scrapper/generated/pet-scraper-vs-db-diff.md lists zone/coord discrepancies for audit
+# - scrapper/generated/pet-skipped.md lists pets with no shipped-baseline fallback
+# - scrapper/generated/pet-fallback.md lists pets recovered from Data.lua
+# - scrapper/generated/pet-scraper-vs-baseline-diff.md lists zone/coord discrepancies for audit
 ```
 
 Sanity-check counts:
 
 ```bash
 grep -c '\["NpcId"\]' Data.lua            # production
-grep -c '\["NpcId"\]' /tmp/Data.test.lua  # new — should be ≥ DB record count
+grep -c '\["NpcId"\]' /tmp/Data.test.lua  # new — should preserve known-good baseline coverage where scraper fails
 
 # Inspect diff log for surprising mismatches
-head -50 scrapper/generated/pet-scraper-vs-db-diff.md
+head -50 scrapper/generated/pet-scraper-vs-baseline-diff.md
 ```
 
 **After Commit 4:**
@@ -267,35 +267,38 @@ rtk python3 -m unittest discover tests/python
 
 | Topic | Decision |
 |---|---|
-| Fallback source | `wow_pets.db` (SQLite) — abandon Data.lua parser idea |
-| Fallback eligibility | Drop rows with NULL `mapID` or empty `coords` at load time |
-| Scraper vs DB conflict | Scraper wins, log diff for audit (Strategy B) |
+| Fallback source | Production `Data.lua` is the trusted shipped baseline |
+| DB role | `scrapper/wow_pets.db` is auxiliary/comparison data only until proven against `Data.lua` |
+| Fallback eligibility | Drop records with missing/zero `zoneID`; salvage partial coordinate lists and drop a row only when no valid coordinates remain |
+| Scraper vs baseline conflict | Scraper wins for current successful Wowhead records, log diff for audit |
 | Family classification | Wowhead's `family_id`/name wins on fallback records (Wowhead is authoritative on classification) |
-| Coord priority | Scraper coords used when scrape succeeds; DB coords when fallback fires |
-| Stable master fallback | Deferred — DB has no stable masters and feature hasn't shipped |
-| DOM-marker fallback | Deferred — DB covers the same cases |
+| Coord priority | Scraper coords used when scrape succeeds; shipped `Data.lua` coords when fallback fires |
+| Stable master fallback | Deferred — there is no shipped stable master baseline and feature hasn't shipped |
+| DOM-marker fallback | Deferred — shipped pet baseline covers the same practical gap for v1 |
 | Order | Kill while-true processes → commits 1-5 → user re-runs clean collect |
 
 ## Pitfalls (read before starting)
 
-1. **`mapID` NULL → drop fallback** at load time, not at use time. Logging count helps measure DB completeness.
-2. **Don't re-read DB during build.** Load once in `main()`, pass dict in.
-3. **Cache invalidation must still fire** in empty-family and per-pet error paths — only `return 1` is removed. This preserves re-collect retry behavior.
-4. **Family ID drift on fallback.** When fallback fires, override DB's family with current Wowhead family. Log it (this IS the audit trail).
-5. **Pets removed from Wowhead but in DB** must NOT be carried forward. Control flow already enforces this — fallback fires only inside the per-tameable loop iterating Wowhead's current listing.
-6. **Self-healing trap (Commit 5):** only heal a manifest entry to `ok` after a full successful parse+validation, never on partial. A loosened parser silently healing real errors is worse than the stale state.
-7. **Budget accounting in `_collect_one`:** error path must NOT call `budget.mark_collected()`.
-8. **Tests: invert in place, do not delete.** Reviewer needs to see the contract change as a 2-line diff per test.
+1. **`Data.lua` is the baseline.** Do not let a newer-looking DB row override the shipped player-validated dataset without an explicit audit decision.
+2. **Partial coordinates are useful.** Preserve every valid coordinate pair; drop only malformed coordinate entries, and drop a pet only when no valid coordinate remains.
+3. **Don't re-read the baseline during build.** Load once in `main()`, pass dict in.
+4. **Cache invalidation must still fire** in empty-family and per-pet error paths — only `return 1` is removed. This preserves re-collect retry behavior.
+5. **Family ID drift on fallback.** When fallback fires, override baseline family with current Wowhead family. Log it.
+6. **Pets removed from Wowhead but still in `Data.lua`** must NOT be carried forward automatically. Fallback fires only inside the per-tameable loop iterating Wowhead's current listing.
+7. **Self-healing trap (Commit 5):** only heal a manifest entry to `ok` after a full successful parse+validation, never on partial. A loosened parser silently healing real errors is worse than the stale state.
+8. **Budget accounting in `_collect_one`:** error path must NOT call `budget.mark_collected()`.
+9. **Tests: invert in place, do not delete.** Reviewer needs to see the contract change as a 2-line diff per test.
 
 ## Total sizing
 
 | Commit | Estimate |
 |---|---|
 | 0 — fixture prep | 0–0.5 day |
-| 1 — DB reader | 0.5 day |
+| 1 — Data.lua baseline reader | 0.75 day |
+| 1.5 — optional DB comparison audit | 0-0.5 day |
 | 2 — `generate_pets` + fallback + diff | 1.25 days |
 | 2.5 — collect-time location filter | 0.5 day |
 | 3 — `generate_stable_masters` | 0.5 day |
 | 4 — `_collect_one` | 0.5 day |
 | 5 — self-healing manifest | 0.5 day |
-| **Total** | **~3.5 days** |
+| **Total** | **~3.5-4 days** |

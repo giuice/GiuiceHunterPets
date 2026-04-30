@@ -8,8 +8,8 @@
 
 | Phase | Name | Goal | Requirements | Success Criteria |
 |-------|------|------|--------------|------------------|
-| 1 | DB Fallback Reader | Establish safe historical pet fallback loading from SQLite. | DATA-01, DATA-02, DATA-03, DATA-04 | 4 |
-| 2 | Resilient Pet Build | Merge successful Wowhead scrape records with DB fallback and audit reports. | PET-01, PET-02, PET-03, PET-04, PET-05, PET-06, PET-07, PET-08, TEST-02 | 5 |
+| 1 | Shipped Baseline Reader | Establish safe historical pet fallback loading from production `Data.lua`. | DATA-01, DATA-02, DATA-03, DATA-04 | 4 |
+| 2 | Resilient Pet Build | Merge successful Wowhead scrape records with shipped-baseline fallback and audit reports. | PET-01, PET-02, PET-03, PET-04, PET-05, PET-06, PET-07, PET-08, TEST-02 | 5 |
 | 3 | Location-Aware Collection | Avoid collecting NPC pages that cannot produce pet records. | COLL-01 | 3 |
 | 4 | Stable Master Skip-And-Continue | Make stable master generation resilient to isolated bad NPC pages. | STBL-01, STBL-02, STBL-03 | 3 |
 | 5 | Collection Error Resilience | Record page fetch failures without aborting collection or consuming page budget. | COLL-02, COLL-03, DOCS-01 | 4 |
@@ -17,38 +17,38 @@
 
 ## Phases
 
-### Phase 1: DB Fallback Reader
+### Phase 1: Shipped Baseline Reader
 
-**Goal:** Add a small read-only SQLite loader that converts valid historical DB rows into `PetRecord` fallback records.
+**Goal:** Add a small read-only loader that converts valid shipped `Data.lua` pet rows into `PetRecord` fallback records.
 
 **Requirements:** DATA-01, DATA-02, DATA-03, DATA-04
 
 **Success Criteria:**
-1. `load_existing_pet_records(Path("scrapper/wow_pets.db"))` returns `dict[int, PetRecord]`.
-2. Rows with null/zero `mapID` or empty coordinates are excluded before export validation.
-3. Multi-coordinate DB rows parse into `tuple[tuple[float, float], ...]`.
-4. A missing DB file returns `{}` and logs or reports the absence without breaking builds.
+1. `load_existing_pet_records(Path("Data.lua"))` returns `dict[int, PetRecord]`.
+2. Rows with missing/zero `zoneID` or no usable coordinates are excluded before export validation.
+3. Multi-coordinate `Data.lua` rows parse into `tuple[tuple[float, float], ...]`.
+4. A missing `Data.lua` path returns `{}` and logs or reports the absence without breaking builds.
 
 **Suggested Plans:**
-- Create `scrapper/existing_pet_db.py` with focused SQLite read and coordinate parsing.
-- Add `tests/python/test_existing_pet_db.py` fixtures for valid rows, invalid rows, multi-coords, and missing DB file.
+- Create `scrapper/existing_pet_data.py` with focused `Data.lua` baseline parsing and coordinate salvage.
+- Add `tests/python/test_existing_pet_data.py` fixtures for valid rows, invalid rows, partial coordinate salvage, multi-coords, and missing file.
 
 ### Phase 2: Resilient Pet Build
 
-**Goal:** Change pet generation from fail-fast to skip-and-continue with DB fallback, audit logs, and cache-backed build verification.
+**Goal:** Change pet generation from fail-fast to skip-and-continue with shipped-baseline fallback, audit logs, and cache-backed build verification.
 
 **Requirements:** PET-01, PET-02, PET-03, PET-04, PET-05, PET-06, PET-07, PET-08, TEST-02
 
 **Success Criteria:**
-1. A per-pet `SourceFetchError` uses DB fallback when available and records the recovery in `pet-fallback.md`.
-2. Scraped records win over DB fallback and zone/coordinate discrepancies are written to `pet-scraper-vs-db-diff.md`.
+1. A per-pet `SourceFetchError` uses `Data.lua` fallback when available and records the recovery in `pet-fallback.md`.
+2. Scraped records win over shipped-baseline fallback and zone/coordinate discrepancies are written to `pet-scraper-vs-baseline-diff.md`.
 3. Empty or malformed individual family/pet sources are skipped and recorded without aborting when other records exist.
 4. The build exits 1 only when no records are produced or final validation fails.
 5. `python3 -m scrapper.refresh_data build-pets --from-cache --output /tmp/Data.test.lua` exits 0 and writes `GHP.pet_by_zones = {` after known bad pages are handled.
 
 **Suggested Plans:**
 - Pass fallback records from `main()` into `generate_pets()`.
-- Update report writing for skipped, fallback, and scraper-vs-DB diff files.
+- Update report writing for skipped, fallback, and scraper-vs-baseline diff files.
 - Update existing fail-fast tests in place and add fallback/diff tests.
 
 ### Phase 3: Location-Aware Collection
@@ -147,7 +147,7 @@
 
 ## Next Up
 
-**Phase 1: DB Fallback Reader** - Establish safe fallback data loading before changing build behavior.
+**Phase 1: Shipped Baseline Reader** - Establish safe fallback data loading before changing build behavior.
 
 `$gsd-plan-phase 1`
 

@@ -7,21 +7,21 @@
 
 ### Fallback Data
 
-- [ ] **DATA-01**: Maintainer can load historical pet records from `scrapper/wow_pets.db` into `PetRecord` objects keyed by NPC ID.
-- [ ] **DATA-02**: DB fallback loading excludes records with null/zero `mapID` before Lua export validation.
-- [ ] **DATA-03**: DB fallback loading excludes records with empty, null, or invalid coordinate data.
-- [ ] **DATA-04**: Missing `scrapper/wow_pets.db` returns an empty fallback set without failing the build.
+- [ ] **DATA-01**: Maintainer can load historical pet records from production `Data.lua` into `PetRecord` objects keyed by NPC ID.
+- [ ] **DATA-02**: Shipped-baseline fallback loading excludes records with missing/zero `zoneID` before Lua export validation.
+- [ ] **DATA-03**: Shipped-baseline fallback loading preserves every valid coordinate pair, discards malformed coordinate entries, and excludes a record only when no valid coordinate pair remains.
+- [ ] **DATA-04**: Missing `Data.lua` path returns an empty fallback set without failing the build.
 
 ### Pet Build
 
 - [ ] **PET-01**: Maintainer can run `build-pets --from-cache` and continue past an empty or malformed individual pet family without aborting the whole build.
-- [ ] **PET-02**: Maintainer can run `build-pets --from-cache` and recover a failed current Wowhead-listed pet from DB fallback when a valid fallback record exists.
-- [ ] **PET-03**: Scraped pet records replace DB fallback records whenever scraping succeeds for the same NPC ID.
-- [ ] **PET-04**: DB fallback records use the current Wowhead family ID and family name when recovered during a family iteration.
-- [ ] **PET-05**: Pets that fail scraping and have no valid DB fallback are recorded in `scrapper/generated/pet-skipped.md` without stopping the build.
+- [ ] **PET-02**: Maintainer can run `build-pets --from-cache` and recover a failed current Wowhead-listed pet from shipped `Data.lua` fallback when a valid fallback record exists.
+- [ ] **PET-03**: Scraped pet records replace shipped-baseline fallback records whenever scraping succeeds for the same NPC ID.
+- [ ] **PET-04**: Shipped-baseline fallback records use the current Wowhead family ID and family name when recovered during a family iteration.
+- [ ] **PET-05**: Pets that fail scraping and have no valid shipped-baseline fallback are recorded in `scrapper/generated/pet-skipped.md` without stopping the build.
 - [ ] **PET-06**: Pet build returns failure only when no pet records can be produced or final validation fails.
-- [ ] **PET-07**: Pet build writes `pet-fallback.md` listing records recovered from DB fallback.
-- [ ] **PET-08**: Pet build writes `pet-scraper-vs-db-diff.md` for audit-only zone or coordinate discrepancies between successful scrape and DB fallback.
+- [ ] **PET-07**: Pet build writes `pet-fallback.md` listing records recovered from shipped-baseline fallback.
+- [ ] **PET-08**: Pet build writes `pet-scraper-vs-baseline-diff.md` for audit-only zone or coordinate discrepancies between successful scrape and shipped-baseline fallback.
 
 ### Collection
 
@@ -44,7 +44,7 @@
 ### Documentation and Verification
 
 - [ ] **DOCS-01**: Refresh runbook explains that the outer `while true` collection loop is no longer required.
-- [ ] **TEST-01**: Python tests cover DB fallback loading, fallback eligibility filtering, skip-and-continue pet builds, diff reporting, stable master skip behavior, collection error handling, and manifest healing.
+- [ ] **TEST-01**: Python tests cover shipped-baseline fallback loading, fallback eligibility filtering, partial coordinate salvage, skip-and-continue pet builds, diff reporting, stable master skip behavior, collection error handling, and manifest healing.
 - [ ] **TEST-02**: The cache-backed pet build verification command exits 0 and writes a Lua output containing `GHP.pet_by_zones = {` after the pet fallback phase.
 
 ## v2 Requirements
@@ -59,7 +59,7 @@
 
 - **REFR-01**: Maintainer can prune or summarize the large HTML source cache without losing useful diagnostics.
 - **REFR-02**: Refresh backend can be swapped or hardened after the fallback build path is stable.
-- **REFR-03**: DOM-marker fallback can recover mapper coordinates when both scraping and DB fallback are insufficient.
+- **REFR-03**: DOM-marker fallback can recover mapper coordinates when both scraping and shipped-baseline fallback are insufficient.
 
 ## Out of Scope
 
@@ -67,7 +67,7 @@
 |---------|--------|
 | Parallel collection | Completeness is the immediate priority; concurrency adds rate-limit and race complexity. |
 | Lower request delay | Speed tuning is unrelated to making cache-backed builds resilient. |
-| Stable master DB fallback | The historical DB has no stable master data. |
+| Stable master fallback | There is no shipped stable master baseline and the historical DB has no stable master data. |
 | Runtime UI refactor | Existing UI concerns are real but separate from refresh-data correctness. |
 | Production `Data.lua` replacement | Generated output must be validated and reviewed before replacing runtime data. |
 | Removing deprecated CLI aliases | Useful cleanup, but not required for the resilient refresh milestone. |

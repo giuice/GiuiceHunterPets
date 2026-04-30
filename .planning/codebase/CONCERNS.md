@@ -137,7 +137,7 @@
 **Wowhead scraping is unstable:**
 - Risk: Current blocker files show Wowhead HTTP 403 for stable master search and an `agent-browser` failure for one NPC page.
 - Impact: Data refresh can stall even when the addon runtime is otherwise functional.
-- Migration plan: Keep a reviewed fallback from `scrapper/wow_pets.db` or production `Data.lua`, and use Wowhead cache-first collection as an enrichment source rather than the sole path to a usable build.
+- Migration plan: Keep production `Data.lua` as the trusted shipped fallback baseline, use `scrapper/wow_pets.db` only as auxiliary comparison data until reviewed against that baseline, and use Wowhead cache-first collection as an enrichment source rather than the sole path to a usable build.
 
 **WoW API surface spans many interface versions:**
 - Risk: `GiuiceHunterPets.toc` declares many interface versions, while runtime code uses modern APIs such as `Settings.*`, `TooltipDataProcessor`, `C_Traits`, and `ModelScene`.

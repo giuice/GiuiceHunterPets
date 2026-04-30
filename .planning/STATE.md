@@ -6,7 +6,7 @@ See: `.planning/PROJECT.md` (updated 2026-04-30)
 
 **Core value:** The addon must be able to produce complete, validated hunter pet location data even when individual Wowhead pages are malformed, missing mapper data, or temporarily unavailable.
 
-**Current focus:** Phase 1: DB Fallback Reader
+**Current focus:** Phase 1: Shipped Baseline Reader
 
 ## Workflow
 
@@ -37,6 +37,7 @@ See: `.planning/PROJECT.md` (updated 2026-04-30)
 - Initialized GSD project from `docs/PLAN.md` and the existing `.planning/codebase/` map.
 - Used recommended defaults because interactive question tooling is unavailable in this runtime.
 - Preserved existing `AGENTS.md` instead of replacing it with generated workflow guidance.
+- Corrected the fallback-source design: production `Data.lua` is the trusted shipped baseline; `scrapper/wow_pets.db` is auxiliary comparison data until proven against `Data.lua`.
 
 ## Next Command
 
