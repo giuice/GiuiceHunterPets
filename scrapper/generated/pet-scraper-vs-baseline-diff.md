@@ -1,0 +1,1286 @@
+- 69943 Gumi: COORD_COUNT_DIFF scraped=16 baseline=3
+- 69946 Hutia: COORD_COUNT_DIFF scraped=11 baseline=1
+- 88708 Gara: ZONE_DIFF scraped=539 baseline=104
+- 88710 Lost Netherwolf: ZONE_DIFF scraped=539 baseline=104; COORD_COUNT_DIFF scraped=2 baseline=1
+- 121567 Lost Spectral Gryphon: COORD_COUNT_DIFF scraped=6 baseline=3
+- 121571 Gon: COORD_COUNT_DIFF scraped=3 baseline=1
+- 125875 Azure Manasaber: ZONE_DIFF scraped=7637 baseline=680
+- 6582 Clutchmother Zavas: ZONE_DIFF scraped=490 baseline=78; COORD_COUNT_DIFF scraped=11 baseline=3
+- 8204 Soriid the Devourer: ZONE_DIFF scraped=440 baseline=71; COORD_COUNT_DIFF scraped=6 baseline=2
+- 8205 Haarka the Ravenous: ZONE_DIFF scraped=440 baseline=71; COORD_COUNT_DIFF scraped=9 baseline=4
+- 38305 Gorishi Fledgling Colossus: ZONE_DIFF scraped=490 baseline=78; COORD_COUNT_DIFF scraped=8 baseline=4
+- 50744 Qu'rik: COORD_COUNT_DIFF scraped=5 baseline=2
+- 50747 Tix: ZONE_DIFF scraped=5695 baseline=327
+- 61509 Sra'thik Kunchong: COORD_COUNT_DIFF scraped=46 baseline=28
+- 63697 Nascent Kunchong: COORD_COUNT_DIFF scraped=31 baseline=11
+- 63765 Kovok: COORD_COUNT_DIFF scraped=2 baseline=1
+- 64717 Dread Kunchong: COORD_COUNT_DIFF scraped=62 baseline=25
+- 64724 Karanosh: COORD_COUNT_DIFF scraped=32 baseline=9
+- 65520 Massive Ik'thik Kunchong: COORD_COUNT_DIFF scraped=35 baseline=6
+- 65582 Ik'thik Kunchong: COORD_COUNT_DIFF scraped=9 baseline=2
+- 67036 Ik'thik Kunchong: COORD_COUNT_DIFF scraped=2 baseline=1
+- 153278 Kunchong Destroyer: ZONE_DIFF scraped=1530 baseline=390
+- 154353 Aqir Goliath: ZONE_DIFF scraped=1527 baseline=249
+- 154576 Aqir Titanus: ZONE_DIFF scraped=1527 baseline=249
+- 154604 Lord Aj'qirai: ZONE_DIFF scraped=1527 baseline=249
+- 155703 Anq'uri the Titanic: ZONE_DIFF scraped=1527 baseline=249
+- 155855 Aqir Goliath: ZONE_DIFF scraped=1527 baseline=249; COORD_COUNT_DIFF scraped=5 baseline=3
+- 158530 Aqir Hive Guardian: ZONE_DIFF scraped=1527 baseline=249
+- 159816 Ruinator Xok'nixx: ZONE_DIFF scraped=1527 baseline=249
+- 160872 Destroyer Krox'tazar: ZONE_DIFF scraped=1530 baseline=390
+- 160970 Vuk'laz the Earthbreaker: ZONE_DIFF scraped=1527 baseline=249
+- 161672 Kri'vin: ZONE_DIFF scraped=1530 baseline=390
+- 162173 R'krox the Runt: ZONE_DIFF scraped=1527 baseline=249
+- 163025 Aqir Goliath: ZONE_DIFF scraped=1527 baseline=249
+- 163259 Goliath Hatchling: ZONE_DIFF scraped=1527 baseline=249; COORD_COUNT_DIFF scraped=8 baseline=4
+- 163268 Titanus Young: ZONE_DIFF scraped=1527 baseline=249
+- 25489 Wooly Rhino Bull: COORD_COUNT_DIFF scraped=35 baseline=155
+- 28009 Shardhorn Rhino: COORD_COUNT_DIFF scraped=104 baseline=249
+- 28288 Farunn: COORD_COUNT_DIFF scraped=8 baseline=17
+- 29469 Ice Steppe Rhino: COORD_COUNT_DIFF scraped=25 baseline=82
+- 50990 Nakk the Thunderer: ZONE_DIFF scraped=550 baseline=107
+- 76946 Faultline: ZONE_DIFF scraped=6967 baseline=599
+- 78364 Iron Horde Battlebeast: COORD_COUNT_DIFF scraped=4 baseline=2
+- 78572 Wild Witherhide Bull: COORD_COUNT_DIFF scraped=4 baseline=1
+- 78574 Ancient Leatherhide: ZONE_DIFF scraped=550 baseline=107
+- 78575 Leatherhide Clefthoof: ZONE_DIFF scraped=550 baseline=107
+- 78576 Leatherhide Calf: ZONE_DIFF scraped=550 baseline=107
+- 79034 Tamed Clefthoof: ZONE_DIFF scraped=550 baseline=107
+- 81898 Leatherhide Bull: ZONE_DIFF scraped=550 baseline=107
+- 82119 Banthar: ZONE_DIFF scraped=550 baseline=107
+- 83483 Flinthide: ZONE_DIFF scraped=550 baseline=107; COORD_COUNT_DIFF scraped=4 baseline=2
+- 85031 Leatherhide Earthshaker: ZONE_DIFF scraped=550 baseline=107; COORD_COUNT_DIFF scraped=2 baseline=1
+- 86730 Ironhide Clefthoof: ZONE_DIFF scraped=550 baseline=107
+- 86731 Ironhide Bull: ZONE_DIFF scraped=550 baseline=107
+- 86732 Bergruu: ZONE_DIFF scraped=550 baseline=107; COORD_COUNT_DIFF scraped=25 baseline=16
+- 194868 Hungry Plainstomper: COORD_COUNT_DIFF scraped=9 baseline=5
+- 14020 Chromaggus: ZONE_DIFF scraped=2677 baseline=1560
+- 17447 The Kurken: ZONE_DIFF scraped=3524 baseline=97
+- 21102 Uvuros: COORD_COUNT_DIFF scraped=6 baseline=2
+- 47544 Svarnos: ZONE_DIFF scraped=244 baseline=245
+- 50839 Chromehound: ZONE_DIFF scraped=51 baseline=32
+- 32485 King Krush: COORD_COUNT_DIFF scraped=39 baseline=99
+- 50846 Slavermaw: COORD_COUNT_DIFF scraped=12 baseline=7
+- 126732 Pinky: COORD_COUNT_DIFF scraped=2 baseline=1
+- 130713 Ten'gor: COORD_COUNT_DIFF scraped=4 baseline=2
+- 131672 Young Xibalan Apex: COORD_COUNT_DIFF scraped=5 baseline=3
+- 134852 Vilebone Ravager: COORD_COUNT_DIFF scraped=10 baseline=5
+- 138794 Dunegorger Kraulok: COORD_COUNT_DIFF scraped=6 baseline=3
+- 50370 Karapax: COORD_COUNT_DIFF scraped=4 baseline=2
+- 78856 Bloodthorn Ravager: ZONE_DIFF scraped=539 baseline=104
+- 78857 Bloodthorn Striker: ZONE_DIFF scraped=539 baseline=104
+- 79726 Jabberback: COORD_COUNT_DIFF scraped=2 baseline=1
+- 80715 Deathspine Ravager: ZONE_DIFF scraped=7025 baseline=534
+- 83522 Hive Queen Skrikka: COORD_COUNT_DIFF scraped=2 baseline=1
+- 85516 Cliffscar Ravager: COORD_COUNT_DIFF scraped=5 baseline=3
+- 88523 Ravager Pit Fodder: ZONE_DIFF scraped=550 baseline=107; COORD_COUNT_DIFF scraped=11 baseline=7
+- 92429 Broodlord Ixkor: COORD_COUNT_DIFF scraped=2 baseline=1
+- 50843 Portent: COORD_COUNT_DIFF scraped=19 baseline=12
+- 59157 Granite Quilen: COORD_COUNT_DIFF scraped=177 baseline=3
+- 60373 Reanimated Quilen: COORD_COUNT_DIFF scraped=12 baseline=3
+- 60573 Terracotta Defender: ZONE_DIFF scraped=5841 baseline=379; COORD_COUNT_DIFF scraped=14 baseline=2
+- 61565 Quilen Statue: ZONE_DIFF scraped=6208 baseline=481; COORD_COUNT_DIFF scraped=63 baseline=10
+- 62254 Quilen Watcher: ZONE_DIFF scraped=6208 baseline=481
+- 63510 Wulon: ZONE_DIFF scraped=5840 baseline=390; COORD_COUNT_DIFF scraped=193 baseline=1
+- 63605 Stonebound Watcher: ZONE_DIFF scraped=5840 baseline=390; COORD_COUNT_DIFF scraped=151 baseline=18
+- 64686 Granite Fragment: ZONE_DIFF scraped=5840 baseline=390; COORD_COUNT_DIFF scraped=31 baseline=1
+- 65450 Ancient Guardian: COORD_COUNT_DIFF scraped=33 baseline=13
+- 131233 Lei-zhi: COORD_COUNT_DIFF scraped=2 baseline=1
+- 153096 Animated Warden: ZONE_DIFF scraped=1530 baseline=390
+- 156046 Zan-tien Quilen: ZONE_DIFF scraped=1530 baseline=390
+- 157290 Jade Watcher: COORD_COUNT_DIFF scraped=7 baseline=3
+- 157466 Anh-De the Loyal: ZONE_DIFF scraped=1530 baseline=390
+- 158409 Rusan: ZONE_DIFF scraped=1530 baseline=390
+- 158702 Lurking Monitor: COORD_COUNT_DIFF scraped=18 baseline=10
+- 167497 Carved Intimidator: COORD_COUNT_DIFF scraped=16 baseline=9
+- 174994 Tamed Gargon: ZONE_DIFF scraped=10986 baseline=1525; COORD_COUNT_DIFF scraped=12 baseline=1
+- 176106 Carved Intimidator: COORD_COUNT_DIFF scraped=14 baseline=9
+- 1132 Timber: ZONE_DIFF scraped=469 baseline=30
+- 7055 Blackrock Worg: COORD_COUNT_DIFF scraped=5 baseline=3
+- 8211 Old Cliff Jumper: COORD_COUNT_DIFF scraped=4 baseline=2
+- 10220 Halycon: ZONE_DIFF scraped=1583 baseline=254
+- 10644 Mist Howler: COORD_COUNT_DIFF scraped=6 baseline=2
+- 24026 Fanggore Worg: COORD_COUNT_DIFF scraped=18 baseline=308
+- 24076 Winterskorn Worg: COORD_COUNT_DIFF scraped=57 baseline=166
+- 25675 Tundra Wolf: COORD_COUNT_DIFF scraped=17 baseline=57
+- 25791 Oil-stained Wolf: COORD_COUNT_DIFF scraped=15 baseline=50
+- 26592 Graymist Hunter: COORD_COUNT_DIFF scraped=66 baseline=282
+- 27408 Duskhowl Prowler: COORD_COUNT_DIFF scraped=19 baseline=96
+- 27523 Grizzlesnout: COORD_COUNT_DIFF scraped=1 baseline=9
+- 29358 Frostworg: COORD_COUNT_DIFF scraped=14 baseline=57
+- 30430 Sentry Worg: COORD_COUNT_DIFF scraped=16 baseline=117
+- 30455 Frostworg: COORD_COUNT_DIFF scraped=2 baseline=6
+- 31233 Sinewy Wolf: COORD_COUNT_DIFF scraped=34 baseline=474
+- 41478 Snow Tracker Wolf: ZONE_DIFF scraped=27 baseline=29
+- 45450 The Lone Hunter: COORD_COUNT_DIFF scraped=2 baseline=1
+- 47769 Barkmutt: COORD_COUNT_DIFF scraped=3 baseline=1
+- 50916 Lamepaw the Whimperer: COORD_COUNT_DIFF scraped=9 baseline=4
+- 56106 Thieving Wolf: COORD_COUNT_DIFF scraped=56 baseline=34
+- 56357 Lupello: COORD_COUNT_DIFF scraped=11 baseline=6
+- 56524 Longfang Howler: COORD_COUNT_DIFF scraped=35 baseline=19
+- 58889 Longfang Patriarch: COORD_COUNT_DIFF scraped=68 baseline=11
+- 58890 Longfang Den-Mother: COORD_COUNT_DIFF scraped=15 baseline=2
+- 58891 Longfang Cub: COORD_COUNT_DIFF scraped=37 baseline=8
+- 60783 Longfang Pack Wolf: COORD_COUNT_DIFF scraped=31 baseline=18
+- 74169 Gloomshade Howler: ZONE_DIFF scraped=539 baseline=104
+- 74208 Killmaw Pup: ZONE_DIFF scraped=539 baseline=104
+- 74712 Gloomshade Howler: ZONE_DIFF scraped=539 baseline=104
+- 77886 Frost Wolf: COORD_COUNT_DIFF scraped=4 baseline=1
+- 79755 Savage Warwolf: ZONE_DIFF scraped=550 baseline=107
+- 80160 Riding Wolf: ZONE_DIFF scraped=550 baseline=107; COORD_COUNT_DIFF scraped=7 baseline=4
+- 80261 Dire Snarler: ZONE_DIFF scraped=550 baseline=107
+- 80263 Shagor: ZONE_DIFF scraped=550 baseline=107; COORD_COUNT_DIFF scraped=5 baseline=2
+- 81000 Garn Nighthowl: COORD_COUNT_DIFF scraped=23 baseline=14
+- 81001 Nok-Karosh: COORD_COUNT_DIFF scraped=5 baseline=3
+- 81718 Warsong Wolf: ZONE_DIFF scraped=550 baseline=107; COORD_COUNT_DIFF scraped=8 baseline=5
+- 81774 Injured Stalker: ZONE_DIFF scraped=539 baseline=104; COORD_COUNT_DIFF scraped=2 baseline=1
+- 81902 Nagrand Prowler: ZONE_DIFF scraped=550 baseline=107
+- 82205 Lupe: ZONE_DIFF scraped=550 baseline=107
+- 82209 Loup: ZONE_DIFF scraped=550 baseline=107
+- 82308 Shadowmoon Stalker: ZONE_DIFF scraped=539 baseline=104
+- 82535 Void-Touched Stalker: ZONE_DIFF scraped=539 baseline=104
+- 82912 Grizzlemaw: ZONE_DIFF scraped=550 baseline=107; COORD_COUNT_DIFF scraped=4 baseline=2
+- 84044 Savage Warwolf: ZONE_DIFF scraped=550 baseline=107
+- 84045 Dire Snarler: ZONE_DIFF scraped=550 baseline=107
+- 86414 Nagrand Savager: ZONE_DIFF scraped=550 baseline=107
+- 86851 Young Snarler: ZONE_DIFF scraped=550 baseline=107
+- 86931 Direfang Prowler: ZONE_DIFF scraped=550 baseline=107
+- 86932 Direfang Alpha: ZONE_DIFF scraped=550 baseline=107
+- 87107 Maimclaw: ZONE_DIFF scraped=550 baseline=107; COORD_COUNT_DIFF scraped=2 baseline=1
+- 92521 Tanaan Wolf: COORD_COUNT_DIFF scraped=2 baseline=1
+- 92906 Frostwolf: COORD_COUNT_DIFF scraped=4 baseline=1
+- 104226 Gloomfang: COORD_COUNT_DIFF scraped=8 baseline=3
+- 112497 Maia the White: COORD_COUNT_DIFF scraped=4 baseline=2
+- 127876 Chillmist Alpha: COORD_COUNT_DIFF scraped=7 baseline=4
+- 129124 Son of Xolotal: COORD_COUNT_DIFF scraped=7 baseline=4
+- 132644 Wolf Pup: ZONE_DIFF scraped=9734 baseline=14
+- 141051 Rustfur Matriarch: COORD_COUNT_DIFF scraped=4 baseline=2
+- 156778 Thundermaw: ZONE_DIFF scraped=1530 baseline=390
+- 162374 Shaggy Desert Coyote: ZONE_DIFF scraped=1527 baseline=249
+- 178096 Lupine Animate: COORD_COUNT_DIFF scraped=3 baseline=1
+- 181360 Vexis: COORD_COUNT_DIFF scraped=5 baseline=2
+- 729 Sin'Dall: COORD_COUNT_DIFF scraped=9 baseline=5
+- 731 King Bangalash: COORD_COUNT_DIFF scraped=13 baseline=3
+- 1201 Snow Leopard: ZONE_DIFF scraped=27 baseline=29
+- 2033 Elder Nightsaber: COORD_COUNT_DIFF scraped=20 baseline=9
+- 2385 Foothill Stalker: COORD_COUNT_DIFF scraped=30 baseline=4
+- 2850 Broken Tooth: COORD_COUNT_DIFF scraped=7 baseline=4
+- 3416 Savannah Matriarch: COORD_COUNT_DIFF scraped=15 baseline=6
+- 5865 Dishu: COORD_COUNT_DIFF scraped=5 baseline=3
+- 14222 Araga: COORD_COUNT_DIFF scraped=4 baseline=1
+- 24043 Amani Lynx: ZONE_DIFF scraped=3805 baseline=333
+- 28001 Dreadsaber: COORD_COUNT_DIFF scraped=139 baseline=437
+- 42170 Snow Leopard: ZONE_DIFF scraped=27 baseline=29; COORD_COUNT_DIFF scraped=9 baseline=2
+- 42171 Snow Leopard Cub: ZONE_DIFF scraped=27 baseline=29
+- 50159 Sambas: COORD_COUNT_DIFF scraped=5 baseline=3
+- 50815 Skarr: ZONE_DIFF scraped=5733 baseline=338
+- 50818 The Dark Prowler: COORD_COUNT_DIFF scraped=2 baseline=1
+- 50825 Feras: COORD_COUNT_DIFF scraped=3 baseline=1
+- 52839 Amani Lynx: ZONE_DIFF scraped=3805 baseline=333
+- 56198 Thicket Stalker: COORD_COUNT_DIFF scraped=35 baseline=17
+- 56272 Forest Prowler: COORD_COUNT_DIFF scraped=48 baseline=22
+- 56329 Kher Shan: COORD_COUNT_DIFF scraped=2 baseline=1
+- 56654 Wild Stalker: COORD_COUNT_DIFF scraped=39 baseline=25
+- 58221 Krasari Stalker: COORD_COUNT_DIFF scraped=25 baseline=14
+- 58432 Gorge Stalker: COORD_COUNT_DIFF scraped=76 baseline=45
+- 58641 Krasari Prowler: COORD_COUNT_DIFF scraped=42 baseline=15
+- 58884 Sha-Haunted Tigress: COORD_COUNT_DIFF scraped=73 baseline=25
+- 58887 Krasari Mauler: COORD_COUNT_DIFF scraped=19 baseline=5
+- 59102 Forest Huntress: COORD_COUNT_DIFF scraped=90 baseline=48
+- 59116 Krasari Huntress: COORD_COUNT_DIFF scraped=15 baseline=8
+- 59196 Krasari Prowler: COORD_COUNT_DIFF scraped=7 baseline=4
+- 59534 Summit Prowler: COORD_COUNT_DIFF scraped=71 baseline=44
+- 59753 Golden Tiger: COORD_COUNT_DIFF scraped=23 baseline=1
+- 66164 Zouchin Tiger: COORD_COUNT_DIFF scraped=48 baseline=14
+- 66184 Dread Stalker: COORD_COUNT_DIFF scraped=153 baseline=23
+- 66187 Dread Matriarch: COORD_COUNT_DIFF scraped=33 baseline=10
+- 66633 Ruukti: COORD_COUNT_DIFF scraped=5 baseline=2
+- 67071 Wary Forest Prowler: COORD_COUNT_DIFF scraped=27 baseline=6
+- 76687 Sher'khaan: COORD_COUNT_DIFF scraped=2 baseline=1
+- 77741 Ra'kahn: COORD_COUNT_DIFF scraped=4 baseline=2
+- 96268 Mountain Prowler: ZONE_DIFF scraped=7731 baseline=650; COORD_COUNT_DIFF scraped=15 baseline=5
+- 101077 Sekhan: ZONE_DIFF scraped=7731 baseline=652; COORD_COUNT_DIFF scraped=15 baseline=8
+- 126419 Naroua: COORD_COUNT_DIFF scraped=8 baseline=4
+- 149663 Shadowclaw: COORD_COUNT_DIFF scraped=5 baseline=2
+- 151809 Savannah Proudfang: ZONE_DIFF scraped=1527 baseline=249; COORD_COUNT_DIFF scraped=8 baseline=4
+- 151948 Senbu the Pridefather: ZONE_DIFF scraped=1527 baseline=249
+- 157121 Ekashim: ZONE_DIFF scraped=1527 baseline=249; COORD_COUNT_DIFF scraped=4 baseline=2
+- 162361 Tiger: ZONE_DIFF scraped=1527 baseline=249
+- 169052 Anima-Starved Matriarch: COORD_COUNT_DIFF scraped=8 baseline=5
+- 187474 Spotted Rockfang: COORD_COUNT_DIFF scraped=7 baseline=4
+- 192644 Mountain Stonefang: COORD_COUNT_DIFF scraped=10 baseline=5
+- 199190 Stonefang Cub: COORD_COUNT_DIFF scraped=3 baseline=1
+- 206551 Dreamsaber: COORD_COUNT_DIFF scraped=10 baseline=3
+- 229617 Escaped Lynx: COORD_COUNT_DIFF scraped=8 baseline=1
+- 229620 Escaped Lynx: COORD_COUNT_DIFF scraped=12 baseline=7
+- 1140 Razormaw Matriarch: COORD_COUNT_DIFF scraped=2 baseline=1
+- 3633 Deviate Slayer: ZONE_DIFF scraped=17 baseline=10
+- 3634 Deviate Stalker: ZONE_DIFF scraped=17 baseline=10
+- 5842 Takk the Leaper: COORD_COUNT_DIFF scraped=10 baseline=4
+- 6581 Ravasaur Matriarch: COORD_COUNT_DIFF scraped=9 baseline=4
+- 34829 King Reaperclaw: COORD_COUNT_DIFF scraped=15 baseline=6
+- 37961 Corrupted Bloodtalon: ZONE_DIFF scraped=463 baseline=1; COORD_COUNT_DIFF scraped=24 baseline=7
+- 44165 Sunscale Consort: COORD_COUNT_DIFF scraped=17 baseline=6
+- 65428 Trained Amani Raptor: COORD_COUNT_DIFF scraped=34 baseline=21
+- 80694 Stonescale: COORD_COUNT_DIFF scraped=4 baseline=2
+- 86292 Brittle Bone Raptor: ZONE_DIFF scraped=550 baseline=107; COORD_COUNT_DIFF scraped=10 baseline=3
+- 87084 Riplash: COORD_COUNT_DIFF scraped=3 baseline=1
+- 88951 Vileclaw: ZONE_DIFF scraped=550 baseline=107; COORD_COUNT_DIFF scraped=4 baseline=1
+- 88956 Vicious Razorclaw: ZONE_DIFF scraped=550 baseline=107
+- 88957 Young Razorclaw: ZONE_DIFF scraped=550 baseline=107
+- 115673 Snowfeather Matriarch: COORD_COUNT_DIFF scraped=5 baseline=2
+- 124217 Raptor Patriarch: COORD_COUNT_DIFF scraped=19 baseline=10
+- 124226 Raptor Matriarch: COORD_COUNT_DIFF scraped=14 baseline=9
+- 126653 Hungry Saurid: COORD_COUNT_DIFF scraped=8 baseline=4
+- 127294 Sickly Saurid: COORD_COUNT_DIFF scraped=2 baseline=1
+- 129410 Risen Ravasaur: COORD_COUNT_DIFF scraped=15 baseline=5
+- 132754 Highland Strider: ZONE_DIFF scraped=9439 baseline=14
+- 133812 Zanxib: COORD_COUNT_DIFF scraped=7 baseline=4
+- 134167 Highland Thrasher: ZONE_DIFF scraped=9734 baseline=14; COORD_COUNT_DIFF scraped=20 baseline=3
+- 135433 Reanimated Ravasaur: COORD_COUNT_DIFF scraped=10 baseline=6
+- 135742 Risen Anklebiter: COORD_COUNT_DIFF scraped=17 baseline=9
+- 139365 Queenfeather: COORD_COUNT_DIFF scraped=4 baseline=2
+- 142312 Skullripper: ZONE_DIFF scraped=9439 baseline=14; COORD_COUNT_DIFF scraped=21 baseline=12
+- 166038 Resurfaced Predator: COORD_COUNT_DIFF scraped=7 baseline=4
+- 206728 Time-Lost Raptor: COORD_COUNT_DIFF scraped=2 baseline=1
+- 210229 Mischievous Dreamtalon: COORD_COUNT_DIFF scraped=10 baseline=6
+- 211630 Hunting Dreamtalon: COORD_COUNT_DIFF scraped=18 baseline=10
+- 2974 Kodo Matriarch: COORD_COUNT_DIFF scraped=17 baseline=4
+- 4700 Aged Kodo: COORD_COUNT_DIFF scraped=16 baseline=8
+- 4702 Ancient Kodo: COORD_COUNT_DIFF scraped=16 baseline=9
+- 6504 Thunderstomp Stegodon: COORD_COUNT_DIFF scraped=15 baseline=7
+- 6583 Gruff: COORD_COUNT_DIFF scraped=7 baseline=2
+- 56239 Adolescent Mushan: COORD_COUNT_DIFF scraped=57 baseline=23
+- 56523 Mushan Nomad: COORD_COUNT_DIFF scraped=92 baseline=56
+- 58424 Dustback Mushan: COORD_COUNT_DIFF scraped=200 baseline=36
+- 58427 Young Dustback Mushan: COORD_COUNT_DIFF scraped=126 baseline=56
+- 58435 Darkhide: COORD_COUNT_DIFF scraped=8 baseline=2
+- 58893 Sungraze Mushan: COORD_COUNT_DIFF scraped=274 baseline=43
+- 58895 Sungraze Behemoth: ZONE_DIFF scraped=433 baseline=371; COORD_COUNT_DIFF scraped=7 baseline=3
+- 59670 Highlands Mushan: COORD_COUNT_DIFF scraped=213 baseline=49
+- 59671 Highlands Calf: COORD_COUNT_DIFF scraped=125 baseline=56
+- 60623 Enraged Mushan: COORD_COUNT_DIFF scraped=16 baseline=7
+- 61618 Longshadow Mushan: COORD_COUNT_DIFF scraped=199 baseline=59
+- 62029 Greatback Mushan: COORD_COUNT_DIFF scraped=110 baseline=62
+- 62760 Frightened Mushan: COORD_COUNT_DIFF scraped=47 baseline=24
+- 63729 Bluehide Mushan: COORD_COUNT_DIFF scraped=67 baseline=34
+- 63827 Young Bluehide Mushan: COORD_COUNT_DIFF scraped=46 baseline=6
+- 65627 Dustback Warder: COORD_COUNT_DIFF scraped=149 baseline=11
+- 66096 Sungraze Mushan Calf: COORD_COUNT_DIFF scraped=60 baseline=11
+- 66463 Longshadow Bull: COORD_COUNT_DIFF scraped=207 baseline=99
+- 177385 Shardhide Pulverizer: COORD_COUNT_DIFF scraped=5 baseline=3
+- 193725 Karkidan: COORD_COUNT_DIFF scraped=4 baseline=1
+- 195716 Cragstrike Stomper: COORD_COUNT_DIFF scraped=13 baseline=7
+- 196655 Sturdy Gladehorn: COORD_COUNT_DIFF scraped=3 baseline=1
+- 196913 Mara'nar the Thunderous: COORD_COUNT_DIFF scraped=4 baseline=2
+- 4066 Nal'taszar: COORD_COUNT_DIFF scraped=7 baseline=3
+- 58214 Windward Matriarch: COORD_COUNT_DIFF scraped=2 baseline=8
+- 58217 Windward Viper: COORD_COUNT_DIFF scraped=2 baseline=5
+- 59158 Subjugated Serpent: COORD_COUNT_DIFF scraped=149 baseline=15
+- 59788 Spirit Darter: COORD_COUNT_DIFF scraped=17 baseline=8
+- 61848 Wild Onyx Serpent: COORD_COUNT_DIFF scraped=19 baseline=2
+- 63920 Hei Feng: COORD_COUNT_DIFF scraped=14 baseline=2
+- 64965 Milau: ZONE_DIFF scraped=5840 baseline=390; COORD_COUNT_DIFF scraped=63 baseline=1
+- 65672 Your Cloud Serpent: COORD_COUNT_DIFF scraped=2 baseline=1
+- 65673 Your Cloud Serpent: COORD_COUNT_DIFF scraped=2 baseline=1
+- 65674 Your Cloud Serpent: COORD_COUNT_DIFF scraped=2 baseline=1
+- 65679 Golden Hatchling: COORD_COUNT_DIFF scraped=2 baseline=1
+- 65723 Jade Hatchling: COORD_COUNT_DIFF scraped=2 baseline=1
+- 65724 Azure Hatchling: COORD_COUNT_DIFF scraped=2 baseline=1
+- 153208 Onyx Warserpent: ZONE_DIFF scraped=1530 baseline=390
+- 154761 Rajani Warserpent: ZONE_DIFF scraped=1530 baseline=390
+- 156389 Rajani Warserpent: ZONE_DIFF scraped=1530 baseline=390
+- 157162 Rei Lun: ZONE_DIFF scraped=1530 baseline=390
+- 157341 Haofeng: ZONE_DIFF scraped=1530 baseline=390
+- 163042 Ivory Cloud Serpent: ZONE_DIFF scraped=1530 baseline=390
+- 163386 Alani: ZONE_DIFF scraped=1530 baseline=390
+- 172081 Shan'ala, Lost to the Tangle: COORD_COUNT_DIFF scraped=6 baseline=3
+- 187324 Time-Charged Hornswog: COORD_COUNT_DIFF scraped=5 baseline=3
+- 189026 Nibbling Hornswog: COORD_COUNT_DIFF scraped=10 baseline=6
+- 192374 Mountain Boghopper: ZONE_DIFF scraped=13802 baseline=2025; COORD_COUNT_DIFF scraped=16 baseline=7
+- 196571 Reservoir Spadefoot: ZONE_DIFF scraped=13802 baseline=2025; COORD_COUNT_DIFF scraped=13 baseline=6
+- 208235 Bough Darter: COORD_COUNT_DIFF scraped=8 baseline=4
+- 209444 Unstable Faerie Dragon: COORD_COUNT_DIFF scraped=11 baseline=7
+- 74981 Thunderlord Driftstalker: COORD_COUNT_DIFF scraped=8 baseline=3
+- 75280 Darkwing Matron: ZONE_DIFF scraped=539 baseline=104
+- 76477 Chilltongue: ZONE_DIFF scraped=6720 baseline=525; COORD_COUNT_DIFF scraped=15 baseline=2
+- 76874 Dreadwing: ZONE_DIFF scraped=6967 baseline=599
+- 77091 Wild Rylak: COORD_COUNT_DIFF scraped=4 baseline=2
+- 78183 Injured Darkwing Glider: ZONE_DIFF scraped=539 baseline=104
+- 78314 Glacial Icemaw: COORD_COUNT_DIFF scraped=17 baseline=9
+- 78508 Darkwing Rylak: ZONE_DIFF scraped=539 baseline=104
+- 78521 Darkwing Rylak: ZONE_DIFF scraped=539 baseline=104
+- 78547 Baby Rylak: ZONE_DIFF scraped=539 baseline=104
+- 80098 Ironbarb Skyreaver: ZONE_DIFF scraped=7307 baseline=618
+- 80241 Blazing Pyreclaw: ZONE_DIFF scraped=7004 baseline=525; COORD_COUNT_DIFF scraped=13 baseline=7
+- 81548 Charl Doomwing: COORD_COUNT_DIFF scraped=7 baseline=4
+- 82646 Venombarb: COORD_COUNT_DIFF scraped=2 baseline=1
+- 83591 Tura'aka: ZONE_DIFF scraped=550 baseline=107; COORD_COUNT_DIFF scraped=5 baseline=1
+- 84002 Darkwing Matron: ZONE_DIFF scraped=539 baseline=104
+- 84151 Gorge Rylak: COORD_COUNT_DIFF scraped=15 baseline=9
+- 84644 Vilewing Rylak: COORD_COUNT_DIFF scraped=9 baseline=2
+- 84927 Darkwing Whelpling: ZONE_DIFF scraped=539 baseline=104
+- 85357 Darkwing Adolescent: ZONE_DIFF scraped=539 baseline=104
+- 86373 Ironwing Flamespitter: COORD_COUNT_DIFF scraped=7 baseline=4
+- 161249 Grimshadow: COORD_COUNT_DIFF scraped=13 baseline=2
+- 162258 Ravenous Galescreamer: COORD_COUNT_DIFF scraped=11 baseline=7
+- 162259 Galescreamer Pup: COORD_COUNT_DIFF scraped=13 baseline=3
+- 162300 Ravenous Galescreamer: ZONE_DIFF scraped=13313 baseline=1536
+- 164312 Taloned Flayedwing: COORD_COUNT_DIFF scraped=12 baseline=3
+- 164479 Bonefang: ZONE_DIFF scraped=12916 baseline=1666
+- 173046 Ferocious Nestkeeper: COORD_COUNT_DIFF scraped=9 baseline=5
+- 174455 Captive Skyripper: COORD_COUNT_DIFF scraped=6 baseline=3
+- 1196 Ice Claw Bear: ZONE_DIFF scraped=27 baseline=29
+- 1961 Mangeclaw: ZONE_DIFF scraped=27 baseline=29
+- 14344 Mongress: COORD_COUNT_DIFF scraped=5 baseline=3
+- 23584 Amani Bear: ZONE_DIFF scraped=3805 baseline=333; COORD_COUNT_DIFF scraped=10 baseline=6
+- 24217 Amani Bear Mount: ZONE_DIFF scraped=3805 baseline=333
+- 26482 Arctic Grizzly: COORD_COUNT_DIFF scraped=123 baseline=256
+- 26643 Rabid Grizzly: COORD_COUNT_DIFF scraped=34 baseline=151
+- 26706 Infected Grizzly Bear: COORD_COUNT_DIFF scraped=9 baseline=60
+- 50926 Grizzled Ben: COORD_COUNT_DIFF scraped=7 baseline=4
+- 50931 Mange: COORD_COUNT_DIFF scraped=7 baseline=2
+- 51972 Black Bear: ZONE_DIFF scraped=27 baseline=29
+- 93330 Gorecrazed Mauler: COORD_COUNT_DIFF scraped=16 baseline=9
+- 98890 Slumber: COORD_COUNT_DIFF scraped=4 baseline=1
+- 108499 Mountain Grizzly: COORD_COUNT_DIFF scraped=11 baseline=4
+- 131697 Highland Grizzly: COORD_COUNT_DIFF scraped=11 baseline=7
+- 137835 Vicious Black Bear: ZONE_DIFF scraped=9439 baseline=14
+- 139278 Ranja: COORD_COUNT_DIFF scraped=4 baseline=2
+- 141239 Osca the Bloodied: COORD_COUNT_DIFF scraped=6 baseline=3
+- 189741 Lumbering Mauler: ZONE_DIFF scraped=2112 baseline=2025; COORD_COUNT_DIFF scraped=16 baseline=4
+- 191199 Hillside Forager: COORD_COUNT_DIFF scraped=10 baseline=6
+- 191535 Blackpaw Bear: COORD_COUNT_DIFF scraped=11 baseline=5
+- 193092 Bristletooth Mauler: COORD_COUNT_DIFF scraped=3 baseline=1
+- 193125 Goremaul the Gluttonous: COORD_COUNT_DIFF scraped=4 baseline=1
+- 194171 Frostcoat Bear: ZONE_DIFF scraped=2151 baseline=2024
+- 197541 Coastal Grizzly: COORD_COUNT_DIFF scraped=11 baseline=7
+- 199354 Frostsnout Bear: COORD_COUNT_DIFF scraped=12 baseline=4
+- 210395 Corrupted Grizzly: COORD_COUNT_DIFF scraped=25 baseline=119
+- 210848 Cave Bristlebruin: COORD_COUNT_DIFF scraped=6 baseline=3
+- 211902 Thicket Bristlebruin: COORD_COUNT_DIFF scraped=4 baseline=2
+- 221690 Strength of Beledar: COORD_COUNT_DIFF scraped=4 baseline=2
+- 114992 Copper Arachnodrone: COORD_COUNT_DIFF scraped=2 baseline=1
+- 115479 Model GU-4RD-3R: COORD_COUNT_DIFF scraped=4 baseline=2
+- 139336 Sabertron: COORD_COUNT_DIFF scraped=2 baseline=1
+- 139356 Sabertron: COORD_COUNT_DIFF scraped=3 baseline=1
+- 139359 Sabertron: COORD_COUNT_DIFF scraped=2 baseline=1
+- 151672 Mecharantula: COORD_COUNT_DIFF scraped=10 baseline=6
+- 151684 Jawbreaker: COORD_COUNT_DIFF scraped=5 baseline=3
+- 152994 Leaping Bugbot: COORD_COUNT_DIFF scraped=13 baseline=5
+- 129476 Bloated Krolusk: COORD_COUNT_DIFF scraped=5 baseline=2
+- 134557 Maimed Krolusk: COORD_COUNT_DIFF scraped=5 baseline=3
+- 136335 Enraged Krolusk: COORD_COUNT_DIFF scraped=6 baseline=2
+- 163370 Gormbore: COORD_COUNT_DIFF scraped=4 baseline=2
+- 163994 Dustwilt Gorger: COORD_COUNT_DIFF scraped=15 baseline=9
+- 164110 Chompy: COORD_COUNT_DIFF scraped=15 baseline=8
+- 165398 Egg-Tender Tiom: COORD_COUNT_DIFF scraped=3 baseline=1
+- 170933 War-gorm: COORD_COUNT_DIFF scraped=2 baseline=1
+- 172082 Thrashspine: COORD_COUNT_DIFF scraped=8 baseline=4
+- 217123 Oblivious Shaleshell: COORD_COUNT_DIFF scraped=37 baseline=20
+- 217741 Deeps Krolusk: COORD_COUNT_DIFF scraped=17 baseline=8
+- 219304 Chasm Snail: COORD_COUNT_DIFF scraped=32 baseline=96
+- 219790 Tamed Lava Snail: COORD_COUNT_DIFF scraped=25 baseline=15
+- 219930 Deep Krolusk: COORD_COUNT_DIFF scraped=7 baseline=4
+- 220764 Unsettled Snail: ZONE_DIFF scraped=2256 baseline=2255
+- 220765 Juvenile Snail: ZONE_DIFF scraped=2256 baseline=2255
+- 222040 Opalooze Mollusc: COORD_COUNT_DIFF scraped=7 baseline=3
+- 223056 Elusive Krolusk: COORD_COUNT_DIFF scraped=231 baseline=113
+- 223074 Elusive Razortusk Krolusk: COORD_COUNT_DIFF scraped=91 baseline=30
+- 223091 Grimlurk: COORD_COUNT_DIFF scraped=5 baseline=1
+- 225388 Krolusk Whelpling: COORD_COUNT_DIFF scraped=15 baseline=9
+- 225391 Slagshell Slider: COORD_COUNT_DIFF scraped=14 baseline=7
+- 225393 Massive Slagshell: COORD_COUNT_DIFF scraped=5 baseline=2
+- 229547 Shimmer Shaleshell: COORD_COUNT_DIFF scraped=12 baseline=1
+- 120560 Marshfly Dreadtick: COORD_COUNT_DIFF scraped=14 baseline=5
+- 121898 Bloodbelly Flyer: COORD_COUNT_DIFF scraped=7 baseline=4
+- 138491 Vicious War Crawg: COORD_COUNT_DIFF scraped=4 baseline=2
+- 138727 Bloodswarmer: COORD_COUNT_DIFF scraped=9 baseline=3
+- 211742 Nerubian Abductor: COORD_COUNT_DIFF scraped=10 baseline=4
+- 213320 Dreadstrike Flitterer: COORD_COUNT_DIFF scraped=13 baseline=4
+- 217040 Noth Venomsprayer: COORD_COUNT_DIFF scraped=8 baseline=4
+- 217939 Swarming Drone: COORD_COUNT_DIFF scraped=8 baseline=4
+- 218082 Xesh Skystinger: ZONE_DIFF scraped=2216 baseline=2255; COORD_COUNT_DIFF scraped=22 baseline=2
+- 218091 Rak-Ush Bloodwing: COORD_COUNT_DIFF scraped=7 baseline=3
+- 219653 Pestilent Drone: ZONE_DIFF scraped=15177 baseline=125
+- 219654 Drone Bomber: ZONE_DIFF scraped=15177 baseline=125
+- 220087 Swarming Screamer: COORD_COUNT_DIFF scraped=2 baseline=1
+- 223117 Discordant Swarmite: ZONE_DIFF scraped=2256 baseline=2255
+- 223905 Discordant Swarmite: ZONE_DIFF scraped=2256 baseline=2255
+- 223966 Swift Courier: COORD_COUNT_DIFF scraped=9 baseline=5
+- 226007 Leechwing Swarmite: COORD_COUNT_DIFF scraped=17 baseline=3
+- 227026 Trained Skyflayer: COORD_COUNT_DIFF scraped=11 baseline=6
+- 4694 Dread Ripper: COORD_COUNT_DIFF scraped=11 baseline=7
+- 21515 Trachela: COORD_COUNT_DIFF scraped=4 baseline=2
+- 26174 Carrion Condor: COORD_COUNT_DIFF scraped=23 baseline=61
+- 26838 Dreadtalon: COORD_COUNT_DIFF scraped=7 baseline=15
+- 50803 Bonechewer: COORD_COUNT_DIFF scraped=8 baseline=3
+- 50812 Arae: COORD_COUNT_DIFF scraped=2 baseline=1
+- 50813 Fene-mal: COORD_COUNT_DIFF scraped=4 baseline=2
+- 50814 Corpsefeeder: COORD_COUNT_DIFF scraped=6 baseline=1
+- 51760 Carrion Bird: COORD_COUNT_DIFF scraped=7 baseline=2
+- 59251 Trenchwing Scavenger: ZONE_DIFF scraped=376 baseline=418
+- 74414 Juvenile Bonestripper: COORD_COUNT_DIFF scraped=8 baseline=1
+- 94718 Greater Raven: COORD_COUNT_DIFF scraped=4 baseline=2
+- 100411 Ravenous Stormcrow: COORD_COUNT_DIFF scraped=12 baseline=6
+- 110846 Cove Raven: COORD_COUNT_DIFF scraped=16 baseline=9
+- 126133 Swamp Scavenger: COORD_COUNT_DIFF scraped=13 baseline=4
+- 126695 Baleful Raven: COORD_COUNT_DIFF scraped=11 baseline=7
+- 131229 Bonescrape Scavenger: COORD_COUNT_DIFF scraped=10 baseline=4
+- 132758 Young Mesa Buzzard: ZONE_DIFF scraped=9439 baseline=14
+- 132799 Mesa Buzzard: ZONE_DIFF scraped=9439 baseline=14
+- 134774 Hexed Raven: COORD_COUNT_DIFF scraped=11 baseline=6
+- 137468 Gorging Raven: COORD_COUNT_DIFF scraped=14 baseline=3
+- 138963 Nestmother Acada: COORD_COUNT_DIFF scraped=2 baseline=1
+- 142361 Plaguefeather: ZONE_DIFF scraped=9734 baseline=14
+- 157143 Arid Bonepicker: ZONE_DIFF scraped=1527 baseline=249; COORD_COUNT_DIFF scraped=5 baseline=3
+- 162368 Diseased Vulture: ZONE_DIFF scraped=1527 baseline=249
+- 168402 Darkwing: COORD_COUNT_DIFF scraped=2 baseline=1
+- 170932 Cloudfeather Guardian: COORD_COUNT_DIFF scraped=5 baseline=3
+- 195722 Harried Plainsfeaster: COORD_COUNT_DIFF scraped=11 baseline=4
+- 209836 Lonely Vulture: COORD_COUNT_DIFF scraped=2 baseline=1
+- 226386 Shimmering Peafowl: COORD_COUNT_DIFF scraped=12 baseline=7
+- 69277 Defiant Direhorn: COORD_COUNT_DIFF scraped=11 baseline=7
+- 122224 Direhorn Bull: COORD_COUNT_DIFF scraped=8 baseline=5
+- 130741 Nol'ixwan: COORD_COUNT_DIFF scraped=5 baseline=3
+- 135508 Kil'Tawan: COORD_COUNT_DIFF scraped=5 baseline=2
+- 4014 Pridewing Consort: COORD_COUNT_DIFF scraped=10 baseline=6
+- 5928 Sorrow Wing: COORD_COUNT_DIFF scraped=5 baseline=1
+- 23772 Spotted Hippogryph: COORD_COUNT_DIFF scraped=27 baseline=118
+- 90901 Pridelord Meowl: COORD_COUNT_DIFF scraped=3 baseline=1
+- 97504 Wraithtalon: COORD_COUNT_DIFF scraped=6 baseline=2
+- 103549 Wild Moonfall Hippogryph: COORD_COUNT_DIFF scraped=14 baseline=9
+- 112909 Canyon Cloudwing: COORD_COUNT_DIFF scraped=10 baseline=1
+- 121623 Varoudnir: ZONE_DIFF scraped=790 baseline=713
+- 121624 Mavarnir: COORD_COUNT_DIFF scraped=2 baseline=1
+- 121625 Kveldulfnir: COORD_COUNT_DIFF scraped=3 baseline=1
+- 158254 Kala: COORD_COUNT_DIFF scraped=3 baseline=1
+- 161529 Nemaeus: COORD_COUNT_DIFF scraped=2 baseline=1
+- 165784 Summoned Glimmerhoof Cloudstrider: ZONE_DIFF scraped=10565 baseline=1670
+- 169504 Argentwing Patriarch: COORD_COUNT_DIFF scraped=8 baseline=5
+- 187754 Rustpine Talonfox: COORD_COUNT_DIFF scraped=5 baseline=3
+- 190742 Swooping Slyvern: COORD_COUNT_DIFF scraped=11 baseline=4
+- 191626 Ancient Gryphon: COORD_COUNT_DIFF scraped=10 baseline=4
+- 195708 Ailing Snowypelt Slyvern: COORD_COUNT_DIFF scraped=7 baseline=1
+- 196057 Coastal Slyvern: COORD_COUNT_DIFF scraped=11 baseline=7
+- 210070 Mosa Umbramane: COORD_COUNT_DIFF scraped=2 baseline=1
+- 212126 Silvercrest Elder: COORD_COUNT_DIFF scraped=8 baseline=3
+- 213808 Silvercrest Ancient: COORD_COUNT_DIFF scraped=12 baseline=7
+- 27294 Tundra Scavenger: COORD_COUNT_DIFF scraped=52 baseline=251
+- 39185 Slaverjaw: COORD_COUNT_DIFF scraped=4 baseline=2
+- 50855 Jaxx the Rabid: COORD_COUNT_DIFF scraped=3 baseline=1
+- 51671 Rabid Hyena: COORD_COUNT_DIFF scraped=12 baseline=5
+- 126644 Snarltooth: COORD_COUNT_DIFF scraped=2 baseline=1
+- 151945 Scavenging Dunerunner: ZONE_DIFF scraped=1527 baseline=249
+- 152657 Tat the Bonechewer: ZONE_DIFF scraped=1527 baseline=249
+- 162381 Rabid Hyena: ZONE_DIFF scraped=1527 baseline=249
+- 192487 Lulu: COORD_COUNT_DIFF scraped=4 baseline=2
+- 195272 Darktooth Renderer: COORD_COUNT_DIFF scraped=10 baseline=6
+- 197667 Darktooth Scavanger: COORD_COUNT_DIFF scraped=8 baseline=4
+- 198627 Darktooth Renderer: COORD_COUNT_DIFF scraped=4 baseline=2
+- 3652 Trigore the Lasher: ZONE_DIFF scraped=17 baseline=11
+- 12940 Vorsha the Lasher: COORD_COUNT_DIFF scraped=4 baseline=2
+- 43296 Chimaeron: ZONE_DIFF scraped=5094 baseline=286
+- 79020 Echidnian Hydra: ZONE_DIFF scraped=539 baseline=104
+- 80122 Gaz'orda: ZONE_DIFF scraped=550 baseline=107
+- 80370 Lernaea: ZONE_DIFF scraped=550 baseline=107
+- 80372 Echidna: COORD_COUNT_DIFF scraped=5 baseline=3
+- 80398 Keravnos: COORD_COUNT_DIFF scraped=2 baseline=1
+- 80541 Lernaean Broodmother: ZONE_DIFF scraped=550 baseline=107; COORD_COUNT_DIFF scraped=9 baseline=5
+- 80542 Lernaean Monitor: ZONE_DIFF scraped=550 baseline=107
+- 80543 Lernaean Scout: ZONE_DIFF scraped=550 baseline=107
+- 80752 Blooming Mandragora: ZONE_DIFF scraped=539 baseline=104
+- 82530 Mandragora: ZONE_DIFF scraped=7025 baseline=534
+- 83393 Typhon Scout: COORD_COUNT_DIFF scraped=7 baseline=4
+- 83530 Hyacinth Mandragora: ZONE_DIFF scraped=539 baseline=104
+- 85473 Varashian Vilefang: COORD_COUNT_DIFF scraped=8 baseline=3
+- 88489 Echidnaean Rockjaw: COORD_COUNT_DIFF scraped=10 baseline=5
+- 89031 Typhon Broodmother: COORD_COUNT_DIFF scraped=3 baseline=1
+- 108535 Marsh Hydra: COORD_COUNT_DIFF scraped=12 baseline=6
+- 112861 Marsh Hydra: COORD_COUNT_DIFF scraped=8 baseline=3
+- 152545 Scale Matriarch Vynara: COORD_COUNT_DIFF scraped=4 baseline=2
+- 152548 Scale Matriarch Gratinax: COORD_COUNT_DIFF scraped=5 baseline=3
+- 153801 Scale Lord Theronar: COORD_COUNT_DIFF scraped=4 baseline=2
+- 224751 Garlic-Breathed Hydra: COORD_COUNT_DIFF scraped=7 baseline=4
+- 7099 Ironbeak Hunter: COORD_COUNT_DIFF scraped=14 baseline=4
+- 22979 Wild Sparrowhawk: COORD_COUNT_DIFF scraped=10 baseline=5
+- 23035 Anzu: ZONE_DIFF scraped=3791 baseline=259
+- 23693 Duskwing Eagle: COORD_COUNT_DIFF scraped=10 baseline=106
+- 24747 Fjord Hawk: COORD_COUNT_DIFF scraped=15 baseline=57
+- 26369 Imperial Eagle: COORD_COUNT_DIFF scraped=32 baseline=207
+- 29044 Goretalon Matriarch: COORD_COUNT_DIFF scraped=3 baseline=7
+- 30988 Scourgebeak Fleshripper: COORD_COUNT_DIFF scraped=15 baseline=33
+- 31263 Carrion Hunter: COORD_COUNT_DIFF scraped=26 baseline=87
+- 34886 Kalimdor Eagle: COORD_COUNT_DIFF scraped=10 baseline=5
+- 42658 Hyjal Roc: COORD_COUNT_DIFF scraped=29 baseline=18
+- 42660 Hyjal Darkhawk: COORD_COUNT_DIFF scraped=35 baseline=21
+- 44481 Diseased Hawk: COORD_COUNT_DIFF scraped=2 baseline=1
+- 48137 Monstrous Macaw: COORD_COUNT_DIFF scraped=20 baseline=4
+- 48138 Brilliant Clayscraper: COORD_COUNT_DIFF scraped=15 baseline=4
+- 50342 Heronis: COORD_COUNT_DIFF scraped=4 baseline=2
+- 50343 Quall: COORD_COUNT_DIFF scraped=4 baseline=2
+- 50345 Alit: COORD_COUNT_DIFF scraped=8 baseline=5
+- 59112 Dawnfeather Flyer: COORD_COUNT_DIFF scraped=8 baseline=3
+- 71739 Windgore: COORD_COUNT_DIFF scraped=10 baseline=6
+- 79061 Void-Torn Kaliri: ZONE_DIFF scraped=539 baseline=104
+- 79398 Windroc: ZONE_DIFF scraped=550 baseline=107
+- 79486 Raketalon: ZONE_DIFF scraped=550 baseline=107
+- 79851 Ravenous Windroc: ZONE_DIFF scraped=550 baseline=107
+- 79854 Ravenous Windroc: ZONE_DIFF scraped=550 baseline=107
+- 80589 Dread Raven: COORD_COUNT_DIFF scraped=7 baseline=3
+- 82037 Lunarfall Raven: ZONE_DIFF scraped=539 baseline=104
+- 82175 Silverwing Kaliri: ZONE_DIFF scraped=539 baseline=104
+- 82312 Young Windroc: ZONE_DIFF scraped=550 baseline=107
+- 82354 Seacliff Kaliri: ZONE_DIFF scraped=539 baseline=104
+- 82411 Darktalon: COORD_COUNT_DIFF scraped=5 baseline=2
+- 82514 Darktalon Young: ZONE_DIFF scraped=539 baseline=104
+- 82515 Darktalon Hatchling: ZONE_DIFF scraped=539 baseline=104
+- 82758 Greatfeather: ZONE_DIFF scraped=550 baseline=107; COORD_COUNT_DIFF scraped=4 baseline=1
+- 84102 Cadaverous Vulture: COORD_COUNT_DIFF scraped=15 baseline=9
+- 84919 Seacliff Kaliri: ZONE_DIFF scraped=539 baseline=104; COORD_COUNT_DIFF scraped=4 baseline=2
+- 85564 Jungle Axebeak: COORD_COUNT_DIFF scraped=12 baseline=6
+- 85852 Windroc: ZONE_DIFF scraped=550 baseline=107
+- 85856 Bloodthirsty Axebeak: ZONE_DIFF scraped=7025 baseline=534
+- 86747 Great Windroc: ZONE_DIFF scraped=550 baseline=107
+- 86748 Direbeak Windroc: ZONE_DIFF scraped=550 baseline=107
+- 86750 Thek'talon: ZONE_DIFF scraped=550 baseline=107
+- 87088 Darkwing Roc: ZONE_DIFF scraped=550 baseline=107
+- 87649 Moonsong Dove: ZONE_DIFF scraped=539 baseline=104
+- 87651 Ebonwing Kaliri: ZONE_DIFF scraped=539 baseline=104
+- 87652 Ghost-Talon Owl: ZONE_DIFF scraped=539 baseline=104; COORD_COUNT_DIFF scraped=12 baseline=4
+- 87671 Midnight Kaliri: ZONE_DIFF scraped=539 baseline=104; COORD_COUNT_DIFF scraped=8 baseline=1
+- 90245 Highlands Axebeak: COORD_COUNT_DIFF scraped=9 baseline=4
+- 91050 Canopy Axebeak: COORD_COUNT_DIFF scraped=10 baseline=3
+- 91269 Llothien Owl: COORD_COUNT_DIFF scraped=13 baseline=4
+- 91527 Dread Falke: ZONE_DIFF scraped=7588 baseline=649
+- 91715 Azsunian Kingfeather: COORD_COUNT_DIFF scraped=13 baseline=7
+- 93952 Fel Raven: ZONE_DIFF scraped=7545 baseline=665
+- 95053 Deathtalon: COORD_COUNT_DIFF scraped=3 baseline=1
+- 97124 Spitefeather: COORD_COUNT_DIFF scraped=3 baseline=1
+- 98743 Cursedwing Guardian: COORD_COUNT_DIFF scraped=2 baseline=1
+- 103480 Northwind Hawk: COORD_COUNT_DIFF scraped=2 baseline=1
+- 104481 Ala'washte: COORD_COUNT_DIFF scraped=5 baseline=2
+- 111570 Cove Gull: COORD_COUNT_DIFF scraped=10 baseline=6
+- 111643 Cove Seagull: COORD_COUNT_DIFF scraped=74 baseline=42
+- 112421 Moist Owlette: COORD_COUNT_DIFF scraped=9 baseline=4
+- 112444 Highland Skyraptor: COORD_COUNT_DIFF scraped=6 baseline=3
+- 113110 Spellwing Strix: COORD_COUNT_DIFF scraped=8 baseline=5
+- 113408 Salty: COORD_COUNT_DIFF scraped=2 baseline=1
+- 125098 Cove Seagull: COORD_COUNT_DIFF scraped=13 baseline=8
+- 127553 Brinebeak: COORD_COUNT_DIFF scraped=4 baseline=2
+- 128188 Alpine Falcon: COORD_COUNT_DIFF scraped=9 baseline=5
+- 128389 Vale Falcon: COORD_COUNT_DIFF scraped=9 baseline=5
+- 128625 Harbor Gull: COORD_COUNT_DIFF scraped=10 baseline=5
+- 128938 Great Sea Albatross: COORD_COUNT_DIFF scraped=14 baseline=4
+- 129950 Talon: COORD_COUNT_DIFF scraped=7 baseline=2
+- 130359 Coastal Osprey: COORD_COUNT_DIFF scraped=15 baseline=8
+- 130846 Salteyed Axebeak: COORD_COUNT_DIFF scraped=8 baseline=5
+- 131136 Glacial Hunter: COORD_COUNT_DIFF scraped=8 baseline=4
+- 131598 Cliff Axebeak: COORD_COUNT_DIFF scraped=15 baseline=7
+- 132211 Fowlmouth: COORD_COUNT_DIFF scraped=5 baseline=2
+- 133843 First Mate Swainbeak: COORD_COUNT_DIFF scraped=5 baseline=3
+- 134780 Enticed Axebeak: COORD_COUNT_DIFF scraped=2 baseline=1
+- 134782 Murderbeak: COORD_COUNT_DIFF scraped=2 baseline=1
+- 135632 Mountain Hawk: COORD_COUNT_DIFF scraped=15 baseline=2
+- 136914 Brinebeak Albatross: COORD_COUNT_DIFF scraped=13 baseline=1
+- 137575 South Sea Albatross: COORD_COUNT_DIFF scraped=19 baseline=9
+- 138286 Hungry Seahawk: COORD_COUNT_DIFF scraped=11 baseline=5
+- 139233 Gulliver: COORD_COUNT_DIFF scraped=6 baseline=3
+- 141877 Shallows Seagull: COORD_COUNT_DIFF scraped=15 baseline=3
+- 151811 Suntouched Falcon: ZONE_DIFF scraped=1527 baseline=249
+- 151883 Anaua: ZONE_DIFF scraped=1527 baseline=249
+- 156931 Silkfeather Hawk: ZONE_DIFF scraped=1530 baseline=390
+- 171776 Battlesewn Roc: COORD_COUNT_DIFF scraped=4 baseline=2
+- 182372 Gardens Avian: COORD_COUNT_DIFF scraped=8 baseline=2
+- 182373 Scavenging Raptora: COORD_COUNT_DIFF scraped=16 baseline=8
+- 183274 Desert Nester: COORD_COUNT_DIFF scraped=10 baseline=5
+- 183542 Ohuna: COORD_COUNT_DIFF scraped=13 baseline=7
+- 183925 Tahkwitz: COORD_COUNT_DIFF scraped=7 baseline=4
+- 187472 Thaldraszian Kite: COORD_COUNT_DIFF scraped=9 baseline=3
+- 187825 Thaldraszian Kite: COORD_COUNT_DIFF scraped=8 baseline=3
+- 189521 Noble Winghunter: COORD_COUNT_DIFF scraped=8 baseline=5
+- 191588 Untamed Stormwing: COORD_COUNT_DIFF scraped=16 baseline=8
+- 193430 Prowling Vulture: COORD_COUNT_DIFF scraped=14 baseline=6
+- 194849 Clawfisher Ohuna: COORD_COUNT_DIFF scraped=13 baseline=7
+- 195362 Garden Winghunter: COORD_COUNT_DIFF scraped=5 baseline=3
+- 195409 Makhra the Ashtouched: COORD_COUNT_DIFF scraped=5 baseline=3
+- 195457 Sunwing Ohuna: COORD_COUNT_DIFF scraped=8 baseline=5
+- 197007 Sunwing Ohuna: COORD_COUNT_DIFF scraped=10 baseline=3
+- 210942 Dusty Somnowl: COORD_COUNT_DIFF scraped=17 baseline=10
+- 211073 Hazelfeather Somnowl: COORD_COUNT_DIFF scraped=5 baseline=1
+- 211176 Mistchaser Somnowl: COORD_COUNT_DIFF scraped=14 baseline=2
+- 213545 Watchful Somnowl: COORD_COUNT_DIFF scraped=14 baseline=5
+- 220295 Fallside Falcon: COORD_COUNT_DIFF scraped=8 baseline=5
+- 220300 Bandtail Kestrel: COORD_COUNT_DIFF scraped=33 baseline=95
+- 221648 The Perchfather: COORD_COUNT_DIFF scraped=4 baseline=2
+- 221897 Bounty Swiftlet: COORD_COUNT_DIFF scraped=8 baseline=3
+- 222223 Watchful Falcon: COORD_COUNT_DIFF scraped=230 baseline=138
+- 222329 Regal Plainshawk: COORD_COUNT_DIFF scraped=5 baseline=3
+- 225936 Grottolight Osprey: COORD_COUNT_DIFF scraped=20 baseline=56
+- 227247 Alpine Hawk: COORD_COUNT_DIFF scraped=6 baseline=3
+- 227757 Sea Hawk: COORD_COUNT_DIFF scraped=18 baseline=67
+- 228999 Soaring Fishhawk: COORD_COUNT_DIFF scraped=10 baseline=71
+- 156759 Docile Porcupine: ZONE_DIFF scraped=1530 baseline=390
+- 183323 Invading Vermin: COORD_COUNT_DIFF scraped=21 baseline=9
+- 183522 Timbertooth Gnasher: COORD_COUNT_DIFF scraped=6 baseline=1
+- 187536 Baby Crystalspine: COORD_COUNT_DIFF scraped=7 baseline=3
+- 189335 Riverbend Timbertooth: COORD_COUNT_DIFF scraped=13 baseline=5
+- 193496 Mud Beaver: COORD_COUNT_DIFF scraped=10 baseline=5
+- 193511 Woadspine: COORD_COUNT_DIFF scraped=16 baseline=10
+- 194718 Intrepid Timbertooth: COORD_COUNT_DIFF scraped=12 baseline=6
+- 196185 Tenacious Timbertooth: COORD_COUNT_DIFF scraped=11 baseline=7
+- 213973 Snuffle Pup: COORD_COUNT_DIFF scraped=7 baseline=4
+- 215743 Waxtail Snuffler: COORD_COUNT_DIFF scraped=10 baseline=6
+- 215846 Displaced Mole: COORD_COUNT_DIFF scraped=17 baseline=10
+- 216134 Snuffle Pup: COORD_COUNT_DIFF scraped=2 baseline=1
+- 219257 Invasive Thickhead: COORD_COUNT_DIFF scraped=11 baseline=4
+- 219799 Sweetsnuffler: COORD_COUNT_DIFF scraped=50 baseline=29
+- 221297 Foraging Mole: COORD_COUNT_DIFF scraped=28 baseline=16
+- 222868 Pack Mole: COORD_COUNT_DIFF scraped=2 baseline=1
+- 225482 Rummaging Mudnose: COORD_COUNT_DIFF scraped=15 baseline=5
+- 225938 Feral Hardhead: COORD_COUNT_DIFF scraped=48 baseline=31
+- 227346 Dirtsnoot Tunneler: COORD_COUNT_DIFF scraped=11 baseline=3
+- 11727 Hive'Zora Wasp: COORD_COUNT_DIFF scraped=20 baseline=7
+- 11732 Hive'Regal Spitfire: COORD_COUNT_DIFF scraped=13 baseline=8
+- 14474 Zora: COORD_COUNT_DIFF scraped=6 baseline=3
+- 28085 Sapphire Hive Drone: COORD_COUNT_DIFF scraped=37 baseline=197
+- 28086 Sapphire Hive Wasp: COORD_COUNT_DIFF scraped=14 baseline=69
+- 48179 Silithid Wasp: COORD_COUNT_DIFF scraped=8 baseline=5
+- 50895 Volux: COORD_COUNT_DIFF scraped=2 baseline=1
+- 50905 Cida: COORD_COUNT_DIFF scraped=2 baseline=1
+- 50906 Mutilax: COORD_COUNT_DIFF scraped=6 baseline=3
+- 75471 Frenzied Swamplighter: ZONE_DIFF scraped=539 baseline=104
+- 77314 Swamplighter Queen: ZONE_DIFF scraped=539 baseline=104; COORD_COUNT_DIFF scraped=5 baseline=3
+- 82370 Swamplighter Worker: ZONE_DIFF scraped=539 baseline=104; COORD_COUNT_DIFF scraped=14 baseline=5
+- 82371 Swamplighter Drone: ZONE_DIFF scraped=539 baseline=104; COORD_COUNT_DIFF scraped=13 baseline=8
+- 83447 Scavenger Wasp: COORD_COUNT_DIFF scraped=10 baseline=4
+- 83520 Stoneshard Hunter: COORD_COUNT_DIFF scraped=4 baseline=2
+- 83681 Buzzing Venomfly: COORD_COUNT_DIFF scraped=10 baseline=1
+- 84905 Stingtail Worker: COORD_COUNT_DIFF scraped=6 baseline=2
+- 84909 Stingtail Drone: COORD_COUNT_DIFF scraped=6 baseline=3
+- 86833 Venombore Drone: ZONE_DIFF scraped=550 baseline=107
+- 86834 Venombore Hive Guard: ZONE_DIFF scraped=550 baseline=107
+- 86835 Xelganak: ZONE_DIFF scraped=550 baseline=107
+- 124187 Bilewing Queen: COORD_COUNT_DIFF scraped=7 baseline=4
+- 127333 Barbthorn Queen: COORD_COUNT_DIFF scraped=4 baseline=2
+- 128974 Queen Tzxi'kik: COORD_COUNT_DIFF scraped=5 baseline=3
+- 129298 Whistlebloom Drone: COORD_COUNT_DIFF scraped=8 baseline=5
+- 132341 Hive Mother: COORD_COUNT_DIFF scraped=4 baseline=2
+- 134147 Beehemoth: COORD_COUNT_DIFF scraped=9 baseline=3
+- 134155 Enraged Swarmer: COORD_COUNT_DIFF scraped=12 baseline=3
+- 135769 Goldcoat Stinger: COORD_COUNT_DIFF scraped=6 baseline=1
+- 139145 Blackthorne: COORD_COUNT_DIFF scraped=2 baseline=1
+- 140275 Dire Barb: COORD_COUNT_DIFF scraped=4 baseline=2
+- 153268 Swarm Ravager: ZONE_DIFF scraped=1530 baseline=390
+- 154354 Aqir Stinger: ZONE_DIFF scraped=1527 baseline=249
+- 154367 Aqir Impaler: ZONE_DIFF scraped=1527 baseline=249
+- 157565 Ravager Drone: ZONE_DIFF scraped=1530 baseline=390
+- 157567 Ravager Worker: ZONE_DIFF scraped=1530 baseline=390
+- 159753 Ravenomous: COORD_COUNT_DIFF scraped=4 baseline=2
+- 162140 Skikx'traz: COORD_COUNT_DIFF scraped=14 baseline=5
+- 162147 Corpse Eater: COORD_COUNT_DIFF scraped=4 baseline=2
+- 162150 Corpse Swarmers: ZONE_DIFF scraped=1527 baseline=249
+- 162373 Ferndweller Wasp: ZONE_DIFF scraped=1527 baseline=249
+- 163045 Aqir Stinger: ZONE_DIFF scraped=1527 baseline=249
+- 163091 Aqir Impaler: ZONE_DIFF scraped=1527 baseline=249; COORD_COUNT_DIFF scraped=6 baseline=3
+- 171366 Gorm Egg Tender: COORD_COUNT_DIFF scraped=5 baseline=3
+- 171367 Gorm Egg Tender: COORD_COUNT_DIFF scraped=5 baseline=3
+- 174392 Captive Scorchwing: COORD_COUNT_DIFF scraped=5 baseline=1
+- 185505 Vespoid Hatchling: COORD_COUNT_DIFF scraped=13 baseline=7
+- 222496 Wandering Stinger: COORD_COUNT_DIFF scraped=4 baseline=1
+- 224959 Elusive Terrorwing Stinger: COORD_COUNT_DIFF scraped=110 baseline=49
+- 227282 Sweetstinger Soldier: COORD_COUNT_DIFF scraped=13 baseline=8
+- 227285 Sweetstinger Scout: COORD_COUNT_DIFF scraped=50 baseline=111
+- 51076 Lopex: COORD_COUNT_DIFF scraped=3 baseline=1
+- 113185 Mana-Infused Bushtail: COORD_COUNT_DIFF scraped=14 baseline=8
+- 137353 Ashenwood Prowler: COORD_COUNT_DIFF scraped=11 baseline=7
+- 142198 Void-Touched Fox: COORD_COUNT_DIFF scraped=13 baseline=1
+- 16181 Rokad the Ravager: ZONE_DIFF scraped=3457 baseline=350
+- 25718 Coldarra Mage Slayer: COORD_COUNT_DIFF scraped=28 baseline=64
+- 26281 Moonrest Stalker: COORD_COUNT_DIFF scraped=26 baseline=144
+- 27329 Onslaught Bloodhound: COORD_COUNT_DIFF scraped=19 baseline=2
+- 30952 Hungering Plaguehound: COORD_COUNT_DIFF scraped=21 baseline=65
+- 31404 Azure Manabeast: COORD_COUNT_DIFF scraped=24 baseline=93
+- 45453 Blighthound: COORD_COUNT_DIFF scraped=6 baseline=2
+- 51037 Lost Gilnean Wardog: COORD_COUNT_DIFF scraped=7 baseline=4
+- 51040 Snuffles: COORD_COUNT_DIFF scraped=8 baseline=5
+- 51042 Bleakheart: COORD_COUNT_DIFF scraped=4 baseline=2
+- 77026 Depraved Hunter: COORD_COUNT_DIFF scraped=9 baseline=5
+- 78457 Burning Hunter: COORD_COUNT_DIFF scraped=8 baseline=5
+- 79110 Ravenous Mongrel: COORD_COUNT_DIFF scraped=13 baseline=8
+- 91384 Helhound: ZONE_DIFF scraped=7588 baseline=649
+- 91386 Guarm: ZONE_DIFF scraped=7588 baseline=649; COORD_COUNT_DIFF scraped=11 baseline=6
+- 92040 Fenri: ZONE_DIFF scraped=7588 baseline=649
+- 92956 Attack Mastiff: COORD_COUNT_DIFF scraped=6 baseline=2
+- 129857 Blacktooth Bloodhound: COORD_COUNT_DIFF scraped=5 baseline=2
+- 134450 Risen Bloodhound: COORD_COUNT_DIFF scraped=7 baseline=4
+- 144731 Forsaken Bonechewer: ZONE_DIFF scraped=1161 baseline=896; COORD_COUNT_DIFF scraped=15 baseline=2
+- 156083 Sanguifang: ZONE_DIFF scraped=1530 baseline=390
+- 157665 Unfallen Warhound: COORD_COUNT_DIFF scraped=8 baseline=5
+- 157670 Deathfang: ZONE_DIFF scraped=13313 baseline=1536
+- 160785 Shadehound Spirithunter: COORD_COUNT_DIFF scraped=14 baseline=9
+- 161585 Dog Bone: COORD_COUNT_DIFF scraped=4 baseline=1
+- 164424 Mawsworn Seeker: ZONE_DIFF scraped=1960 baseline=1543
+- 168676 Bonemauler Alpha: COORD_COUNT_DIFF scraped=11 baseline=4
+- 173782 Horrific Bonemauler: COORD_COUNT_DIFF scraped=11 baseline=7
+- 175543 Horrific Bonemauler: COORD_COUNT_DIFF scraped=10 baseline=4
+- 175720 Rune Hunter: COORD_COUNT_DIFF scraped=5 baseline=3
+- 177441 Frekki: COORD_COUNT_DIFF scraped=11 baseline=7
+- 194290 Feral Bakar: COORD_COUNT_DIFF scraped=4 baseline=2
+- 195221 Grasslands Bakar: COORD_COUNT_DIFF scraped=10 baseline=5
+- 196082 Coastal Bakar: COORD_COUNT_DIFF scraped=13 baseline=8
+- 196159 Stout Riding Bakar: COORD_COUNT_DIFF scraped=16 baseline=3
+- 196695 Stout Riding Bakar: COORD_COUNT_DIFF scraped=9 baseline=1
+- 229170 Duskborn Darkhound: COORD_COUNT_DIFF scraped=7 baseline=4
+- 23834 Amani Dragonhawk: ZONE_DIFF scraped=3805 baseline=333
+- 50353 Manas: COORD_COUNT_DIFF scraped=3 baseline=1
+- 49816 Deep Spider: COORD_COUNT_DIFF scraped=6 baseline=3
+- 51066 Crystalfang: ZONE_DIFF scraped=51 baseline=32
+- 51067 Glint: COORD_COUNT_DIFF scraped=7 baseline=3
+- 51069 Scintillex: COORD_COUNT_DIFF scraped=2 baseline=1
+- 65229 Kypa'rak: COORD_COUNT_DIFF scraped=5 baseline=1
+- 98382 Corrupted Gyreworm: ZONE_DIFF scraped=7955 baseline=207
+- 101062 Corrupted Shale Spider: ZONE_DIFF scraped=7955 baseline=207
+- 106665 Ualair: COORD_COUNT_DIFF scraped=3 baseline=1
+- 135745 Shale Crawler: COORD_COUNT_DIFF scraped=12 baseline=3
+- 152136 Azerite Gorger: COORD_COUNT_DIFF scraped=13 baseline=8
+- 5831 Swiftmane: COORD_COUNT_DIFF scraped=17 baseline=2
+- 27626 Tatjana's Horse: COORD_COUNT_DIFF scraped=4 baseline=1
+- 44166 Grazing Zhevra: COORD_COUNT_DIFF scraped=20 baseline=4
+- 44836 Hearthglen Mustang: COORD_COUNT_DIFF scraped=5 baseline=3
+- 54510 Baby: ZONE_DIFF scraped=5861 baseline=407
+- 55272 Mountain Horse: COORD_COUNT_DIFF scraped=9 baseline=5
+- 55273 Swift Mountain Horse: ZONE_DIFF scraped=89 baseline=84
+- 81306 Preston: ZONE_DIFF scraped=539 baseline=104
+- 81307 Argyle: ZONE_DIFF scraped=539 baseline=104; COORD_COUNT_DIFF scraped=2 baseline=1
+- 89384 Wild Manarunner: COORD_COUNT_DIFF scraped=8 baseline=2
+- 110350 Tormented Shadowrunner: COORD_COUNT_DIFF scraped=17 baseline=11
+- 112533 Ethereal Sunrunner: ZONE_DIFF scraped=7502 baseline=125
+- 128441 Magoo: COORD_COUNT_DIFF scraped=3 baseline=1
+- 134307 Hexthralled Courser: COORD_COUNT_DIFF scraped=8 baseline=4
+- 142455 Riverland Bronco: COORD_COUNT_DIFF scraped=14 baseline=3
+- 142610 Pack Mule: COORD_COUNT_DIFF scraped=5 baseline=1
+- 150581 Hurricane: COORD_COUNT_DIFF scraped=2 baseline=1
+- 161309 Sinrunner: COORD_COUNT_DIFF scraped=4 baseline=2
+- 169061 Briarbane Stallion: COORD_COUNT_DIFF scraped=4 baseline=2
+- 210835 Wild Horse: COORD_COUNT_DIFF scraped=37 baseline=19
+- 1125 Crag Boar: ZONE_DIFF scraped=27 baseline=29
+- 1689 Scarred Crag Boar: ZONE_DIFF scraped=27 baseline=29
+- 21195 Domesticated Felboar: COORD_COUNT_DIFF scraped=23 baseline=14
+- 25362 Warsong Swine: COORD_COUNT_DIFF scraped=5 baseline=3
+- 50937 Hamhide: COORD_COUNT_DIFF scraped=7 baseline=4
+- 50946 Hogzilla: COORD_COUNT_DIFF scraped=4 baseline=2
+- 50947 Varah: COORD_COUNT_DIFF scraped=4 baseline=2
+- 50949 Finn's Gambit: COORD_COUNT_DIFF scraped=2 baseline=1
+- 59603 Piggy: COORD_COUNT_DIFF scraped=6 baseline=2
+- 72934 Trained Coldsnout: ZONE_DIFF scraped=7004 baseline=525
+- 75037 Unbroken Goresnout: ZONE_DIFF scraped=6720 baseline=525
+- 77124 Crag Goretusk: COORD_COUNT_DIFF scraped=7 baseline=4
+- 79483 Porkchop: ZONE_DIFF scraped=550 baseline=107
+- 79756 Coldsnout Sow: COORD_COUNT_DIFF scraped=21 baseline=7
+- 83804 Ashmaul Gutwrencher: COORD_COUNT_DIFF scraped=17 baseline=1
+- 92887 Steelsnout: COORD_COUNT_DIFF scraped=4 baseline=2
+- 100846 Leytusk: ZONE_DIFF scraped=680 baseline=630; COORD_COUNT_DIFF scraped=4 baseline=2
+- 124316 Pig: ZONE_DIFF scraped=9439 baseline=896; COORD_COUNT_DIFF scraped=10 baseline=3
+- 138675 Gorged Boar: COORD_COUNT_DIFF scraped=6 baseline=3
+- 166559 Ol' Big Head: COORD_COUNT_DIFF scraped=5 baseline=3
+- 168192 Bloodtusk Ancient: COORD_COUNT_DIFF scraped=6 baseline=1
+- 174391 Captive Bonetusk: COORD_COUNT_DIFF scraped=5 baseline=3
+- 214926 Stonehoofed Piglet: COORD_COUNT_DIFF scraped=7 baseline=4
+- 214928 Stonehoofed Hog: COORD_COUNT_DIFF scraped=7 baseline=4
+- 215206 Night-Twisted Hog: COORD_COUNT_DIFF scraped=6 baseline=3
+- 28096 Hardknuckle Charger: COORD_COUNT_DIFF scraped=40 baseline=120
+- 28098 Hardknuckle Forager: COORD_COUNT_DIFF scraped=37 baseline=101
+- 129005 King Kooba: COORD_COUNT_DIFF scraped=2 baseline=1
+- 130512 Juvenile Thumpknuckle: COORD_COUNT_DIFF scraped=13 baseline=7
+- 5225 Murk Spitter: COORD_COUNT_DIFF scraped=11 baseline=6
+- 25711 Spirit of the North: COORD_COUNT_DIFF scraped=18 baseline=8
+- 26322 Arcane Wyrm: COORD_COUNT_DIFF scraped=43 baseline=168
+- 28011 Emperor Cobra: COORD_COUNT_DIFF scraped=50 baseline=219
+- 28358 Venomtip: COORD_COUNT_DIFF scraped=9 baseline=22
+- 47283 Sand Serpent: COORD_COUNT_DIFF scraped=7 baseline=3
+- 50317 Mana Thirster: COORD_COUNT_DIFF scraped=3 baseline=1
+- 50735 Blinkeye the Rattler: COORD_COUNT_DIFF scraped=4 baseline=2
+- 65821 Cobaltscale Death Adder: COORD_COUNT_DIFF scraped=13 baseline=7
+- 87039 Marsh Anaconda: ZONE_DIFF scraped=550 baseline=107
+- 92606 Sylissa: COORD_COUNT_DIFF scraped=2 baseline=1
+- 102091 Slithering Swampserpent: COORD_COUNT_DIFF scraped=19 baseline=7
+- 105884 Spellwyrm: ZONE_DIFF scraped=7637 baseline=680
+- 123358 Serpent Hatchling: COORD_COUNT_DIFF scraped=2 baseline=1
+- 126894 Pit Snake: COORD_COUNT_DIFF scraped=4 baseline=2
+- 130401 Vathikur: COORD_COUNT_DIFF scraped=2 baseline=1
+- 134390 Sand-crusted Striker: ZONE_DIFF scraped=9527 baseline=1038
+- 137183 Honey-Coated Slitherer: COORD_COUNT_DIFF scraped=2 baseline=1
+- 137824 Arclight: COORD_COUNT_DIFF scraped=2 baseline=1
+- 152555 Elderspawn Nalaada: COORD_COUNT_DIFF scraped=5 baseline=3
+- 158465 Poisonous Snake: ZONE_DIFF scraped=1527 baseline=249; COORD_COUNT_DIFF scraped=8 baseline=4
+- 162375 Marsh Serpent: ZONE_DIFF scraped=1527 baseline=249
+- 166475 Dambala: COORD_COUNT_DIFF scraped=2 baseline=1
+- 198782 Coastal Eel: ZONE_DIFF scraped=2151 baseline=2200; COORD_COUNT_DIFF scraped=7 baseline=4
+- 220786 Wavecutter Eel: COORD_COUNT_DIFF scraped=9 baseline=4
+- 222810 Undersea Depthstalker: COORD_COUNT_DIFF scraped=4 baseline=2
+- 225525 Spined Bilespitter: COORD_COUNT_DIFF scraped=9 baseline=19
+- 228506 Sunken River Eel: ZONE_DIFF scraped=2256 baseline=2255
+- 50859 Glimmer: COORD_COUNT_DIFF scraped=13 baseline=2
+- 60804 Lightfooted Snapclaw: COORD_COUNT_DIFF scraped=8 baseline=5
+- 63755 Swamp Strider: COORD_COUNT_DIFF scraped=18 baseline=7
+- 66895 River Strider: COORD_COUNT_DIFF scraped=12 baseline=6
+- 79334 No'losh: COORD_COUNT_DIFF scraped=5 baseline=3
+- 84640 Bog Strider: ZONE_DIFF scraped=550 baseline=107
+- 84642 Pond Skipper: ZONE_DIFF scraped=550 baseline=107
+- 84643 Deep Strider: ZONE_DIFF scraped=550 baseline=107; COORD_COUNT_DIFF scraped=7 baseline=4
+- 112331 Skittering Riverbug: COORD_COUNT_DIFF scraped=14 baseline=7
+- 210795 Fens Shimmerstrider: COORD_COUNT_DIFF scraped=9 baseline=3
+- 8301 Clack the Reaver: COORD_COUNT_DIFF scraped=7 baseline=3
+- 47803 Sand Scorpid: COORD_COUNT_DIFF scraped=10 baseline=3
+- 51000 Blackshell the Impenetrable: COORD_COUNT_DIFF scraped=6 baseline=3
+- 51001 Venomclaw: COORD_COUNT_DIFF scraped=4 baseline=2
+- 51008 The Barbed Horror: COORD_COUNT_DIFF scraped=4 baseline=1
+- 51403 Madexx: COORD_COUNT_DIFF scraped=10 baseline=5
+- 123636 Lost Emberspit Scorpion: ZONE_DIFF scraped=5733 baseline=338
+- 129259 Deathsnap Elder: COORD_COUNT_DIFF scraped=11 baseline=7
+- 134019 Scorpashi Venomtail: COORD_COUNT_DIFF scraped=4 baseline=2
+- 136336 Scorpox: COORD_COUNT_DIFF scraped=5 baseline=2
+- 152768 Venomtail Scorpid: ZONE_DIFF scraped=1527 baseline=249
+- 161382 Chittering Scorpling: ZONE_DIFF scraped=1530 baseline=390
+- 162364 Sand Scorpid: ZONE_DIFF scraped=1527 baseline=249
+- 162378 Venomscale Spitter: ZONE_DIFF scraped=1527 baseline=249
+- 162380 Venomblood Scorpid: ZONE_DIFF scraped=1527 baseline=249
+- 217742 Deeps Scorpion: COORD_COUNT_DIFF scraped=13 baseline=5
+- 220698 Shadowsting Scorpid: COORD_COUNT_DIFF scraped=2 baseline=1
+- 222645 Shadowsting Lurker: COORD_COUNT_DIFF scraped=8 baseline=2
+- 222872 Shadowsting Scavenger: COORD_COUNT_DIFF scraped=13 baseline=7
+- 222873 Scavenging Swarmer: COORD_COUNT_DIFF scraped=13 baseline=8
+- 222874 Lurking Hatchling: COORD_COUNT_DIFF scraped=6 baseline=1
+- 226573 Cliffwalk Scavenger: COORD_COUNT_DIFF scraped=8 baseline=4
+- 471 Mother Fang: ZONE_DIFF scraped=12 baseline=37
+- 574 Naraxis: COORD_COUNT_DIFF scraped=5 baseline=1
+- 1994 Githyiss the Vile: ZONE_DIFF scraped=141 baseline=57; COORD_COUNT_DIFF scraped=10 baseline=3
+- 2350 Forest Creeper: COORD_COUNT_DIFF scraped=16 baseline=10
+- 4006 Deepmoss Webspinner: COORD_COUNT_DIFF scraped=16 baseline=8
+- 4380 Darkmist Widow: COORD_COUNT_DIFF scraped=5 baseline=3
+- 4415 Giant Darkfang Spider: COORD_COUNT_DIFF scraped=16 baseline=5
+- 10359 Sri'skulk: COORD_COUNT_DIFF scraped=5 baseline=3
+- 10596 Mother Smolderweb: ZONE_DIFF scraped=1583 baseline=251
+- 14279 Creepthess: COORD_COUNT_DIFF scraped=5 baseline=3
+- 23958 Riven Widow: COORD_COUNT_DIFF scraped=25 baseline=73
+- 31747 Necrotic Webspinner: COORD_COUNT_DIFF scraped=11 baseline=29
+- 50765 Miasmiss: COORD_COUNT_DIFF scraped=3 baseline=1
+- 50770 Zorn: COORD_COUNT_DIFF scraped=4 baseline=2
+- 54321 Solix: ZONE_DIFF scraped=5733 baseline=338; COORD_COUNT_DIFF scraped=11 baseline=3
+- 54322 Deth'tilac: ZONE_DIFF scraped=5733 baseline=338
+- 54323 Kirix: ZONE_DIFF scraped=5733 baseline=338
+- 54324 Skitterflame: ZONE_DIFF scraped=5733 baseline=338
+- 54338 Anthriss: ZONE_DIFF scraped=5733 baseline=338
+- 64323 Echoweb Toxiclaw: ZONE_DIFF scraped=5805 baseline=376; COORD_COUNT_DIFF scraped=9 baseline=4
+- 76473 Mother Araneae: COORD_COUNT_DIFF scraped=3 baseline=1
+- 76891 Ice Spider: COORD_COUNT_DIFF scraped=8 baseline=5
+- 78864 Deathweb Hatchling: COORD_COUNT_DIFF scraped=5 baseline=3
+- 84190 Boneshallow Spider: COORD_COUNT_DIFF scraped=14 baseline=6
+- 86507 Taladorette: COORD_COUNT_DIFF scraped=4 baseline=2
+- 107398 Moonfall Stalker: COORD_COUNT_DIFF scraped=2 baseline=1
+- 107778 Mana-Engorged Spiderling: ZONE_DIFF scraped=7502 baseline=125
+- 108035 Fal'dorei Spiderling: ZONE_DIFF scraped=7637 baseline=680
+- 110376 Leyline Spiderling: ZONE_DIFF scraped=7637 baseline=680
+- 112859 Vicious Spiderling: COORD_COUNT_DIFF scraped=6 baseline=3
+- 114692 Leyline Spiderling: ZONE_DIFF scraped=7637 baseline=680
+- 121178 Felcrawler Skitterer: COORD_COUNT_DIFF scraped=4 baseline=2
+- 121927 Legion Venomretcher: ZONE_DIFF scraped=7502 baseline=125; COORD_COUNT_DIFF scraped=11 baseline=1
+- 129505 Sandspinner Hunter: COORD_COUNT_DIFF scraped=10 baseline=6
+- 129913 Lurking Tarantula: COORD_COUNT_DIFF scraped=12 baseline=7
+- 132319 Bilefang Mother: COORD_COUNT_DIFF scraped=4 baseline=2
+- 132760 Plains Creeper: ZONE_DIFF scraped=9439 baseline=14
+- 134296 Lucille: COORD_COUNT_DIFF scraped=2 baseline=1
+- 134717 Umbra'rix: COORD_COUNT_DIFF scraped=2 baseline=1
+- 142301 Venomarus: ZONE_DIFF scraped=9734 baseline=14
+- 165801 Summoned Arachnid: ZONE_DIFF scraped=10565 baseline=1670
+- 169276 Disturbed Nightmare: COORD_COUNT_DIFF scraped=13 baseline=7
+- 174431 Captive Weaver: COORD_COUNT_DIFF scraped=4 baseline=2
+- 178508 Mother Phestis: COORD_COUNT_DIFF scraped=5 baseline=3
+- 199543 Shifting Cavestalker: COORD_COUNT_DIFF scraped=5 baseline=3
+- 210832 Vilebrood Skitterer: COORD_COUNT_DIFF scraped=19 baseline=11
+- 215772 Queen Rickiticka: COORD_COUNT_DIFF scraped=5 baseline=2
+- 217137 Invasive Nestling: COORD_COUNT_DIFF scraped=5 baseline=3
+- 219662 Small Threadling: ZONE_DIFF scraped=15177 baseline=125
+- 219664 Rampaging Threadling: ZONE_DIFF scraped=15177 baseline=125
+- 220257 Captured Undercrawler: COORD_COUNT_DIFF scraped=10 baseline=4
+- 222183 Freed Undercrawler: COORD_COUNT_DIFF scraped=8 baseline=3
+- 223076 Elusive Kaheti Undercrawler: COORD_COUNT_DIFF scraped=40 baseline=17
+- 223329 Captured Undercrawler: COORD_COUNT_DIFF scraped=11 baseline=7
+- 88208 Pit Beast: ZONE_DIFF scraped=550 baseline=107
+- 120593 Nazmani Skyterror: COORD_COUNT_DIFF scraped=12 baseline=5
+- 122114 Pterrordax: COORD_COUNT_DIFF scraped=12 baseline=5
+- 124397 Kal'draxa: COORD_COUNT_DIFF scraped=4 baseline=2
+- 126703 Jarkadiax: COORD_COUNT_DIFF scraped=2 baseline=1
+- 72606 Rockhoof: COORD_COUNT_DIFF scraped=4 baseline=1
+- 75468 Twilight Riverbeast: ZONE_DIFF scraped=539 baseline=104
+- 83388 Infested Riverbeast: ZONE_DIFF scraped=539 baseline=104
+- 83455 Twilight Riverbeast: ZONE_DIFF scraped=539 baseline=104
+- 85907 Berthora: COORD_COUNT_DIFF scraped=3 baseline=1
+- 86780 Napestone Riverbeast: ZONE_DIFF scraped=7025 baseline=534
+- 87020 Wetland Riverbeast: ZONE_DIFF scraped=550 baseline=107
+- 87021 Wetland Trampler: ZONE_DIFF scraped=550 baseline=107
+- 87666 Mu'gra: ZONE_DIFF scraped=550 baseline=107
+- 88075 Stonehide Riverbeast: ZONE_DIFF scraped=7333 baseline=624
+- 88669 Lowland Mirebeast: COORD_COUNT_DIFF scraped=7 baseline=2
+- 92979 Thundertail Riverbeast: COORD_COUNT_DIFF scraped=13 baseline=6
+- 93002 Magwia: COORD_COUNT_DIFF scraped=4 baseline=1
+- 128667 Sandscale Riverbeast: COORD_COUNT_DIFF scraped=7 baseline=2
+- 128708 Sandscale Calf: COORD_COUNT_DIFF scraped=5 baseline=3
+- 133896 Defiant Riverbeast: COORD_COUNT_DIFF scraped=5 baseline=3
+- 141977 Milden Mud Snout: COORD_COUNT_DIFF scraped=4 baseline=2
+- 194665 Mirror Lurker Calf: COORD_COUNT_DIFF scraped=11 baseline=4
+- 194666 Mirror Lurker Elder: COORD_COUNT_DIFF scraped=5 baseline=3
+- 5431 Surf Glider: COORD_COUNT_DIFF scraped=13 baseline=7
+- 25482 Sand Turtle: COORD_COUNT_DIFF scraped=7 baseline=20
+- 33711 Plagued Snapper: COORD_COUNT_DIFF scraped=12 baseline=5
+- 50058 Terrorpene: COORD_COUNT_DIFF scraped=11 baseline=7
+- 56833 Krosh: COORD_COUNT_DIFF scraped=3 baseline=1
+- 62739 Docile Razorback: COORD_COUNT_DIFF scraped=4 baseline=2
+- 69998 Goda: COORD_COUNT_DIFF scraped=3 baseline=1
+- 101982 Coldshell Snapper: COORD_COUNT_DIFF scraped=11 baseline=6
+- 130160 Saltrock Terrapin: COORD_COUNT_DIFF scraped=4 baseline=2
+- 131520 Kulett the Ornery: COORD_COUNT_DIFF scraped=4 baseline=2
+- 139235 Tort Jaw: COORD_COUNT_DIFF scraped=5 baseline=3
+- 196182 Highland Snapper: COORD_COUNT_DIFF scraped=9 baseline=3
+- 196619 Springshell Snapper: COORD_COUNT_DIFF scraped=14 baseline=8
+- 210782 Singing Shore Snapper: COORD_COUNT_DIFF scraped=6 baseline=3
+- 211145 Dewdrop Tortoise: COORD_COUNT_DIFF scraped=11 baseline=4
+- 212143 Cerulean Greyback: COORD_COUNT_DIFF scraped=9 baseline=3
+- 123714 Hillborn Saurolisk: ZONE_DIFF scraped=1161 baseline=895; COORD_COUNT_DIFF scraped=25 baseline=11
+- 124179 Bloated Saurolisk: COORD_COUNT_DIFF scraped=5 baseline=3
+- 124300 Saurolisk Patriarch: COORD_COUNT_DIFF scraped=16 baseline=7
+- 124375 Overstuffed Saurolisk: COORD_COUNT_DIFF scraped=7 baseline=3
+- 127290 Mugg: COORD_COUNT_DIFF scraped=4 baseline=2
+- 128065 Mirehunter Matriarch: COORD_COUNT_DIFF scraped=4 baseline=1
+- 129323 Sabertusk Empress: COORD_COUNT_DIFF scraped=5 baseline=3
+- 130752 Dazarian Giantfang: COORD_COUNT_DIFF scraped=7 baseline=2
+- 130753 Vicious Diemetradon: ZONE_DIFF scraped=863 baseline=862; COORD_COUNT_DIFF scraped=12 baseline=7
+- 130756 Vicious Diemetradon: COORD_COUNT_DIFF scraped=13 baseline=7
+- 130774 Dazarian Stalker: COORD_COUNT_DIFF scraped=12 baseline=5
+- 131252 Merianae: COORD_COUNT_DIFF scraped=3 baseline=1
+- 133356 Tempestria: COORD_COUNT_DIFF scraped=2 baseline=1
+- 133853 Bloodcrest: COORD_COUNT_DIFF scraped=7 baseline=2
+- 135510 Azuresail the Ancient: COORD_COUNT_DIFF scraped=4 baseline=2
+- 137356 Whistlebloom Hatchling: COORD_COUNT_DIFF scraped=4 baseline=2
+- 140664 Southern Sabertusk: COORD_COUNT_DIFF scraped=13 baseline=4
+- 141832 Rottail: COORD_COUNT_DIFF scraped=7 baseline=4
+- 149262 Irritable Diemetradon: COORD_COUNT_DIFF scraped=15 baseline=6
+- 152361 Banescale the Packfather: COORD_COUNT_DIFF scraped=8 baseline=4
+- 154182 Broken Snapdragon: COORD_COUNT_DIFF scraped=9 baseline=5
+- 186701 Summoned Scalebiter: ZONE_DIFF scraped=2437 baseline=2023
+- 189841 Russet Mudwalker: COORD_COUNT_DIFF scraped=16 baseline=8
+- 190242 Slippery Salamanther: COORD_COUNT_DIFF scraped=11 baseline=4
+- 192946 Thicket Scalebiter: COORD_COUNT_DIFF scraped=17 baseline=11
+- 211165 Webbed Kelpchomper: COORD_COUNT_DIFF scraped=7 baseline=2
+- 214284 Saurolisk Ambusher: COORD_COUNT_DIFF scraped=11 baseline=4
+- 217727 Ravenous Hungrander: COORD_COUNT_DIFF scraped=4 baseline=2
+- 224464 Venomous Salamanther: COORD_COUNT_DIFF scraped=2 baseline=1
+- 224725 Saurolisk Ambusher: COORD_COUNT_DIFF scraped=7 baseline=4
+- 227608 Undersea Salamanther: COORD_COUNT_DIFF scraped=4 baseline=1
+- 228823 Undersea Salamanther: COORD_COUNT_DIFF scraped=8 baseline=2
+- 11787 Rock Borer: ZONE_DIFF scraped=405 baseline=66
+- 11788 Rock Worm: ZONE_DIFF scraped=405 baseline=66
+- 26293 Hulking Jormungar: COORD_COUNT_DIFF scraped=20 baseline=63
+- 26358 Ice Heart Jormungar Feeder: COORD_COUNT_DIFF scraped=26 baseline=61
+- 29390 Snowdrift Jormungar: COORD_COUNT_DIFF scraped=19 baseline=60
+- 51025 Dilennaa: COORD_COUNT_DIFF scraped=5 baseline=2
+- 51028 The Deep Tunneler: COORD_COUNT_DIFF scraped=2 baseline=1
+- 51029 Parasitus: COORD_COUNT_DIFF scraped=5 baseline=3
+- 59756 Chibee: COORD_COUNT_DIFF scraped=13 baseline=7
+- 88524 Larva Pit Fodder: ZONE_DIFF scraped=550 baseline=107
+- 91916 Spiked Rockworm: COORD_COUNT_DIFF scraped=15 baseline=4
+- 184804 Helmix: COORD_COUNT_DIFF scraped=4 baseline=2
+- 199331 Lakefrost Worm: COORD_COUNT_DIFF scraped=8 baseline=3
+- 215735 Deeps Spitter: COORD_COUNT_DIFF scraped=44 baseline=23
+- 218083 Off-Duty Silkhauler: ZONE_DIFF scraped=2216 baseline=2255; COORD_COUNT_DIFF scraped=21 baseline=5
+- 219246 Deep Spitter: COORD_COUNT_DIFF scraped=7 baseline=4
+- 220261 Captured Jawgrub: COORD_COUNT_DIFF scraped=6 baseline=2
+- 223058 Elusive Lurker: COORD_COUNT_DIFF scraped=429 baseline=257
+- 223078 Elusive Stormfathom Worm: COORD_COUNT_DIFF scraped=155 baseline=56
+- 223080 Elusive Steelclaw Borer: COORD_COUNT_DIFF scraped=42 baseline=23
+- 223388 Vein Excavator: ZONE_DIFF scraped=2256 baseline=2255
+- 223749 Ploughworm Broodling: COORD_COUNT_DIFF scraped=5 baseline=3
+- 223836 Baby Larva: COORD_COUNT_DIFF scraped=3 baseline=1
+- 225049 Caustic Jawcrawler: COORD_COUNT_DIFF scraped=6 baseline=3
+- 225981 Underhang Jawcrawler: COORD_COUNT_DIFF scraped=8 baseline=4
+- 226198 Tunneling Jawcrawler: COORD_COUNT_DIFF scraped=14 baseline=7
+- 227470 Siltbrood Jawcrawler: COORD_COUNT_DIFF scraped=5 baseline=3
+- 227778 Sandgorged Jawcrawler: COORD_COUNT_DIFF scraped=7 baseline=4
+- 228055 Hilltop Hatchling: COORD_COUNT_DIFF scraped=8 baseline=3
+- 229206 Thickhide Behemoth: COORD_COUNT_DIFF scraped=6 baseline=3
+- 4347 Noxious Reaver: COORD_COUNT_DIFF scraped=16 baseline=10
+- 20797 Deviate Coiler Hatchling: ZONE_DIFF scraped=17 baseline=10; COORD_COUNT_DIFF scraped=8 baseline=4
+- 29693 Serpent Defender: COORD_COUNT_DIFF scraped=18 baseline=53
+- 50792 Chiaa: COORD_COUNT_DIFF scraped=4 baseline=2
+- 90782 Rasthe: COORD_COUNT_DIFF scraped=6 baseline=3
+- 133321 Razorwing Defender: COORD_COUNT_DIFF scraped=2 baseline=1
+- 50779 Sporeggon: COORD_COUNT_DIFF scraped=5 baseline=1
+- 73013 Vile Sporebat: ZONE_DIFF scraped=539 baseline=104
+- 75482 Veloss: COORD_COUNT_DIFF scraped=5 baseline=3
+- 82323 Moonglow Sporebat: ZONE_DIFF scraped=539 baseline=104
+- 83720 Sporebat Darter: COORD_COUNT_DIFF scraped=13 baseline=6
+- 84639 Sporebat: ZONE_DIFF scraped=550 baseline=107
+- 3253 Silithid Harvester: COORD_COUNT_DIFF scraped=2 baseline=1
+- 40310 Blistering Scarab: ZONE_DIFF scraped=4945 baseline=279
+- 47079 Lava Scarab: ZONE_DIFF scraped=5334 baseline=294
+- 51053 Quirix: COORD_COUNT_DIFF scraped=4 baseline=2
+- 51058 Aphis: COORD_COUNT_DIFF scraped=6 baseline=3
+- 51062 Khep-Re: COORD_COUNT_DIFF scraped=2 baseline=1
+- 51063 Phalanax: COORD_COUNT_DIFF scraped=4 baseline=2
+- 51674 Sand-Husk Scarab: COORD_COUNT_DIFF scraped=13 baseline=7
+- 128404 Shackled Beetle: COORD_COUNT_DIFF scraped=12 baseline=4
+- 136487 Goldeater: COORD_COUNT_DIFF scraped=8 baseline=4
+- 141755 Ridge Skimmer: COORD_COUNT_DIFF scraped=6 baseline=3
+- 151859 Tomb Scarab: ZONE_DIFF scraped=1527 baseline=249
+- 158511 Sandstone Hatchling: ZONE_DIFF scraped=1527 baseline=249
+- 161280 Aqir Scarab: ZONE_DIFF scraped=1527 baseline=249
+- 161541 Aqir Scarab: ZONE_DIFF scraped=1527 baseline=249
+- 162382 Sand-Husk Scarab: ZONE_DIFF scraped=1527 baseline=249
+- 162767 Pesticide: COORD_COUNT_DIFF scraped=2 baseline=1
+- 163154 Aqir Scarab: ZONE_DIFF scraped=1527 baseline=249
+- 172847 Maw Roach: COORD_COUNT_DIFF scraped=8 baseline=5
+- 183927 Sand Matriarch Ileus: COORD_COUNT_DIFF scraped=4 baseline=2
+- 185073 Scarabid Burrower: COORD_COUNT_DIFF scraped=4 baseline=2
+- 186725 Trrsha: COORD_COUNT_DIFF scraped=2 baseline=1
+- 196489 Algath'ar Gemshell: COORD_COUNT_DIFF scraped=7 baseline=4
+- 196498 Skittering Boneborer: COORD_COUNT_DIFF scraped=5 baseline=1
+- 215608 Siegehold Drone: COORD_COUNT_DIFF scraped=7 baseline=3
+- 216144 Siege Hauler: ZONE_DIFF scraped=2213 baseline=2255; COORD_COUNT_DIFF scraped=18 baseline=5
+- 219059 Bulbophyll: COORD_COUNT_DIFF scraped=2 baseline=1
+- 219130 Feral Stagshell: COORD_COUNT_DIFF scraped=2 baseline=1
+- 219131 Feral Stagshell: COORD_COUNT_DIFF scraped=2 baseline=1
+- 220714 Harvest Hauler: ZONE_DIFF scraped=2256 baseline=2255
+- 223066 Elusive Kaheti Burrower: COORD_COUNT_DIFF scraped=215 baseline=138
+- 223075 Elusive Kaheti Stoneborer: COORD_COUNT_DIFF scraped=37 baseline=21
+- 224963 Elusive Kaheti Battle Tank: COORD_COUNT_DIFF scraped=16 baseline=7
+- 225865 Emerald Stagshell: COORD_COUNT_DIFF scraped=15 baseline=7
+- 228427 Stagshell Swarmer: ZONE_DIFF scraped=15177 baseline=125
+- 13596 Rotgrip: ZONE_DIFF scraped=2100 baseline=281
+- 17144 Goretooth: COORD_COUNT_DIFF scraped=14 baseline=9
+- 28002 Mangal Crocolisk: COORD_COUNT_DIFF scraped=102 baseline=399
+- 41420 Horrorjaw: COORD_COUNT_DIFF scraped=7 baseline=4
+- 47591 Baradin Crocolisk: ZONE_DIFF scraped=244 baseline=245
+- 50967 Craw the Ravager: COORD_COUNT_DIFF scraped=3 baseline=1
+- 60203 Nahassa: COORD_COUNT_DIFF scraped=3 baseline=1
+- 60282 Desperate Mortbreath: COORD_COUNT_DIFF scraped=6 baseline=3
+- 62008 Coldbite Matriarch: COORD_COUNT_DIFF scraped=3 baseline=1
+- 109934 Baradin Crocolisk: ZONE_DIFF scraped=8309 baseline=245
+- 125212 Patriarch Jawbreaker: COORD_COUNT_DIFF scraped=17 baseline=11
+- 156760 Stillwater Crocolisk: ZONE_DIFF scraped=1530 baseline=390
+- 162334 Riverbed Crocolisk: ZONE_DIFF scraped=1527 baseline=249
+- 162335 Oasis Crocolisk: ZONE_DIFF scraped=1527 baseline=249
+- 162336 Neferset Crocolisk: ZONE_DIFF scraped=1527 baseline=249
+- 25464 Bloodspore Moth: COORD_COUNT_DIFF scraped=30 baseline=119
+- 27421 Fern Feeder Moth: COORD_COUNT_DIFF scraped=48 baseline=115
+- 57421 Mothallus: COORD_COUNT_DIFF scraped=5 baseline=2
+- 66319 Fear-Touched Moth: ZONE_DIFF scraped=422 baseline=388; COORD_COUNT_DIFF scraped=7 baseline=1
+- 77328 Elder Duskwing: COORD_COUNT_DIFF scraped=15 baseline=4
+- 82192 Glittering Mothling: ZONE_DIFF scraped=539 baseline=104
+- 86757 Mistwing Harvester: ZONE_DIFF scraped=550 baseline=107
+- 87089 Moth of Wrath: ZONE_DIFF scraped=550 baseline=107
+- 87425 Tainted Lightwing: ZONE_DIFF scraped=539 baseline=104
+- 170769 Withering Ardenmoth: COORD_COUNT_DIFF scraped=13 baseline=5
+- 199248 Academy Monarch: COORD_COUNT_DIFF scraped=3 baseline=1
+- 210767 Shimmerwing Monarch: COORD_COUNT_DIFF scraped=13 baseline=6
+- 213960 Domesticated Candlefly: COORD_COUNT_DIFF scraped=16 baseline=10
+- 218331 Underlight Moth: COORD_COUNT_DIFF scraped=26 baseline=58
+- 219850 Terrace Moth: COORD_COUNT_DIFF scraped=43 baseline=26
+- 220376 Captured Candlefly: COORD_COUNT_DIFF scraped=4 baseline=2
+- 225515 Diminutive Glowmite: COORD_COUNT_DIFF scraped=14 baseline=9
+- 229111 Unsettled Glowmite: ZONE_DIFF scraped=2256 baseline=2255
+- 18289 Bull Elekk: COORD_COUNT_DIFF scraped=16 baseline=6
+- 24614 Wooly Mammoth: COORD_COUNT_DIFF scraped=88 baseline=182
+- 25452 Scourged Mammoth: COORD_COUNT_DIFF scraped=74 baseline=152
+- 25743 Wooly Mammoth Bull: COORD_COUNT_DIFF scraped=30 baseline=190
+- 26271 Emaciated Mammoth Bull: COORD_COUNT_DIFF scraped=23 baseline=234
+- 26272 Emaciated Mammoth: COORD_COUNT_DIFF scraped=44 baseline=301
+- 26273 Emaciated Mammoth Calf: COORD_COUNT_DIFF scraped=52 baseline=278
+- 26711 Injured Mammoth: COORD_COUNT_DIFF scraped=14 baseline=140
+- 28379 Shattertusk Mammoth: COORD_COUNT_DIFF scraped=9 baseline=36
+- 28380 Shattertusk Bull: COORD_COUNT_DIFF scraped=23 baseline=118
+- 29402 Ironwool Mammoth: COORD_COUNT_DIFF scraped=17 baseline=42
+- 30448 Plains Mammoth: COORD_COUNT_DIFF scraped=21 baseline=44
+- 32400 Tukemuth: COORD_COUNT_DIFF scraped=27 baseline=78
+- 50981 Luk'hok: ZONE_DIFF scraped=550 baseline=107
+- 73686 Pearltusk Calf: ZONE_DIFF scraped=539 baseline=104
+- 73960 Elekk: ZONE_DIFF scraped=539 baseline=104
+- 74630 Pearltusk Grazer: ZONE_DIFF scraped=539 baseline=104
+- 75484 Kuu'rat: ZONE_DIFF scraped=539 baseline=104; COORD_COUNT_DIFF scraped=6 baseline=3
+- 77212 Pearltusk Bull: ZONE_DIFF scraped=539 baseline=104
+- 78371 Pearltusk Calf: ZONE_DIFF scraped=539 baseline=104
+- 78385 Pearltusk Grazer: ZONE_DIFF scraped=539 baseline=104
+- 78387 Pearltusk Bull: ZONE_DIFF scraped=539 baseline=104
+- 78459 Tenderhoof Meadowstomper: ZONE_DIFF scraped=550 baseline=107
+- 78460 Meadowstomper: ZONE_DIFF scraped=550 baseline=107
+- 78462 Territorial Meadowstomper: ZONE_DIFF scraped=550 baseline=107
+- 79148 Phantom Pearltusk: ZONE_DIFF scraped=539 baseline=104
+- 79149 Phantom Pearltusk Calf: ZONE_DIFF scraped=539 baseline=104
+- 80175 Elekk: ZONE_DIFF scraped=539 baseline=104
+- 80997 Elekk: ZONE_DIFF scraped=539 baseline=104
+- 81083 Elekk Grazer: ZONE_DIFF scraped=539 baseline=104
+- 81084 Elekk: ZONE_DIFF scraped=539 baseline=104
+- 81085 Elekk Calf: ZONE_DIFF scraped=539 baseline=104
+- 81828 Eventide Elekk: ZONE_DIFF scraped=539 baseline=104
+- 81966 Oli: ZONE_DIFF scraped=550 baseline=107
+- 81968 Vera: ZONE_DIFF scraped=550 baseline=107
+- 81979 Tenderhoof Meadowstomper: ZONE_DIFF scraped=550 baseline=107
+- 81980 Oli: ZONE_DIFF scraped=550 baseline=107
+- 81982 Vera: ZONE_DIFF scraped=550 baseline=107
+- 82172 Domesticated Calf: ZONE_DIFF scraped=539 baseline=104
+- 82173 Domesticated Bull: ZONE_DIFF scraped=539 baseline=104
+- 82174 Domesticated Elekk: ZONE_DIFF scraped=539 baseline=104
+- 82258 Phantom Pearltusk: ZONE_DIFF scraped=539 baseline=104
+- 82452 Ancient Pearltusk: ZONE_DIFF scraped=539 baseline=104
+- 86549 Steeltusk: COORD_COUNT_DIFF scraped=5 baseline=3
+- 86741 Grand Elekk: ZONE_DIFF scraped=550 baseline=107
+- 86743 Dekorhan: ZONE_DIFF scraped=550 baseline=107
+- 86852 Young Meadowstomper: ZONE_DIFF scraped=550 baseline=107
+- 87083 Great-Tusk: ZONE_DIFF scraped=539 baseline=104; COORD_COUNT_DIFF scraped=6 baseline=1
+- 87660 Dekorhan: ZONE_DIFF scraped=550 baseline=107
+- 87698 Rockhide Bull: ZONE_DIFF scraped=539 baseline=104
+- 87699 Rockhide Calf: ZONE_DIFF scraped=539 baseline=104
+- 87700 Rockhide Grazer: ZONE_DIFF scraped=539 baseline=104
+- 186384 Fallen On'tuq Mammoth: COORD_COUNT_DIFF scraped=2 baseline=1
+- 188099 Plainswalker Calf: COORD_COUNT_DIFF scraped=4 baseline=2
+- 193514 Snowy Mammoth Bull: COORD_COUNT_DIFF scraped=3 baseline=1
+- 211057 Zaqali Dreamcrusher: COORD_COUNT_DIFF scraped=9 baseline=4
+- 3107 Mature Surf Crawler: ZONE_DIFF scraped=463 baseline=1
+- 23929 Giant Tidecrawler: COORD_COUNT_DIFF scraped=22 baseline=85
+- 24478 Fjord Crawler: COORD_COUNT_DIFF scraped=14 baseline=72
+- 25481 Landing Crawler: COORD_COUNT_DIFF scraped=15 baseline=42
+- 26521 Kili'ua: COORD_COUNT_DIFF scraped=6 baseline=13
+- 33712 Golden Crawler: COORD_COUNT_DIFF scraped=19 baseline=7
+- 34369 Hermit Tide Crawler: COORD_COUNT_DIFF scraped=8 baseline=5
+- 40238 Agitated Green Sand Crab: COORD_COUNT_DIFF scraped=6 baseline=1
+- 50955 Carcinak: COORD_COUNT_DIFF scraped=5 baseline=2
+- 50959 Karkin: ZONE_DIFF scraped=5733 baseline=338
+- 60401 Snapclaw: COORD_COUNT_DIFF scraped=5 baseline=3
+- 61091 Elder Viseclaw: COORD_COUNT_DIFF scraped=17 baseline=7
+- 83840 Sand Snapper: COORD_COUNT_DIFF scraped=19 baseline=3
+- 84341 Moonshell Crawler: ZONE_DIFF scraped=539 baseline=104
+- 84432 Glass Crab: ZONE_DIFF scraped=550 baseline=107
+- 88076 Sand Scavenger: ZONE_DIFF scraped=7333 baseline=624
+- 108163 Scumshell Crab: COORD_COUNT_DIFF scraped=14 baseline=6
+- 109803 Leyscar Scuttler: COORD_COUNT_DIFF scraped=20 baseline=12
+- 126642 Sandyback Crab: ZONE_DIFF scraped=1161 baseline=895
+- 127259 Furious Scuttler: COORD_COUNT_DIFF scraped=3 baseline=1
+- 128942 Mudfisher Crab: COORD_COUNT_DIFF scraped=14 baseline=8
+- 129318 Sandskitter Crab: COORD_COUNT_DIFF scraped=11 baseline=1
+- 131687 Tambano: COORD_COUNT_DIFF scraped=5 baseline=3
+- 137681 King Clickyclack: COORD_COUNT_DIFF scraped=3 baseline=1
+- 137763 Coral Snapper: ZONE_DIFF scraped=942 baseline=895; COORD_COUNT_DIFF scraped=17 baseline=4
+- 139298 Pinku'shon: COORD_COUNT_DIFF scraped=6 baseline=3
+- 142577 Hardshell Scavenger: COORD_COUNT_DIFF scraped=7 baseline=4
+- 144460 Overfed Snapper: COORD_COUNT_DIFF scraped=4 baseline=1
+- 151354 Shep: COORD_COUNT_DIFF scraped=2 baseline=1
+- 153814 Chitterspine Guillotine: COORD_COUNT_DIFF scraped=15 baseline=4
+- 153902 Tucel: COORD_COUNT_DIFF scraped=5 baseline=3
+- 155073 Chitterspine Encroacher: COORD_COUNT_DIFF scraped=2 baseline=1
+- 155583 Scrapclaw: COORD_COUNT_DIFF scraped=8 baseline=5
+- 188328 Crab: COORD_COUNT_DIFF scraped=4 baseline=2
+- 190431 Shore Crab: COORD_COUNT_DIFF scraped=10 baseline=3
+- 199773 Softshell Skitterer: ZONE_DIFF scraped=2151 baseline=2200; COORD_COUNT_DIFF scraped=19 baseline=12
+- 218885 Undersea Scuttler: COORD_COUNT_DIFF scraped=27 baseline=135
+- 219278 Shallowshell the Clacker: COORD_COUNT_DIFF scraped=4 baseline=2
+- 225889 Angry Sandsnapper: COORD_COUNT_DIFF scraped=5 baseline=3
+- 73805 Corrupted Toad: ZONE_DIFF scraped=539 baseline=104
+- 74176 Gloomshade Gulper: ZONE_DIFF scraped=539 baseline=104
+- 79660 Shimmering Croaker: ZONE_DIFF scraped=539 baseline=104
+- 89749 Marsh Gulper: COORD_COUNT_DIFF scraped=22 baseline=11
+- 136475 Speckled Bullfrog: COORD_COUNT_DIFF scraped=17 baseline=11
+- 175350 Falls Gulper: COORD_COUNT_DIFF scraped=12 baseline=7
+- 214960 Bubbling Mudskip: COORD_COUNT_DIFF scraped=17 baseline=11
+- 220275 King Splash: COORD_COUNT_DIFF scraped=6 baseline=1
+- 225933 Glowshade Ambusher: COORD_COUNT_DIFF scraped=8 baseline=4
+- 226417 Furious Skipper: COORD_COUNT_DIFF scraped=2 baseline=1
+- 226421 Stonepool Skipper: COORD_COUNT_DIFF scraped=16 baseline=8
+- 226929 Stonepool Skipper: COORD_COUNT_DIFF scraped=6 baseline=3
+- 227325 Bubbling Mudskip: COORD_COUNT_DIFF scraped=13 baseline=7
+- 23740 Frosthorn Ram: COORD_COUNT_DIFF scraped=86 baseline=291
+- 24863 Frosthorn Kid: COORD_COUNT_DIFF scraped=14 baseline=34
+- 24901 Maddened Frosthorn: COORD_COUNT_DIFF scraped=10 baseline=42
+- 26426 Arctic Ram: COORD_COUNT_DIFF scraped=31 baseline=66
+- 29958 Tundra Ram: COORD_COUNT_DIFF scraped=13 baseline=33
+- 41539 Stolen Ram: ZONE_DIFF scraped=27 baseline=29
+- 60511 Wild Mountain Kid: COORD_COUNT_DIFF scraped=18 baseline=10
+- 112453 Black Phillip: COORD_COUNT_DIFF scraped=2 baseline=1
+- 143929 Hexed Craghopper: COORD_COUNT_DIFF scraped=10 baseline=5
+- 156756 Black Bengal Goat: ZONE_DIFF scraped=1530 baseline=390; COORD_COUNT_DIFF scraped=13 baseline=6
+- 190220 Headbutting Caprine: COORD_COUNT_DIFF scraped=9 baseline=2
+- 193427 Tired Goat: COORD_COUNT_DIFF scraped=14 baseline=7
+- 193612 Highpeaks Goat: ZONE_DIFF scraped=13844 baseline=2024; COORD_COUNT_DIFF scraped=22 baseline=8
+- 214945 Moss-Draped Ramolith: COORD_COUNT_DIFF scraped=12 baseline=4
+- 16180 Shadikith the Glider: ZONE_DIFF scraped=3457 baseline=350
+- 23959 Darkclaw Bat: COORD_COUNT_DIFF scraped=26 baseline=75
+- 48456 Rabid Screecher: COORD_COUNT_DIFF scraped=9 baseline=5
+- 59235 Albino Canopy Screecher: COORD_COUNT_DIFF scraped=5 baseline=1
+- 80192 Icecave Bat: ZONE_DIFF scraped=7004 baseline=525; COORD_COUNT_DIFF scraped=11 baseline=2
+- 80242 Chillfang: COORD_COUNT_DIFF scraped=2 baseline=1
+- 96287 Great Cavernbat: ZONE_DIFF scraped=7503 baseline=650
+- 161207 Fangling: COORD_COUNT_DIFF scraped=12 baseline=7
+- 214162 The Ringing Death: COORD_COUNT_DIFF scraped=4 baseline=2
+- 51021 Vorticus: COORD_COUNT_DIFF scraped=6 baseline=3
+- 75483 Shaded Plainstalker: ZONE_DIFF scraped=539 baseline=104
+- 79721 Underbrush Egg Snatcher: ZONE_DIFF scraped=539 baseline=104
+- 79779 Underbrush Stalker: ZONE_DIFF scraped=539 baseline=104
+- 83553 Insha'tar: COORD_COUNT_DIFF scraped=4 baseline=2
+- 86773 Deadly Gloomstalker: ZONE_DIFF scraped=550 baseline=107
+- 86774 Aogexon: ZONE_DIFF scraped=550 baseline=107
+- 160341 Sewer Beastling: ZONE_DIFF scraped=10488 baseline=1470
+- 5935 Ironeye the Invincible: COORD_COUNT_DIFF scraped=5 baseline=2
+- 11786 Ambereye Reaver: COORD_COUNT_DIFF scraped=9 baseline=1
+- 71721 Canyon Icemother: COORD_COUNT_DIFF scraped=5 baseline=1
+- 85694 Mire Basilisk: COORD_COUNT_DIFF scraped=16 baseline=10
+- 88481 Sandhide Watcher: COORD_COUNT_DIFF scraped=11 baseline=6
+- 100841 Spinesever: COORD_COUNT_DIFF scraped=4 baseline=2
+- 102106 Starving Basilisk: COORD_COUNT_DIFF scraped=2 baseline=1
+- 107965 Canyon Rockeater: COORD_COUNT_DIFF scraped=12 baseline=6
+- 109867 Fjara Rockjaw: COORD_COUNT_DIFF scraped=16 baseline=7
+- 130598 Crystal Spine Matriarch: COORD_COUNT_DIFF scraped=7 baseline=3
+- 195359 Thornsided Basilisk: COORD_COUNT_DIFF scraped=4 baseline=2
+- 219949 Cavern Basilisk: COORD_COUNT_DIFF scraped=26 baseline=15
+- 220270 Zilthara: COORD_COUNT_DIFF scraped=4 baseline=2
+- 226369 Warmslink Gator: COORD_COUNT_DIFF scraped=5 baseline=3
+- 226397 Rockslab Basilisk: COORD_COUNT_DIFF scraped=8 baseline=5
+- 226700 Mudstone Basilisk: COORD_COUNT_DIFF scraped=14 baseline=5
+- 227538 Ironhide Gazer: COORD_COUNT_DIFF scraped=9 baseline=5
+- 23690 Shoveltusk: COORD_COUNT_DIFF scraped=144 baseline=585
+- 23691 Shoveltusk Stag: COORD_COUNT_DIFF scraped=35 baseline=220
+- 24791 Shoveltusk Calf: COORD_COUNT_DIFF scraped=112 baseline=565
+- 26418 Longhoof Grazer: COORD_COUNT_DIFF scraped=72 baseline=170
+- 29479 Shoveltusk Forager: COORD_COUNT_DIFF scraped=127 baseline=344
+- 29486 Tamed Shoveltusk: COORD_COUNT_DIFF scraped=9 baseline=30
+- 59339 Terrified Yak: COORD_COUNT_DIFF scraped=8 baseline=5
+- 59367 Hijacked Yak: COORD_COUNT_DIFF scraped=10 baseline=3
+- 103786 Well-Fed Musken: COORD_COUNT_DIFF scraped=8 baseline=5
+- 108935 Highlands Runehorn Calf: COORD_COUNT_DIFF scraped=11 baseline=7
+- 162478 Leashed Tauralus: COORD_COUNT_DIFF scraped=7 baseline=3
+- 174396 Captive Tauralus: COORD_COUNT_DIFF scraped=6 baseline=3
+- 56752 Whitefisher Crane: ZONE_DIFF scraped=418 baseline=376
+- 59105 Wandering Greenback: COORD_COUNT_DIFF scraped=7 baseline=3
+- 59787 Sunrise Crane: COORD_COUNT_DIFF scraped=20 baseline=5
+- 67128 Kracor: COORD_COUNT_DIFF scraped=5 baseline=2
+- 156780 White Crane: ZONE_DIFF scraped=1530 baseline=390
+- 165086 Nightsong Elder: COORD_COUNT_DIFF scraped=8 baseline=2
+- 168240 Gorgebeak: COORD_COUNT_DIFF scraped=5 baseline=2
+- 170460 Pearly Wader: COORD_COUNT_DIFF scraped=14 baseline=9
+- 170790 Tranquil Puddlewader: COORD_COUNT_DIFF scraped=3 baseline=1
+- 178743 Terrified Glitterfeather: ZONE_DIFF scraped=13619 baseline=1565; COORD_COUNT_DIFF scraped=13 baseline=6
+- 189508 Ambercrowned Mallard: COORD_COUNT_DIFF scraped=6 baseline=3
+- 189835 Woodwing Quacker: COORD_COUNT_DIFF scraped=10 baseline=6
+- 192557 Quackers the Terrible: COORD_COUNT_DIFF scraped=2 baseline=1
+- 192953 Thicket Mallard: COORD_COUNT_DIFF scraped=18 baseline=6
+- 194489 Elusive Elder Drake: COORD_COUNT_DIFF scraped=5 baseline=2
+- 196609 Buffleheaded Waterfowl: ZONE_DIFF scraped=13802 baseline=2025; COORD_COUNT_DIFF scraped=21 baseline=13
+- 196674 Buffleheaded Waterfowl: ZONE_DIFF scraped=13802 baseline=2025
+- 197685 Cliffs Mallard: COORD_COUNT_DIFF scraped=6 baseline=3
+- 3248 Barrens Giraffe: ZONE_DIFF scraped=199 baseline=10; COORD_COUNT_DIFF scraped=22 baseline=4
+- 25680 Marsh Caribou: COORD_COUNT_DIFF scraped=109 baseline=309
+- 26363 Tallhorn Stag: COORD_COUNT_DIFF scraped=195 baseline=774
+- 26615 Snowfall Elk: COORD_COUNT_DIFF scraped=40 baseline=309
+- 26616 Blighted Elk: COORD_COUNT_DIFF scraped=59 baseline=228
+- 27230 Silvercoat Stag: COORD_COUNT_DIFF scraped=69 baseline=267
+- 28129 Longneck Grazer: COORD_COUNT_DIFF scraped=93 baseline=222
+- 31236 Dappled Stag: COORD_COUNT_DIFF scraped=51 baseline=217
+- 45302 Sunchaser Gazelle: ZONE_DIFF scraped=1527 baseline=249

@@ -1,152 +1,134 @@
 # Data Refresh Runbook
 
-## Guia Rapido Em Portugues
+## Visao Geral
 
-Rode a partir da raiz do repositorio:
+`Data.lua` na raiz do repo eh o **baseline confiavel** (dataset shippado, validado por jogadores). O scrapper aplica atualizacoes do Wowhead em cima dele:
 
-```bash
-rtk python3 -m scrapper.refresh_data collect-pets --limit-pages 10 --delay 5
-rtk python3 -m scrapper.refresh_data build-pets --from-cache --output scrapper/generated/Data.lua
-```
+- Se Wowhead funciona pro pet -> scrapper vence.
+- Se Wowhead falha pro pet -> usa o registro do `Data.lua` como fallback.
+- Se uma familia inteira nao parseia ou nao tem cache -> carrega todos pets daquela familia direto do baseline.
+- Build so falha se **zero** registros foram produzidos no total.
 
-O primeiro comando coleta HTML e salva em cache. O segundo comando gera Lua somente a partir do cache local, sem bater no Wowhead.
+## Passo a Passo (Pets)
 
-Se falhar, o comando imprime o arquivo de diagnostico. Para pets, leia:
-
-```bash
-rtk sed -n '1,120p' scrapper/generated/pet-refresh-blockers.md
-rtk sed -n '1,120p' scrapper/generated/pet-validation-errors.md
-```
-
-O erro `HTTP Error 403: Forbidden` quer dizer que o Wowhead bloqueou a coleta antes de baixar os dados. Nesse caso o pipeline nao escreve `Data.lua`, de proposito, para evitar trocar dados bons por uma coleta incompleta.
-
-Para stable masters:
+### 1. Coleta (uma vez ou ate completar)
 
 ```bash
-rtk python3 -m scrapper.refresh_data collect-stable-masters --limit-pages 10 --delay 5
-rtk python3 -m scrapper.refresh_data build-stable-masters --from-cache --output scrapper/generated/StableMastersData.lua
-rtk sed -n '1,120p' scrapper/generated/stable-master-blockers.md
-rtk sed -n '1,120p' scrapper/generated/stable-master-validation-errors.md
+rtk python3 -m scrapper.refresh_data collect-pets --limit-pages 200 --delay 5
 ```
 
-O cache/progresso fica em:
+- Resumivel: rerode quantas vezes precisar, ele continua de onde parou.
+- Erros HTTP individuais (403, 404, etc.) sao logados no manifest e o run **nao aborta mais**. Continue rodando ate o output reportar 0 paginas novas coletadas.
+- Nao precisa mais de `while true; sleep 5; ...` por fora — `_collect_one` engole erros transientes e segue.
 
-- `scrapper/generated/cache/`
-- `scrapper/generated/refresh-manifest.json`
-
-Use `--reset-cache` somente quando quiser descartar o cache e tentar tudo do zero. Nao use durante investigacao normal.
-
-## Source Shape
-
-Validated with `agent-browser 0.26.0` on 2026-04-28/2026-04-29:
-
-- `https://www.wowhead.com/hunter-pets` exposes pet families through `g_listviews.pets.data`.
-- `https://www.wowhead.com/pet=<family-id>` exposes tameable NPC rows through `g_listviews.tameable.data`.
-- `https://www.wowhead.com/npc=<npc-id>` exposes coordinates through `g_mapperData` when Wowhead has mapped locations.
-- `https://www.wowhead.com/search?q=stable%20master` exposes stable master candidates through `g_listviews.npcs.data`.
-
-## Pet Sample
+### 2. Build a partir do cache
 
 ```bash
-rtk python3 -m scrapper.refresh_data collect-pets --limit-pages 10 --delay 5
-rtk python3 -m scrapper.refresh_data build-pets --from-cache --limit-families 1 --output scrapper/generated/Data.sample.lua
+rtk python3 -m scrapper.refresh_data build-pets --from-cache --output /tmp/Data.test.lua
 ```
 
-Expected:
+- Le o `Data.lua` da raiz como baseline e passa para `generate_pets`.
+- Output em `/tmp/Data.test.lua` (NAO sobrescreva producao ainda).
+- Build agora roda ate o fim mesmo com paginas ruins; usa baseline pra preencher buracos.
 
-- Exit code `0`.
-- `scrapper/generated/Data.sample.lua` exists.
-- `scrapper/generated/Data.sample.lua` contains `GHP.pet_by_zones = {`.
-- `scrapper/generated/Data.sample.lua` contains at least one `["coords"] = { {`.
-
-## Full Pet Refresh
+### 3. Inspecao dos relatorios
 
 ```bash
-rtk python3 -m scrapper.refresh_data collect-pets --limit-pages 10 --delay 5
-rtk python3 -m scrapper.refresh_data build-pets --from-cache --output scrapper/generated/Data.lua
+# Pets recuperados do baseline (scrape falhou, fallback fez efeito)
+head -50 scrapper/generated/pet-fallback.md
+
+# Pets sem fallback nem scrape (perdidos nessa rodada)
+head -50 scrapper/generated/pet-skipped.md
+
+# Diferencas scraper vs baseline pra auditoria manual
+head -50 scrapper/generated/pet-scraper-vs-baseline-diff.md
 ```
 
-Before replacing production `Data.lua`:
+Procure no diff log:
+- `ZONE_DIFF` -> Wowhead trocou o uiMapId; valide se a nova zona faz sentido.
+- `COORD_COUNT_DIFF` -> contagem de coords mudou >50%; pode ser pet movido ou bug do parser.
+
+### 4. Comparacao com producao
 
 ```bash
-rtk rg -n 'GHP.pet_by_zones = \{|\["NpcId"\]|\["coords"\]' scrapper/generated/Data.lua
-rtk git diff --no-index Data.lua scrapper/generated/Data.lua
+grep -c '\["NpcId"\]' Data.lua /tmp/Data.test.lua
+git diff --no-index Data.lua /tmp/Data.test.lua | head -200
 ```
 
-Review requirements:
+Esperado: `/tmp/Data.test.lua` tem **menos** registros que `Data.lua` original — porque o parser do baseline descarta linhas com `zoneID=0` (cerca de 1400) que sempre falhariam na validacao. Isso eh por design.
 
-- Generated pet count is plausible compared with checked-in `Data.lua`.
-- Sample current expansion pets appear in the generated output.
-- `scrapper/generated/pet-validation-errors.md` is empty or absent.
-- If Wowhead blocks source fetches, `scrapper/generated/pet-refresh-blockers.md` records the HTTP error and production `Data.lua` must not be replaced.
-- Coordinate-heavy diffs are expected; missing-coordinate records are not accepted into generated output.
+### 5. Substituicao em producao
 
-## Resume And Cache Workflow
+So substitua `Data.lua` quando:
 
-Full refreshes are resumable. The pipeline persists fetched Wowhead pages under `scrapper/generated/cache/` and records progress in `scrapper/generated/refresh-manifest.json`.
-
-Collection is cache-first and resumable. Rerun the collect command to continue from the existing manifest and fetch only missing pages:
+- `pet-fallback.md` esta dentro do esperado (sem regressoes massivas).
+- `pet-scraper-vs-baseline-diff.md` foi auditado linha a linha e os mismatches sao aceitaveis.
+- `pet-validation-errors.md` esta vazio/ausente.
+- Spot-check de pets de expansao atual existe no output.
 
 ```bash
-rtk python3 -m scrapper.refresh_data collect-pets --limit-pages 10 --delay 5
-rtk python3 -m scrapper.refresh_data collect-stable-masters --limit-pages 10 --delay 5
+cp /tmp/Data.test.lua Data.lua
 ```
 
-Build commands are offline and must use cache only:
+## Passo a Passo (Stable Masters)
 
 ```bash
-rtk python3 -m scrapper.refresh_data build-pets --from-cache --output scrapper/generated/Data.lua
-rtk python3 -m scrapper.refresh_data build-stable-masters --from-cache --output scrapper/generated/StableMastersData.lua
+rtk python3 -m scrapper.refresh_data collect-stable-masters --limit-pages 50 --delay 5
+rtk python3 -m scrapper.refresh_data build-stable-masters --from-cache --output /tmp/StableMastersData.test.lua
+head -50 scrapper/generated/stable-master-skipped.md
 ```
 
-Use `--reset-cache` only when intentionally discarding saved source pages:
+Stable masters **nao tem baseline shippado**; build agora skip-and-continue por registro mas nao tem fallback. Se zero stable masters validarem -> exit 1 com `stable-master-blockers.md`.
+
+## Onde Fica o Estado
+
+- `scrapper/generated/cache/` — paginas HTML cacheadas.
+- `scrapper/generated/refresh-manifest.json` — status por URL (ok / parse_error / error).
+- Manifesto agora se auto-cura: pagina marcada como `parse_error` que parseia OK em build subsequente volta a `ok`.
+
+## Quando Usar `--reset-cache`
+
+Quase nunca. So quando:
+- Mudou estrutura de cache key.
+- Quer forcar recoleta total (vai demorar horas com `--delay 5`).
 
 ```bash
 rtk python3 -m scrapper.refresh_data collect-pets --limit-pages 1 --delay 5 --reset-cache
-rtk python3 -m scrapper.refresh_data collect-stable-masters --limit-pages 1 --delay 5 --reset-cache
 ```
 
-Inspect the manifest when a refresh fails:
+## Diagnostico de Falhas
+
+Se `build-pets` exit 1 (zero registros — caso extremo):
 
 ```bash
-rtk sed -n '1,200p' scrapper/generated/refresh-manifest.json
-rtk sed -n '1,120p' scrapper/generated/pet-refresh-blockers.md
-rtk sed -n '1,120p' scrapper/generated/stable-master-blockers.md
+sed -n '1,120p' scrapper/generated/pet-refresh-blockers.md
 ```
 
-Required behavior:
+Causas plausiveis:
+- Cache totalmente vazio E `Data.lua` ausente.
+- `Data.lua` corrompido a ponto do parser nao achar `GHP.pet_by_zones = {`.
 
-- Successful cached pages are reused indefinitely.
-- Missing or failed URLs are retried on rerun.
-- Every successful page is written to `scrapper/generated/cache/` before parsing the next page.
-- Parser or validation failures keep the cached HTML and record the local path in the manifest.
-- `--reset-cache` removes saved pages and starts a fresh collection.
-- Generated Lua is written only from a complete validated cached source set.
-- Production `Data.lua` and `StableMastersData.lua` are replaced only after generated output validates and the diff is reviewed.
+Se Wowhead esta retornando 403 em massa:
+- Continue rodando `collect-pets` periodicamente; o build ja nao depende mais de coleta perfeita.
+- O baseline cobre o gap.
 
-## Stable Master Feasibility
+## Source Shape (Referencia)
 
-```bash
-rtk python3 -m scrapper.refresh_data collect-stable-masters --limit-pages 10 --delay 5
-rtk python3 -m scrapper.refresh_data build-stable-masters --from-cache --output scrapper/generated/StableMastersData.lua
-```
+Validado em 2026-04-28/2026-04-29 com `agent-browser 0.26.0`:
 
-If the command exits `0`, review:
+- `https://www.wowhead.com/hunter-pets` -> `g_listviews.pets.data` (familias).
+- `https://www.wowhead.com/pet=<family-id>` -> `g_listviews.tameable.data` (pets da familia).
+- `https://www.wowhead.com/npc=<npc-id>` -> `g_mapperData` (coordenadas).
+- `https://www.wowhead.com/search?q=stable%20master` -> `g_listviews.npcs.data`.
 
-```bash
-rtk rg -n 'GHP.stable_masters = \{|\["npcID"\]|\["faction"\]' scrapper/generated/StableMastersData.lua
-rtk sed -n '1,80p' scrapper/generated/stable-master-skipped.md
-```
+## Decisoes Locked-in
 
-If the command exits non-zero, review:
-
-```bash
-rtk sed -n '1,120p' scrapper/generated/stable-master-blockers.md
-rtk sed -n '1,120p' scrapper/generated/stable-master-validation-errors.md
-```
-
-## Production Replacement
-
-Only replace `Data.lua` after the generated pet file validates and the diff is reviewed.
-
-Only add `StableMastersData.lua` and `GiuiceHunterPets.toc` after stable master validation passes. This phase loads data only; it does not render stable master pins.
+| Topico | Decisao |
+|---|---|
+| Fonte fallback | `Data.lua` shippado eh autoridade |
+| `wow_pets.db` | Auxiliar/comparacao apenas |
+| Drop em load | Linhas com `zoneID=0` ou sem coords sao descartadas |
+| Conflito scraper vs baseline | Scraper vence quando scrape sucede; diff logado |
+| Familia (id, nome) | Wowhead vence sobre baseline em fallback |
+| Stable masters | Sem fallback, skip-and-continue por registro |
+| Loop externo `while true` | Nao mais necessario |
