@@ -1,0 +1,378 @@
+- 213428 Aradan: no mapper coordinates
+- 15229 Vekniss Soldier: no mapper coordinates
+- 15230 Vekniss Warrior: no mapper coordinates
+- 15233 Vekniss Guardian: no mapper coordinates
+- 15300 Vekniss Drone: no mapper coordinates
+- 15318 Hive'Zara Drone: no mapper coordinates
+- 15319 Hive'Zara Collector: no mapper coordinates
+- 15320 Hive'Zara Soldier: no mapper coordinates
+- 15323 Hive'Zara Sandstalker: no mapper coordinates
+- 15521 Hive'Zara Hatchling: no mapper coordinates
+- 15622 Vekniss Borer: no mapper coordinates
+- 72927 Kovok: no mapper coordinates
+- 29838 Drakkari Rhino: no mapper coordinates
+- 29931 Drakkari Rhino: no mapper coordinates
+- 11671 Core Hound: no mapper coordinates
+- 11672 Core Rager: no mapper coordinates
+- 11673 Ancient Core Hound: no mapper coordinates
+- 77927 Son of the Beast: no mapper coordinates
+- 122963 Rezan: no mapper coordinates
+- 253179 Razorshell Ravager: no mapper coordinates
+- 61387 Quilen Guardian: no mapper coordinates
+- 61945 Gurthan Iron Maw: no mapper coordinates
+- 99675 Enormous Stone Quilen: no mapper coordinates
+- 164563 Vicious Gargon: no mapper coordinates
+- 168457 Stonewall Gargon: no mapper coordinates
+- 171455 Stonewall Gargon: no mapper coordinates
+- 10981 Frost Wolf: no mapper coordinates
+- 17280 Shattered Hand Warhound: no mapper coordinates
+- 23232 Mutant War Hound: no mapper coordinates
+- 26672 Bloodthirsty Tundra Wolf: no mapper coordinates
+- 29735 Savage Worg: no mapper coordinates
+- 71921 Darkfang: no mapper coordinates
+- 71923 Bloodclaw: no mapper coordinates
+- 72452 Kor'kron Dire Wolf: no mapper coordinates
+- 76181 Ragemaw Worg: no mapper coordinates
+- 87241 Dreadfang: no mapper coordinates
+- 93349 Felbound Wolf: no mapper coordinates
+- 96608 Ebonclaw Worg: no mapper coordinates
+- 119990 Fenryr: no mapper coordinates
+- 18982 Sable Jaguar: no mapper coordinates
+- 24064 Amani Lynx Cub: no mapper coordinates
+- 42718 Young Cat: no mapper coordinates
+- 45096 Tamed Tol'vir Prowler: no mapper coordinates
+- 52345 Pride of Bethekk: no mapper coordinates
+- 70595 Frostmane Prowler: no mapper coordinates
+- 122408 Shadow Stalker: no mapper coordinates
+- 122560 Shadow Stalker: no mapper coordinates
+- 202339 Ancient Tiger: no mapper coordinates
+- 3636 Deviate Ravager: no mapper coordinates
+- 3637 Deviate Guardian: no mapper coordinates
+- 26628 Drakkari Scytheclaw: no mapper coordinates
+- 26641 Drakkari Gutripper: no mapper coordinates
+- 26824 Drakkari Raptor Mount: no mapper coordinates
+- 128435 Toxic Saurid: no mapper coordinates
+- 129517 Reanimated Raptor: no mapper coordinates
+- 136976 T'zala: no mapper coordinates
+- 136984 Reban: no mapper coordinates
+- 137487 Skeletal Hunting Raptor: no mapper coordinates
+- 139842 Risen Ravasaur: no mapper coordinates
+- 168986 Skeletal Raptor: no mapper coordinates
+- 212781 Dreamtalon: no mapper coordinates
+- 8928 Burrowing Thundersnout: no mapper coordinates
+- 5912 Deviate Faerie Dragon: no mapper coordinates
+- 14398 Eldreth Darter: no mapper coordinates
+- 63025 Tsulong: no mapper coordinates
+- 187246 Nullmagic Hornswog: no mapper coordinates
+- 83389 Ironwing Flamespitter: no mapper coordinates
+- 163157 Amarth: no mapper coordinates
+- 2354 Vicious Gray Bear: no mapper coordinates
+- 69177 Amani Warbear: no mapper coordinates
+- 107676 Blue Juggernaut: no mapper coordinates
+- 107678 Teal Juggernaut: no mapper coordinates
+- 107679 Grey Juggernaut: no mapper coordinates
+- 111820 Friender: no mapper coordinates
+- 150254 Scraphound: no mapper coordinates
+- 150293 Mechagon Prowler: no mapper coordinates
+- 151773 Junkyard D.0.G.: no mapper coordinates
+- 167964 4.RF-4.RF: no mapper coordinates
+- 127479 The Sand Queen: no mapper coordinates
+- 134686 Mature Krolusk: no mapper coordinates
+- 133835 Feral Bloodswarmer: no mapper coordinates
+- 141935 Thrashing Crawg: no mapper coordinates
+- 222235 Bloodthirsty Swarmer: no mapper coordinates
+- 135049 Dreadwing Raven: no mapper coordinates
+- 69246 Hatchling Direhorn: no mapper coordinates
+- 121540 Lalathin: no mapper coordinates
+- 163506 Forsworn Stealthclaw: no mapper coordinates
+- 212779 Umbraclaw: no mapper coordinates
+- 13036 Gordok Hound: no mapper coordinates
+- 12207 Thessala Hydra: no mapper coordinates
+- 52418 Lost Offspring of Gahz'ranka: no mapper coordinates
+- 250489 Voltaic Trigore: no mapper coordinates
+- 14283 Stormpike Owl: no mapper coordinates
+- 19429 Avian Darkhawk: no mapper coordinates
+- 21891 Avian Ripper: no mapper coordinates
+- 21904 Avian Warhawk: no mapper coordinates
+- 38154 Warhawk: no mapper coordinates
+- 48447 Monstrous Parrot: no mapper coordinates
+- 48448 Albino Eyegouger: no mapper coordinates
+- 48449 Brilliant Macaw: no mapper coordinates
+- 48450 Sunwing Squawker: no mapper coordinates
+- 48451 Ol' Beaky: no mapper coordinates
+- 54517 Time-Twisted Shadowtalon: no mapper coordinates
+- 76143 Rukhran: no mapper coordinates
+- 76253 Dread Raven Hatchling: no mapper coordinates
+- 91539 Fel Raven: no mapper coordinates
+- 103045 Plaguemaw: no mapper coordinates
+- 168153 Plagueroc: no mapper coordinates
+- 168310 Plagueroc: no mapper coordinates
+- 178626 Mawrat: no mapper coordinates
+- 206008 Shimmering Crystalspine: no mapper coordinates
+- 15235 Vekniss Stinger: no mapper coordinates
+- 15236 Vekniss Wasp: no mapper coordinates
+- 15325 Hive'Zara Wasp: no mapper coordinates
+- 15327 Hive'Zara Stinger: no mapper coordinates
+- 19632 Lykul Stinger: no mapper coordinates
+- 52373 Florawing Needler: no mapper coordinates
+- 52375 Florawing Needler: no mapper coordinates
+- 52376 Florawing Needler: no mapper coordinates
+- 52377 Florawing Needler: no mapper coordinates
+- 52442 Florawing Hive Queen: no mapper coordinates
+- 140594 Silithid Hunter-Killer: no mapper coordinates
+- 167116 Spinemaw Reaver: no mapper coordinates
+- 168361 Fen Hornet: no mapper coordinates
+- 168579 Fen Hatchling: no mapper coordinates
+- 180153 Aqir Impaler: no mapper coordinates
+- 180566 Rat of Unusual Size: no mapper coordinates
+- 222936 Sweet-Sting Worker: no mapper coordinates
+- 166301 Mistveil Stalker: no mapper coordinates
+- 8921 Bloodhound: no mapper coordinates
+- 8922 Bloodhound Mastiff: no mapper coordinates
+- 9042 Verek: no mapper coordinates
+- 16176 Shadowbeast: no mapper coordinates
+- 16177 Dreadbeast: no mapper coordinates
+- 16178 Phase Hound: no mapper coordinates
+- 26730 Mage Slayer: no mapper coordinates
+- 30664 Azure Mage Slayer: no mapper coordinates
+- 30963 Azure Mage Slayer: no mapper coordinates
+- 31010 Azure Mage Slayer: no mapper coordinates
+- 37025 Stinky: no mapper coordinates
+- 37217 Precious: no mapper coordinates
+- 53206 Hell Hound: no mapper coordinates
+- 53614 Ceredos: no mapper coordinates
+- 53694 Riplimb: no mapper coordinates
+- 53695 Rageface: no mapper coordinates
+- 58876 Starving Hound: no mapper coordinates
+- 59309 Obedient Hound: no mapper coordinates
+- 61408 Adarogg: no mapper coordinates
+- 61657 Adolescent Flame Hound: no mapper coordinates
+- 61658 Mature Flame Hound: no mapper coordinates
+- 81818 Legion Hunter-Killer: no mapper coordinates
+- 103605 Shroudseeker: no mapper coordinates
+- 108794 Shroudseeker's Shadow: no mapper coordinates
+- 114323 Guarm: no mapper coordinates
+- 114794 Skeletal Hound: no mapper coordinates
+- 128551 Irontide Mastiff: no mapper coordinates
+- 135234 Diseased Mastiff: no mapper coordinates
+- 178630 Mawsworn Seeker: no mapper coordinates
+- 199719 Nokhud Wardog: no mapper coordinates
+- 18155 Bloodfalcon: no mapper coordinates
+- 20038 Phoenix-Hawk Hatchling: no mapper coordinates
+- 25867 Sunblade Dragonhawk: no mapper coordinates
+- 70589 Cavern Burrower: no mapper coordinates
+- 71578 Amber Parasite: no mapper coordinates
+- 74509 Blue Shale Crawler: no mapper coordinates
+- 134005 Shalebiter: no mapper coordinates
+- 151639 Crazed Gyreworm: no mapper coordinates
+- 3864 Fel Steed: no mapper coordinates
+- 14566 Ancient Equine Spirit: no mapper coordinates
+- 30573 Duke: no mapper coordinates
+- 6021 Boar Spirit: no mapper coordinates
+- 74620 Battle Boar: no mapper coordinates
+- 135048 Gorestained Piglet: no mapper coordinates
+- 144637 Grong: no mapper coordinates
+- 3680 Serpentbloom Snake: no mapper coordinates
+- 5048 Deviate Adder: no mapper coordinates
+- 5755 Deviate Viper: no mapper coordinates
+- 5762 Deviate Moccasin: no mapper coordinates
+- 8886 Deviate Python: no mapper coordinates
+- 16491 Mana Feeder: no mapper coordinates
+- 16492 Syphoner: no mapper coordinates
+- 19306 Mana Leech: no mapper coordinates
+- 29713 Slad'ran Constrictor: no mapper coordinates
+- 70448 Ancient Python: no mapper coordinates
+- 115795 Abyss Stalker: no mapper coordinates
+- 120477 Deep Stalker: no mapper coordinates
+- 135846 Sand-Crusted Striker: no mapper coordinates
+- 140038 Abyssal Eel: no mapper coordinates
+- 160413 Crimson Cobra: no mapper coordinates
+- 232106 Brightscale Wyrm: no mapper coordinates
+- 22056 Coilfang Strider: no mapper coordinates
+- 22299 Spore Strider: no mapper coordinates
+- 7022 Venomlash Scorpid: no mapper coordinates
+- 7078 Cleft Scorpid: no mapper coordinates
+- 7405 Deadly Cleft Scorpid: no mapper coordinates
+- 8926 Deep Stinger: no mapper coordinates
+- 15240 Vekniss Hive Crawler: no mapper coordinates
+- 15317 Qiraji Scorpion: no mapper coordinates
+- 15336 Hive'Zara Tail Lasher: no mapper coordinates
+- 103217 Crystalline Scorpid: no mapper coordinates
+- 108359 Volatile Scorpid: no mapper coordinates
+- 108360 Acidmaw Scorpid: no mapper coordinates
+- 108361 Crystalline Scorpid: no mapper coordinates
+- 8933 Cave Creeper: no mapper coordinates
+- 10376 Crystal Fang: no mapper coordinates
+- 15974 Dread Creeper: no mapper coordinates
+- 15975 Carrion Spinner: no mapper coordinates
+- 15976 Venom Stalker: no mapper coordinates
+- 16170 Coldmist Stalker: no mapper coordinates
+- 18983 Blackfang Tarantula: no mapper coordinates
+- 26625 Darkweb Recluse: no mapper coordinates
+- 74583 Festering Spiderling: no mapper coordinates
+- 74584 Plague-Rotted Webslinger: no mapper coordinates
+- 97677 Barbed Spiderling: no mapper coordinates
+- 98759 Vicious Manafang: no mapper coordinates
+- 105876 Enchanted Broodling: no mapper coordinates
+- 106311 Venomous Spiderling: no mapper coordinates
+- 107459 Venomous Spiderling: no mapper coordinates
+- 108542 Skittering Spiderling: no mapper coordinates
+- 110966 Vicious Manafang: no mapper coordinates
+- 111721 Venomous Spiderling: no mapper coordinates
+- 111933 Venomous Spiderling: no mapper coordinates
+- 111980 Nightmother: no mapper coordinates
+- 112039 Screeching Spiderling: no mapper coordinates
+- 113626 Venomous Spiderling: no mapper coordinates
+- 118706 Necrotic Spiderling: no mapper coordinates
+- 120016 Necrotic Spiderling: no mapper coordinates
+- 125547 Feltouched Skitterer: no mapper coordinates
+- 130902 Creepy Spider: no mapper coordinates
+- 168747 Venomfang: no mapper coordinates
+- 231380 Undercrawler: no mapper coordinates
+- 73223 Pterrordax: no mapper coordinates
+- 113040 Frenzied Pterrordax: no mapper coordinates
+- 122986 Wild Skyscreamer: no mapper coordinates
+- 128434 Feasting Skyscreamer: no mapper coordinates
+- 13599 Stolid Snapjaw: no mapper coordinates
+- 22885 Dragon Turtle: no mapper coordinates
+- 74446 Ghamoo-Ra: no mapper coordinates
+- 74722 Razorshell Snapjaw: no mapper coordinates
+- 76954 Pahboo-Ra: no mapper coordinates
+- 127477 Saltwater Snapper: no mapper coordinates
+- 13323 Subterranean Diemetradon: no mapper coordinates
+- 137098 Liskorath: no mapper coordinates
+- 150154 Saurolisk Bonenipper: no mapper coordinates
+- 8925 Dredge Worm: no mapper coordinates
+- 11789 Deep Borer: no mapper coordinates
+- 14370 Cadaverous Worm: no mapper coordinates
+- 139194 Rotmaw: no mapper coordinates
+- 173834 Chilled Crustburster: no mapper coordinates
+- 225376 Beloved Worm: no mapper coordinates
+- 250503 Invasive Consumptor: no mapper coordinates
+- 252240 Invasive Consumptor: no mapper coordinates
+- 5056 Deviate Dreadfang: no mapper coordinates
+- 5291 Hakkari Frostwing: no mapper coordinates
+- 5756 Deviate Venomwing: no mapper coordinates
+- 8336 Hakkari Sapper: no mapper coordinates
+- 8440 Shade of Hakkar: no mapper coordinates
+- 19428 Cobalt Serpent: no mapper coordinates
+- 163503 Etherdiver: no mapper coordinates
+- 165905 Son of Hakkar: no mapper coordinates
+- 170488 Son of Hakkar: no mapper coordinates
+- 7269 Scarab: no mapper coordinates
+- 8932 Borer Beetle: no mapper coordinates
+- 15168 Vile Scarab: no mapper coordinates
+- 15316 Qiraji Scarab: no mapper coordinates
+- 15461 Shrieker Scarab: no mapper coordinates
+- 15462 Spitting Scarab: no mapper coordinates
+- 15621 Yauj Brood: no mapper coordinates
+- 15718 Ouro Scarab: no mapper coordinates
+- 39440 Venomous Skitterer: no mapper coordinates
+- 140591 Qiraji Scarab: no mapper coordinates
+- 216340 Sentry Stagshell: no mapper coordinates
+- 5053 Deviate Crocolisk: no mapper coordinates
+- 17952 Darkwater Crocolisk: no mapper coordinates
+- 24138 Tamed Amani Crocolisk: no mapper coordinates
+- 43658 Frenzied Crocolisk: no mapper coordinates
+- 52413 Zulian Gnasher: no mapper coordinates
+- 127482 Sewer Vicejaw: no mapper coordinates
+- 166304 Mistveil Stinger: no mapper coordinates
+- 27642 Phantasmal Mammoth: no mapper coordinates
+- 74508 Guardian of the Deep: no mapper coordinates
+- 127381 Silt Crab: no mapper coordinates
+- 137713 Big Money Crab: no mapper coordinates
+- 137716 Bottom Feeder: no mapper coordinates
+- 75588 Grotto Toad: no mapper coordinates
+- 75590 Enormous Bullfrog: no mapper coordinates
+- 135052 Blight Toad: no mapper coordinates
+- 137233 Plague Toad: no mapper coordinates
+- 173720 Mistveil Gorgegullet: no mapper coordinates
+- 214801 Skipper: no mapper coordinates
+- 251885 Gravid Potatoad: no mapper coordinates
+- 10990 Alterac Ram: no mapper coordinates
+- 13676 Stabled Alterac Ram: no mapper coordinates
+- 48440 Mining Monkey: no mapper coordinates
+- 48441 Mining Monkey: no mapper coordinates
+- 52441 Curious Jungle Monkey: no mapper coordinates
+- 4861 Shrike Bat: no mapper coordinates
+- 8927 Dark Screecher: no mapper coordinates
+- 16173 Shadowbat: no mapper coordinates
+- 16175 Vampiric Shadowbat: no mapper coordinates
+- 26622 Drakkari Bat: no mapper coordinates
+- 61415 Giant Cave Bat: no mapper coordinates
+- 75247 Groyat, the Blind Hunter: no mapper coordinates
+- 75466 Vile Bat: no mapper coordinates
+- 75467 Cave Bat: no mapper coordinates
+- 168591 Ravenous Dreadbat: no mapper coordinates
+- 202341 Ancient Bat: no mapper coordinates
+- 20906 Phase-Hunter: no mapper coordinates
+- 122407 Warp Stalker: no mapper coordinates
+- 125081 Warp Stalker: no mapper coordinates
+- 4863 Jadespine Basilisk: no mapper coordinates
+- 6215 Chomper: no mapper coordinates
+- 8095 Sul'lithuz Sandcrawler: no mapper coordinates
+- 8120 Sul'lithuz Abomination: no mapper coordinates
+- 8138 Sul'lithuz Broodling: no mapper coordinates
+- 184023 Vicious Basilisk: no mapper coordinates
+- 227903 Darkfuse Growler: no mapper coordinates
+- 96611 Angerhoof Bull: no mapper coordinates
+- 171181 Territorial Bladebeak: no mapper coordinates
+- 171341 Bladebeak Hatchling: no mapper coordinates
+- 171343 Bladebeak Matriarch: no mapper coordinates
+- 68250 Unguloxx: scrape failed and no baseline (https://www.wowhead.com/npc=68250: missing cached source: https://www.wowhead.com/npc=68250)
+- 82031 Pearlfur Grazer: scrape failed and no baseline (https://www.wowhead.com/npc=82031: missing cached source: https://www.wowhead.com/npc=82031)
+- 112691 Greathorn Stag: scrape failed and no baseline (https://www.wowhead.com/npc=112691: missing cached source: https://www.wowhead.com/npc=112691)
+- 112692 Greathorn Doe: scrape failed and no baseline (https://www.wowhead.com/npc=112692: missing cached source: https://www.wowhead.com/npc=112692)
+- 121564 Skittish Chitinbuk: scrape failed and no baseline (https://www.wowhead.com/npc=121564: missing cached source: https://www.wowhead.com/npc=121564)
+- 121565 Shadowcrazed Chitinbuk: scrape failed and no baseline (https://www.wowhead.com/npc=121565: missing cached source: https://www.wowhead.com/npc=121565)
+- 122363 Chitinbuk Ruinwalker: scrape failed and no baseline (https://www.wowhead.com/npc=122363: missing cached source: https://www.wowhead.com/npc=122363)
+- 123527 Chitinbuk Grazer: scrape failed and no baseline (https://www.wowhead.com/npc=123527: missing cached source: https://www.wowhead.com/npc=123527)
+- 124225 Chitinous Cragscaler: scrape failed and no baseline (https://www.wowhead.com/npc=124225: missing cached source: https://www.wowhead.com/npc=124225)
+- 124265 Chitinous Cragscaler: scrape failed and no baseline (https://www.wowhead.com/npc=124265: missing cached source: https://www.wowhead.com/npc=124265)
+- 124439 Wild Cragscaler: scrape failed and no baseline (https://www.wowhead.com/npc=124439: missing cached source: https://www.wowhead.com/npc=124439)
+- 126939 Ruinwalker Stag: scrape failed and no baseline (https://www.wowhead.com/npc=126939: missing cached source: https://www.wowhead.com/npc=126939)
+- 126945 Subdued Ruins Wanderer: scrape failed and no baseline (https://www.wowhead.com/npc=126945: missing cached source: https://www.wowhead.com/npc=126945)
+- 126952 Ruinwalker Calf: scrape failed and no baseline (https://www.wowhead.com/npc=126952: missing cached source: https://www.wowhead.com/npc=126952)
+- 127569 Redwood Guardian: scrape failed and no baseline (https://www.wowhead.com/npc=127569: missing cached source: https://www.wowhead.com/npc=127569)
+- 127611 Redwood Guardian: scrape failed and no baseline (https://www.wowhead.com/npc=127611: missing cached source: https://www.wowhead.com/npc=127611)
+- 130935 Elusive Chitinbuk: scrape failed and no baseline (https://www.wowhead.com/npc=130935: missing cached source: https://www.wowhead.com/npc=130935)
+- 164873 Runestag Elderhorn: scrape failed and no baseline (https://www.wowhead.com/npc=164873: missing cached source: https://www.wowhead.com/npc=164873)
+- 165727 Plains Doe: scrape failed and no baseline (https://www.wowhead.com/npc=165727: missing cached source: https://www.wowhead.com/npc=165727)
+- 165730 Plains Stag: scrape failed and no baseline (https://www.wowhead.com/npc=165730: missing cached source: https://www.wowhead.com/npc=165730)
+- 171202 Runestag Elderhorn: scrape failed and no baseline (https://www.wowhead.com/npc=171202: missing cached source: https://www.wowhead.com/npc=171202)
+- 171203 Runestag Bull: scrape failed and no baseline (https://www.wowhead.com/npc=171203: missing cached source: https://www.wowhead.com/npc=171203)
+- 171204 Runestag: scrape failed and no baseline (https://www.wowhead.com/npc=171204: missing cached source: https://www.wowhead.com/npc=171204)
+- 171205 Runestag Fawn: scrape failed and no baseline (https://www.wowhead.com/npc=171205: missing cached source: https://www.wowhead.com/npc=171205)
+- 171342 Juvenile Runestag: scrape failed and no baseline (https://www.wowhead.com/npc=171342: missing cached source: https://www.wowhead.com/npc=171342)
+- 188294 Lushmeadow Grazer: scrape failed and no baseline (https://www.wowhead.com/npc=188294: missing cached source: https://www.wowhead.com/npc=188294)
+- 188524 Lushmeadow Stag: scrape failed and no baseline (https://www.wowhead.com/npc=188524: missing cached source: https://www.wowhead.com/npc=188524)
+- 191624 Tranquil Vorquin: scrape failed and no baseline (https://www.wowhead.com/npc=191624: missing cached source: https://www.wowhead.com/npc=191624)
+- 193577 Lushmeadow Stag: scrape failed and no baseline (https://www.wowhead.com/npc=193577: missing cached source: https://www.wowhead.com/npc=193577)
+- 193752 Elegant Vorquin: scrape failed and no baseline (https://www.wowhead.com/npc=193752: missing cached source: https://www.wowhead.com/npc=193752)
+- 198414 Vorquin: scrape failed and no baseline (https://www.wowhead.com/npc=198414: missing cached source: https://www.wowhead.com/npc=198414)
+- 198789 Vorquin: scrape failed and no baseline (https://www.wowhead.com/npc=198789: missing cached source: https://www.wowhead.com/npc=198789)
+- 212484 Brushwalker Bruffalon: scrape failed and no baseline (https://www.wowhead.com/npc=212484: missing cached source: https://www.wowhead.com/npc=212484)
+- 212485 Leafcrusher Bruffalon: scrape failed and no baseline (https://www.wowhead.com/npc=212485: missing cached source: https://www.wowhead.com/npc=212485)
+- 212787 Gladehart: scrape failed and no baseline (https://www.wowhead.com/npc=212787: missing cached source: https://www.wowhead.com/npc=212787)
+- 214200 Shadehewn Bull: scrape failed and no baseline (https://www.wowhead.com/npc=214200: missing cached source: https://www.wowhead.com/npc=214200)
+- 214201 Shadehewn Bruffalon: scrape failed and no baseline (https://www.wowhead.com/npc=214201: missing cached source: https://www.wowhead.com/npc=214201)
+- 216698 Efflorescent Gladehind: scrape failed and no baseline (https://www.wowhead.com/npc=216698: missing cached source: https://www.wowhead.com/npc=216698)
+- 216699 Efflorescent Gladehart: scrape failed and no baseline (https://www.wowhead.com/npc=216699: missing cached source: https://www.wowhead.com/npc=216699)
+- 216701 Migrating Plains Stag: scrape failed and no baseline (https://www.wowhead.com/npc=216701: missing cached source: https://www.wowhead.com/npc=216701)
+- 216702 Migrating Plains Doe: scrape failed and no baseline (https://www.wowhead.com/npc=216702: missing cached source: https://www.wowhead.com/npc=216702)
+- 216704 Migrating Bruffalon: scrape failed and no baseline (https://www.wowhead.com/npc=216704: missing cached source: https://www.wowhead.com/npc=216704)
+- 216705 Migrating Bull: scrape failed and no baseline (https://www.wowhead.com/npc=216705: missing cached source: https://www.wowhead.com/npc=216705)
+- 231194 Jade-Scaled Windsteed: scrape failed and no baseline (https://www.wowhead.com/npc=231194: missing cached source: https://www.wowhead.com/npc=231194)
+- 231195 Crimson Windsteed: scrape failed and no baseline (https://www.wowhead.com/npc=231195: missing cached source: https://www.wowhead.com/npc=231195)
+- 231257 Shimmering Windsteed: scrape failed and no baseline (https://www.wowhead.com/npc=231257: missing cached source: https://www.wowhead.com/npc=231257)
+- 231258 Serene Windsteed: scrape failed and no baseline (https://www.wowhead.com/npc=231258: missing cached source: https://www.wowhead.com/npc=231258)
+- 235095 Dreaming Festive Reindeer: scrape failed and no baseline (https://www.wowhead.com/npc=235095: missing cached source: https://www.wowhead.com/npc=235095)
+- 249799 Slateback Roamer: scrape failed and no baseline (https://www.wowhead.com/npc=249799: missing cached source: https://www.wowhead.com/npc=249799)
+- 252836 Sunset Stag: scrape failed and no baseline (https://www.wowhead.com/npc=252836: missing cached source: https://www.wowhead.com/npc=252836)
+- 252837 Sunset Doe: scrape failed and no baseline (https://www.wowhead.com/npc=252837: missing cached source: https://www.wowhead.com/npc=252837)
+- 253923 Sunset Doe: scrape failed and no baseline (https://www.wowhead.com/npc=253923: missing cached source: https://www.wowhead.com/npc=253923)
+- 253938 Sunset Doe: scrape failed and no baseline (https://www.wowhead.com/npc=253938: missing cached source: https://www.wowhead.com/npc=253938)
+- 254053 Sunset Stag: scrape failed and no baseline (https://www.wowhead.com/npc=254053: missing cached source: https://www.wowhead.com/npc=254053)
+- family Tallstrider: family source unavailable (https://www.wowhead.com/pet=12: missing cached source: https://www.wowhead.com/pet=12)
+- family Ray: family source unavailable (https://www.wowhead.com/pet=34: missing cached source: https://www.wowhead.com/pet=34)
+- family Camel: family source unavailable (https://www.wowhead.com/pet=298: missing cached source: https://www.wowhead.com/pet=298)

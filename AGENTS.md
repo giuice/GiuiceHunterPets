@@ -3,6 +3,7 @@ name: best-practices-guidelines
 description: Behavioral guidelines to reduce common LLM coding mistakes. Use when writing, reviewing, or refactoring code to avoid overcomplication, make surgical changes, surface assumptions, and define verifiable success criteria.
 license: MIT
 ---
+**User-facing conversation may be Portuguese; repository documentation and planning artifacts must be written in English.**
 
 # Karpathy Guidelines
 
