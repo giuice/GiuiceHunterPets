@@ -119,6 +119,28 @@ class SourceCache:
     def invalidate(self, url: str, role: str, error: str) -> None:
         self.record_semantic_error(url, role, "parse_error", error)
 
+    def mark_ok(self, url: str, role: str) -> None:
+        normalized_url = self._normalize_url(url)
+        cache_key = self._cache_key(normalized_url)
+        path = self.path_for(normalized_url)
+        if not path.exists():
+            return
+        with self._manifest_lock:
+            manifest = self._load_manifest()
+            entry = manifest["sources"].get(cache_key)
+            if entry is None or entry.get("status") == "ok":
+                return
+            manifest["sources"][cache_key] = {
+                "url": normalized_url,
+                "cache_key": cache_key,
+                "role": role,
+                "status": "ok",
+                "path": str(path),
+                "fetched_at": self._now(),
+                "error": None,
+            }
+            self._write_manifest(manifest)
+
     def record_semantic_error(self, url: str, role: str, status: str, error: str) -> None:
         normalized_url = self._normalize_url(url)
         cache_key = self._cache_key(normalized_url)

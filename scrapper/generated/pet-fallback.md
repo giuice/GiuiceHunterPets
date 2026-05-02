@@ -1,0 +1,428 @@
+- 118244 Lightning Paw: no mapper coordinates; used Data.lua baseline
+- 56703 Ik'thik Colossus: no mapper coordinates; used Data.lua baseline
+- 63625 Krik'thik Battletank: no mapper coordinates; used Data.lua baseline
+- 63637 Ik'thik Kunchong: no mapper coordinates; used Data.lua baseline
+- 69218 Kroshik: no mapper coordinates; used Data.lua baseline
+- 70226 Kroshik: no mapper coordinates; used Data.lua baseline
+- 64186 Stonebound Quilen: no mapper coordinates; used Data.lua baseline
+- 71491 Guardian of Sacrifice: no mapper coordinates; used Data.lua baseline
+- 72805 Primal Stalker: no mapper coordinates; used Data.lua baseline
+- 72807 Crag Stalker: no mapper coordinates; used Data.lua baseline
+- 72808 Tsavo'ka: no mapper coordinates; used Data.lua baseline
+- 63895 Shan'ze Cloudrider: no mapper coordinates; used Data.lua baseline
+- 72876 Crimsonscale Firestorm: no mapper coordinates; used Data.lua baseline
+- 73167 Huolon: no mapper coordinates; used Data.lua baseline
+- 48455 Felrot Courser: scrape failed (https://www.wowhead.com/npc=48455: missing cached source: https://www.wowhead.com/npc=48455); used Data.lua baseline
+- 48918 Winterhorn Stag: scrape failed (https://www.wowhead.com/npc=48918: missing cached source: https://www.wowhead.com/npc=48918); used Data.lua baseline
+- 51713 Longstrider Gazelle: scrape failed (https://www.wowhead.com/npc=51713: missing cached source: https://www.wowhead.com/npc=51713); used Data.lua baseline
+- 51961 Tirisfal Stag: scrape failed (https://www.wowhead.com/npc=51961: missing cached source: https://www.wowhead.com/npc=51961); used Data.lua baseline
+- 56532 Tawnyhide Stag: scrape failed (https://www.wowhead.com/npc=56532: missing cached source: https://www.wowhead.com/npc=56532); used Data.lua baseline
+- 58454 Fairlands Gazelle: scrape failed (https://www.wowhead.com/npc=58454: missing cached source: https://www.wowhead.com/npc=58454); used Data.lua baseline
+- 58489 Wilderland Stag: scrape failed (https://www.wowhead.com/npc=58489: missing cached source: https://www.wowhead.com/npc=58489); used Data.lua baseline
+- 58490 Wilderland Doe: scrape failed (https://www.wowhead.com/npc=58490: missing cached source: https://www.wowhead.com/npc=58490); used Data.lua baseline
+- 59104 Shrine Elk: scrape failed (https://www.wowhead.com/npc=59104: missing cached source: https://www.wowhead.com/npc=59104); used Data.lua baseline
+- 59743 Silverhorn Stag: scrape failed (https://www.wowhead.com/npc=59743: missing cached source: https://www.wowhead.com/npc=59743); used Data.lua baseline
+- 59744 Silverhorn Yearling: scrape failed (https://www.wowhead.com/npc=59744: missing cached source: https://www.wowhead.com/npc=59744); used Data.lua baseline
+- 59745 Silverhorn Calf: scrape failed (https://www.wowhead.com/npc=59745: missing cached source: https://www.wowhead.com/npc=59745); used Data.lua baseline
+- 62763 Rikkilea Strider: scrape failed (https://www.wowhead.com/npc=62763: missing cached source: https://www.wowhead.com/npc=62763); used Data.lua baseline
+- 66421 Painted Stag: scrape failed (https://www.wowhead.com/npc=66421: missing cached source: https://www.wowhead.com/npc=66421); used Data.lua baseline
+- 66605 Ancient Stag: scrape failed (https://www.wowhead.com/npc=66605: missing cached source: https://www.wowhead.com/npc=66605); used Data.lua baseline
+- 76442 Maa'run: scrape failed (https://www.wowhead.com/npc=76442: missing cached source: https://www.wowhead.com/npc=76442); used Data.lua baseline
+- 78274 Silverpelt Calf: scrape failed (https://www.wowhead.com/npc=78274: missing cached source: https://www.wowhead.com/npc=78274); used Data.lua baseline
+- 78275 Silverpelt Doe: scrape failed (https://www.wowhead.com/npc=78275: missing cached source: https://www.wowhead.com/npc=78275); used Data.lua baseline
+- 78276 Silverpelt Charger: scrape failed (https://www.wowhead.com/npc=78276: missing cached source: https://www.wowhead.com/npc=78276); used Data.lua baseline
+- 78277 Breezestrider Colt: scrape failed (https://www.wowhead.com/npc=78277: missing cached source: https://www.wowhead.com/npc=78277); used Data.lua baseline
+- 78278 Breezestrider Talbuk: scrape failed (https://www.wowhead.com/npc=78278: missing cached source: https://www.wowhead.com/npc=78278); used Data.lua baseline
+- 78279 Breezestrider Stallion: scrape failed (https://www.wowhead.com/npc=78279: missing cached source: https://www.wowhead.com/npc=78279); used Data.lua baseline
+- 82116 Tall Buck: scrape failed (https://www.wowhead.com/npc=82116: missing cached source: https://www.wowhead.com/npc=82116); used Data.lua baseline
+- 82513 Void-Touched Charger: scrape failed (https://www.wowhead.com/npc=82513: missing cached source: https://www.wowhead.com/npc=82513); used Data.lua baseline
+- 82778 Gnarlhoof the Rabid: scrape failed (https://www.wowhead.com/npc=82778: missing cached source: https://www.wowhead.com/npc=82778); used Data.lua baseline
+- 83470 Breezestrider Talbuk: scrape failed (https://www.wowhead.com/npc=83470: missing cached source: https://www.wowhead.com/npc=83470); used Data.lua baseline
+- 83843 Breezestrider Stallion: scrape failed (https://www.wowhead.com/npc=83843: missing cached source: https://www.wowhead.com/npc=83843); used Data.lua baseline
+- 86727 Thorncoat Talbuk: scrape failed (https://www.wowhead.com/npc=86727: missing cached source: https://www.wowhead.com/npc=86727); used Data.lua baseline
+- 86728 Thorncoat Buck: scrape failed (https://www.wowhead.com/npc=86728: missing cached source: https://www.wowhead.com/npc=86728); used Data.lua baseline
+- 86729 Direhoof: scrape failed (https://www.wowhead.com/npc=86729: missing cached source: https://www.wowhead.com/npc=86729); used Data.lua baseline
+- 86801 Young Silverpelt: scrape failed (https://www.wowhead.com/npc=86801: missing cached source: https://www.wowhead.com/npc=86801); used Data.lua baseline
+- 93313 Gleamhoof Stag: scrape failed (https://www.wowhead.com/npc=93313: missing cached source: https://www.wowhead.com/npc=93313); used Data.lua baseline
+- 93314 Gleamhoof Doe: scrape failed (https://www.wowhead.com/npc=93314: missing cached source: https://www.wowhead.com/npc=93314); used Data.lua baseline
+- 93316 Gleamhoof Fawn: scrape failed (https://www.wowhead.com/npc=93316: missing cached source: https://www.wowhead.com/npc=93316); used Data.lua baseline
+- 93327 Frenzybound Stag: scrape failed (https://www.wowhead.com/npc=93327: missing cached source: https://www.wowhead.com/npc=93327); used Data.lua baseline
+- 93328 Frenzybound Doe: scrape failed (https://www.wowhead.com/npc=93328: missing cached source: https://www.wowhead.com/npc=93328); used Data.lua baseline
+- 93329 Frenzybound Doe: scrape failed (https://www.wowhead.com/npc=93329: missing cached source: https://www.wowhead.com/npc=93329); used Data.lua baseline
+- 93856 Mountainstrider Bull: scrape failed (https://www.wowhead.com/npc=93856: missing cached source: https://www.wowhead.com/npc=93856); used Data.lua baseline
+- 94151 Pinerock Elderhorn: scrape failed (https://www.wowhead.com/npc=94151: missing cached source: https://www.wowhead.com/npc=94151); used Data.lua baseline
+- 94238 Skittish Doe: scrape failed (https://www.wowhead.com/npc=94238: missing cached source: https://www.wowhead.com/npc=94238); used Data.lua baseline
+- 94386 Cursed Elderhorn: scrape failed (https://www.wowhead.com/npc=94386: missing cached source: https://www.wowhead.com/npc=94386); used Data.lua baseline
+- 94694 Morashu: scrape failed (https://www.wowhead.com/npc=94694: missing cached source: https://www.wowhead.com/npc=94694); used Data.lua baseline
+- 95043 Young Mountainstrider: scrape failed (https://www.wowhead.com/npc=95043: missing cached source: https://www.wowhead.com/npc=95043); used Data.lua baseline
+- 95268 Highland Elderhorn: scrape failed (https://www.wowhead.com/npc=95268: missing cached source: https://www.wowhead.com/npc=95268); used Data.lua baseline
+- 96266 Pale Elderhorn: scrape failed (https://www.wowhead.com/npc=96266: missing cached source: https://www.wowhead.com/npc=96266); used Data.lua baseline
+- 96267 Rockhorn Stag: scrape failed (https://www.wowhead.com/npc=96267: missing cached source: https://www.wowhead.com/npc=96267); used Data.lua baseline
+- 96410 Majestic Elderhorn: scrape failed (https://www.wowhead.com/npc=96410: missing cached source: https://www.wowhead.com/npc=96410); used Data.lua baseline
+- 97516 Foothills Greatstag: scrape failed (https://www.wowhead.com/npc=97516: missing cached source: https://www.wowhead.com/npc=97516); used Data.lua baseline
+- 97752 Ironhorn Bull: scrape failed (https://www.wowhead.com/npc=97752: missing cached source: https://www.wowhead.com/npc=97752); used Data.lua baseline
+- 98884 Bewitched Elderhorn: scrape failed (https://www.wowhead.com/npc=98884: missing cached source: https://www.wowhead.com/npc=98884); used Data.lua baseline
+- 99119 Weakened Mosshoof Stag: scrape failed (https://www.wowhead.com/npc=99119: missing cached source: https://www.wowhead.com/npc=99119); used Data.lua baseline
+- 103681 Well-Fed Ironhorn Bull: scrape failed (https://www.wowhead.com/npc=103681: missing cached source: https://www.wowhead.com/npc=103681); used Data.lua baseline
+- 103805 Sablehorn Doe: scrape failed (https://www.wowhead.com/npc=103805: missing cached source: https://www.wowhead.com/npc=103805); used Data.lua baseline
+- 106837 Sablehorn Stag: scrape failed (https://www.wowhead.com/npc=106837: missing cached source: https://www.wowhead.com/npc=106837); used Data.lua baseline
+- 107487 Starbuck: scrape failed (https://www.wowhead.com/npc=107487: missing cached source: https://www.wowhead.com/npc=107487); used Data.lua baseline
+- 107755 Amberfall Doe: scrape failed (https://www.wowhead.com/npc=107755: missing cached source: https://www.wowhead.com/npc=107755); used Data.lua baseline
+- 107758 Amberfall Greatstag: scrape failed (https://www.wowhead.com/npc=107758: missing cached source: https://www.wowhead.com/npc=107758); used Data.lua baseline
+- 108313 Ferngrazer Doe: scrape failed (https://www.wowhead.com/npc=108313: missing cached source: https://www.wowhead.com/npc=108313); used Data.lua baseline
+- 108322 Ferngrazer Stag: scrape failed (https://www.wowhead.com/npc=108322: missing cached source: https://www.wowhead.com/npc=108322); used Data.lua baseline
+- 108890 Runewood Greatstag: scrape failed (https://www.wowhead.com/npc=108890: missing cached source: https://www.wowhead.com/npc=108890); used Data.lua baseline
+- 108891 Runewood Doe: scrape failed (https://www.wowhead.com/npc=108891: missing cached source: https://www.wowhead.com/npc=108891); used Data.lua baseline
+- 110042 Heartwood Stag: scrape failed (https://www.wowhead.com/npc=110042: missing cached source: https://www.wowhead.com/npc=110042); used Data.lua baseline
+- 110043 Heartwood Doe: scrape failed (https://www.wowhead.com/npc=110043: missing cached source: https://www.wowhead.com/npc=110043); used Data.lua baseline
+- 110502 Snowstrider Bull: scrape failed (https://www.wowhead.com/npc=110502: missing cached source: https://www.wowhead.com/npc=110502); used Data.lua baseline
+- 110503 Young Snowstrider: scrape failed (https://www.wowhead.com/npc=110503: missing cached source: https://www.wowhead.com/npc=110503); used Data.lua baseline
+- 112825 Shieldscar Stag: scrape failed (https://www.wowhead.com/npc=112825: missing cached source: https://www.wowhead.com/npc=112825); used Data.lua baseline
+- 112827 Shieldscar Doe: scrape failed (https://www.wowhead.com/npc=112827: missing cached source: https://www.wowhead.com/npc=112827); used Data.lua baseline
+- 113205 Leyscarred Stag: scrape failed (https://www.wowhead.com/npc=113205: missing cached source: https://www.wowhead.com/npc=113205); used Data.lua baseline
+- 126708 Noblehoof Stag: scrape failed (https://www.wowhead.com/npc=126708: missing cached source: https://www.wowhead.com/npc=126708); used Data.lua baseline
+- 126709 Noblehoof Doe: scrape failed (https://www.wowhead.com/npc=126709: missing cached source: https://www.wowhead.com/npc=126709); used Data.lua baseline
+- 126966 Midland Doe: scrape failed (https://www.wowhead.com/npc=126966: missing cached source: https://www.wowhead.com/npc=126966); used Data.lua baseline
+- 126967 Midland Stag: scrape failed (https://www.wowhead.com/npc=126967: missing cached source: https://www.wowhead.com/npc=126967); used Data.lua baseline
+- 127806 Mountain Greatstag: scrape failed (https://www.wowhead.com/npc=127806: missing cached source: https://www.wowhead.com/npc=127806); used Data.lua baseline
+- 127807 Mountain Doe: scrape failed (https://www.wowhead.com/npc=127807: missing cached source: https://www.wowhead.com/npc=127807); used Data.lua baseline
+- 128361 Hexcrazed Greatstag: scrape failed (https://www.wowhead.com/npc=128361: missing cached source: https://www.wowhead.com/npc=128361); used Data.lua baseline
+- 128384 Lowlands Greatstag: scrape failed (https://www.wowhead.com/npc=128384: missing cached source: https://www.wowhead.com/npc=128384); used Data.lua baseline
+- 128385 Lowlands Doe: scrape failed (https://www.wowhead.com/npc=128385: missing cached source: https://www.wowhead.com/npc=128385); used Data.lua baseline
+- 129764 Hexcrazed Doe: scrape failed (https://www.wowhead.com/npc=129764: missing cached source: https://www.wowhead.com/npc=129764); used Data.lua baseline
+- 129835 Gorehorn: scrape failed (https://www.wowhead.com/npc=129835: missing cached source: https://www.wowhead.com/npc=129835); used Data.lua baseline
+- 130316 Ringhorn Strider: scrape failed (https://www.wowhead.com/npc=130316: missing cached source: https://www.wowhead.com/npc=130316); used Data.lua baseline
+- 130321 Ringhorn Stag: scrape failed (https://www.wowhead.com/npc=130321: missing cached source: https://www.wowhead.com/npc=130321); used Data.lua baseline
+- 134690 Ambermane Gazelle: scrape failed (https://www.wowhead.com/npc=134690: missing cached source: https://www.wowhead.com/npc=134690); used Data.lua baseline
+- 134699 Ambermane Buck: scrape failed (https://www.wowhead.com/npc=134699: missing cached source: https://www.wowhead.com/npc=134699); used Data.lua baseline
+- 137336 Ashenwood Doe: scrape failed (https://www.wowhead.com/npc=137336: missing cached source: https://www.wowhead.com/npc=137336); used Data.lua baseline
+- 137349 Ashenwood Stag: scrape failed (https://www.wowhead.com/npc=137349: missing cached source: https://www.wowhead.com/npc=137349); used Data.lua baseline
+- 139280 Sythian the Swift: scrape failed (https://www.wowhead.com/npc=139280: missing cached source: https://www.wowhead.com/npc=139280); used Data.lua baseline
+- 139790 Highland Proudhorn: scrape failed (https://www.wowhead.com/npc=139790: missing cached source: https://www.wowhead.com/npc=139790); used Data.lua baseline
+- 140735 Whitetail Stag: scrape failed (https://www.wowhead.com/npc=140735: missing cached source: https://www.wowhead.com/npc=140735); used Data.lua baseline
+- 142183 Riverland Doe: scrape failed (https://www.wowhead.com/npc=142183: missing cached source: https://www.wowhead.com/npc=142183); used Data.lua baseline
+- 142195 Riverland Stag: scrape failed (https://www.wowhead.com/npc=142195: missing cached source: https://www.wowhead.com/npc=142195); used Data.lua baseline
+- 149134 Trapped Doe: scrape failed (https://www.wowhead.com/npc=149134: missing cached source: https://www.wowhead.com/npc=149134); used Data.lua baseline
+- 149138 Trapped Stag: scrape failed (https://www.wowhead.com/npc=149138: missing cached source: https://www.wowhead.com/npc=149138); used Data.lua baseline
+- 152092 Bronzefur Elk: scrape failed (https://www.wowhead.com/npc=152092: missing cached source: https://www.wowhead.com/npc=152092); used Data.lua baseline
+- 156788 Fairlands Gazelle: scrape failed (https://www.wowhead.com/npc=156788: missing cached source: https://www.wowhead.com/npc=156788); used Data.lua baseline
+- 159029 Juvenile Runedeer: scrape failed (https://www.wowhead.com/npc=159029: missing cached source: https://www.wowhead.com/npc=159029); used Data.lua baseline
+- 159030 Runestag: scrape failed (https://www.wowhead.com/npc=159030: missing cached source: https://www.wowhead.com/npc=159030); used Data.lua baseline
+- 161828 Food: scrape failed (https://www.wowhead.com/npc=161828: missing cached source: https://www.wowhead.com/npc=161828); used Data.lua baseline
+- 163072 Longstrider Gazelle: scrape failed (https://www.wowhead.com/npc=163072: missing cached source: https://www.wowhead.com/npc=163072); used Data.lua baseline
+- 164874 Juvenile Miredeer: scrape failed (https://www.wowhead.com/npc=164874: missing cached source: https://www.wowhead.com/npc=164874); used Data.lua baseline
+- 164875 Mire Runestag: scrape failed (https://www.wowhead.com/npc=164875: missing cached source: https://www.wowhead.com/npc=164875); used Data.lua baseline
+- 165092 Forest Guardian: scrape failed (https://www.wowhead.com/npc=165092: missing cached source: https://www.wowhead.com/npc=165092); used Data.lua baseline
+- 165093 Wounded Forest Guardian: scrape failed (https://www.wowhead.com/npc=165093: missing cached source: https://www.wowhead.com/npc=165093); used Data.lua baseline
+- 165106 Runestag Youngling: scrape failed (https://www.wowhead.com/npc=165106: missing cached source: https://www.wowhead.com/npc=165106); used Data.lua baseline
+- 165790 Summoned Runestag: scrape failed (https://www.wowhead.com/npc=165790: missing cached source: https://www.wowhead.com/npc=165790); used Data.lua baseline
+- 165800 Summoned Mountainbuck: scrape failed (https://www.wowhead.com/npc=165800: missing cached source: https://www.wowhead.com/npc=165800); used Data.lua baseline
+- 165907 Runestag: scrape failed (https://www.wowhead.com/npc=165907: missing cached source: https://www.wowhead.com/npc=165907); used Data.lua baseline
+- 165908 Juvenile Runedeer: scrape failed (https://www.wowhead.com/npc=165908: missing cached source: https://www.wowhead.com/npc=165908); used Data.lua baseline
+- 166024 Skittish Runefoal: scrape failed (https://www.wowhead.com/npc=166024: missing cached source: https://www.wowhead.com/npc=166024); used Data.lua baseline
+- 166187 Runestag: scrape failed (https://www.wowhead.com/npc=166187: missing cached source: https://www.wowhead.com/npc=166187); used Data.lua baseline
+- 166735 Deranged Guardian: scrape failed (https://www.wowhead.com/npc=166735: missing cached source: https://www.wowhead.com/npc=166735); used Data.lua baseline
+- 170014 Mire Runestag: scrape failed (https://www.wowhead.com/npc=170014: missing cached source: https://www.wowhead.com/npc=170014); used Data.lua baseline
+- 170015 Juvenile Miredeer: scrape failed (https://www.wowhead.com/npc=170015: missing cached source: https://www.wowhead.com/npc=170015); used Data.lua baseline
+- 170144 Juvenile Runedeer: scrape failed (https://www.wowhead.com/npc=170144: missing cached source: https://www.wowhead.com/npc=170144); used Data.lua baseline
+- 170145 Runestag: scrape failed (https://www.wowhead.com/npc=170145: missing cached source: https://www.wowhead.com/npc=170145); used Data.lua baseline
+- 170205 Juvenile Runedeer: scrape failed (https://www.wowhead.com/npc=170205: missing cached source: https://www.wowhead.com/npc=170205); used Data.lua baseline
+- 170206 Runestag: scrape failed (https://www.wowhead.com/npc=170206: missing cached source: https://www.wowhead.com/npc=170206); used Data.lua baseline
+- 170609 Stranded Stag: scrape failed (https://www.wowhead.com/npc=170609: missing cached source: https://www.wowhead.com/npc=170609); used Data.lua baseline
+- 170674 Runestag: scrape failed (https://www.wowhead.com/npc=170674: missing cached source: https://www.wowhead.com/npc=170674); used Data.lua baseline
+- 170852 Highland Runedeer: scrape failed (https://www.wowhead.com/npc=170852: missing cached source: https://www.wowhead.com/npc=170852); used Data.lua baseline
+- 170853 Highland Bull: scrape failed (https://www.wowhead.com/npc=170853: missing cached source: https://www.wowhead.com/npc=170853); used Data.lua baseline
+- 170856 Highland Runestag: scrape failed (https://www.wowhead.com/npc=170856: missing cached source: https://www.wowhead.com/npc=170856); used Data.lua baseline
+- 172067 Terrified Guardian: scrape failed (https://www.wowhead.com/npc=172067: missing cached source: https://www.wowhead.com/npc=172067); used Data.lua baseline
+- 172073 Hazebroken Guardian: scrape failed (https://www.wowhead.com/npc=172073: missing cached source: https://www.wowhead.com/npc=172073); used Data.lua baseline
+- 172934 Wildbough Runestag: scrape failed (https://www.wowhead.com/npc=172934: missing cached source: https://www.wowhead.com/npc=172934); used Data.lua baseline
+- 172943 Wildbough Juvenile: scrape failed (https://www.wowhead.com/npc=172943: missing cached source: https://www.wowhead.com/npc=172943); used Data.lua baseline
+- 173818 Runestag Elderhorn: scrape failed (https://www.wowhead.com/npc=173818: missing cached source: https://www.wowhead.com/npc=173818); used Data.lua baseline
+- 174356 Runestag: scrape failed (https://www.wowhead.com/npc=174356: missing cached source: https://www.wowhead.com/npc=174356); used Data.lua baseline
+- 178098 Cervid Grazer: scrape failed (https://www.wowhead.com/npc=178098: missing cached source: https://www.wowhead.com/npc=178098); used Data.lua baseline
+- 178099 Cervid Protector: scrape failed (https://www.wowhead.com/npc=178099: missing cached source: https://www.wowhead.com/npc=178099); used Data.lua baseline
+- 180049 Cervid Grazer: scrape failed (https://www.wowhead.com/npc=180049: missing cached source: https://www.wowhead.com/npc=180049); used Data.lua baseline
+- 180050 Cervid Protector: scrape failed (https://www.wowhead.com/npc=180050: missing cached source: https://www.wowhead.com/npc=180050); used Data.lua baseline
+- 181260 Native Cervid: scrape failed (https://www.wowhead.com/npc=181260: missing cached source: https://www.wowhead.com/npc=181260); used Data.lua baseline
+- 181383 Mawtouched Grazer: scrape failed (https://www.wowhead.com/npc=181383: missing cached source: https://www.wowhead.com/npc=181383); used Data.lua baseline
+- 181432 Vorquin: scrape failed (https://www.wowhead.com/npc=181432: missing cached source: https://www.wowhead.com/npc=181432); used Data.lua baseline
+- 182269 Carnivorous Cervid: scrape failed (https://www.wowhead.com/npc=182269: missing cached source: https://www.wowhead.com/npc=182269); used Data.lua baseline
+- 182272 Ravenous Cervid: scrape failed (https://www.wowhead.com/npc=182272: missing cached source: https://www.wowhead.com/npc=182272); used Data.lua baseline
+- 183596 Chitali the Eldest: scrape failed (https://www.wowhead.com/npc=183596: missing cached source: https://www.wowhead.com/npc=183596); used Data.lua baseline
+- 184524 Dimensional Cervid: scrape failed (https://www.wowhead.com/npc=184524: missing cached source: https://www.wowhead.com/npc=184524); used Data.lua baseline
+- 185297 Agitated Cervid: scrape failed (https://www.wowhead.com/npc=185297: missing cached source: https://www.wowhead.com/npc=185297); used Data.lua baseline
+- 185301 Calm Cervid: scrape failed (https://www.wowhead.com/npc=185301: missing cached source: https://www.wowhead.com/npc=185301); used Data.lua baseline
+- 187336 Time-Charged Vorquin: scrape failed (https://www.wowhead.com/npc=187336: missing cached source: https://www.wowhead.com/npc=187336); used Data.lua baseline
+- 187477 Sylvan Calf: scrape failed (https://www.wowhead.com/npc=187477: missing cached source: https://www.wowhead.com/npc=187477); used Data.lua baseline
+- 187478 Broadhoof Bull: scrape failed (https://www.wowhead.com/npc=187478: missing cached source: https://www.wowhead.com/npc=187478); used Data.lua baseline
+- 187480 Sylvan Broadhoof: scrape failed (https://www.wowhead.com/npc=187480: missing cached source: https://www.wowhead.com/npc=187480); used Data.lua baseline
+- 187697 Forest Vorquin: scrape failed (https://www.wowhead.com/npc=187697: missing cached source: https://www.wowhead.com/npc=187697); used Data.lua baseline
+- 187727 Rustpine Bruffalon: scrape failed (https://www.wowhead.com/npc=187727: missing cached source: https://www.wowhead.com/npc=187727); used Data.lua baseline
+- 188276 Fierce Herdstallion: scrape failed (https://www.wowhead.com/npc=188276: missing cached source: https://www.wowhead.com/npc=188276); used Data.lua baseline
+- 188277 Garden Herdmare: scrape failed (https://www.wowhead.com/npc=188277: missing cached source: https://www.wowhead.com/npc=188277); used Data.lua baseline
+- 190216 Azure Vorquin: scrape failed (https://www.wowhead.com/npc=190216: missing cached source: https://www.wowhead.com/npc=190216); used Data.lua baseline
+- 190322 Highhorn Bull: scrape failed (https://www.wowhead.com/npc=190322: missing cached source: https://www.wowhead.com/npc=190322); used Data.lua baseline
+- 190324 Tundra Vorquin: scrape failed (https://www.wowhead.com/npc=190324: missing cached source: https://www.wowhead.com/npc=190324); used Data.lua baseline
+- 190726 Striped Bruffalon: scrape failed (https://www.wowhead.com/npc=190726: missing cached source: https://www.wowhead.com/npc=190726); used Data.lua baseline
+- 190944 Vorquin Strider: scrape failed (https://www.wowhead.com/npc=190944: missing cached source: https://www.wowhead.com/npc=190944); used Data.lua baseline
+- 191203 Pleasant Hart: scrape failed (https://www.wowhead.com/npc=191203: missing cached source: https://www.wowhead.com/npc=191203); used Data.lua baseline
+- 191204 Pleasant Yearling: scrape failed (https://www.wowhead.com/npc=191204: missing cached source: https://www.wowhead.com/npc=191204); used Data.lua baseline
+- 191238 Tiny: scrape failed (https://www.wowhead.com/npc=191238: missing cached source: https://www.wowhead.com/npc=191238); used Data.lua baseline
+- 191242 Junior: scrape failed (https://www.wowhead.com/npc=191242: missing cached source: https://www.wowhead.com/npc=191242); used Data.lua baseline
+- 191317 Creekside Grazer: scrape failed (https://www.wowhead.com/npc=191317: missing cached source: https://www.wowhead.com/npc=191317); used Data.lua baseline
+- 191496 Pinehoof Doe: scrape failed (https://www.wowhead.com/npc=191496: missing cached source: https://www.wowhead.com/npc=191496); used Data.lua baseline
+- 191541 Craggy Stag: scrape failed (https://www.wowhead.com/npc=191541: missing cached source: https://www.wowhead.com/npc=191541); used Data.lua baseline
+- 191748 Burnished Ledgehopper: scrape failed (https://www.wowhead.com/npc=191748: missing cached source: https://www.wowhead.com/npc=191748); used Data.lua baseline
+- 192639 Skittish Herdmare: scrape failed (https://www.wowhead.com/npc=192639: missing cached source: https://www.wowhead.com/npc=192639); used Data.lua baseline
+- 192640 Mountain Herdstallion: scrape failed (https://www.wowhead.com/npc=192640: missing cached source: https://www.wowhead.com/npc=192640); used Data.lua baseline
+- 192885 Snowhorn Bruffalon: scrape failed (https://www.wowhead.com/npc=192885: missing cached source: https://www.wowhead.com/npc=192885); used Data.lua baseline
+- 193385 Broadhoof Bull: scrape failed (https://www.wowhead.com/npc=193385: missing cached source: https://www.wowhead.com/npc=193385); used Data.lua baseline
+- 193386 Grazing Broadhoof: scrape failed (https://www.wowhead.com/npc=193386: missing cached source: https://www.wowhead.com/npc=193386); used Data.lua baseline
+- 193429 Ravaged Bruffalon: scrape failed (https://www.wowhead.com/npc=193429: missing cached source: https://www.wowhead.com/npc=193429); used Data.lua baseline
+- 193502 Red Furred Calf: scrape failed (https://www.wowhead.com/npc=193502: missing cached source: https://www.wowhead.com/npc=193502); used Data.lua baseline
+- 193503 Red Furred Cow: scrape failed (https://www.wowhead.com/npc=193503: missing cached source: https://www.wowhead.com/npc=193503); used Data.lua baseline
+- 193507 Red Furred Bull: scrape failed (https://www.wowhead.com/npc=193507: missing cached source: https://www.wowhead.com/npc=193507); used Data.lua baseline
+- 193595 Pinehoof Bull: scrape failed (https://www.wowhead.com/npc=193595: missing cached source: https://www.wowhead.com/npc=193595); used Data.lua baseline
+- 193719 Pinehoof Cow: scrape failed (https://www.wowhead.com/npc=193719: missing cached source: https://www.wowhead.com/npc=193719); used Data.lua baseline
+- 193738 Forkriver Bull: scrape failed (https://www.wowhead.com/npc=193738: missing cached source: https://www.wowhead.com/npc=193738); used Data.lua baseline
+- 193739 Forkriver Pinehoof: scrape failed (https://www.wowhead.com/npc=193739: missing cached source: https://www.wowhead.com/npc=193739); used Data.lua baseline
+- 193892 Elusive Bull: scrape failed (https://www.wowhead.com/npc=193892: missing cached source: https://www.wowhead.com/npc=193892); used Data.lua baseline
+- 193966 Seaspan Runner: scrape failed (https://www.wowhead.com/npc=193966: missing cached source: https://www.wowhead.com/npc=193966); used Data.lua baseline
+- 193968 Cliffhoof Bruffalon: scrape failed (https://www.wowhead.com/npc=193968: missing cached source: https://www.wowhead.com/npc=193968); used Data.lua baseline
+- 194220 Pinefrost Bruffalon: scrape failed (https://www.wowhead.com/npc=194220: missing cached source: https://www.wowhead.com/npc=194220); used Data.lua baseline
+- 194272 Highlands Bruffalon: scrape failed (https://www.wowhead.com/npc=194272: missing cached source: https://www.wowhead.com/npc=194272); used Data.lua baseline
+- 194283 Azure Herdmare: scrape failed (https://www.wowhead.com/npc=194283: missing cached source: https://www.wowhead.com/npc=194283); used Data.lua baseline
+- 194300 Highlands Cow: scrape failed (https://www.wowhead.com/npc=194300: missing cached source: https://www.wowhead.com/npc=194300); used Data.lua baseline
+- 194305 Highlands Calf: scrape failed (https://www.wowhead.com/npc=194305: missing cached source: https://www.wowhead.com/npc=194305); used Data.lua baseline
+- 194311 Freezefur Bruffalon: scrape failed (https://www.wowhead.com/npc=194311: missing cached source: https://www.wowhead.com/npc=194311); used Data.lua baseline
+- 194962 Highhorn Bull: scrape failed (https://www.wowhead.com/npc=194962: missing cached source: https://www.wowhead.com/npc=194962); used Data.lua baseline
+- 195047 Tranquil Vorquin: scrape failed (https://www.wowhead.com/npc=195047: missing cached source: https://www.wowhead.com/npc=195047); used Data.lua baseline
+- 195048 Sparring Vorquin: scrape failed (https://www.wowhead.com/npc=195048: missing cached source: https://www.wowhead.com/npc=195048); used Data.lua baseline
+- 195190 Highlands Bull: scrape failed (https://www.wowhead.com/npc=195190: missing cached source: https://www.wowhead.com/npc=195190); used Data.lua baseline
+- 195191 Highlands Calf: scrape failed (https://www.wowhead.com/npc=195191: missing cached source: https://www.wowhead.com/npc=195191); used Data.lua baseline
+- 195192 Highlands Cow: scrape failed (https://www.wowhead.com/npc=195192: missing cached source: https://www.wowhead.com/npc=195192); used Data.lua baseline
+- 195256 Plains Moose: scrape failed (https://www.wowhead.com/npc=195256: missing cached source: https://www.wowhead.com/npc=195256); used Data.lua baseline
+- 195261 Plains Bull: scrape failed (https://www.wowhead.com/npc=195261: missing cached source: https://www.wowhead.com/npc=195261); used Data.lua baseline
+- 195499 Grazing Bruffalon: scrape failed (https://www.wowhead.com/npc=195499: missing cached source: https://www.wowhead.com/npc=195499); used Data.lua baseline
+- 195525 Bruffalon Calf: scrape failed (https://www.wowhead.com/npc=195525: missing cached source: https://www.wowhead.com/npc=195525); used Data.lua baseline
+- 195530 Proudhorn Wanderer: scrape failed (https://www.wowhead.com/npc=195530: missing cached source: https://www.wowhead.com/npc=195530); used Data.lua baseline
+- 195552 Bruffalon Bull: scrape failed (https://www.wowhead.com/npc=195552: missing cached source: https://www.wowhead.com/npc=195552); used Data.lua baseline
+- 195627 Rambunctious Calf: scrape failed (https://www.wowhead.com/npc=195627: missing cached source: https://www.wowhead.com/npc=195627); used Data.lua baseline
+- 195897 Dead Bruffalon: scrape failed (https://www.wowhead.com/npc=195897: missing cached source: https://www.wowhead.com/npc=195897); used Data.lua baseline
+- 196096 Sandhoof Bull: scrape failed (https://www.wowhead.com/npc=196096: missing cached source: https://www.wowhead.com/npc=196096); used Data.lua baseline
+- 196097 Sandhoof Bruffalon: scrape failed (https://www.wowhead.com/npc=196097: missing cached source: https://www.wowhead.com/npc=196097); used Data.lua baseline
+- 196517 Serene Vorquin: scrape failed (https://www.wowhead.com/npc=196517: missing cached source: https://www.wowhead.com/npc=196517); used Data.lua baseline
+- 196632 Reservoir Dapple: scrape failed (https://www.wowhead.com/npc=196632: missing cached source: https://www.wowhead.com/npc=196632); used Data.lua baseline
+- 197009 Liskheszaera: scrape failed (https://www.wowhead.com/npc=197009: missing cached source: https://www.wowhead.com/npc=197009); used Data.lua baseline
+- 197438 Mountainside Dapple: scrape failed (https://www.wowhead.com/npc=197438: missing cached source: https://www.wowhead.com/npc=197438); used Data.lua baseline
+- 197555 Arboreal Grazer: scrape failed (https://www.wowhead.com/npc=197555: missing cached source: https://www.wowhead.com/npc=197555); used Data.lua baseline
+- 197651 Grey Tailed Stag: scrape failed (https://www.wowhead.com/npc=197651: missing cached source: https://www.wowhead.com/npc=197651); used Data.lua baseline
+- 197652 Grey Tailed Doe: scrape failed (https://www.wowhead.com/npc=197652: missing cached source: https://www.wowhead.com/npc=197652); used Data.lua baseline
+- 198387 Pleasant Hart: scrape failed (https://www.wowhead.com/npc=198387: missing cached source: https://www.wowhead.com/npc=198387); used Data.lua baseline
+- 198388 Pleasant Yearling: scrape failed (https://www.wowhead.com/npc=198388: missing cached source: https://www.wowhead.com/npc=198388); used Data.lua baseline
+- 198415 Tyrhold Dapple: scrape failed (https://www.wowhead.com/npc=198415: missing cached source: https://www.wowhead.com/npc=198415); used Data.lua baseline
+- 198416 Tyrhold Broodmare: scrape failed (https://www.wowhead.com/npc=198416: missing cached source: https://www.wowhead.com/npc=198416); used Data.lua baseline
+- 198426 Burnished Vorquin: scrape failed (https://www.wowhead.com/npc=198426: missing cached source: https://www.wowhead.com/npc=198426); used Data.lua baseline
+- 199777 Azure Vorquin: scrape failed (https://www.wowhead.com/npc=199777: missing cached source: https://www.wowhead.com/npc=199777); used Data.lua baseline
+- 207620 Resilient Gladehart: scrape failed (https://www.wowhead.com/npc=207620: missing cached source: https://www.wowhead.com/npc=207620); used Data.lua baseline
+- 207621 Watchful Gladehind: scrape failed (https://www.wowhead.com/npc=207621: missing cached source: https://www.wowhead.com/npc=207621); used Data.lua baseline
+- 207784 Distressed Gladehind: scrape failed (https://www.wowhead.com/npc=207784: missing cached source: https://www.wowhead.com/npc=207784); used Data.lua baseline
+- 207785 Irate Gladehart: scrape failed (https://www.wowhead.com/npc=207785: missing cached source: https://www.wowhead.com/npc=207785); used Data.lua baseline
+- 208231 Bough Gladehart: scrape failed (https://www.wowhead.com/npc=208231: missing cached source: https://www.wowhead.com/npc=208231); used Data.lua baseline
+- 209492 Frightened Gladehart: scrape failed (https://www.wowhead.com/npc=209492: missing cached source: https://www.wowhead.com/npc=209492); used Data.lua baseline
+- 209929 Envoy of Winter: scrape failed (https://www.wowhead.com/npc=209929: missing cached source: https://www.wowhead.com/npc=209929); used Data.lua baseline
+- 210283 Shoreline Gladehart: scrape failed (https://www.wowhead.com/npc=210283: missing cached source: https://www.wowhead.com/npc=210283); used Data.lua baseline
+- 210284 Shoreline Gladehind: scrape failed (https://www.wowhead.com/npc=210284: missing cached source: https://www.wowhead.com/npc=210284); used Data.lua baseline
+- 210596 Verdant Gladehart: scrape failed (https://www.wowhead.com/npc=210596: missing cached source: https://www.wowhead.com/npc=210596); used Data.lua baseline
+- 210774 Fenblossom Gladehind: scrape failed (https://www.wowhead.com/npc=210774: missing cached source: https://www.wowhead.com/npc=210774); used Data.lua baseline
+- 210775 Fenblossom Gladehart: scrape failed (https://www.wowhead.com/npc=210775: missing cached source: https://www.wowhead.com/npc=210775); used Data.lua baseline
+- 210843 Dreamhoof Stag: scrape failed (https://www.wowhead.com/npc=210843: missing cached source: https://www.wowhead.com/npc=210843); used Data.lua baseline
+- 210844 Dreamhoof Doe: scrape failed (https://www.wowhead.com/npc=210844: missing cached source: https://www.wowhead.com/npc=210844); used Data.lua baseline
+- 210849 Gilnean Stag: scrape failed (https://www.wowhead.com/npc=210849: missing cached source: https://www.wowhead.com/npc=210849); used Data.lua baseline
+- 210850 Gilnean Doe: scrape failed (https://www.wowhead.com/npc=210850: missing cached source: https://www.wowhead.com/npc=210850); used Data.lua baseline
+- 210894 Flathoof Dreamstag: scrape failed (https://www.wowhead.com/npc=210894: missing cached source: https://www.wowhead.com/npc=210894); used Data.lua baseline
+- 210954 Poised Gladehind: scrape failed (https://www.wowhead.com/npc=210954: missing cached source: https://www.wowhead.com/npc=210954); used Data.lua baseline
+- 210984 Argyr: scrape failed (https://www.wowhead.com/npc=210984: missing cached source: https://www.wowhead.com/npc=210984); used Data.lua baseline
+- 210985 Argyr: scrape failed (https://www.wowhead.com/npc=210985: missing cached source: https://www.wowhead.com/npc=210985); used Data.lua baseline
+- 210986 Argyr: scrape failed (https://www.wowhead.com/npc=210986: missing cached source: https://www.wowhead.com/npc=210986); used Data.lua baseline
+- 211283 Watchful Gladehind: scrape failed (https://www.wowhead.com/npc=211283: missing cached source: https://www.wowhead.com/npc=211283); used Data.lua baseline
+- 211347 Rabid Gladehart: scrape failed (https://www.wowhead.com/npc=211347: missing cached source: https://www.wowhead.com/npc=211347); used Data.lua baseline
+- 211370 Verdant Gladehart: scrape failed (https://www.wowhead.com/npc=211370: missing cached source: https://www.wowhead.com/npc=211370); used Data.lua baseline
+- 211767 Gentle Gladehart: scrape failed (https://www.wowhead.com/npc=211767: missing cached source: https://www.wowhead.com/npc=211767); used Data.lua baseline
+- 211990 Domesticated Dreamstag: scrape failed (https://www.wowhead.com/npc=211990: missing cached source: https://www.wowhead.com/npc=211990); used Data.lua baseline
+- 212061 Elusive Gladehart: scrape failed (https://www.wowhead.com/npc=212061: missing cached source: https://www.wowhead.com/npc=212061); used Data.lua baseline
+- 212069 Elusive Swifthoof Gladehart: scrape failed (https://www.wowhead.com/npc=212069: missing cached source: https://www.wowhead.com/npc=212069); used Data.lua baseline
+- 212133 Elusive Verdant Gladewarden: scrape failed (https://www.wowhead.com/npc=212133: missing cached source: https://www.wowhead.com/npc=212133); used Data.lua baseline
+- 212424 Shalehorn Calf: scrape failed (https://www.wowhead.com/npc=212424: missing cached source: https://www.wowhead.com/npc=212424); used Data.lua baseline
+- 212701 Elder Shalehorn: scrape failed (https://www.wowhead.com/npc=212701: missing cached source: https://www.wowhead.com/npc=212701); used Data.lua baseline
+- 212702 Mycotic Shalehorn: scrape failed (https://www.wowhead.com/npc=212702: missing cached source: https://www.wowhead.com/npc=212702); used Data.lua baseline
+- 212704 Mycotic Shalehorn: scrape failed (https://www.wowhead.com/npc=212704: missing cached source: https://www.wowhead.com/npc=212704); used Data.lua baseline
+- 213781 Ashen Gladehart Buck: scrape failed (https://www.wowhead.com/npc=213781: missing cached source: https://www.wowhead.com/npc=213781); used Data.lua baseline
+- 214764 Rustmane Shalehorn: scrape failed (https://www.wowhead.com/npc=214764: missing cached source: https://www.wowhead.com/npc=214764); used Data.lua baseline
+- 214973 Shalehorn Bull: scrape failed (https://www.wowhead.com/npc=214973: missing cached source: https://www.wowhead.com/npc=214973); used Data.lua baseline
+- 216970 Shalehorn Impaler: scrape failed (https://www.wowhead.com/npc=216970: missing cached source: https://www.wowhead.com/npc=216970); used Data.lua baseline
+- 217121 Brightland Hornface: scrape failed (https://www.wowhead.com/npc=217121: missing cached source: https://www.wowhead.com/npc=217121); used Data.lua baseline
+- 218187 Grazing Stomper: scrape failed (https://www.wowhead.com/npc=218187: missing cached source: https://www.wowhead.com/npc=218187); used Data.lua baseline
+- 218188 Meandering Gorger: scrape failed (https://www.wowhead.com/npc=218188: missing cached source: https://www.wowhead.com/npc=218188); used Data.lua baseline
+- 219263 Warphorn: scrape failed (https://www.wowhead.com/npc=219263: missing cached source: https://www.wowhead.com/npc=219263); used Data.lua baseline
+- 219267 Plaguehart: scrape failed (https://www.wowhead.com/npc=219267: missing cached source: https://www.wowhead.com/npc=219267); used Data.lua baseline
+- 220299 Grazing Shalehorn: scrape failed (https://www.wowhead.com/npc=220299: missing cached source: https://www.wowhead.com/npc=220299); used Data.lua baseline
+- 221024 Enraged Shalehorn: scrape failed (https://www.wowhead.com/npc=221024: missing cached source: https://www.wowhead.com/npc=221024); used Data.lua baseline
+- 221474 Wary Shalehorn: scrape failed (https://www.wowhead.com/npc=221474: missing cached source: https://www.wowhead.com/npc=221474); used Data.lua baseline
+- 221684 Crested Shalehorn: scrape failed (https://www.wowhead.com/npc=221684: missing cached source: https://www.wowhead.com/npc=221684); used Data.lua baseline
+- 221786 Pride of Beledar: scrape failed (https://www.wowhead.com/npc=221786: missing cached source: https://www.wowhead.com/npc=221786); used Data.lua baseline
+- 222618 Alert Shalehorn: scrape failed (https://www.wowhead.com/npc=222618: missing cached source: https://www.wowhead.com/npc=222618); used Data.lua baseline
+- 222619 Meandering Shalehorn: scrape failed (https://www.wowhead.com/npc=222619: missing cached source: https://www.wowhead.com/npc=222619); used Data.lua baseline
+- 223042 Elusive Shalehorn: scrape failed (https://www.wowhead.com/npc=223042: missing cached source: https://www.wowhead.com/npc=223042); used Data.lua baseline
+- 223079 Elusive Swifthoof Shalehorn: scrape failed (https://www.wowhead.com/npc=223079: missing cached source: https://www.wowhead.com/npc=223079); used Data.lua baseline
+- 224099 Shalehorn Bull: scrape failed (https://www.wowhead.com/npc=224099: missing cached source: https://www.wowhead.com/npc=224099); used Data.lua baseline
+- 224101 Shalehorn Cow: scrape failed (https://www.wowhead.com/npc=224101: missing cached source: https://www.wowhead.com/npc=224101); used Data.lua baseline
+- 224409 Shalehorn Cow: scrape failed (https://www.wowhead.com/npc=224409: missing cached source: https://www.wowhead.com/npc=224409); used Data.lua baseline
+- 224410 Shalehorn Bull: scrape failed (https://www.wowhead.com/npc=224410: missing cached source: https://www.wowhead.com/npc=224410); used Data.lua baseline
+- 224551 Immature Shalehorn: scrape failed (https://www.wowhead.com/npc=224551: missing cached source: https://www.wowhead.com/npc=224551); used Data.lua baseline
+- 224586 Daunted Bull: scrape failed (https://www.wowhead.com/npc=224586: missing cached source: https://www.wowhead.com/npc=224586); used Data.lua baseline
+- 224588 Spooked Cow: scrape failed (https://www.wowhead.com/npc=224588: missing cached source: https://www.wowhead.com/npc=224588); used Data.lua baseline
+- 224611 Unnerved Calf: scrape failed (https://www.wowhead.com/npc=224611: missing cached source: https://www.wowhead.com/npc=224611); used Data.lua baseline
+- 225180 Ironhoof Shalehorn: scrape failed (https://www.wowhead.com/npc=225180: missing cached source: https://www.wowhead.com/npc=225180); used Data.lua baseline
+- 225268 Plainswalker Shalehorn: scrape failed (https://www.wowhead.com/npc=225268: missing cached source: https://www.wowhead.com/npc=225268); used Data.lua baseline
+- 225270 Crested Shalehorn: scrape failed (https://www.wowhead.com/npc=225270: missing cached source: https://www.wowhead.com/npc=225270); used Data.lua baseline
+- 225311 Plainswalker Shalehorn: scrape failed (https://www.wowhead.com/npc=225311: missing cached source: https://www.wowhead.com/npc=225311); used Data.lua baseline
+- 225912 Shalehorn Calf: scrape failed (https://www.wowhead.com/npc=225912: missing cached source: https://www.wowhead.com/npc=225912); used Data.lua baseline
+- 225913 Shalehorn Calf: scrape failed (https://www.wowhead.com/npc=225913: missing cached source: https://www.wowhead.com/npc=225913); used Data.lua baseline
+- 226115 Upland Shalehorn: scrape failed (https://www.wowhead.com/npc=226115: missing cached source: https://www.wowhead.com/npc=226115); used Data.lua baseline
+- 226116 Upland Shalehorn: scrape failed (https://www.wowhead.com/npc=226116: missing cached source: https://www.wowhead.com/npc=226116); used Data.lua baseline
+- 226117 Upland Calf: scrape failed (https://www.wowhead.com/npc=226117: missing cached source: https://www.wowhead.com/npc=226117); used Data.lua baseline
+- 226118 Upland Bull: scrape failed (https://www.wowhead.com/npc=226118: missing cached source: https://www.wowhead.com/npc=226118); used Data.lua baseline
+- 226120 Upland Bull: scrape failed (https://www.wowhead.com/npc=226120: missing cached source: https://www.wowhead.com/npc=226120); used Data.lua baseline
+- 226252 Upland Calf: scrape failed (https://www.wowhead.com/npc=226252: missing cached source: https://www.wowhead.com/npc=226252); used Data.lua baseline
+- 227150 Immature Shalehorn: scrape failed (https://www.wowhead.com/npc=227150: missing cached source: https://www.wowhead.com/npc=227150); used Data.lua baseline
+- 227933 Penumbral Shalehorn: scrape failed (https://www.wowhead.com/npc=227933: missing cached source: https://www.wowhead.com/npc=227933); used Data.lua baseline
+- 227934 Penumbral Bull: scrape failed (https://www.wowhead.com/npc=227934: missing cached source: https://www.wowhead.com/npc=227934); used Data.lua baseline
+- 227935 Penumbral Calf: scrape failed (https://www.wowhead.com/npc=227935: missing cached source: https://www.wowhead.com/npc=227935); used Data.lua baseline
+- 227999 Penumbral Shalehorn: scrape failed (https://www.wowhead.com/npc=227999: missing cached source: https://www.wowhead.com/npc=227999); used Data.lua baseline
+- 228000 Penumbral Bull: scrape failed (https://www.wowhead.com/npc=228000: missing cached source: https://www.wowhead.com/npc=228000); used Data.lua baseline
+- 228012 Immature Shalehorn: scrape failed (https://www.wowhead.com/npc=228012: missing cached source: https://www.wowhead.com/npc=228012); used Data.lua baseline
+- 228115 Carefree Calf: scrape failed (https://www.wowhead.com/npc=228115: missing cached source: https://www.wowhead.com/npc=228115); used Data.lua baseline
+- 228120 Wary Bull: scrape failed (https://www.wowhead.com/npc=228120: missing cached source: https://www.wowhead.com/npc=228120); used Data.lua baseline
+- 228153 Immature Shalehorn: scrape failed (https://www.wowhead.com/npc=228153: missing cached source: https://www.wowhead.com/npc=228153); used Data.lua baseline
+- 228217 Wary Shalehorn: scrape failed (https://www.wowhead.com/npc=228217: missing cached source: https://www.wowhead.com/npc=228217); used Data.lua baseline
+- 228447 Highrock Cow: scrape failed (https://www.wowhead.com/npc=228447: missing cached source: https://www.wowhead.com/npc=228447); used Data.lua baseline
+- 228450 Highrock Bull: scrape failed (https://www.wowhead.com/npc=228450: missing cached source: https://www.wowhead.com/npc=228450); used Data.lua baseline
+- 228451 Highrock Calf: scrape failed (https://www.wowhead.com/npc=228451: missing cached source: https://www.wowhead.com/npc=228451); used Data.lua baseline
+- 228874 Penumbral Calf: scrape failed (https://www.wowhead.com/npc=228874: missing cached source: https://www.wowhead.com/npc=228874); used Data.lua baseline
+- 229117 Highrock Cow: scrape failed (https://www.wowhead.com/npc=229117: missing cached source: https://www.wowhead.com/npc=229117); used Data.lua baseline
+- 229119 Highrock Calf: scrape failed (https://www.wowhead.com/npc=229119: missing cached source: https://www.wowhead.com/npc=229119); used Data.lua baseline
+- 2956 Adult Plainstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 193301 Aggressive Hornstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 37091 Deviate Plainstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 50884 Dustflight the Cowardly: family Tallstrider unscrapeable; used Data.lua baseline
+- 2957 Elder Plainstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 193884 Elusive Hornstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 32997 Fleetfoot: family Tallstrider unscrapeable; used Data.lua baseline
+- 3246 Fleeting Plainstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 96167 Fleeting Plainstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 2321 Foreststrider Fledgling: family Tallstrider unscrapeable; used Data.lua baseline
+- 3244 Greater Plainstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 17374 Greater Timberstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 56753 Hornbill Strider: family Tallstrider unscrapeable; used Data.lua baseline
+- 193308 Hornstrider Chick: family Tallstrider unscrapeable; used Data.lua baseline
+- 195905 Hornstrider Runner: family Tallstrider unscrapeable; used Data.lua baseline
+- 22807 Lost Torranche: family Tallstrider unscrapeable; used Data.lua baseline
+- 3068 Mazzranache: family Tallstrider unscrapeable; used Data.lua baseline
+- 195895 Nergazurai: family Tallstrider unscrapeable; used Data.lua baseline
+- 3245 Ornery Plainstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 183595 Primal Hornstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 50886 Seawing: family Tallstrider unscrapeable; used Data.lua baseline
+- 194673 Sprightly Hornstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 195458 Sprightly Hornstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 2172 Strider Clutchmother: family Tallstrider unscrapeable; used Data.lua baseline
+- 45825 Swampstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 188089 Swift Hornstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 190029 Swift Hornstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 190909 Swift Hornstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 194926 Swift Hornstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 195459 Swift Hornstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 192641 Swiftfoot Tallstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 195366 Swiftfoot Tallstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 195383 Swiftfoot Tallstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 17373 Timberstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 17372 Timberstrider Fledgling: family Tallstrider unscrapeable; used Data.lua baseline
+- 37085 Towering Plainstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 39337 Wayward Plainstrider: family Tallstrider unscrapeable; used Data.lua baseline
+- 226381 Agitated Shalewing: family Ray unscrapeable; used Data.lua baseline
+- 171093 Ancient Necroray: family Ray unscrapeable; used Data.lua baseline
+- 50362 Blackbog the Fang: family Ray unscrapeable; used Data.lua baseline
+- 150373 Bloated Sky Ray: family Ray unscrapeable; used Data.lua baseline
+- 210050 Bloodstripe Great Ray: family Ray unscrapeable; used Data.lua baseline
+- 222248 Canyon Devilfish: family Ray unscrapeable; used Data.lua baseline
+- 222262 Canyon Skimmer: family Ray unscrapeable; used Data.lua baseline
+- 219291 Chasm Shalewing: family Ray unscrapeable; used Data.lua baseline
+- 150467 Colossal Sky Ray: family Ray unscrapeable; used Data.lua baseline
+- 150376 Coral Skate: family Ray unscrapeable; used Data.lua baseline
+- 152291 Deepglider: family Ray unscrapeable; used Data.lua baseline
+- 208662 Dreadfire Shalewing: family Ray unscrapeable; used Data.lua baseline
+- 215794 Dusty Shalewing: family Ray unscrapeable; used Data.lua baseline
+- 173582 Escaped Blightray: family Ray unscrapeable; used Data.lua baseline
+- 153350 Fathom Pup: family Ray unscrapeable; used Data.lua baseline
+- 145967 Fathom Ray: family Ray unscrapeable; used Data.lua baseline
+- 226028 Fathom Ray: family Ray unscrapeable; used Data.lua baseline
+- 150696 Fathom Ray Broodkeeper: family Ray unscrapeable; used Data.lua baseline
+- 223492 Flatcram Grandame: family Ray unscrapeable; used Data.lua baseline
+- 222347 Gnashing Rockwing: family Ray unscrapeable; used Data.lua baseline
+- 207025 Lava Sporebat: family Ray unscrapeable; used Data.lua baseline
+- 162593 Luminous Necroray: family Ray unscrapeable; used Data.lua baseline
+- 210064 Molten Leadspike: family Ray unscrapeable; used Data.lua baseline
+- 211755 Moltenjaw Shalewing: family Ray unscrapeable; used Data.lua baseline
+- 211651 Moltenjaw Sporebat: family Ray unscrapeable; used Data.lua baseline
+- 18880 Nether Ray: family Ray unscrapeable; used Data.lua baseline
+- 21901 Netherskate: family Ray unscrapeable; used Data.lua baseline
+- 23501 Netherwing Ray: family Ray unscrapeable; used Data.lua baseline
+- 50361 Ornat: family Ray unscrapeable; used Data.lua baseline
+- 165025 Panicked Necroray: family Ray unscrapeable; used Data.lua baseline
+- 168269 Panicked Necroray: family Ray unscrapeable; used Data.lua baseline
+- 75487 Razorfang Hunter: family Ray unscrapeable; used Data.lua baseline
+- 88962 Razorfang Hunter: family Ray unscrapeable; used Data.lua baseline
+- 215384 Rock Sporebat: family Ray unscrapeable; used Data.lua baseline
+- 222869 Rock Sporebat: family Ray unscrapeable; used Data.lua baseline
+- 226648 Rockwing Glider: family Ray unscrapeable; used Data.lua baseline
+- 169129 Rotdust Bat: family Ray unscrapeable; used Data.lua baseline
+- 152290 Soundless: family Ray unscrapeable; used Data.lua baseline
+- 221217 Spore-Infused Shalewing: family Ray unscrapeable; used Data.lua baseline
+- 212364 Stormtop Shalemaw: family Ray unscrapeable; used Data.lua baseline
+- 212368 Stormtop Shalemaw Young: family Ray unscrapeable; used Data.lua baseline
+- 226413 Underlit Shalewing: family Ray unscrapeable; used Data.lua baseline
+- 101110 Warp Ray: family Ray unscrapeable; used Data.lua baseline
+- 153764 Wrinklefin: family Ray unscrapeable; used Data.lua baseline
+- 207090 Zaqali Shalewing: family Ray unscrapeable; used Data.lua baseline
+- 211114 Zaqali Shalewing: family Ray unscrapeable; used Data.lua baseline
+- 124522 Alpaca: family Camel unscrapeable; used Data.lua baseline
+- 135483 Alpaca: family Camel unscrapeable; used Data.lua baseline
+- 136354 Alpaca: family Camel unscrapeable; used Data.lua baseline
+- 142449 Alpaca: family Camel unscrapeable; used Data.lua baseline
+- 147453 Alpaca: family Camel unscrapeable; used Data.lua baseline
+- 124716 Alpaca Alpha: family Camel unscrapeable; used Data.lua baseline
+- 124718 Alpaca Calf: family Camel unscrapeable; used Data.lua baseline
+- 50249 Camel: family Camel unscrapeable; used Data.lua baseline
+- 162360 Camel: family Camel unscrapeable; used Data.lua baseline
+- 126219 Dolly: family Camel unscrapeable; used Data.lua baseline
+- 128848 Dolly: family Camel unscrapeable; used Data.lua baseline
+- 143741 Dolly: family Camel unscrapeable; used Data.lua baseline
+- 145528 Dolly: family Camel unscrapeable; used Data.lua baseline
+- 196714 Dolly: family Camel unscrapeable; used Data.lua baseline
+- 143700 Domestic Alpaca: family Camel unscrapeable; used Data.lua baseline
+- 51259 Domesticated Camel: family Camel unscrapeable; used Data.lua baseline
+- 126217 Dot: family Camel unscrapeable; used Data.lua baseline
+- 128849 Dot: family Camel unscrapeable; used Data.lua baseline
+- 143740 Dot: family Camel unscrapeable; used Data.lua baseline
+- 145529 Dot: family Camel unscrapeable; used Data.lua baseline
+- 196715 Dot: family Camel unscrapeable; used Data.lua baseline
+- 162681 Elusive Quickhoof: family Camel unscrapeable; used Data.lua baseline
+- 162765 Friendly Alpaca: family Camel unscrapeable; used Data.lua baseline
+- 45121 Lady Humps: family Camel unscrapeable; used Data.lua baseline
+- 46517 Lady Humps: family Camel unscrapeable; used Data.lua baseline
+- 46536 Lady Humps: family Camel unscrapeable; used Data.lua baseline
+- 126627 Lost Alpaca: family Camel unscrapeable; used Data.lua baseline
+- 140501 Lost Alpaca: family Camel unscrapeable; used Data.lua baseline
+- 147500 Max: family Camel unscrapeable; used Data.lua baseline
+- 147499 Molly: family Camel unscrapeable; used Data.lua baseline
+- 51193 Wild Camel: family Camel unscrapeable; used Data.lua baseline

@@ -10,11 +10,13 @@ from pathlib import Path
 from typing import Any, Callable, TypeVar
 
 from scrapper.data_records import (
+    PetRecord,
     build_pet_record,
     build_stable_master_record,
     source_family_rows,
     source_tameable_rows,
 )
+from scrapper.existing_pet_data import load_existing_pet_records
 from scrapper.lua_export import (
     export_pet_data,
     export_stable_master_data,
@@ -190,7 +192,8 @@ def _collect_one(source_cache: SourceCache, fetcher, url: str, role: str, budget
         text = fetcher(url)
     except Exception as error:
         source_cache.record_semantic_error(url, role, "error", str(error))
-        raise SourceFetchError(url, role, error) from error
+        print(f"Skipped {role} {url}: {error}", flush=True)
+        return True
     result = source_cache.store_text(url, role, text)
     budget.mark_collected()
     print(f"Collected {budget.collected}/{budget.limit_pages} {role}: {result.path}", flush=True)
@@ -271,12 +274,23 @@ def main() -> int:
         _print_failure_report(exit_code, "stable-masters", GENERATED_DIR)
         return exit_code
     if args.command in {"build-pets", "pets"}:
+        fallback, summary = load_existing_pet_records(Path("Data.lua"))
+        if summary.missing_file:
+            print("No Data.lua baseline found; running without fallback.", flush=True)
+        else:
+            print(
+                f"Loaded {summary.loaded} baseline pet records from Data.lua "
+                f"(dropped {summary.dropped_no_zone} no-zone, {summary.dropped_no_coords} no-coords, "
+                f"salvaged {summary.salvaged_partial_coords} partial-coord rows).",
+                flush=True,
+            )
         exit_code = generate_pets(
             Path(args.output),
             args.limit_families,
             source_cache=source_cache,
             generated_dir=GENERATED_DIR,
             from_cache=True,
+            fallback_records=fallback,
         )
         _print_failure_report(exit_code, "pets", GENERATED_DIR)
         return exit_code
@@ -299,6 +313,7 @@ def generate_pets(
     source_cache: SourceCache | None = None,
     generated_dir: Path = GENERATED_DIR,
     from_cache: bool = False,
+    fallback_records: dict[int, PetRecord] | None = None,
 ) -> int:
     source_cache = source_cache or SourceCache(
         generated_dir / "cache",
@@ -330,16 +345,21 @@ def generate_pets(
     if limit_families:
         families = families[:limit_families]
 
-    records = []
-    skipped = []
+    records: list[PetRecord] = []
+    skipped: list[str] = []
+    fallback_log: list[str] = []
+    diff_log: list[str] = []
     for family_index, family in enumerate(families, start=1):
         print(f"Reading family {family_index}/{len(families)}: {family.name}", flush=True)
         family_url = pet_family_url(family.id)
         try:
             family_source = _source_text(source_cache, family_url, "pet-family", from_cache)
         except SourceFetchError as error:
-            _write_pet_blockers(generated_dir, [str(error)])
-            return 1
+            skipped.append(f"family {family.name}: family source unavailable ({error})")
+            recovered = _carry_family_baseline(records, fallback_log, fallback_records, family)
+            if recovered:
+                print(f"  Recovered {recovered} baseline pets for family {family.name}", flush=True)
+            continue
         try:
             tameable_rows = _listview_rows_from_source(
                 source_cache,
@@ -350,24 +370,53 @@ def generate_pets(
                 row_validator=_validate_tameable_pet_rows,
             )
         except ValueError as semantic_error:
-            error = str(semantic_error)
-            _write_pet_blockers(generated_dir, [error])
-            return 1
+            skipped.append(f"family {family.name}: malformed tameable source ({semantic_error})")
+            recovered = _carry_family_baseline(records, fallback_log, fallback_records, family)
+            if recovered:
+                print(f"  Recovered {recovered} baseline pets for family {family.name}", flush=True)
+            continue
         if not tameable_rows:
             error = f"No tameable pets found for family {family.name}: {family_source.url}"
             source_cache.invalidate(family_source.url, family_source.role, error)
-            _write_pet_blockers(generated_dir, [error])
-            return 1
+            skipped.append(f"family {family.name}: empty tameable source")
+            recovered = _carry_family_baseline(records, fallback_log, fallback_records, family)
+            if recovered:
+                print(f"  Recovered {recovered} baseline pets for family {family.name}", flush=True)
+            continue
         for tameable in tameable_rows:
             try:
                 tameable, record = _build_pet_record_from_source(family, tameable, source_cache, from_cache)
             except SourceFetchError as error:
-                _write_pet_blockers(generated_dir, [str(error)])
-                return 1
+                fallback = fallback_records.get(tameable.id) if fallback_records else None
+                if fallback is not None:
+                    rebound = _rebind_family(fallback, family)
+                    records.append(rebound)
+                    fallback_log.append(
+                        f"{tameable.id} {tameable.name}: scrape failed ({error}); used Data.lua baseline"
+                    )
+                else:
+                    skipped.append(f"{tameable.id} {tameable.name}: scrape failed and no baseline ({error})")
+                continue
             if record is None:
-                skipped.append(f"{tameable.id} {tameable.name}: no mapper coordinates")
+                fallback = fallback_records.get(tameable.id) if fallback_records else None
+                if fallback is not None:
+                    rebound = _rebind_family(fallback, family)
+                    records.append(rebound)
+                    fallback_log.append(
+                        f"{tameable.id} {tameable.name}: no mapper coordinates; used Data.lua baseline"
+                    )
+                else:
+                    skipped.append(f"{tameable.id} {tameable.name}: no mapper coordinates")
                 continue
             records.append(record)
+            if fallback_records:
+                baseline = fallback_records.get(tameable.id)
+                if baseline is not None:
+                    diff = _diff_record_against_baseline(record, baseline)
+                    if diff:
+                        diff_log.append(diff)
+
+    records = _dedupe_records(records, fallback_log)
 
     if not records:
         _write_pet_blockers(generated_dir, skipped or ["No pet records validated."])
@@ -382,8 +431,88 @@ def generate_pets(
     _clear_lines(generated_dir / "pet-validation-errors.md")
     output.write_text(export_pet_data(records), encoding="utf-8")
     _write_lines(generated_dir / "pet-skipped.md", skipped)
+    _write_lines(generated_dir / "pet-fallback.md", fallback_log)
+    _write_lines(generated_dir / "pet-scraper-vs-baseline-diff.md", diff_log)
     print(f"Wrote {len(records)} pet records to {output}")
+    if fallback_log:
+        print(f"Recovered {len(fallback_log)} pets from Data.lua baseline.")
+    if diff_log:
+        print(f"Logged {len(diff_log)} scraper-vs-baseline discrepancies for audit.")
     return 0
+
+
+def _dedupe_records(records: list[PetRecord], fallback_log: list[str]) -> list[PetRecord]:
+    by_id: dict[int, PetRecord] = {}
+    duplicates = 0
+    for record in records:
+        existing = by_id.get(record.npc_id)
+        if existing is None:
+            by_id[record.npc_id] = record
+            continue
+        duplicates += 1
+        existing_from_baseline = any(
+            line.startswith(f"{record.npc_id} ") for line in fallback_log
+        )
+        if existing_from_baseline:
+            by_id[record.npc_id] = record
+    if duplicates:
+        print(f"Removed {duplicates} duplicate pet records (scraper wins over baseline).", flush=True)
+    return list(by_id.values())
+
+
+def _carry_family_baseline(
+    records: list[PetRecord],
+    fallback_log: list[str],
+    fallback_records: dict[int, PetRecord] | None,
+    family,
+) -> int:
+    if not fallback_records:
+        return 0
+    seen = {r.npc_id for r in records}
+    count = 0
+    for npc_id, baseline in fallback_records.items():
+        if npc_id in seen:
+            continue
+        if baseline.family[0] != family.id:
+            continue
+        records.append(_rebind_family(baseline, family))
+        fallback_log.append(
+            f"{npc_id} {baseline.name}: family {family.name} unscrapeable; used Data.lua baseline"
+        )
+        count += 1
+    return count
+
+
+def _rebind_family(record: PetRecord, family) -> PetRecord:
+    if record.family == (family.id, family.name):
+        return record
+    return PetRecord(
+        zone_name=record.zone_name,
+        zone_id=record.zone_id,
+        name=record.name,
+        maxlevel=record.maxlevel,
+        minlevel=record.minlevel,
+        pet_class=record.pet_class,
+        family=(family.id, family.name),
+        display_id=record.display_id,
+        npc_id=record.npc_id,
+        coords=record.coords,
+    )
+
+
+def _diff_record_against_baseline(scraped: PetRecord, baseline: PetRecord) -> str | None:
+    notes: list[str] = []
+    if scraped.zone_id != baseline.zone_id:
+        notes.append(f"ZONE_DIFF scraped={scraped.zone_id} baseline={baseline.zone_id}")
+    s_count = len(scraped.coords)
+    b_count = len(baseline.coords)
+    if b_count and abs(s_count - b_count) / b_count > 0.5:
+        notes.append(f"COORD_COUNT_DIFF scraped={s_count} baseline={b_count}")
+    elif b_count == 0 and s_count > 0:
+        notes.append(f"COORD_COUNT_DIFF scraped={s_count} baseline=0")
+    if not notes:
+        return None
+    return f"{scraped.npc_id} {scraped.name}: " + "; ".join(notes)
 
 
 def _build_pet_record_from_source(family, tameable, source_cache: SourceCache, from_cache: bool = False):
@@ -394,6 +523,8 @@ def _build_pet_record_from_source(family, tameable, source_cache: SourceCache, f
         record = build_pet_record(family, tameable, mapper_data)
     except SEMANTIC_SOURCE_ERRORS as parse_error:
         raise _malformed_mapper_source_error(source_cache, source, parse_error) from parse_error
+    if record is not None:
+        source_cache.mark_ok(source.url, source.role)
     return tameable, record
 
 
@@ -458,6 +589,7 @@ def generate_stable_masters(
     records = []
     skipped = []
     for row, npc_id, _name, locations, _react in rows_with_values:
+        source = None
         try:
             source, mapper_data = _extract_mapper_data_from_source(
                 source_cache,
@@ -468,24 +600,25 @@ def generate_stable_masters(
             _validate_mapper_data_for_locations(mapper_data, locations)
             record = build_stable_master_record(row, mapper_data)
         except SourceFetchError as error:
-            _write_stable_master_blockers(generated_dir, [str(error)])
-            return 1
+            skipped.append(f"{row.get('id')} {row.get('name')}: fetch failed ({error})")
+            continue
         except SEMANTIC_SOURCE_ERRORS as parse_error:
-            error = _malformed_mapper_source_error(source_cache, source, parse_error)
-            _write_stable_master_blockers(generated_dir, [str(error)])
-            return 1
+            if source is not None:
+                _malformed_mapper_source_error(source_cache, source, parse_error)
+            skipped.append(f"{row.get('id')} {row.get('name')}: malformed mapper data ({parse_error})")
+            continue
         if record is None:
             skipped.append(f"{row.get('id')} {row.get('name')}: no valid stable master coordinates")
             continue
         records.append(record)
 
+    if not records:
+        _write_stable_master_blockers(generated_dir, skipped or ["No stable master records validated."])
+        return 1
+
     errors = validate_stable_master_records(records)
     if errors:
         _write_stable_master_validation_errors(generated_dir, errors)
-        return 1
-
-    if not records:
-        _write_stable_master_blockers(generated_dir, skipped or ["No stable master records validated."])
         return 1
 
     _clear_lines(generated_dir / "stable-master-blockers.md")
@@ -509,11 +642,13 @@ def _listview_rows_from_source(
         _require_list_rows(rows, listview_id)
         if row_validator is not None:
             row_validator(rows)
-        return normalizer(rows)
+        result = normalizer(rows)
     except SEMANTIC_SOURCE_ERRORS as parse_error:
         error = f"{error_prefix}: {source.url}: {parse_error}"
         source_cache.invalidate(source.url, source.role, error)
         raise ValueError(error) from parse_error
+    source_cache.mark_ok(source.url, source.role)
+    return result
 
 
 def _tameable_npc_ids_from_source(source_cache: SourceCache, source, family_name: str) -> list[int]:
@@ -522,6 +657,9 @@ def _tameable_npc_ids_from_source(source_cache: SourceCache, source, family_name
         _require_list_rows(rows, "tameable")
         npc_ids = []
         for index, row in enumerate(rows):
+            locations = row.get("location")
+            if not locations:
+                continue
             npc_ids.append(_required_positive_int(row, index, "tameable pet", "id"))
         return npc_ids
     except SEMANTIC_SOURCE_ERRORS as parse_error:
@@ -545,14 +683,23 @@ def _validate_pet_family_rows(rows: list[dict[str, Any]]) -> None:
 
 
 def _validate_tameable_pet_rows(rows: list[dict[str, Any]]) -> None:
+    valid: list[dict[str, Any]] = []
+    dropped: list[str] = []
     for index, row in enumerate(rows):
-        _required_positive_int(row, index, "tameable pet", "id")
-        _required_name(row, index, "tameable pet")
-        _optional_int(row, index, "tameable pet", "classification")
-        _optional_positive_int_list(row, index, "tameable pet", "location")
-        _required_react(row, index, "tameable pet")
-        _optional_int(row, index, "tameable pet", "minlevel")
-        _optional_int(row, index, "tameable pet", "maxlevel")
+        try:
+            _required_positive_int(row, index, "tameable pet", "id")
+            _required_name(row, index, "tameable pet")
+            _optional_int(row, index, "tameable pet", "classification")
+            _optional_positive_int_list(row, index, "tameable pet", "location")
+            _required_react(row, index, "tameable pet")
+            _optional_int(row, index, "tameable pet", "minlevel")
+            _optional_int(row, index, "tameable pet", "maxlevel")
+            valid.append(row)
+        except ValueError as e:
+            dropped.append(f"row {index}: {e}")
+    if dropped:
+        print(f"  Dropped {len(dropped)} malformed tameable rows", flush=True)
+    rows[:] = valid
 
 
 def _required_int(row: dict[str, Any], index: int, row_name: str, field: str) -> int:
@@ -666,9 +813,14 @@ def _extract_mapper_data_from_source(source_cache: SourceCache, url: str, role: 
         source_cache.invalidate(source.url, source.role, error)
         raise SourceFetchError(source.url, source.role, ValueError(error)) from parse_error
     if mapper_data is None:
-        error = f"Missing g_mapperData assignment in source: {source.url}"
-        source_cache.invalidate(source.url, source.role, error)
-        raise SourceFetchError(source.url, source.role, ValueError(error))
+        # Wowhead serves no g_mapperData when the NPC has no mapped locations.
+        # Treat as "no coords" so the build falls back to the Data.lua baseline.
+        source_cache.mark_ok(source.url, source.role)
+        return source, {}
+    if isinstance(mapper_data, list) and not mapper_data:
+        # g_mapperData = [] -> empty list means "no mapped locations".
+        source_cache.mark_ok(source.url, source.role)
+        return source, {}
     if not isinstance(mapper_data, dict):
         error = (
             f"Invalid g_mapperData assignment in source: {source.url}: "
@@ -806,4 +958,8 @@ def _write_lines(path: Path, lines: list[str]) -> None:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except KeyboardInterrupt:
+        print("\nInterrupted by user. Cache and manifest were preserved; rerun the same command to resume.", file=sys.stderr)
+        raise SystemExit(130)

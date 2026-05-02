@@ -1,1 +1,0 @@
-- https://www.wowhead.com/npc=158226: Command '['agent-browser', 'open', 'https://www.wowhead.com/npc=158226']' returned non-zero exit status 1.
