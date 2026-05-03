@@ -54,8 +54,34 @@ def extract_listview_data(html: str, listview_id: str) -> list[dict[str, Any]]:
         data_index = _find_property_value_start(object_text, "data")
         if data_index is None:
             return []
+        cursor = data_index
+        while cursor < len(object_text) and object_text[cursor].isspace():
+            cursor += 1
+        page_data = _PAGE_DATA_REF_RE.match(object_text, cursor)
+        if page_data:
+            return _load_page_data_payload(html, page_data.group(1))
         return _parse_jsonish_value(object_text, data_index)
     return []
+
+
+_PAGE_DATA_REF_RE = re.compile(r"WH\.getPageData\(\s*['\"]([^'\"]+)['\"]\s*\)")
+_PAGE_DATA_SCRIPT_TEMPLATE = (
+    r'<script[^>]*\bid\s*=\s*["\']data\.{guid}["\'][^>]*>(.*?)</script>'
+)
+
+
+def _load_page_data_payload(html: str, guid: str) -> Any:
+    pattern = re.compile(
+        _PAGE_DATA_SCRIPT_TEMPLATE.format(guid=re.escape(guid)),
+        re.DOTALL,
+    )
+    match = pattern.search(html)
+    if not match:
+        raise ValueError(f"missing inline page-data script for guid {guid}")
+    body = match.group(1).strip()
+    if not body:
+        return []
+    return json.loads(body)
 
 
 def _iter_listview_objects(html: str):

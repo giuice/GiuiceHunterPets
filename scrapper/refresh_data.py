@@ -789,9 +789,10 @@ def _stable_master_location_ids(row: dict, index: int) -> list[int]:
         )
     if not all(_is_json_int(value) for value in raw_locations):
         raise ValueError(f"stable master row {index} location values must be integers")
-    if not all(value > 0 for value in raw_locations):
-        raise ValueError(f"stable master row {index} location values must be positive integers")
-    return raw_locations
+    # Wowhead serves sentinels like -1 alongside real uiMapIds; drop them and
+    # let downstream lookup resolve the real ones. If nothing positive remains,
+    # build_stable_master_record returns None and the pipeline skip-and-continues.
+    return [value for value in raw_locations if value > 0]
 
 
 def _is_json_int(value: Any) -> bool:

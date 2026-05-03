@@ -1,0 +1,32 @@
+- 9896 World Stable Master: no valid stable master coordinates
+- 13616 Frostwolf Stable Master: no valid stable master coordinates
+- 13617 Stormpike Stable Master: no valid stable master coordinates
+- 158863 Stormpike Stable Master: no valid stable master coordinates
+- 158864 Frostwolf Stable Master: no valid stable master coordinates
+- 9978 Wesley: no valid stable master coordinates
+- 11117 Awenasa: no valid stable master coordinates
+- 19491 World Flying Mount Vendor Alliance: no valid stable master coordinates
+- 19492 World Flying Mount Vendor Horde: no valid stable master coordinates
+- 25519 Caleb: no valid stable master coordinates
+- 77838 Gul'rak: no valid stable master coordinates
+- 84578 Wesley: no valid stable master coordinates
+- 84616 Theodore Mont Claire: no valid stable master coordinates
+- 95972 Reggifuz: no valid stable master coordinates
+- 98471 Seikwa: no valid stable master coordinates
+- 110763 Ansel Tunsleworth: no valid stable master coordinates
+- 121827 Michael: no valid stable master coordinates
+- 121936 Carey Willis: no valid stable master coordinates
+- 122498 Grantor: no valid stable master coordinates
+- 125177 Lucia Farondale: no valid stable master coordinates
+- 133235 Mitchell Byer: no valid stable master coordinates
+- 142073 Leila Stafford: no valid stable master coordinates
+- 142979 Baz Hagglebit: no valid stable master coordinates
+- 154996 Lonto: no valid stable master coordinates
+- 159101 Jaul Hsu: no valid stable master coordinates
+- 162567 Finlar: no valid stable master coordinates
+- 164793 Stea'b: no valid stable master coordinates
+- 172978 Littlewing: no valid stable master coordinates
+- 200905 Zaliskarr: no valid stable master coordinates
+- 226500 Squire Leoren Mal'derath: no valid stable master coordinates
+- 232748 Tharlidun: no valid stable master coordinates
+- 249914 Tassia Whisperglen: no valid stable master coordinates
