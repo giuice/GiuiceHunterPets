@@ -1,0 +1,22 @@
+{
+  "sources/wow-api-migration-sources.md": {
+    "outgoing": ["concepts/wow-addon-api-migration.md"],
+    "incoming": ["concepts/wow-addon-api-migration.md"]
+  },
+  "concepts/wow-addon-api-migration.md": {
+    "outgoing": ["sources/wow-api-migration-sources.md"],
+    "incoming": ["sources/wow-api-migration-sources.md"]
+  },
+  "lessons/data-refresh-pipeline.md": {
+    "outgoing": ["lessons/pipeline-pitfalls.md"],
+    "incoming": ["lessons/pipeline-pitfalls.md"]
+  },
+  "lessons/pipeline-pitfalls.md": {
+    "outgoing": ["lessons/data-refresh-pipeline.md"],
+    "incoming": ["lessons/data-refresh-pipeline.md"]
+  },
+  "lessons/library-update-safety.md": {
+    "outgoing": [],
+    "incoming": []
+  }
+}

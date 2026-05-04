@@ -1,0 +1,25 @@
+version: 1
+project:
+  name: "GiuiceHunterPets"
+  description: "Brief project description for LLM context"
+tools: []
+wiki:
+  path: "wiki/"
+  raw_path: "wiki/raw/"
+  tasks_path: ".codewiki/tasks/"
+verification:
+  require_human_approval: true
+  require_tests: true
+  auto_log: true
+ingestion:
+  interactive: true
+  max_pages_per_ingest: 20
+lint:
+  check_orphans: true
+  check_contradictions: true
+  check_stale_issues: true
+  check_file_drift: true
+  check_frontmatter: true
+  check_source_drift: true
+  check_tag_taxonomy: true
+  check_page_size: true
