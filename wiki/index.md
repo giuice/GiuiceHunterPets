@@ -7,11 +7,15 @@ project: "GiuiceHunterPets"
 
 This index is the first file read by `codewiki query` before matched pages.
 
-> Last updated: 2026-05-04 | Total pages: 5
+> Last updated: 2026-05-04 | Total pages: 7
 
 ## Entities
 
+- [ENTITY-001: Stable Master Pins](entities/stable-master-pins.md) — Hunter-only stable master world map and minimap pins with independent data, index, renderer, settings, and HBD-Pins keys
+
 ## Decisions
+
+- [ADR-001: Stable Master Neutral Faction Handling](decisions/stable-master-neutral-faction.md) — Treat Neutral stable master records as visible to both Alliance and Horde in v1
 
 ## Concepts
 

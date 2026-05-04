@@ -41,3 +41,11 @@ type: log
 - Updated: `wiki/index.md` — added 1 entry, total pages: 5
 - Updated: `wiki/_backlinks.json` — added LESSON-003
 - Raw source: `wiki/raw/specs/library-update-safety.md` — provenance frontmatter added, SHA256 verified, no drift
+
+## [2026-05-04] absorb | Stable Master Pins
+
+- Created: `wiki/entities/stable-master-pins.md` (ENTITY-001)
+- Created: `wiki/decisions/stable-master-neutral-faction.md` (ADR-001)
+- Updated: `wiki/lessons/data-refresh-pipeline.md` — removed stale pending-integration claim and linked stable master release checks
+- Updated: `wiki/index.md` — added 2 entries, total pages: 7
+- Updated: `wiki/_backlinks.json` — added links among stable master pins, neutral faction decision, and data refresh pipeline lesson

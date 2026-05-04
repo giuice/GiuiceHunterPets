@@ -121,3 +121,5 @@ CodeWiki is not query-time RAG. It maintains a persistent, human-reviewed markdo
 - Config: `.codewiki/config.yml`
 - Backlinks index: `wiki/_backlinks.json`
 <!-- codewiki:end -->
+
+@RTK.md

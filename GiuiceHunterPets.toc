@@ -26,6 +26,9 @@ Settings.lua
 GiuiceHunterPets.xml
 StablePetList.lua
 MapPetIndex.lua
+StableMastersData.lua
+StableMasterIndex.lua
+StableMasterPins.lua
 GiuiceHunterPetListItemMixin.lua
 GiuiceWorldMapButton.lua
 

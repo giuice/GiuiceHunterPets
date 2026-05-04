@@ -3,6 +3,7 @@ _, GHP = ...
 
 GHP_SavedVars = GHP_SavedVars or {
     worldMapPins = 1, -- Default to "All Pets Pins"
+    stableMasterPins = true,
     tooltips = true,
     minimapPins = true,
     position = nil,
@@ -13,6 +14,39 @@ GHP_SavedVars = GHP_SavedVars or {
 local category = Settings.RegisterVerticalLayoutCategory("Giuice Hunter Pets")
 GHP.category_id = category:GetID()
 
+
+do
+    local name = "Show Stable Master Pins"
+    local variableKey = "stableMasterPins"
+    local defaultValue = true
+
+    local function GetValue()
+        if GHP_SavedVars.stableMasterPins == nil then
+            return defaultValue
+        end
+
+        return GHP_SavedVars.stableMasterPins
+    end
+
+    local function SetValue(value)
+        GHP_SavedVars.stableMasterPins = value
+    end
+
+    local setting = Settings.RegisterProxySetting(category,
+        variableKey,
+        type(defaultValue),
+        name,
+        defaultValue,
+        GetValue,
+        SetValue
+    )
+
+    local tooltip = "Enable or disable showing stable master pins on the world map and minimap"
+    setting:SetValueChangedCallback(function(setting, value)
+        GHP.OnStableMasterPinsSettingChanged(setting, value)
+    end)
+    Settings.CreateCheckbox(category, setting, tooltip)
+end
 
 do
     local name = "Show Pet Pins on World Map"
