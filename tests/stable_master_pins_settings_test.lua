@@ -211,6 +211,7 @@ assertTableLength(worldMapAdds, 2, "worldMapAdds")
 assertTableLength(minimapAdds, 2, "minimapAdds")
 assertEqual(worldMapAdds[1].key, "GiuiceHunterPetsStableMasterIcons", "stable world map key added")
 assertEqual(minimapAdds[1].key, "GiuiceHunterPetsStableMasterMinimapIcons", "stable minimap key added")
+assertEqual(worldMapAdds[1].pin.texture, "Interface\\Icons\\INV_Misc_Horseshoe_01", "stable master icon")
 
 worldMapAdds[1].pin.scripts.OnEnter(worldMapAdds[1].pin)
 

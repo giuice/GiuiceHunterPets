@@ -49,3 +49,9 @@ type: log
 - Updated: `wiki/lessons/data-refresh-pipeline.md` — removed stale pending-integration claim and linked stable master release checks
 - Updated: `wiki/index.md` — added 2 entries, total pages: 7
 - Updated: `wiki/_backlinks.json` — added links among stable master pins, neutral faction decision, and data refresh pipeline lesson
+
+## [2026-05-05] lint | CodeWiki Health Check
+
+- Fixed raw source SHA drift in 4 raw specs by aligning stored hashes to the schema body-hash rule.
+- Fixed stale backlinks and one missing required frontmatter field.
+- Added addon-relevant cross-links among data refresh, pipeline pitfalls, stable master pins, library safety, and WoW API migration pages.

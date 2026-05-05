@@ -7,7 +7,7 @@ project: "GiuiceHunterPets"
 
 This index is the first file read by `codewiki query` before matched pages.
 
-> Last updated: 2026-05-04 | Total pages: 7
+> Last updated: 2026-05-05 | Total pages: 7
 
 ## Entities
 

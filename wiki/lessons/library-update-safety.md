@@ -3,7 +3,7 @@ type: lesson
 id: LESSON-003
 title: Library Update Safety
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-05-05
 tags: [lesson, release]
 sources: [wiki/raw/specs/library-update-safety.md]
 confidence: high
@@ -93,3 +93,7 @@ After updating a library, test the feature that depends on it:
 6. Flatten extra folders if needed
 7. Keep `LibDBIcon` flat at `Libs/LibDBIcon-1.0/LibDBIcon-1.0.lua`
 8. Test in game
+
+## Related Pages
+
+- [[wow-addon-api-migration]] — addon release compatibility context where vendored library checks may become part of migration work

@@ -378,7 +378,11 @@ end
 local lastWorldMapPinKey
 
 local function DisplayPetIcons()
-    if not GHP_SavedVars.worldMapPins or GHP_SavedVars.worldMapPins == 4 then
+    local currentSetting = GHP_SavedVars.worldMapPins or 1
+
+    if currentSetting == 4 then
+        lastWorldMapPinKey = nil
+        RemoveAllPins()
         return
     end  
 
@@ -391,7 +395,7 @@ local function DisplayPetIcons()
 
     EnsurePetIndexes()
 
-    local pinKey = tostring(playerMapID) .. ":" .. tostring(GHP_SavedVars.worldMapPins or 1)
+    local pinKey = tostring(playerMapID) .. ":" .. tostring(currentSetting)
     if lastWorldMapPinKey == pinKey then
         return
     end
@@ -400,7 +404,7 @@ local function DisplayPetIcons()
     -- 1. Clear existing pins
     petPins:RemoveAllWorldMapIcons("GiuiceHunterPetsIcons")
 
-    local filteredPets = GHP.GetPetsForMap(GHP.mapPetIndex, playerMapID, GHP_SavedVars.worldMapPins)
+    local filteredPets = GHP.GetPetsForMap(GHP.mapPetIndex, playerMapID, currentSetting)
 
     -- 3. Add pins for each pet location
     for _, petData in ipairs(filteredPets) do
@@ -441,7 +445,7 @@ local function DisplayPetIcons()
                     GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
                     GameTooltip:SetMinimumWidth(350)
                     -- Title with class color
-                    local classColor = petData.class == "Elite" and "|cFFFFD100" or "|cFFFFFFFF"
+                    local classColor = (petData.class == "Elite" or petData.class == "Rare Elite") and "|cFFFFD100" or "|cFFFFFFFF"
                     GameTooltip:SetText(classColor .. petData.name .. " (" .. petData.family[2] .. ")|r")
                     
                     -- Basic info
@@ -449,12 +453,13 @@ local function DisplayPetIcons()
                     GameTooltip:AddLine(petData.class, 0.7, 0.7, 0.7)
                     
                     -- Family info
-                    local familyInfo = GHP.FAMILY_DATA[petData.family[1]]
+                    local familyInfo = GHP.FAMILY_DATA and GHP.FAMILY_DATA[petData.family[1]]
                     if familyInfo then
                         GameTooltip:AddLine(" ")
-                        GameTooltip:AddLine("Type: " .. familyInfo.pet_type, 1, 1, 1)
-                        local dietPadding = GetTooltipPaddingForDiet(familyInfo.diet)
-                        GameTooltip:AddLine("Diet: " .. familyInfo.diet .. dietPadding, 1, 1, 1)
+                        GameTooltip:AddLine("Type: " .. (familyInfo.pet_type or "Unknown"), 1, 1, 1)
+                        local dietText = familyInfo.diet or "Unknown"
+                        local dietPadding = GetTooltipPaddingForDiet(dietText)
+                        GameTooltip:AddLine("Diet: " .. dietText .. dietPadding, 1, 1, 1)
                         if familyInfo.exotic == 1 then
                             GameTooltip:AddLine("Exotic Pet", 1, 0.8, 0)
                         end
@@ -523,6 +528,7 @@ GHP.OnWorldMapPinsSettingChanged = function(setting, value)
     if value == 4 or not value then
         lastWorldMapPinKey = nil
         RemoveAllPins()
+        ClearMinimapPins()
     end
     ManageWorldMapEvents(value)
     -- If enabled and map is currently shown, refresh pins

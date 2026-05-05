@@ -1,6 +1,6 @@
 #!/bin/sh
 # codewiki: post-verify hook
-# Checks whether modified files appear related to wiki entities or new topic candidates.
+# Records a small pending-absorb signal when modified files appear wiki-relevant.
 # Always exits 0 so it never blocks the agent.
 
 trap 'exit 0' EXIT
@@ -8,14 +8,41 @@ set -e
 
 _cwiki_entities="wiki/entities"
 _cwiki_payload=""
+_cwiki_state_dir=".codewiki/state"
+_cwiki_pending_file="$_cwiki_state_dir/pending-absorb.jsonl"
+_cwiki_debug_file="$_cwiki_state_dir/hooks-debug.jsonl"
+_cwiki_host="${CODEWIKI_HOOK_HOST:-unknown}"
+_cwiki_event="${CODEWIKI_HOOK_EVENT:-post-verify}"
+
+_cwiki_json_escape() {
+    sed 's/\\/\\\\/g; s/"/\\"/g; s/	/\\t/g; s/\r/\\r/g' | awk 'BEGIN { ORS = "" } { if (NR > 1) printf "\\n"; printf "%s", $0 }'
+}
+
+_cwiki_log_debug() {
+    [ "${CODEWIKI_HOOK_DEBUG:-}" = "1" ] || return 0
+    mkdir -p "$_cwiki_state_dir" 2>/dev/null || return 0
+    _cwiki_debug_stage=$(printf '%s' "$1" | _cwiki_json_escape)
+    _cwiki_debug_stdin="${2:-unknown}"
+    _cwiki_debug_stdout="${3:-false}"
+    _cwiki_debug_wrapper_json="${4:-unknown}"
+    _cwiki_debug_observable="${5:-unknown}"
+    _cwiki_debug_message=$(printf '%s' "$6" | _cwiki_json_escape)
+    _cwiki_debug_ts=$(date -u '+%Y-%m-%dT%H:%M:%SZ' 2>/dev/null || date '+%Y-%m-%dT%H:%M:%S%z')
+    printf '{"timestamp":"%s","host":"%s","event":"%s","stage":"%s","stdin_payload":"%s","stdout_produced":%s,"wrapper_json":"%s","observable_context":"%s","message":"%s"}\n' \
+        "$_cwiki_debug_ts" "$_cwiki_host" "$_cwiki_event" "$_cwiki_debug_stage" "$_cwiki_debug_stdin" "$_cwiki_debug_stdout" "$_cwiki_debug_wrapper_json" "$_cwiki_debug_observable" "$_cwiki_debug_message" >>"$_cwiki_debug_file" 2>/dev/null || true
+}
 
 if [ -t 0 ]; then
+    _cwiki_log_debug "called" false false unknown none "called without stdin payload"
     exit 0
 fi
 
 _cwiki_payload=$(cat 2>/dev/null) || _cwiki_payload=""
 
-[ -z "$_cwiki_payload" ] && exit 0
+if [ -z "$_cwiki_payload" ]; then
+    _cwiki_log_debug "called" true false unknown none "called with empty stdin payload"
+    exit 0
+fi
 
 if command -v jq >/dev/null 2>&1; then
     _cwiki_files=$(printf '%s' "$_cwiki_payload" | jq -r '.. | strings' 2>/dev/null) || _cwiki_files=""
@@ -23,7 +50,10 @@ else
     _cwiki_files=$(printf '%s' "$_cwiki_payload" | grep -oE '"[^"]+\.[a-zA-Z0-9]+"' | tr -d '"') || _cwiki_files=""
 fi
 
-[ -z "$_cwiki_files" ] && exit 0
+if [ -z "$_cwiki_files" ]; then
+    _cwiki_log_debug "parsed" true false unknown none "payload contained no file-like strings"
+    exit 0
+fi
 
 _cwiki_matched=""
 _cwiki_candidates=""
@@ -44,17 +74,19 @@ _cwiki_candidates=$(printf '%s\n' "$_cwiki_files" |
     sort -u |
     sed -n '1,12p') || _cwiki_candidates=""
 
-[ -z "$_cwiki_matched" ] && [ -z "$_cwiki_candidates" ] && exit 0
+if [ -z "$_cwiki_matched" ] && [ -z "$_cwiki_candidates" ]; then
+    _cwiki_log_debug "parsed" true false unknown none "no wiki-relevant file signal"
+    exit 0
+fi
 
-printf 'CODEWIKI_CHANGE_CONTEXT\n'
-if [ -n "$_cwiki_matched" ]; then
-    printf 'Affected wiki entities:\n'
-    printf '%b' "$_cwiki_matched"
-fi
-if [ -n "$_cwiki_candidates" ]; then
-    printf 'Potential new topic candidates:\n'
-    printf '%s\n' "$_cwiki_candidates"
-fi
-printf 'Required next step for the host agent: invoke codewiki-wiki-updater now to propose approval-gated wiki updates, or explicitly defer this to codewiki-absorb at session end.\n'
-printf 'Verification path: after a non-trivial wiki proposal, invoke codewiki-verifier for read-only review before applying approved wiki edits.\n'
-printf 'END_CODEWIKI_CHANGE_CONTEXT\n'
+mkdir -p "$_cwiki_state_dir" 2>/dev/null || exit 0
+
+_cwiki_ts=$(date -u '+%Y-%m-%dT%H:%M:%SZ' 2>/dev/null || date '+%Y-%m-%dT%H:%M:%S%z')
+_cwiki_files_json=$(printf '%s\n' "$_cwiki_files" | grep -E '(^|/)[A-Za-z0-9._/-]+\.[A-Za-z0-9]+$' | sed -n '1,20p' | _cwiki_json_escape)
+_cwiki_matched_json=$(printf '%b' "$_cwiki_matched" | sed '/^$/d' | _cwiki_json_escape)
+_cwiki_candidates_json=$(printf '%s\n' "$_cwiki_candidates" | sed '/^$/d' | _cwiki_json_escape)
+
+printf '{"timestamp":"%s","source":"hook","host":"%s","event":"%s","reason":"wiki-relevant file change","files":"%s","matched_entities":"%s","topic_candidates":"%s"}\n' \
+    "$_cwiki_ts" "$_cwiki_host" "$_cwiki_event" "$_cwiki_files_json" "$_cwiki_matched_json" "$_cwiki_candidates_json" >>"$_cwiki_pending_file" 2>/dev/null || true
+
+_cwiki_log_debug "recorded" true false unknown state "recorded pending absorb signal"

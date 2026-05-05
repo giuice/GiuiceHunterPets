@@ -79,13 +79,14 @@ CodeWiki is not query-time RAG. It maintains a persistent, human-reviewed markdo
 - At session start for wiki work: read `.codewiki/config.yml`, `wiki/SCHEMA.md`, `wiki/index.md`, and recent `wiki/log.md` before ingest/query/lint/absorb.
 - New external source in `wiki/raw/` or user asks to process docs: use `codewiki-ingest`. Raw sources are immutable; wiki edits are proposed for review.
 - User asks how the project works, why a decision was made, or where knowledge lives: use `codewiki-query` and cite wiki pages rather than inventing answers.
-- New feature or larger change: use `codewiki-prd`, then `codewiki-tasks`, then `codewiki-process` to work one sub-task at a time.
+- User asks what to do next, resumes a session, starts a feature, or needs routing across CodeWiki workflows: use `codewiki-flow` to choose the next focused skill.
+- New feature or larger change: use `codewiki-prd`, then `codewiki-tasks`, then `codewiki-process` to work one task at a time inside the generated phases.
 - After a substantial coding session: run `codewiki-absorb` deliberately to capture durable lessons, entities, decisions, and issues from recent changes.
 - Periodically or when drift is suspected: run `codewiki-lint` and `codewiki-breakdown` to find contradictions, stale claims, orphan pages, and missing high-signal pages.
 - When setting up or auditing Obsidian usage: use `codewiki-obsidian` to keep vault structure, attachments, wikilinks, Dataview-ready frontmatter, and graph navigation compatible with CodeWiki.
-- When a hook surfaces `CODEWIKI_CHANGE_CONTEXT`, treat it as a required follow-up signal: invoke `codewiki-wiki-updater` immediately to propose approval-gated wiki updates, or explicitly defer the same work to `codewiki-absorb` at session end.
+- When `.codewiki/state/pending-absorb.jsonl` exists, treat it as a pending follow-up signal: invoke `codewiki-wiki-updater` for durable wiki-relevant changes, or explicitly defer the same work to `codewiki-absorb` at the next completed phase or explicit user request.
 - After `codewiki-wiki-updater` proposes a non-trivial wiki change, invoke `codewiki-verifier` for read-only contradiction, reference, frontmatter, index, log, and backlink review before applying approved wiki edits.
-- Hooks provide context and change signals; they do not replace deliberate ingest/query/absorb/lint work or human approval of wiki writes.
+- Hooks provide optional context and persistent change signals; they do not replace deliberate ingest/query/absorb/lint work or human approval of wiki writes.
 
 ### Schema Discipline
 
@@ -100,7 +101,7 @@ CodeWiki is not query-time RAG. It maintains a persistent, human-reviewed markdo
 
 - `codewiki-ingest`, `codewiki-query`, `codewiki-lint`
 - `codewiki-absorb`, `codewiki-breakdown`, `codewiki-obsidian`
-- `codewiki-prd`, `codewiki-tasks`, `codewiki-process`
+- `codewiki-prd`, `codewiki-tasks`, `codewiki-process`, `codewiki-flow`
 
 ### Approval Boundary
 
@@ -112,10 +113,10 @@ CodeWiki is not query-time RAG. It maintains a persistent, human-reviewed markdo
 
 - `.codex/config.toml` enables `[features] codex_hooks = true`
 - `.codex/hooks.json` wires `UserPromptSubmit`, `PreToolUse`, `PostToolUse`, and loop-safe `Stop`
-- `UserPromptSubmit` loads prompt-level wiki context from `.codewiki/hooks/pre-wiki-context.sh`
+- `UserPromptSubmit` may load short prompt-level wiki context from `.codewiki/hooks/pre-wiki-context.sh` when the prompt is wiki-relevant
 - `PreToolUse` on `Edit|Write|apply_patch` is guardrail-only because Codex ignores plain stdout there
-- `PostToolUse` wraps `.codewiki/hooks/post-verify.sh` output as Codex JSON additional context; `CODEWIKI_CHANGE_CONTEXT` is the discovery mechanism for invoking `codewiki-wiki-updater`
-- `Stop` wraps `.codewiki/hooks/session-end.sh` as JSON and respects `stop_hook_active` to avoid continuation loops
+- `PostToolUse` records pending absorb state through `.codewiki/hooks/post-verify.sh`; visible hook context is debug-only
+- `Stop` wraps `.codewiki/hooks/session-end.sh` without blocking by default and respects `stop_hook_active` to avoid continuation loops
 
 ### Important Paths
 
@@ -126,6 +127,7 @@ CodeWiki is not query-time RAG. It maintains a persistent, human-reviewed markdo
 - Raw sources: `wiki/raw/`
 - PRD/task workflow: `.codewiki/tasks/`
 - Config: `.codewiki/config.yml`
+- Pending absorb state: `.codewiki/state/pending-absorb.jsonl`
 - Backlinks index: `wiki/_backlinks.json`
 <!-- codewiki:end -->
 

@@ -1,7 +1,7 @@
 ---
 source_url: https://github.com/giuice/GiuiceHunterPets/blob/main/.planning/research/PITFALLS.md
 ingested: 2026-05-04
-sha256: e94eb521f75744887a3ef607f7309359895e76fd6c943ba66e601f9ac48ef0ae
+sha256: 95433cf749fe087f253f1bfc9b362b9038a9eaa549711a92025e4da10dd416d5
 ---
 
 # Pitfalls Research

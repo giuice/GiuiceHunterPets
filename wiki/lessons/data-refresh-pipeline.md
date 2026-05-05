@@ -3,7 +3,7 @@ type: lesson
 id: LESSON-001
 title: Data Refresh Pipeline Operations
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-05-05
 tags: [lesson, cli]
 sources: [wiki/raw/specs/data-refresh-runbook.md]
 confidence: high
@@ -119,3 +119,7 @@ cp scrapper/generated/Data.candidate.lua Data.lua
 - **Candidate has fewer records than original `Data.lua`**: expected — baseline parser discards ~1400 rows with `zoneID=0` that would fail validation
 - **Cache junk from old `agent-browser` runs**: 39-byte stubs marked `ok`; detect and clean with inline Python, then re-collect
 - **Stable master release checks**: after promoting `StableMastersData.lua`, verify [[stable-master-pins]] in-game on Horde and Alliance Hunters. Confirm world map pins, minimap pins, tooltip content, toggle refresh, faction filtering, pet pin isolation, and icon texture availability.
+
+## Related Pages
+
+- [[pipeline-pitfalls]] — failure modes to check before changing refresh collection, fallback, or validation behavior

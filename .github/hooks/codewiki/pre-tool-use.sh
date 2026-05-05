@@ -12,7 +12,7 @@ fi
 ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
 
 if [ -f "$ROOT/.codewiki/hooks/pre-wiki-context.sh" ]; then
-    printf '%s' "$PAYLOAD" | sh "$ROOT/.codewiki/hooks/pre-wiki-context.sh" >/dev/null 2>&1 || true
+    printf '%s' "$PAYLOAD" | CODEWIKI_HOOK_HOST=copilot CODEWIKI_HOOK_EVENT=preToolUse sh "$ROOT/.codewiki/hooks/pre-wiki-context.sh" >/dev/null 2>&1 || true
 fi
 
 printf '{}\n'

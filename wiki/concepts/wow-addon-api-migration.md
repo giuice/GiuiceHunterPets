@@ -3,7 +3,7 @@ type: concept
 id: CONCEPT-001
 title: WoW Addon API Migration (11.0.7 to 12.0.5)
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-05-05
 tags: [architecture, concept]
 sources: [wiki/raw/specs/wow-api-migration-research.md]
 confidence: high
@@ -44,6 +44,7 @@ Key changes in this wave:
 ## Related Pages
 
 - [[wow-api-migration-sources]] — ranked source catalog for this migration
+- [[library-update-safety]] — vendored library update checklist for addon release compatibility work
 
 ## Open Questions
 

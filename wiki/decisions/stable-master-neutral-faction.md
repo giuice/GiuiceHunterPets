@@ -16,6 +16,7 @@ sources:
 confidence: medium
 contested: false
 contradictions: []
+verified_by: human
 approved: true
 ---
 

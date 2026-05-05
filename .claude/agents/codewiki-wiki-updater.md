@@ -12,8 +12,8 @@ so the project wiki stays aligned with the codebase.
 
 ## Instructions
 
-1. Read recent code changes by running `git diff HEAD~1` or by inspecting the modified files passed
-   in the current context.
+1. Read `.codewiki/state/pending-absorb.jsonl` when it exists, then inspect current changes with
+   `git diff` and `git diff --cached` or by reading the modified files passed in the current context.
 2. Read `.codewiki/config.yml`, then orient through `wiki/SCHEMA.md`, `wiki/index.md`, and recent
    `wiki/log.md` before proposing wiki edits.
 3. Identify which wiki topics are affected by the changes. Search `wiki/entities/` first, then

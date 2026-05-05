@@ -1,6 +1,6 @@
 ---
 name: codewiki-lint
-description: Check wiki for contradictions, orphans, stale content, and drift
+description: Audits CodeWiki health for contradictions, broken wikilinks, orphan pages, stale code claims, source drift, frontmatter/tag problems, oversized pages, and log/index issues. Use when wiki drift is suspected, contested knowledge needs review, a periodic health check is due, or large batches of wiki changes need validation.
 allowed-tools: [Read, Glob, Grep, Bash]
 ---
 
@@ -14,12 +14,14 @@ instead of silently drifting out of sync with the project.
 <process>
 ## Step 1: Resolve and load the wiki catalog
 - Read `.codewiki/config.yml` if it exists.
-- Use `wiki.path` as the wiki root when present; otherwise use `wiki/`.
+- If `.codewiki/config.yml` declares `wiki.path`, use it as the wiki root.
+- If `wiki.path` is not declared, use `wiki/` as the wiki root.
 - Read `SCHEMA.md` from the resolved wiki root when it exists.
 - Read `index.md` from the resolved wiki root first.
 - Read recent entries from `log.md` in the resolved wiki root.
 - Glob all markdown files under the resolved wiki root to inventory every wiki page currently present.
 - Read `_backlinks.json` from the resolved wiki root to identify high-importance pages (many backlinks) versus orphaned pages (zero backlinks).
+- Run the remaining checks in severity order: HIGH findings first, then MEDIUM findings, then LOW findings.
 
 ## Step 2: Validate links and index coverage
 - Programmatically scan all markdown files for `[[wikilinks]]`.
@@ -56,7 +58,7 @@ instead of silently drifting out of sync with the project.
 - Prefer high-value gaps: entity-to-decision, issue-to-lesson, source-to-entity.
 
 ## Step 9: Detect page size and template drift
-- Flag pages over about 200 lines as split candidates.
+- Flag pages over 200 lines as split candidates.
 - Compare representative pages against `.codewiki/templates/` expectations.
 - Flag pages whose structure has drifted so far that future maintenance becomes unreliable.
 

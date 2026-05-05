@@ -58,10 +58,11 @@ do
 
     local function GetOptions()
         local container = Settings.CreateControlTextContainer()
-        container:Add(1, "All Pets Pins")
-        container:Add(2, "Rares Pets Pins")
-        container:Add(3, "Elite Pets Pins")
-        container:Add(4, "Disable Pins")
+        container:Add(1, "All Pet Pins")
+        container:Add(2, "Rare Pet Pins")
+        container:Add(3, "Elite Pet Pins")
+        container:Add(5, "Rare Elite Pet Pins")
+        container:Add(4, "Disable Pet Pins")
         return container:GetData()
     end
 

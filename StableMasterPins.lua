@@ -12,7 +12,7 @@ end
 
 local WORLD_MAP_PIN_KEY = "GiuiceHunterPetsStableMasterIcons"
 local MINIMAP_PIN_KEY = "GiuiceHunterPetsStableMasterMinimapIcons"
-local STABLE_MASTER_ICON = "Interface\\Icons\\Ability_Hunter_BeastCall"
+local STABLE_MASTER_ICON = "Interface\\Icons\\INV_Misc_Horseshoe_01"
 
 local lastWorldMapPinKey
 

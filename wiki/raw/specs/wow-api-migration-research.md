@@ -1,7 +1,7 @@
 ---
 source_url: https://github.com/giuice/GiuiceHunterPets/blob/main/research.md
 ingested: 2026-05-04
-sha256: 67532ce25ec5618c2a7232e868196c12b78698a45e1172882fdad38e8e8a8477
+sha256: 3e879704276161e6e8396c5676a85238f9e1deb428d5a767346968e8409aab4c
 ---
 
 ## Corrections to your version map

@@ -4,7 +4,7 @@ id: ENTITY-001
 title: Stable Master Pins
 name: Stable Master Pins
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-05-05
 tags: [architecture, testing, release]
 sources:
   - .codewiki/tasks/0001-prd-stable-master-pins.md
@@ -81,3 +81,7 @@ Manual in-game checks remain required before release because HBD-Pins rendering,
 
 - Confirm in-game that `Interface\\Icons\\Ability_Hunter_BeastCall` renders acceptably as the stable master pin icon.
 - Confirm Horde and Alliance manual checks pass in zones that contain faction-specific and Neutral stable master records.
+
+## Related Pages
+
+- [[data-refresh-pipeline]] — stable master source collection, validation, and release checks
