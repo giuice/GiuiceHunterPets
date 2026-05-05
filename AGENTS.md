@@ -70,7 +70,7 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 <!-- codewiki:start -->
 ## CodeWiki
 
-OpenCode uses the shared `.agents/skills/codewiki-<name>/SKILL.md` tree for CodeWiki skills, plus the project-local plugin and agents installed under `.opencode/`.
+Codex uses the shared `.agents/skills/codewiki-<name>/SKILL.md` tree for CodeWiki skills, plus Codex-owned hooks and agents under `.codex/`.
 
 CodeWiki is not query-time RAG. It maintains a persistent, human-reviewed markdown wiki that compounds project knowledge across sessions. Use it as durable project memory: read/query the wiki before answering questions that depend on project history, and keep the wiki current when sources or substantial code changes add durable knowledge.
 
@@ -83,6 +83,8 @@ CodeWiki is not query-time RAG. It maintains a persistent, human-reviewed markdo
 - After a substantial coding session: run `codewiki-absorb` deliberately to capture durable lessons, entities, decisions, and issues from recent changes.
 - Periodically or when drift is suspected: run `codewiki-lint` and `codewiki-breakdown` to find contradictions, stale claims, orphan pages, and missing high-signal pages.
 - When setting up or auditing Obsidian usage: use `codewiki-obsidian` to keep vault structure, attachments, wikilinks, Dataview-ready frontmatter, and graph navigation compatible with CodeWiki.
+- When a hook surfaces `CODEWIKI_CHANGE_CONTEXT`, treat it as a required follow-up signal: invoke `codewiki-wiki-updater` immediately to propose approval-gated wiki updates, or explicitly defer the same work to `codewiki-absorb` at session end.
+- After `codewiki-wiki-updater` proposes a non-trivial wiki change, invoke `codewiki-verifier` for read-only contradiction, reference, frontmatter, index, log, and backlink review before applying approved wiki edits.
 - Hooks provide context and change signals; they do not replace deliberate ingest/query/absorb/lint work or human approval of wiki writes.
 
 ### Schema Discipline
@@ -104,16 +106,21 @@ CodeWiki is not query-time RAG. It maintains a persistent, human-reviewed markdo
 
 - Treat `wiki/` as human-reviewed knowledge.
 - Propose wiki edits first and wait for approval before writing them.
-- Use the verifier agent as a read-only check when a wiki change needs contradiction or index review.
+- Use the verifier agent as a read-only check when a wiki change needs contradiction, reference, or index review.
 
-### OpenCode Hooks
+### Codex Hooks
 
-- `.opencode/plugins/codewiki.ts` forwards `tool.execute.before` to `.codewiki/hooks/pre-wiki-context.sh`
-- `.opencode/plugins/codewiki.ts` forwards `file.edited` to `.codewiki/hooks/post-verify.sh`
-- `.opencode/plugins/codewiki.ts` forwards `session.idle` to `.codewiki/hooks/session-end.sh` as an idle or turn-end signal, not teardown
+- `.codex/config.toml` enables `[features] codex_hooks = true`
+- `.codex/hooks.json` wires `UserPromptSubmit`, `PreToolUse`, `PostToolUse`, and loop-safe `Stop`
+- `UserPromptSubmit` loads prompt-level wiki context from `.codewiki/hooks/pre-wiki-context.sh`
+- `PreToolUse` on `Edit|Write|apply_patch` is guardrail-only because Codex ignores plain stdout there
+- `PostToolUse` wraps `.codewiki/hooks/post-verify.sh` output as Codex JSON additional context; `CODEWIKI_CHANGE_CONTEXT` is the discovery mechanism for invoking `codewiki-wiki-updater`
+- `Stop` wraps `.codewiki/hooks/session-end.sh` as JSON and respects `stop_hook_active` to avoid continuation loops
 
 ### Important Paths
 
+- Hooks: `.codex/hooks.json`, `.codex/config.toml`
+- Agents: `.codex/agents/`
 - Wiki: `wiki/`
 - Schema: `wiki/SCHEMA.md`
 - Raw sources: `wiki/raw/`

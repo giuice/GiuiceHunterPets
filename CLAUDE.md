@@ -102,6 +102,8 @@ CodeWiki is not query-time RAG. It maintains a persistent, human-reviewed markdo
 - After a substantial coding session: run `codewiki-absorb` deliberately to capture durable lessons, entities, decisions, and issues from recent changes.
 - Periodically or when drift is suspected: run `codewiki-lint` and `codewiki-breakdown` to find contradictions, stale claims, orphan pages, and missing high-signal pages.
 - When setting up or auditing Obsidian usage: use `codewiki-obsidian` to keep vault structure, attachments, wikilinks, Dataview-ready frontmatter, and graph navigation compatible with CodeWiki.
+- When a hook surfaces `CODEWIKI_CHANGE_CONTEXT`, treat it as a required follow-up signal: invoke `codewiki-wiki-updater` immediately to propose approval-gated wiki updates, or explicitly defer the same work to `codewiki-absorb` at session end.
+- After `codewiki-wiki-updater` proposes a non-trivial wiki change, invoke `codewiki-verifier` for read-only contradiction, reference, frontmatter, index, log, and backlink review before applying approved wiki edits.
 - Hooks provide context and change signals; they do not replace deliberate ingest/query/absorb/lint work or human approval of wiki writes.
 
 ### Schema Discipline
@@ -136,6 +138,6 @@ Claude Code discovers these from `.claude/skills/codewiki-<name>/SKILL.md` and c
 ### Hooks
 CodeWiki hooks are wired through `.claude/settings.json`.
 
-- `PreToolUse` and `PostToolUse` run on `Write|Edit` to provide wiki context and emit post-verify change context.
+- `PreToolUse` and `PostToolUse` run on `Write|Edit` to provide wiki context and emit post-verify change context; `CODEWIKI_CHANGE_CONTEXT` is the discovery mechanism for invoking `codewiki-wiki-updater`.
 - `.codewiki/hooks/session-end.sh` ships as a shared asset but is not wired automatically in v1. Use `codewiki-absorb` deliberately at the end of a substantial session.
 <!-- codewiki:end -->
