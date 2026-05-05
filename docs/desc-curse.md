@@ -11,12 +11,14 @@ A complete pet companion for Hunters: browse your stable without visiting one, p
 ## What's New
 
 - **7,275 tameable pets** mapped across **170 zones**, including all current Midnight content (Eversong Woods, Isle of Quel'Danas, K'aresh, Hallowfall, Isle of Dorn, The Ringing Deeps, Azj-Kahet, and more).
+- Stable Master pins now appear on the world map and minimap for Hunters, filtered by your faction.
 - Database rebuilt from a resilient pipeline that cross-validates Wowhead with the previously shipped dataset, so pets you could already see don't disappear when Wowhead has a bad day.
 - Coverage of recent battle pet families and reclassified beasts.
 
 ## Changelog
 
 - 🆕 +204 tameable pets, full Midnight coverage (Eversong, K'aresh, Quel'Danas, Hallowfall, and more).
+- 🆕 Stable Master pins on the world map and minimap, with a dedicated settings toggle.
 - 🔄 Updated coordinates and reclassified families synced with current Wowhead.
 - 🛡️ More resilient data pipeline — known-good pet locations preserved even when Wowhead has parsing issues.
 - ⚡ ~3-4× faster source refresh under the hood.
@@ -41,6 +43,14 @@ Tameable beasts show up as pins on the world map **and** the minimap, with a 3D 
 - Filter pins by classification: **All**, **Rare only**, **Elite only**, or **Disabled**
 - Minimap pins update automatically when you change zones
 - Tooltip preview includes the pet's family icon and 3D model
+
+### Stable Master Pins
+
+Stable Masters also appear on the world map and minimap for Hunter characters.
+
+- Faction filtering hides opposing-faction Stable Masters
+- Neutral Stable Masters are shown to both factions
+- A dedicated settings checkbox turns Stable Master pins on or off immediately
 
 ![](https://media.forgecdn.net/attachments/description/null/description_d904454c-b934-4a68-9e51-ea73b8ef7072.png)
 

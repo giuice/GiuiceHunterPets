@@ -22,6 +22,13 @@ json_escape() {
     '
 }
 
+log_wrapper_debug() {
+    [ "${CODEWIKI_HOOK_DEBUG:-}" = "1" ] || return 0
+    mkdir -p "$ROOT/.codewiki/state" 2>/dev/null || return 0
+    printf '{"timestamp":"%s","host":"codex","event":"Stop","stage":"wrapper","stdin_payload":"true","stdout_produced":%s,"wrapper_json":"%s","observable_context":"%s","message":"%s"}\n' \
+        "$(date -u '+%Y-%m-%dT%H:%M:%SZ' 2>/dev/null || date '+%Y-%m-%dT%H:%M:%S%z')" "$1" "$2" "$3" "$4" >>"$ROOT/.codewiki/state/hooks-debug.jsonl" 2>/dev/null || true
+}
+
 PAYLOAD=$(cat 2>/dev/null) || PAYLOAD=""
 ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
 HOOK="$ROOT/.codewiki/hooks/session-end.sh"
@@ -36,13 +43,21 @@ if [ ! -x "$HOOK" ] && [ ! -r "$HOOK" ]; then
     exit 0
 fi
 
-OUTPUT=$(printf '%s' "$PAYLOAD" | bash "$HOOK" 2>/dev/null) || OUTPUT=""
+OUTPUT=$(printf '%s' "$PAYLOAD" | CODEWIKI_HOOK_HOST=codex CODEWIKI_HOOK_EVENT=Stop bash "$HOOK" 2>/dev/null) || OUTPUT=""
 
 if [ -z "$OUTPUT" ]; then
+    log_wrapper_debug false false none "returned empty Codex Stop JSON"
     printf '{}\n'
     exit 0
 fi
 
-ESCAPED_OUTPUT=$(printf '%s' "$OUTPUT" | json_escape)
-printf '{"decision":"block","reason":"%s"}\n' "$ESCAPED_OUTPUT"
+if [ "${CODEWIKI_HOOK_DEBUG:-}" = "1" ]; then
+    ESCAPED_OUTPUT=$(printf '%s' "$OUTPUT" | json_escape)
+    log_wrapper_debug true true continuation "wrapped hook stdout as Codex Stop block JSON"
+    printf '{"decision":"block","reason":"%s"}\n' "$ESCAPED_OUTPUT"
+    exit 0
+fi
+
+log_wrapper_debug false false none "returned empty Codex Stop JSON"
+printf '{}\n'
 exit 0

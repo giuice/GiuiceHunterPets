@@ -98,11 +98,14 @@ CodeWiki is not query-time RAG. It maintains a persistent, human-reviewed markdo
 - At session start for wiki work: read `.codewiki/config.yml`, `wiki/SCHEMA.md`, `wiki/index.md`, and recent `wiki/log.md` before ingest/query/lint/absorb.
 - New external source in `wiki/raw/` or user asks to process docs: use `codewiki-ingest`. Raw sources are immutable; wiki edits are proposed for review.
 - User asks how the project works, why a decision was made, or where knowledge lives: use `codewiki-query` and cite wiki pages rather than inventing answers.
-- New feature or larger change: use `codewiki-prd`, then `codewiki-tasks`, then `codewiki-process` to work one sub-task at a time.
+- User asks what to do next, resumes a session, starts a feature, or needs routing across CodeWiki workflows: use `codewiki-flow` to choose the next focused skill.
+- New feature or larger change: use `codewiki-prd`, then `codewiki-tasks`, then `codewiki-process` to work one task at a time inside the generated phases.
 - After a substantial coding session: run `codewiki-absorb` deliberately to capture durable lessons, entities, decisions, and issues from recent changes.
 - Periodically or when drift is suspected: run `codewiki-lint` and `codewiki-breakdown` to find contradictions, stale claims, orphan pages, and missing high-signal pages.
 - When setting up or auditing Obsidian usage: use `codewiki-obsidian` to keep vault structure, attachments, wikilinks, Dataview-ready frontmatter, and graph navigation compatible with CodeWiki.
-- Hooks provide context and change signals; they do not replace deliberate ingest/query/absorb/lint work or human approval of wiki writes.
+- When `.codewiki/state/pending-absorb.jsonl` exists, treat it as a pending follow-up signal: invoke `codewiki-wiki-updater` for durable wiki-relevant changes, or explicitly defer the same work to `codewiki-absorb` at the next completed phase or explicit user request.
+- After `codewiki-wiki-updater` proposes a non-trivial wiki change, invoke `codewiki-verifier` for read-only contradiction, reference, frontmatter, index, log, and backlink review before applying approved wiki edits.
+- Hooks provide optional context and persistent change signals; they do not replace deliberate ingest/query/absorb/lint work or human approval of wiki writes.
 
 ### Schema Discipline
 - Treat `wiki/SCHEMA.md` as the routing contract for page types, frontmatter, tag taxonomy, page thresholds, archive policy, index metadata, and log format.
@@ -121,7 +124,8 @@ CodeWiki is not query-time RAG. It maintains a persistent, human-reviewed markdo
 - `codewiki-obsidian` — Configure and audit the wiki as an Obsidian-compatible vault
 - `codewiki-prd` — Create a product requirements document
 - `codewiki-tasks` — Generate tasks from a PRD
-- `codewiki-process` — Process a task list one sub-task at a time
+- `codewiki-process` — Process a phase plan one task at a time
+- `codewiki-flow` — Choose the right CodeWiki skill for setup, ingest, query, feature work, change-context follow-up, absorb, breakdown, and lint
 
 Claude Code discovers these from `.claude/skills/codewiki-<name>/SKILL.md` and can invoke them through its native skill system.
 
@@ -132,10 +136,11 @@ Claude Code discovers these from `.claude/skills/codewiki-<name>/SKILL.md` and c
 - Raw sources: `wiki/raw/`
 - PRD/task workflow: `.codewiki/tasks/`
 - Config: `.codewiki/config.yml`
+- Pending absorb state: `.codewiki/state/pending-absorb.jsonl`
 
 ### Hooks
 CodeWiki hooks are wired through `.claude/settings.json`.
 
-- `PreToolUse` and `PostToolUse` run on `Write|Edit` to provide wiki context and emit post-verify change context.
+- `PreToolUse` and `PostToolUse` run on `Write|Edit` for short optional context and persistent pending-absorb signals. Hook output is advisory and may not be delivered by every host/runtime.
 - `.codewiki/hooks/session-end.sh` ships as a shared asset but is not wired automatically in v1. Use `codewiki-absorb` deliberately at the end of a substantial session.
 <!-- codewiki:end -->

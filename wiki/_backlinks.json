@@ -4,19 +4,48 @@
     "incoming": ["concepts/wow-addon-api-migration.md"]
   },
   "concepts/wow-addon-api-migration.md": {
-    "outgoing": ["sources/wow-api-migration-sources.md"],
-    "incoming": ["sources/wow-api-migration-sources.md"]
+    "outgoing": [
+      "lessons/library-update-safety.md",
+      "sources/wow-api-migration-sources.md"
+    ],
+    "incoming": [
+      "lessons/library-update-safety.md",
+      "sources/wow-api-migration-sources.md"
+    ]
   },
   "lessons/data-refresh-pipeline.md": {
-    "outgoing": ["lessons/pipeline-pitfalls.md"],
-    "incoming": ["lessons/pipeline-pitfalls.md"]
+    "outgoing": [
+      "decisions/stable-master-neutral-faction.md",
+      "entities/stable-master-pins.md",
+      "lessons/pipeline-pitfalls.md"
+    ],
+    "incoming": [
+      "entities/stable-master-pins.md",
+      "lessons/pipeline-pitfalls.md"
+    ]
   },
   "lessons/pipeline-pitfalls.md": {
     "outgoing": ["lessons/data-refresh-pipeline.md"],
     "incoming": ["lessons/data-refresh-pipeline.md"]
   },
   "lessons/library-update-safety.md": {
+    "outgoing": ["concepts/wow-addon-api-migration.md"],
+    "incoming": ["concepts/wow-addon-api-migration.md"]
+  },
+  "entities/stable-master-pins.md": {
+    "outgoing": [
+      "decisions/stable-master-neutral-faction.md",
+      "lessons/data-refresh-pipeline.md"
+    ],
+    "incoming": [
+      "lessons/data-refresh-pipeline.md"
+    ]
+  },
+  "decisions/stable-master-neutral-faction.md": {
     "outgoing": [],
-    "incoming": []
+    "incoming": [
+      "entities/stable-master-pins.md",
+      "lessons/data-refresh-pipeline.md"
+    ]
   }
 }

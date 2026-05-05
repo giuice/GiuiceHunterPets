@@ -26,7 +26,17 @@ function tests.nil_stabled_list_is_unloaded()
     local state = GHP.utils.GetStablePetListState(nil, nil)
     assertEqual(state.status, "unloaded", "status")
     assertTableLength(state.pets, 0, "pets")
-    assertEqual(state.message, "Stable data is not loaded yet. Open a stable master once on this hunter, then reopen this window.", "message")
+    assertEqual(state.message, "Stable data is not available right now. Full stable data may require leaving the instance or opening a stable master.", "message")
+end
+
+function tests.nil_stabled_list_falls_back_to_active_pets()
+    local activePets = {
+        { name = "Active One", familyName = "Cat", level = 70 },
+    }
+    local state = GHP.utils.GetStablePetListState(nil, activePets)
+    assertEqual(state.status, "active-only", "status")
+    assertTableLength(state.pets, 1, "pets")
+    assertEqual(state.message, "Only active pets are available right now. Full stable data may require leaving the instance or opening a stable master.", "message")
 end
 
 function tests.empty_stabled_and_empty_active_list_is_empty()
@@ -44,7 +54,7 @@ function tests.empty_stabled_list_falls_back_to_active_pets()
     local state = GHP.utils.GetStablePetListState({}, activePets)
     assertEqual(state.status, "active-only", "status")
     assertTableLength(state.pets, 2, "pets")
-    assertEqual(state.message, "Only active pets are available. Open a stable master once on this hunter to load the full stable.", "message")
+    assertEqual(state.message, "Only active pets are available right now. Full stable data may require leaving the instance or opening a stable master.", "message")
 end
 
 function tests.stabled_pets_take_priority()

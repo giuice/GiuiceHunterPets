@@ -3,20 +3,12 @@ local addonName, GHP = ...
 GHP = GHP or _G.GHP or {}
 GHP.utils = GHP.utils or {}
 
-local UNLOADED_MESSAGE = "Stable data is not loaded yet. Open a stable master once on this hunter, then reopen this window."
-local ACTIVE_ONLY_MESSAGE = "Only active pets are available. Open a stable master once on this hunter to load the full stable."
+local UNLOADED_MESSAGE = "Stable data is not available right now. Full stable data may require leaving the instance or opening a stable master."
+local ACTIVE_ONLY_MESSAGE = "Only active pets are available right now. Full stable data may require leaving the instance or opening a stable master."
 local EMPTY_MESSAGE = "No stable pets were returned for this hunter."
 
 function GHP.utils.GetStablePetListState(stabledPets, activePets)
-    if stabledPets == nil then
-        return {
-            status = "unloaded",
-            pets = {},
-            message = UNLOADED_MESSAGE,
-        }
-    end
-
-    if #stabledPets > 0 then
+    if stabledPets and #stabledPets > 0 then
         return {
             status = "loaded",
             pets = stabledPets,
@@ -29,6 +21,14 @@ function GHP.utils.GetStablePetListState(stabledPets, activePets)
             status = "active-only",
             pets = activePets,
             message = ACTIVE_ONLY_MESSAGE,
+        }
+    end
+
+    if stabledPets == nil then
+        return {
+            status = "unloaded",
+            pets = {},
+            message = UNLOADED_MESSAGE,
         }
     end
 

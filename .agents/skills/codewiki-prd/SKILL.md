@@ -1,6 +1,6 @@
 ---
 name: codewiki-prd
-description: Generate a Product Requirements Document from a feature idea
+description: Drafts an implementation-ready Product Requirements Document from a feature idea using repository and wiki context. Use when the user wants to plan a new feature, clarify product intent, define scope before implementation, capture acceptance criteria, or start the CodeWiki PRD -> tasks -> process development workflow.
 argument-hint: <feature-description>
 allowed-tools: [Read, Write, Edit, Glob, Grep, Bash, Task]
 ---
@@ -9,8 +9,8 @@ allowed-tools: [Read, Write, Edit, Glob, Grep, Bash, Task]
 
 <purpose>
 Turn a feature idea into a concrete Product Requirements Document that fits the current codebase.
-Use the existing repository and wiki as context. Default to an interactive clarification flow, with
-`--fast` available for one-pass drafting when the user explicitly asks for speed.
+Use the existing repository and wiki as context. Default to an interactive clarification flow unless
+the user includes the `--fast` flag in their input to request one-pass drafting.
 </purpose>
 
 <process>
@@ -20,13 +20,13 @@ Use the existing repository and wiki as context. Default to an interactive clari
 
 ## Step 2: Resolve the task directory
 - Read `.codewiki/config.yml` if it exists.
-- Use `wiki.tasks_path` as the PRD/task directory when present.
-- If `wiki.tasks_path` is missing, use `.codewiki/tasks/`.
+- If `.codewiki/config.yml` declares `wiki.tasks_path`, use it as the PRD/task directory.
+- If `wiki.tasks_path` is not declared, use `.codewiki/tasks/`.
 - Create the directory if it does not exist.
 
 ## Step 3: Choose the interaction mode
 - If `$ARGUMENTS` contains `--fast`, switch to fast mode.
-- Otherwise default to interactive mode.
+- If `$ARGUMENTS` does not contain `--fast`, use interactive mode.
 - In interactive mode, ask clarifying questions before writing the PRD. Use lettered or numbered
   options so the user can answer quickly.
 

@@ -65,9 +65,14 @@ local function CreateMainFrame()
     end
 
     -- Add hunter icon
-    frame.portraitIcon = "Interface\\Icons\\ClassIcon_Hunter"
+    local hunterIcon = "Interface\\Icons\\ClassIcon_Hunter"
+    frame.portraitIcon = hunterIcon
      -- Portrait and title (correct method)
-    frame:SetPortraitToAsset("Interface\\Icons\\ClassIcon_Hunter") 
+    if frame.SetPortraitToAsset then
+        frame:SetPortraitToAsset(hunterIcon)
+    elseif frame.PortraitContainer and frame.PortraitContainer.portrait then
+        frame.PortraitContainer.portrait:SetTexture(hunterIcon)
+    end
     --SetPortraitToTexture(frame.PortraitContainer.portrait, "Interface\\Icons\\ClassIcon_Hunter")
         -- Title text
     frame.TitleContainer.TitleText:SetText("Giuice's hunter pets viewer")
@@ -198,11 +203,15 @@ function GHP.utils.UpdatePetList(frame, searchText)
     local activePets = C_StableInfo.GetActivePetList()
     local state = GHP.utils.GetStablePetListState(stabledPets, activePets)
     local filteredPets = GHP.utils.FilterStablePets(state.pets, searchText, frame.searchType())
+    local listTopOffset = 0
 
     if frame.emptyState then
-        if state.message and #filteredPets == 0 then
+        if state.message and (#filteredPets == 0 or state.status == "active-only") then
             frame.emptyState:SetText(state.message)
             frame.emptyState:Show()
+            if #filteredPets > 0 then
+                listTopOffset = -44
+            end
         else
             frame.emptyState:Hide()
         end
@@ -217,7 +226,7 @@ function GHP.utils.UpdatePetList(frame, searchText)
         if previousElement then
             petContainer:SetPoint("TOPLEFT", previousElement, "BOTTOMLEFT", 0, -2)
         else
-            petContainer:SetPoint("TOPLEFT", 0, 0)
+            petContainer:SetPoint("TOPLEFT", 0, listTopOffset)
         end
         previousElement = petContainer
         totalHeight = totalHeight + 72
@@ -226,7 +235,7 @@ function GHP.utils.UpdatePetList(frame, searchText)
     if #filteredPets > 0 then
         GHP.utils.ShowPetDetails(GHP.frames.mainFrame.detailPanel, filteredPets[1])
     end
-    scrollChild:SetHeight(math.max(totalHeight, frame:GetHeight()))
+    scrollChild:SetHeight(math.max(totalHeight + math.abs(listTopOffset), frame:GetHeight()))
     
 end
 

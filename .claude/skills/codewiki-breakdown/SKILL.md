@@ -1,6 +1,6 @@
 ---
 name: codewiki-breakdown
-description: Find undocumented entities referenced in wiki and propose new pages
+description: Finds important but undocumented CodeWiki entities, concepts, decisions, lessons, or issues by scanning wikilinks, backlinks, repeated mentions, and code-backed references. Use when the wiki has thin pages, missing high-signal pages, repeated unresolved links, or the user asks to expand the knowledge graph.
 allowed-tools: [Read, Glob, Grep, Bash]
 ---
 
@@ -15,14 +15,15 @@ gaps get filled first.
 <process>
 ## Step 1: Resolve and orient in the wiki
 - Read `.codewiki/config.yml` if it exists.
-- Use `wiki.path` as the wiki root when present; otherwise use `wiki/`.
-- Read `SCHEMA.md` from the resolved wiki root when it exists.
+- If `.codewiki/config.yml` declares `wiki.path`, use it as the wiki root.
+- If `wiki.path` is not declared, use `wiki/` as the wiki root.
 - Read `index.md` from the resolved wiki root.
+- Read `SCHEMA.md` from the resolved wiki root when it exists.
 - Read recent entries from `log.md` in the resolved wiki root.
 
 ## Step 2: Load backlink index and wiki inventory
-- Read `_backlinks.json` from the resolved wiki root.
-- If it is missing or empty, scan markdown files under the resolved wiki root for `[[wikilink]]` references and build the backlink index before continuing.
+- Read `_backlinks.json` from the resolved wiki root when it exists.
+- If `_backlinks.json` is missing or empty, scan markdown files under the resolved wiki root for `[[wikilink]]` references and build the backlink index before continuing.
 - Use `Glob` under the resolved wiki root to inventory all existing wiki pages.
 
 ## Step 3: Find undocumented references
@@ -38,7 +39,7 @@ gaps get filled first.
   - backlink count from `_backlinks.json`
   - number of wiki pages mentioning the entity
   - whether the entity is also visible in code
-- Drop candidates that are only passing mentions, incidental details, or outside the project domain.
+- Drop candidates that are mentioned fewer than 2 times, not directly related to the project's codebase or wiki, or lacking clear relevance to the project knowledge graph.
 - Prefer candidates that are central to one source/change or appear across two or more sources/wiki pages.
 
 ## Step 6: Propose batch

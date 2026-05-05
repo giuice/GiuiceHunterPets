@@ -102,7 +102,18 @@ cp scrapper/generated/StableMastersData.lua StableMastersData.lua
 
 Stable masters **nao tem baseline shippado**; build skip-and-continue por registro mas sem fallback. Se zero stable masters validarem -> exit 1 com `stable-master-blockers.md`.
 
-> **Nota:** a feature de pins de stable master in-game ainda nao esta implementada — gerar e copiar `StableMastersData.lua` so faz sentido depois que os arquivos Lua de renderizacao existirem (`MapStableMasterIndex.lua`, `GiuiceStableMasterPins.lua`). Veja `docs/plans/stable-master-pins.md`.
+Antes de promover release, valide que `StableMastersData.lua` foi carregado pelo TOC antes de `StableMasterIndex.lua` e `StableMasterPins.lua`. A feature in-game usa `StableMasterIndex.lua` para indexar por `zoneID` e `StableMasterPins.lua` para renderizar pins independentes de pet pins.
+
+Neutral records (`faction = "Neutral"`) sao tratados como visiveis para ambas as faccoes na v1. Se a fonte mudar a semantica desse campo, revise a regra antes de promover nova base.
+
+### Verificacao in-game obrigatoria
+
+- Hunter Horde em zona com stable masters Horde/Neutral: world map e minimap mostram pins esperados; Alliance-only nao aparece.
+- Hunter Alliance em zona com stable masters Alliance/Neutral: world map e minimap mostram pins esperados; Horde-only nao aparece.
+- Tooltip do pin mostra nome, `Stable Master`, zona e faccao.
+- Toggle `Show Stable Master Pins` remove e restaura pins do world map e minimap sem `/reload`.
+- Toggle e filtros de pet pins continuam funcionando sem alterar pins de stable master.
+- Confirmar que `Interface\\Icons\\Ability_Hunter_BeastCall` renderiza como icone de stable master; se aparecer textura ausente, escolher fallback antes do release.
 
 ## Onde Fica o Estado
 
@@ -196,7 +207,8 @@ Para NPCs sem locais mapeados, Wowhead serve `g_mapperData = []` ou omite a atri
 | Familia (id, nome) | Wowhead vence sobre baseline em fallback |
 | `g_mapperData` vazio/ausente | Tratado como "sem coords" (nao fatal); cura manifest |
 | Row malformada em listview de familia | Drop apenas a row; familia continua |
-| Stable masters | Sem fallback, skip-and-continue por registro; pipeline pronto, integracao Lua pendente |
+| Stable masters | Sem fallback, skip-and-continue por registro; `StableMastersData.lua` promove para raiz e alimenta `StableMasterIndex.lua` + `StableMasterPins.lua` |
+| Stable master neutral records | `faction = "Neutral"` visivel para Alliance e Horde na v1 |
 | Loop externo `while true` | Nao mais necessario |
 
 ## Comandos Equivalentes (referencia rapida)

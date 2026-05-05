@@ -3,6 +3,7 @@ _, GHP = ...
 
 GHP_SavedVars = GHP_SavedVars or {
     worldMapPins = 1, -- Default to "All Pets Pins"
+    stableMasterPins = true,
     tooltips = true,
     minimapPins = true,
     position = nil,
@@ -15,6 +16,39 @@ GHP.category_id = category:GetID()
 
 
 do
+    local name = "Show Stable Master Pins"
+    local variableKey = "stableMasterPins"
+    local defaultValue = true
+
+    local function GetValue()
+        if GHP_SavedVars.stableMasterPins == nil then
+            return defaultValue
+        end
+
+        return GHP_SavedVars.stableMasterPins
+    end
+
+    local function SetValue(value)
+        GHP_SavedVars.stableMasterPins = value
+    end
+
+    local setting = Settings.RegisterProxySetting(category,
+        variableKey,
+        type(defaultValue),
+        name,
+        defaultValue,
+        GetValue,
+        SetValue
+    )
+
+    local tooltip = "Enable or disable showing stable master pins on the world map and minimap"
+    setting:SetValueChangedCallback(function(setting, value)
+        GHP.OnStableMasterPinsSettingChanged(setting, value)
+    end)
+    Settings.CreateCheckbox(category, setting, tooltip)
+end
+
+do
     local name = "Show Pet Pins on World Map"
     local variable = "GHP_WorldMapPins"
     local variableKey = "worldMapPins"
@@ -24,10 +58,11 @@ do
 
     local function GetOptions()
         local container = Settings.CreateControlTextContainer()
-        container:Add(1, "All Pets Pins")
-        container:Add(2, "Rares Pets Pins")
-        container:Add(3, "Elite Pets Pins")
-        container:Add(4, "Disable Pins")
+        container:Add(1, "All Pet Pins")
+        container:Add(2, "Rare Pet Pins")
+        container:Add(3, "Elite Pet Pins")
+        container:Add(5, "Rare Elite Pet Pins")
+        container:Add(4, "Disable Pet Pins")
         return container:GetData()
     end
 

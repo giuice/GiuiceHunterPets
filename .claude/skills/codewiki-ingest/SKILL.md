@@ -1,6 +1,6 @@
 ---
 name: codewiki-ingest
-description: Digest a raw source document into wiki pages
+description: Digests raw source documents into human-approved CodeWiki pages with summaries, entities, decisions, links, index updates, log entries, and source drift checks. Use when new material appears under wiki/raw, the user asks to process docs, ingest articles/papers/transcripts/specs, bulk-import sources, or update the wiki from immutable raw evidence.
 argument-hint: <source-file-path>
 allowed-tools: [Read, Write, Edit, Glob, Grep, Bash]
 ---
@@ -17,12 +17,16 @@ until the user approves the proposal.
 ## Step 1: Resolve the source
 - Treat `$ARGUMENTS` as the source file path.
 - Read `.codewiki/config.yml` if it exists.
-- Use `wiki.path` as the wiki root when present; otherwise use `wiki/`.
-- Use `wiki.raw_path` as the raw source root when present; otherwise use `wiki/raw/`.
+- If `.codewiki/config.yml` declares `wiki.path`, use it as the wiki root.
+- If `wiki.path` is not declared, use `wiki/` as the wiki root.
+- If `.codewiki/config.yml` declares `wiki.raw_path`, use it as the raw source root.
+- If `wiki.raw_path` is not declared, use `wiki/raw/` as the raw source root.
 - If no path was provided, ask the user which raw file to ingest.
-- If the user provides a relative path that does not exist, also try resolving it under the raw source root.
+- If the user provides a relative path and it exists, use that path.
+- If the user provides a relative path and it does not exist, try resolving it under the raw source root.
 - Default raw source locations are `wiki/raw/articles/`, `wiki/raw/papers/`, `wiki/raw/transcripts/`, `wiki/raw/specs/`, and `wiki/raw/assets/`.
 - Read the source and note what kind of material it is (notes, article, transcript, spec, diff).
+- If the source file cannot be read or is invalid, notify the user and skip processing that file.
 - If the source has raw frontmatter with `sha256`, recompute the digest over the body after the closing `---`.
 - Skip re-ingest when the recomputed digest matches. Flag source drift when it does not match.
 - When capturing a new markdown source, add raw frontmatter with `source_url`, `ingested`, and `sha256` when those values are known.
