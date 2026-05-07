@@ -1,5 +1,9 @@
 local addonName, GHP = ...
 
+if UnitClass and select(3, UnitClass("player")) ~= 3 then
+    return
+end
+
 -- Initialize addon table with necessary functions
 GHP.utils = GHP.utils or {}
 GHP.frames = GHP.frames or {}

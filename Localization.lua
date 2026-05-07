@@ -1,5 +1,9 @@
 local addonName, GHP = ...
 
+if UnitClass and select(3, UnitClass("player")) ~= 3 then
+    return
+end
+
 -- Add after our existing helper functions
 local L = {
     -- English
@@ -60,4 +64,3 @@ for baseKey, baseValue in pairs(L["enUS"]) do
         GHP.exoticFamilies[L[clientLocale][baseKey]] = true
     end
 end
-

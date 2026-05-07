@@ -1,4 +1,8 @@
 
+if UnitClass and select(3, UnitClass("player")) ~= 3 then
+    return
+end
+
 
 -- Create the main frame
 local petListFrame = CreateFrame("Frame", "PetListFrame", UIParent, "BasicFrameTemplateWithInset")

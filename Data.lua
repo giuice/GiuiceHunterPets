@@ -1,3 +1,9 @@
+local addonName, GHP = ...
+
+if UnitClass and select(3, UnitClass("player")) ~= 3 then
+    return
+end
+
 GHP.pet_by_zones = {
     {
         ["zone_name"] = "Durotar",

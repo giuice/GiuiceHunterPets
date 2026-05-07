@@ -1,5 +1,9 @@
 _, GHP = ...
 
+if UnitClass and select(3, UnitClass("player")) ~= 3 then
+    return
+end
+
 
 GHP_SavedVars = GHP_SavedVars or {
     worldMapPins = 1, -- Default to "All Pets Pins"
@@ -61,7 +65,7 @@ do
         container:Add(1, "All Pet Pins")
         container:Add(2, "Rare Pet Pins")
         container:Add(3, "Elite Pet Pins")
-        container:Add(5, "Rare Elite Pet Pins")
+        container:Add(5, "Rare and Elite Pet Pins")
         container:Add(4, "Disable Pet Pins")
         return container:GetData()
     end

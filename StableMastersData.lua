@@ -1,6 +1,10 @@
 -- StableMastersData.lua
 local addonName, GHP = ...
 
+if UnitClass and select(3, UnitClass("player")) ~= 3 then
+    return
+end
+
 GHP.stable_masters = {
     {
         ["npcID"] = 9987,

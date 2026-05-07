@@ -1,5 +1,9 @@
 local addonName, addonTable = ...
 
+if UnitClass and select(3, UnitClass("player")) ~= 3 then
+    return
+end
+
 local GHP = addonTable or _G.GHP or {}
 _G.GHP = GHP
 
@@ -19,8 +23,10 @@ local function IsEliteClassification(classification)
     return classification == "Elite"
 end
 
-local function IsRareEliteClassification(classification)
-    return classification == "Rare Elite"
+local function IsRareOrEliteClassification(classification)
+    return classification == "Rare"
+        or classification == "Elite"
+        or classification == "Rare Elite"
 end
 
 function GHP.BuildMapPetIndex(pets)
@@ -49,7 +55,7 @@ function GHP.GetPetsForMap(index, mapID, settingValue)
         if setting == "allpets"
             or (setting == "rarepets" and IsRareClassification(petData.class))
             or (setting == "elitepets" and IsEliteClassification(petData.class))
-            or (setting == "rareelitepets" and IsRareEliteClassification(petData.class)) then
+            or (setting == "rareelitepets" and IsRareOrEliteClassification(petData.class)) then
             table.insert(filteredPets, petData)
         end
     end

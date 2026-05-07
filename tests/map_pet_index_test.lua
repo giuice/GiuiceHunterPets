@@ -43,8 +43,10 @@ assertTableLength(elitePets, 1, "elitePets")
 assertEqual(elitePets[1].name, "Elite Bear", "elitePets first")
 
 local rareElitePets = GHP.GetPetsForMap(index, 1, 5)
-assertTableLength(rareElitePets, 1, "rareElitePets")
-assertEqual(rareElitePets[1].name, "Rare Elite Spirit Beast", "rareElitePets first")
+assertTableLength(rareElitePets, 3, "rareElitePets")
+assertEqual(rareElitePets[1].name, "Rare Wolf", "rareElitePets first")
+assertEqual(rareElitePets[2].name, "Elite Bear", "rareElitePets second")
+assertEqual(rareElitePets[3].name, "Rare Elite Spirit Beast", "rareElitePets third")
 
 local disabledPets = GHP.GetPetsForMap(index, 1, 4)
 assertTableLength(disabledPets, 0, "disabledPets")

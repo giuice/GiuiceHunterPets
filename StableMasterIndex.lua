@@ -1,5 +1,9 @@
 local addonName, addonTable = ...
 
+if UnitClass and select(3, UnitClass("player")) ~= 3 then
+    return
+end
+
 local GHP = addonTable or _G.GHP or {}
 _G.GHP = GHP
 
