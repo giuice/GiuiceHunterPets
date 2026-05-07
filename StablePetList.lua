@@ -8,10 +8,9 @@ GHP = GHP or _G.GHP or {}
 GHP.utils = GHP.utils or {}
 
 local UNLOADED_MESSAGE = "Stable data is not available right now. Full stable data may require leaving the instance or opening a stable master."
-local ACTIVE_ONLY_MESSAGE = "Only active pets are available right now. Full stable data may require leaving the instance or opening a stable master."
 local EMPTY_MESSAGE = "No stable pets were returned for this hunter."
 
-function GHP.utils.GetStablePetListState(stabledPets, activePets)
+function GHP.utils.GetStablePetListState(stabledPets, isAtStableMaster)
     if stabledPets and #stabledPets > 0 then
         return {
             status = "loaded",
@@ -20,26 +19,18 @@ function GHP.utils.GetStablePetListState(stabledPets, activePets)
         }
     end
 
-    if activePets and #activePets > 0 then
+    if isAtStableMaster and stabledPets then
         return {
-            status = "active-only",
-            pets = activePets,
-            message = ACTIVE_ONLY_MESSAGE,
-        }
-    end
-
-    if stabledPets == nil then
-        return {
-            status = "unloaded",
+            status = "empty",
             pets = {},
-            message = UNLOADED_MESSAGE,
+            message = EMPTY_MESSAGE,
         }
     end
 
     return {
-        status = "empty",
+        status = "unloaded",
         pets = {},
-        message = EMPTY_MESSAGE,
+        message = UNLOADED_MESSAGE,
     }
 end
 
@@ -71,6 +62,22 @@ function GHP.utils.FilterStablePets(pets, searchText, searchType)
     end
 
     return filteredPets
+end
+
+local function IsValidActivePetSlot(slotID, maxSlots)
+    return type(slotID) == "number" and slotID >= 1 and slotID <= maxSlots and math.floor(slotID) == slotID
+end
+
+function GHP.utils.IndexActivePetsBySlot(activePets, maxSlots)
+    local petsBySlot = {}
+
+    for _, pet in ipairs(activePets or {}) do
+        if pet and IsValidActivePetSlot(pet.slotID, maxSlots or 0) then
+            petsBySlot[pet.slotID] = pet
+        end
+    end
+
+    return petsBySlot
 end
 
 local function AppendAbilities(target, abilities)

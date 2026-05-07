@@ -200,18 +200,15 @@ function GHP.utils.UpdatePetList(frame, searchText)
     end
 
     local stabledPets = C_StableInfo.GetStabledPetList()
-    local activePets = C_StableInfo.GetActivePetList()
-    local state = GHP.utils.GetStablePetListState(stabledPets, activePets)
+    local isAtStableMaster = C_StableInfo.IsAtStableMaster and C_StableInfo.IsAtStableMaster()
+    local state = GHP.utils.GetStablePetListState(stabledPets, isAtStableMaster)
     local filteredPets = GHP.utils.FilterStablePets(state.pets, searchText, frame.searchType())
     local listTopOffset = 0
 
     if frame.emptyState then
-        if state.message and (#filteredPets == 0 or state.status == "active-only") then
+        if state.message and #filteredPets == 0 then
             frame.emptyState:SetText(state.message)
             frame.emptyState:Show()
-            if #filteredPets > 0 then
-                listTopOffset = -44
-            end
         else
             frame.emptyState:Hide()
         end

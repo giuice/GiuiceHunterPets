@@ -195,7 +195,7 @@ function GiuiceHunterActivePetListMixin:OnEvent(event, ...)
 end
 
 function GiuiceHunterActivePetListMixin:Refresh()
-    self.pets = C_StableInfo.GetActivePetList() or {};
+    self.pets = GHP.utils.IndexActivePetsBySlot(C_StableInfo.GetActivePetList(), #self.PetButtons);
     
     -- Update regular pet slots
     for i = 1, 5 do
