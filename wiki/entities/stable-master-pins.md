@@ -4,13 +4,15 @@ id: ENTITY-001
 title: Stable Master Pins
 name: Stable Master Pins
 created: 2026-05-04
-updated: 2026-05-05
+updated: 2026-05-07
 tags: [architecture, testing, release]
 sources:
   - .codewiki/tasks/0001-prd-stable-master-pins.md
   - .codewiki/tasks/tasks-0001-prd-stable-master-pins.md
   - StableMasterPins.lua
   - StableMasterIndex.lua
+  - StableMastersData.lua
+  - Settings.lua
   - tests/stable_master_index_test.lua
   - tests/stable_master_pins_settings_test.lua
 status: active
@@ -53,7 +55,7 @@ The implementation deliberately keeps stable masters independent from tameable p
 
 ## Current Behavior
 
-`StableMasterPins.lua` exits early for non-Hunter characters by checking `select(3, UnitClass("player"))`. For Hunters, it renders stable masters on the current world map and minimap when `GHP_SavedVars.stableMasterPins ~= false`.
+Stable master pins are part of the broader [[hunter-only-runtime-initialization]] model. `StableMastersData.lua`, `StableMasterIndex.lua`, `StableMasterPins.lua`, and the shared settings module all exit early for non-Hunter characters before registering data, indexes, settings, frames, or pin refresh hooks. For Hunters, `StableMasterPins.lua` renders stable masters on the current world map and minimap when `GHP_SavedVars.stableMasterPins ~= false`.
 
 Stable master pins use these independent HBD-Pins keys:
 
@@ -85,3 +87,5 @@ Manual in-game checks remain required before release because HBD-Pins rendering,
 ## Related Pages
 
 - [[data-refresh-pipeline]] — stable master source collection, validation, and release checks
+- [[hunter-only-runtime-initialization]] — class guard behavior for `.toc`-loaded modules
+- [[pet-map-pins]] — separate map pin system for tameable beasts

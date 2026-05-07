@@ -10,6 +10,11 @@ GiuiceHunterPets is a World of Warcraft addon that lists all hunter pets in a cu
 - ~~Displays a list of all battle pets with their name and level.~~ (not implemented yet maybe in future versions)
 - Customizable frame with scroll functionality.
 - Minimap button to open/close the petlist window.
+- Runtime features are restricted to Hunter characters, so non-Hunter characters do not register the addon's settings, map pins, tooltip hooks, or pet data.
+
+## Changelog
+
+- Added Hunter-only runtime guards across addon modules. Non-Hunter characters can still see the addon installed in the AddOns list, but the addon no longer initializes its UI, map pins, tooltip enhancements, settings, or pet/stable data for those characters.
 
 ## Installation
 

@@ -55,3 +55,17 @@ type: log
 - Fixed raw source SHA drift in 4 raw specs by aligning stored hashes to the schema body-hash rule.
 - Fixed stale backlinks and one missing required frontmatter field.
 - Added addon-relevant cross-links among data refresh, pipeline pitfalls, stable master pins, library safety, and WoW API migration pages.
+
+## [2026-05-07] absorb | Hunter-only runtime initialization and release staging
+
+- Created: `wiki/concepts/hunter-only-runtime-initialization.md` (CONCEPT-002)
+- Created: `wiki/entities/pet-map-pins.md` (ENTITY-002)
+- Created: `wiki/entities/addon-staging-script.md` (ENTITY-003)
+- Updated: `wiki/entities/stable-master-pins.md` — broadened Hunter-only runtime guard narrative beyond `StableMasterPins.lua`
+- Updated: `wiki/index.md` — added 3 entries, total pages: 10
+- Updated: `wiki/_backlinks.json` — rebuilt links for Hunter-only initialization, pet map pins, stable master pins, staging, and release safety pages
+
+## [2026-05-07] lint | CodeWiki Health Check
+
+- Verified wikilinks, index coverage, active page frontmatter, tag taxonomy, backlinks JSON, log format, and referenced runtime files.
+- Fixed source hash drift in 4 raw specs by aligning stored hashes to the schema body-hash rule.

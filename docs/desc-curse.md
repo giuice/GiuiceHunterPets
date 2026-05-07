@@ -10,6 +10,7 @@ A complete pet companion for Hunters: browse your stable without visiting one, p
 
 ## What's New
 
+- Hunter-only runtime loading now prevents the addon's UI, settings, map pins, tooltip hooks, and pet data from initializing on non-Hunter characters.
 - **7,275 tameable pets** mapped across **170 zones**, including all current Midnight content (Eversong Woods, Isle of Quel'Danas, K'aresh, Hallowfall, Isle of Dorn, The Ringing Deeps, Azj-Kahet, and more).
 - Stable Master pins now appear on the world map and minimap for Hunters, filtered by your faction.
 - Database rebuilt from a resilient pipeline that cross-validates Wowhead with the previously shipped dataset, so pets you could already see don't disappear when Wowhead has a bad day.
@@ -17,6 +18,7 @@ A complete pet companion for Hunters: browse your stable without visiting one, p
 
 ## Changelog
 
+- 🛡️ Added Hunter-only runtime guards so non-Hunter characters no longer initialize GiuiceHunterPets settings, map pins, tooltip hooks, UI frames, or pet/stable data.
 - 🆕 +204 tameable pets, full Midnight coverage (Eversong, K'aresh, Quel'Danas, Hallowfall, and more).
 - 🆕 Stable Master pins on the world map and minimap, with a dedicated settings toggle.
 - 🔄 Updated coordinates and reclassified families synced with current Wowhead.

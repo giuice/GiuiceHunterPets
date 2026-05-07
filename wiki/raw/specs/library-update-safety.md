@@ -1,7 +1,7 @@
 ---
 source_url: https://github.com/giuice/GiuiceHunterPets/blob/main/important-readme.md
 ingested: 2026-05-04
-sha256: 31c389e673003526fbff20e7736d539fa99a270bb87c732cd317acd331831cb5
+sha256: 9fc71bb9647be09ed254070741822c1583d5e31e313e37a9ae2ba47525ca3cb0
 ---
 
 # IMPORTANT: How To Update Libraries Safely

@@ -7,11 +7,13 @@ project: "GiuiceHunterPets"
 
 This index is the first file read by `codewiki query` before matched pages.
 
-> Last updated: 2026-05-05 | Total pages: 7
+> Last updated: 2026-05-07 | Total pages: 10
 
 ## Entities
 
 - [ENTITY-001: Stable Master Pins](entities/stable-master-pins.md) — Hunter-only stable master world map and minimap pins with independent data, index, renderer, settings, and HBD-Pins keys
+- [ENTITY-002: Pet Map Pins](entities/pet-map-pins.md) — Hunter-only tameable pet world map and minimap pins with classification filters and map indexes
+- [ENTITY-003: Addon Staging Script](entities/addon-staging-script.md) — Runtime-file staging and WoW AddOns sync helper for release checks
 
 ## Decisions
 
@@ -20,6 +22,7 @@ This index is the first file read by `codewiki query` before matched pages.
 ## Concepts
 
 - [CONCEPT-001: WoW Addon API Migration](concepts/wow-addon-api-migration.md) — Breaking-wave migration path from 11.0.7 to 12.0.5
+- [CONCEPT-002: Hunter-Only Runtime Initialization](concepts/hunter-only-runtime-initialization.md) — Class guard model for `.toc`-loaded modules with runtime side effects
 
 ## Comparisons
 

@@ -20,6 +20,7 @@
       "lessons/pipeline-pitfalls.md"
     ],
     "incoming": [
+      "entities/pet-map-pins.md",
       "entities/stable-master-pins.md",
       "lessons/pipeline-pitfalls.md"
     ]
@@ -30,14 +31,21 @@
   },
   "lessons/library-update-safety.md": {
     "outgoing": ["concepts/wow-addon-api-migration.md"],
-    "incoming": ["concepts/wow-addon-api-migration.md"]
+    "incoming": [
+      "concepts/wow-addon-api-migration.md",
+      "entities/addon-staging-script.md"
+    ]
   },
   "entities/stable-master-pins.md": {
     "outgoing": [
+      "concepts/hunter-only-runtime-initialization.md",
       "decisions/stable-master-neutral-faction.md",
+      "entities/pet-map-pins.md",
       "lessons/data-refresh-pipeline.md"
     ],
     "incoming": [
+      "concepts/hunter-only-runtime-initialization.md",
+      "entities/pet-map-pins.md",
       "lessons/data-refresh-pipeline.md"
     ]
   },
@@ -47,5 +55,35 @@
       "entities/stable-master-pins.md",
       "lessons/data-refresh-pipeline.md"
     ]
+  },
+  "concepts/hunter-only-runtime-initialization.md": {
+    "outgoing": [
+      "entities/addon-staging-script.md",
+      "entities/pet-map-pins.md",
+      "entities/stable-master-pins.md"
+    ],
+    "incoming": [
+      "entities/addon-staging-script.md",
+      "entities/pet-map-pins.md",
+      "entities/stable-master-pins.md"
+    ]
+  },
+  "entities/pet-map-pins.md": {
+    "outgoing": [
+      "concepts/hunter-only-runtime-initialization.md",
+      "entities/stable-master-pins.md",
+      "lessons/data-refresh-pipeline.md"
+    ],
+    "incoming": [
+      "concepts/hunter-only-runtime-initialization.md",
+      "entities/stable-master-pins.md"
+    ]
+  },
+  "entities/addon-staging-script.md": {
+    "outgoing": [
+      "concepts/hunter-only-runtime-initialization.md",
+      "lessons/library-update-safety.md"
+    ],
+    "incoming": ["concepts/hunter-only-runtime-initialization.md"]
   }
 }
