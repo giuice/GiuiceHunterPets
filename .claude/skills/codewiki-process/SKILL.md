@@ -39,7 +39,11 @@ change, and works one task at a time by default. Use `--fast` only when the user
 
 ## Step 4: Find the next actionable work
 - Identify the next incomplete task under the earliest incomplete phase.
-- Read the relevant files and existing code patterns before making changes.
+- Before editing, read every file listed in that task's `read_first`.
+- If a task lacks `read_first`, infer the smallest useful file set from `Relevant Files`, the PRD context, and the task text before making changes.
+- Use the task's `acceptance_criteria` as the completion contract.
+- If a task lacks `acceptance_criteria`, add concrete criteria to the phase plan before implementation unless the change is a trivial documentation-only cleanup.
+- Read existing code patterns before making changes.
 - Explain the why for any non-obvious implementation choice.
 
 ## Step 5: Use focused task execution
@@ -60,11 +64,13 @@ change, and works one task at a time by default. Use `--fast` only when the user
 - In fast mode, continue through all remaining tasks without pausing between them.
 
 ## Step 8: Verification
+- Verify the task against each `acceptance_criteria` item before marking it complete.
 - Run the most relevant existing tests or checks after meaningful implementation steps.
 - Do not treat hook output as proof that verification passed; it is only a change signal.
 
 ## Step 9: Handle CodeWiki pending absorb state
 - After meaningful verification, inspect `.codewiki/state/pending-absorb.jsonl` when it exists.
+- Treat pending entries as hook-recorded state only; hooks do not run updater, verifier, absorb, or any other workflow directly.
 - Treat hook-provided context as optional because host runtimes differ on whether hook output
   reaches the agent.
 - If the change created durable wiki-relevant knowledge, invoke `codewiki-wiki-updater` to propose

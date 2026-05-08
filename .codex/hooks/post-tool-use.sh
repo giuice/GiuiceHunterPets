@@ -38,7 +38,7 @@ if [ ! -x "$HOOK" ] && [ ! -r "$HOOK" ]; then
     exit 0
 fi
 
-OUTPUT=$(printf '%s' "$PAYLOAD" | CODEWIKI_HOOK_HOST=codex CODEWIKI_HOOK_EVENT=PostToolUse bash "$HOOK" 2>/dev/null) || OUTPUT=""
+OUTPUT=$(printf '%s' "$PAYLOAD" | CODEWIKI_HOOK_HOST=codex CODEWIKI_HOOK_EVENT=PostToolUse sh "$HOOK" 2>/dev/null) || OUTPUT=""
 
 if [ "${CODEWIKI_HOOK_DEBUG:-}" = "1" ] && [ -n "$OUTPUT" ]; then
     ESCAPED_OUTPUT=$(printf '%s' "$OUTPUT" | json_escape)

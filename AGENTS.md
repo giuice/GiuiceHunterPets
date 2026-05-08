@@ -112,11 +112,13 @@ CodeWiki is not query-time RAG. It maintains a persistent, human-reviewed markdo
 ### Codex Hooks
 
 - `.codex/config.toml` enables `[features] codex_hooks = true`
-- `.codex/hooks.json` wires `UserPromptSubmit`, `PreToolUse`, `PostToolUse`, and loop-safe `Stop`
+- `.codex/hooks.json` wires `UserPromptSubmit`, `PostToolUse`, and loop-safe `Stop`
 - `UserPromptSubmit` may load short prompt-level wiki context from `.codewiki/hooks/pre-wiki-context.sh` when the prompt is wiki-relevant
-- `PreToolUse` on `Edit|Write|apply_patch` is guardrail-only because Codex ignores plain stdout there
-- `PostToolUse` records pending absorb state through `.codewiki/hooks/post-verify.sh`; visible hook context is debug-only
-- `Stop` wraps `.codewiki/hooks/session-end.sh` without blocking by default and respects `stop_hook_active` to avoid continuation loops
+- Prompt context is filtered by explicit CodeWiki/wiki workflow terms and deduped per emitted context fingerprint under `.codewiki/state/`
+- `PreToolUse` is not wired by default; `.codex/hooks/pre-tool-use.sh` remains packaged for future opt-in blocking guardrails
+- `PostToolUse` records deduped pending absorb state through `.codewiki/hooks/post-verify.sh`; visible hook context is debug-only
+- `Stop` wraps `.codewiki/hooks/session-end.sh` without blocking by default, records deduped lifecycle state, and respects `stop_hook_active` to avoid continuation loops
+- `CODEWIKI_HOOK_DEBUG=1` writes hook diagnostics to state logs; `CODEWIKI_HOOK_CONTEXT_BYPASS=1` bypasses prompt-context dedupe only for diagnostics
 
 ### Important Paths
 

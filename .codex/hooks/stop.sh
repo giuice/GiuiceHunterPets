@@ -43,7 +43,7 @@ if [ ! -x "$HOOK" ] && [ ! -r "$HOOK" ]; then
     exit 0
 fi
 
-OUTPUT=$(printf '%s' "$PAYLOAD" | CODEWIKI_HOOK_HOST=codex CODEWIKI_HOOK_EVENT=Stop bash "$HOOK" 2>/dev/null) || OUTPUT=""
+OUTPUT=$(printf '%s' "$PAYLOAD" | CODEWIKI_HOOK_HOST=codex CODEWIKI_HOOK_EVENT=Stop sh "$HOOK" 2>/dev/null) || OUTPUT=""
 
 if [ -z "$OUTPUT" ]; then
     log_wrapper_debug false false none "returned empty Codex Stop JSON"

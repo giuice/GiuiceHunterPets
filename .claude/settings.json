@@ -20,6 +20,16 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "CODEWIKI_HOOK_HOST=claude-code CODEWIKI_HOOK_EVENT=PreToolUse sh .codewiki/hooks/pre-wiki-context.sh",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "PostToolUse": [
@@ -39,6 +49,16 @@
           {
             "type": "command",
             "command": "CODEWIKI_HOOK_HOST=claude-code CODEWIKI_HOOK_EVENT=PostToolUse bash .codewiki/hooks/post-verify.sh",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "CODEWIKI_HOOK_HOST=claude-code CODEWIKI_HOOK_EVENT=PostToolUse sh .codewiki/hooks/post-verify.sh",
             "timeout": 10
           }
         ]

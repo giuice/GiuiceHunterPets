@@ -10,11 +10,22 @@ _cwiki_index="wiki/index.md"
 _cwiki_input=""
 _cwiki_state_dir=".codewiki/state"
 _cwiki_debug_file="$_cwiki_state_dir/hooks-debug.jsonl"
+_cwiki_context_cache_file="$_cwiki_state_dir/pre-wiki-context-cache.txt"
 _cwiki_host="${CODEWIKI_HOOK_HOST:-unknown}"
 _cwiki_event="${CODEWIKI_HOOK_EVENT:-pre-wiki-context}"
 
 _cwiki_json_escape() {
     sed 's/\\/\\\\/g; s/"/\\"/g; s/	/\\t/g; s/\r/\\r/g' | awk 'BEGIN { ORS = "" } { if (NR > 1) printf "\\n"; printf "%s", $0 }'
+}
+
+_cwiki_hash_stdin() {
+    if command -v sha256sum >/dev/null 2>&1; then
+        sha256sum | awk '{ print $1 }'
+    elif command -v shasum >/dev/null 2>&1; then
+        shasum -a 256 | awk '{ print $1 }'
+    else
+        cksum | awk '{ print $1 "-" $2 }'
+    fi
 }
 
 _cwiki_log_debug() {
@@ -48,30 +59,48 @@ if [ -z "$_cwiki_input" ]; then
     exit 0
 fi
 
-if ! printf '%s' "$_cwiki_input" | grep -Eiq 'codewiki|wiki|decision|decisão|architecture|arquitetura|history|histórico|historico|ingest|query|lint|absorb|absorver|source|fonte|schema'; then
+if ! printf '%s' "$_cwiki_input" | grep -Eiq 'codewiki|wiki|ingest|query|lint|absorb|obsidian|lesson|lessons'; then
     _cwiki_log_debug "filtered" "$_cwiki_has_stdin" false unknown none "prompt did not request wiki context"
     exit 0
 fi
 
-printf '## CodeWiki Context\n\n'
-printf 'Relevant wiki index entries only; hooks are advisory and may not be delivered by every host.\n\n'
-
+_cwiki_intent_terms=$(printf '%s' "$_cwiki_input" | grep -Eio 'codewiki|wiki|ingest|query|lint|absorb|obsidian|lesson|lessons' | tr '[:upper:]' '[:lower:]' | sort -u | awk 'BEGIN { ORS = "" } { if (NR > 1) printf " "; printf "%s", $0 }') || _cwiki_intent_terms=""
 _cwiki_terms=$(printf '%s' "$_cwiki_input" | grep -oE '[A-Za-z][A-Za-z0-9_-]+' | sort -u | head -20) || _cwiki_terms=""
 _cwiki_emitted=0
+_cwiki_matched_lines=""
 
 for _cwiki_term in $_cwiki_terms; do
     if grep -Fqi "$_cwiki_term" "$_cwiki_index" 2>/dev/null; then
-        grep -Fi "$_cwiki_term" "$_cwiki_index" | sed -n '1,3p'
+        _cwiki_match=$(grep -Fi "$_cwiki_term" "$_cwiki_index" | sed -n '1,3p') || _cwiki_match=""
+        _cwiki_matched_lines="${_cwiki_matched_lines}${_cwiki_match}
+"
         _cwiki_emitted=$((_cwiki_emitted + 1))
     fi
     [ "$_cwiki_emitted" -ge 5 ] && break
 done
 
-if [ -f "$_cwiki_state_dir/pending-absorb.jsonl" ]; then
-    _cwiki_pending_count=$(wc -l <"$_cwiki_state_dir/pending-absorb.jsonl" 2>/dev/null | tr -d ' ') || _cwiki_pending_count="0"
-    if [ "$_cwiki_pending_count" != "0" ]; then
-        printf '\nPending CodeWiki absorb signals: %s. Read .codewiki/state/pending-absorb.jsonl before absorb.\n' "$_cwiki_pending_count"
+_cwiki_context=$(
+    printf '## CodeWiki Context\n\n'
+    printf 'Relevant wiki index entries only; hooks are advisory and may not be delivered by every host.\n\n'
+    printf '%s' "$_cwiki_matched_lines"
+    if [ -f "$_cwiki_state_dir/pending-absorb.jsonl" ]; then
+        _cwiki_pending_count=$(wc -l <"$_cwiki_state_dir/pending-absorb.jsonl" 2>/dev/null | tr -d ' ') || _cwiki_pending_count="0"
+        if [ "$_cwiki_pending_count" != "0" ]; then
+            printf '\nPending CodeWiki absorb signals: %s. Read .codewiki/state/pending-absorb.jsonl before absorb.\n' "$_cwiki_pending_count"
+        fi
     fi
+)
+
+_cwiki_fingerprint=$(printf '%s\n%s\n%s\n%s\n' "$_cwiki_host" "$_cwiki_event" "$_cwiki_intent_terms" "$_cwiki_context" | _cwiki_hash_stdin) || _cwiki_fingerprint="unknown"
+
+if [ "${CODEWIKI_HOOK_CONTEXT_BYPASS:-}" != "1" ] && [ -f "$_cwiki_context_cache_file" ] && grep -Fqx "$_cwiki_fingerprint" "$_cwiki_context_cache_file" 2>/dev/null; then
+    _cwiki_log_debug "deduped" "$_cwiki_has_stdin" false unknown none "context fingerprint already emitted"
+    exit 0
 fi
 
+if [ "${CODEWIKI_HOOK_CONTEXT_BYPASS:-}" != "1" ]; then
+    mkdir -p "$_cwiki_state_dir" 2>/dev/null && printf '%s\n' "$_cwiki_fingerprint" >>"$_cwiki_context_cache_file" 2>/dev/null || true
+fi
+
+printf '%s\n' "$_cwiki_context"
 _cwiki_log_debug "emitted" "$_cwiki_has_stdin" true unknown advisory "emitted short wiki context"

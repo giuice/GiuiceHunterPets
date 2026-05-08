@@ -5,21 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "sh -c 'ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd); bash \"$ROOT/.codex/hooks/user-prompt-submit.sh\"'",
-            "statusMessage": "Loading CodeWiki context"
-          }
-        ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "matcher": "Edit|Write|apply_patch",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "sh -c 'ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd); bash \"$ROOT/.codex/hooks/pre-tool-use.sh\"'",
-            "timeout": 30,
-            "statusMessage": "Checking CodeWiki edit guardrails"
+            "command": "sh -c 'ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd); sh \"$ROOT/.codex/hooks/user-prompt-submit.sh\"'"
           }
         ]
       }
@@ -30,9 +16,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "sh -c 'ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd); bash \"$ROOT/.codex/hooks/post-tool-use.sh\"'",
-            "timeout": 30,
-            "statusMessage": "Reviewing CodeWiki changes"
+            "command": "sh -c 'ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd); sh \"$ROOT/.codex/hooks/post-tool-use.sh\"'",
+            "timeout": 30
           }
         ]
       }
@@ -42,7 +27,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "sh -c 'ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd); bash \"$ROOT/.codex/hooks/stop.sh\"'",
+            "command": "sh -c 'ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd); sh \"$ROOT/.codex/hooks/stop.sh\"'",
             "timeout": 30
           }
         ]
