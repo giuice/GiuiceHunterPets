@@ -18,6 +18,7 @@ A complete pet companion for Hunters: browse your stable without visiting one, p
 
 ## Changelog
 
+- 🛠️ Fixed stable viewer edge cases: unloaded stable data no longer mixes active pets into the left pet list, and active-pet slots now respect their real slot IDs so empty slots stay empty.
 - 🛡️ Added Hunter-only runtime guards so non-Hunter characters no longer initialize GiuiceHunterPets settings, map pins, tooltip hooks, UI frames, or pet/stable data.
 - 🆕 +204 tameable pets, full Midnight coverage (Eversong, K'aresh, Quel'Danas, Hallowfall, and more).
 - 🆕 Stable Master pins on the world map and minimap, with a dedicated settings toggle.
